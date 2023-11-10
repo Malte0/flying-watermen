@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://uucsetkt53ld"]
+
+[ext_resource type="Shader" path="res://Shader/default.gdshader" id="1_0ck5s"]
+[ext_resource type="Texture2D" uid="uid://bys4us6fchwcd" path="res://Shader/default.tres" id="2_p12m3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t7ns2"]
+shader = ExtResource("1_0ck5s")
+shader_parameter/distortionTexture = ExtResource("2_p12m3")
+
+[node name="ShaderRect" type="ColorRect"]
+material = SubResource("ShaderMaterial_t7ns2")
+offset_left = -55.0
+offset_top = -60.0
+offset_right = 2570.0
+offset_bottom = 1455.0

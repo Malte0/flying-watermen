@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bsyl8qn5nxpjg"]
+
+[node name="ButtonContainer" type="MarginContainer"]
+size_flags_vertical = 3
+theme_override_constants/margin_left = 700
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 700
+theme_override_constants/margin_bottom = 20

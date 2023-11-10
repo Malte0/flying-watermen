@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://cl3ojw8h1pb8y"]
+
+[ext_resource type="Shader" path="res://Shader/gradient.gdshader" id="1_qvv6s"]
+
+[sub_resource type="Gradient" id="Gradient_6f4yt"]
+colors = PackedColorArray(0, 0, 0, 1, 0.5264, 0.366424, 0.302978, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_65635"]
+gradient = SubResource("Gradient_6f4yt")
+fill_from = Vector2(0.387097, 0.584229)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aghg5"]
+shader = ExtResource("1_qvv6s")
+shader_parameter/gradient = SubResource("GradientTexture2D_65635")
+
+[node name="GradientRect" type="ColorRect"]
+material = SubResource("ShaderMaterial_aghg5")
+offset_left = 1.0
+offset_right = 2558.0
+offset_bottom = 1428.0

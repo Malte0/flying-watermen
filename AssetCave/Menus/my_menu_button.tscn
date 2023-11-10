@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvi2ctp5dqjqf"]
+
+[ext_resource type="Theme" uid="uid://j5dj8s7pejmn" path="res://Menus/default.tres" id="1_qp1vl"]
+
+[node name="MyMenuButton" type="Button"]
+offset_right = 680.0
+offset_bottom = 163.0
+theme = ExtResource("1_qp1vl")
+text = "yjgWILGO"
