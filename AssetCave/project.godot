@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Metroidvania?"
-run/main_scene="res://Menus/main_menu.tscn"
+config/name="AssetCave"
+run/main_scene="res://launch_scene.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 

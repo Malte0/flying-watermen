@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b83vy1c4hb0cs"]
+
+[ext_resource type="Script" path="res://LaunchScene.gd" id="1_gkwpg"]
+[ext_resource type="Theme" uid="uid://bhvqvvud37ufg" path="res://Menus/title.tres" id="2_dqilv"]
+[ext_resource type="FontFile" uid="uid://byk6d8y8ednja" path="res://Assets/EquipmentPro.ttf" id="3_an38m"]
+
+[node name="LaunchScene" type="Node"]
+script = ExtResource("1_gkwpg")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 2561.0
+offset_bottom = 1437.0
+theme = ExtResource("2_dqilv")
+theme_override_fonts/font = ExtResource("3_an38m")
+text = "LOADING"
+horizontal_alignment = 1
+vertical_alignment = 1
