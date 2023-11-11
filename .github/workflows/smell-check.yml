@@ -1,0 +1,12 @@
+name: Check for Code smells
+
+on:
+  workflow_call:
+
+jobs:
+  check-smels:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/labeler@v4
+    - name: Run smell check
+      run: echo Checking for smells!
