@@ -23,6 +23,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6237m")
 
+[node name="Background" parent="." instance=ExtResource("2_de6dy")]
+layout_mode = 0
+
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
 layout_mode = 0
@@ -32,15 +35,20 @@ color = Color(0.333333, 0.270588, 0.25098, 1)
 metadata/_edit_lock_ = true
 
 [node name="MyMenuButton" parent="ColorRect" instance=ExtResource("4_gdqr6")]
-visible = false
-layout_mode = 0
-offset_left = 965.0
-offset_top = 592.0
-offset_right = 1634.0
-offset_bottom = 752.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -339.0
+offset_top = -132.5
+offset_right = 339.0
+offset_bottom = 132.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MyMenuButton2" parent="ColorRect" instance=ExtResource("4_gdqr6")]
-visible = false
 layout_mode = 0
 offset_left = 965.0
 offset_top = 812.0
@@ -48,15 +56,11 @@ offset_right = 1634.0
 offset_bottom = 972.0
 
 [node name="MyMenuButton3" parent="ColorRect" instance=ExtResource("4_gdqr6")]
-visible = false
 layout_mode = 0
 offset_left = 966.0
 offset_top = 1076.0
 offset_right = 1635.0
 offset_bottom = 1236.0
-
-[node name="Background" parent="." instance=ExtResource("2_de6dy")]
-layout_mode = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

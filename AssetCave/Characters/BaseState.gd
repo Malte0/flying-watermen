@@ -9,15 +9,17 @@ class_name BaseState
 @onready var tree_state_machine = $"../../AnimationTree".get("parameters/playback")
 
 @onready var idle_state: State = $"../Idle"
-@onready var jump_state: State = $"../Jump"
 @onready var run_state: State = $"../Run"
-@onready var crouch_state: State = $"../Crouch"
 @onready var slide_state: State = $"../Slide"
+@onready var crouch_state: State = $"../Crouch"
+@onready var jump_state: State = $"../Jump"
+@onready var fall_state: State = $"../Fall"
 @onready var turn_around_state: State = $"../TurnAround"
 
 @export var can_move = true
 @export var can_jump = true
 @export var speed = 300.0
+@export var air_speed = 300
 @export var jump_velocity = -400.0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -46,6 +48,9 @@ func on_physics_process(delta):
 
 	if player.position.x < -200:
 		player.position.x = 600
+	
+	if player.velocity.y > 0:
+		state_machine.current_state = fall_state
 	update_animation()
 	player.move_and_slide()
 

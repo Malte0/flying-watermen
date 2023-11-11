@@ -21,8 +21,14 @@ func on_physics_process(delta):
 	else:
 		player.velocity.x = lerp(player.velocity.x, 0.0, 0.5)
 	
+	# Change State
 	if abs(player.velocity.x) < 0.005:
 		state_machine.current_state = idle_state
+	elif Input.is_action_pressed("s"):
+		if abs(player.velocity.x) > 200:
+			state_machine.current_state = slide_state
+		else:
+			state_machine.current_state = crouch_state
 #	elif right != (dir >= 0) and abs(dir) > 0:
 #		state_machine.current_state = turn_around_state
 #	else: right = dir > 0
@@ -32,10 +38,8 @@ func on_physics_process(delta):
 
 # Called when there is an input event while this state is active.
 func on_input(event: InputEvent):
-	if event.is_action_pressed("w") and player.is_on_floor():
+	if event.is_action_pressed("w"):
 		state_machine.current_state = jump_state
-	elif event.is_action_pressed("s") and player.is_on_floor():
-		state_machine.current_state = slide_state
 
 
 # Called when the state machine exits this state.
