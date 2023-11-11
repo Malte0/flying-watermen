@@ -3,11 +3,12 @@ extends State
 class_name BaseState
 
 @onready var player: CharacterBody2D = $"../.."
-@onready var tree = $"../../AnimationTree"
-@onready var sprite = $"../../AnimatedSprite2D"
-@onready var anim_player = $"../../AnimationPlayer"
+@onready var tree: AnimationTree = $"../../AnimationTree"
+@onready var sprite: AnimatedSprite2D = $"../../AnimatedSprite2D"
+@onready var anim_player: AnimationPlayer = $"../../AnimationPlayer"
 @onready var tree_state_machine = $"../../AnimationTree".get("parameters/playback")
 
+#@onready var current_state: State = $"../Idle"
 @onready var idle_state: State = $"../Idle"
 @onready var run_state: State = $"../Run"
 @onready var slide_state: State = $"../Slide"
@@ -20,7 +21,6 @@ class_name BaseState
 @export var can_jump = true
 @export var speed = 300.0
 @export var air_speed = 300
-@export var jump_velocity = -400.0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var dir = 0.0
@@ -45,6 +45,8 @@ func on_physics_process(delta):
 	# Add the gravity.
 	if not player.is_on_floor():
 		player.velocity.y += gravity * delta
+	else:
+		player.double_jumped = false
 
 	if player.position.x < -200:
 		player.position.x = 600
@@ -79,3 +81,9 @@ func update_orientation():
 func turn_around(move_sprite):
 	sprite.flip_h = !sprite.flip_h
 	sprite.move_local_x(move_sprite)
+
+func double_jump():
+	if !player.double_jumped:
+		player.double_jumped = true
+		player.temp_jump_velocity = player.velocity.y/2 + player.jump_velocity
+		state_machine.current_state = jump_state

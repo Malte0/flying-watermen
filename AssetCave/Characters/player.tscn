@@ -1,5 +1,6 @@
-[gd_scene load_steps=262 format=3 uid="uid://dae63ya3ql370"]
+[gd_scene load_steps=253 format=3 uid="uid://dae63ya3ql370"]
 
+[ext_resource type="Script" path="res://Characters/player.gd" id="1_kkkcj"]
 [ext_resource type="Texture2D" uid="uid://dcbg7s3ifl3np" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_Attack.png" id="2_pktqb"]
 [ext_resource type="Texture2D" uid="uid://k170wxlpi2mp" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_Attack2.png" id="3_btqn2"]
 [ext_resource type="Texture2D" uid="uid://r8mw0y5dppfp" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_Attack2NoMovement.png" id="4_3ae85"]
@@ -864,7 +865,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_m8p1b")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 10.0
 }, {
@@ -1479,7 +1480,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_njjbq"]
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1994,41 +1994,6 @@ states/jumpfallinbetween/node = SubResource("AnimationNodeAnimation_h4pug")
 states/jumpfallinbetween/position = Vector2(374.667, 100.222)
 transitions = ["Start", "jumpfallinbetween", SubResource("AnimationNodeStateMachineTransition_u2lse"), "jumpfallinbetween", "fall", SubResource("AnimationNodeStateMachineTransition_jrlh8")]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p6qc2"]
-animation = &"fall"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vd3wa"]
-animation = &"jump"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oen3u"]
-animation = &"jumpfallinbetween"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0wry8"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jbrtk"]
-advance_mode = 2
-advance_condition = &"start_fall"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ke7fd"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i7x52"]
-advance_mode = 0
-advance_condition = &"end_jump"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ee4x4"]
-states/End/position = Vector2(817.333, 99.8381)
-states/Start/position = Vector2(201.333, 100.667)
-states/fall/node = SubResource("AnimationNodeAnimation_p6qc2")
-states/fall/position = Vector2(690, 98.0741)
-states/jump/node = SubResource("AnimationNodeAnimation_vd3wa")
-states/jump/position = Vector2(328.667, 100.296)
-states/jumpfallinbetween/node = SubResource("AnimationNodeAnimation_oen3u")
-states/jumpfallinbetween/position = Vector2(506, 100.09)
-transitions = ["Start", "jump", SubResource("AnimationNodeStateMachineTransition_0wry8"), "jump", "jumpfallinbetween", SubResource("AnimationNodeStateMachineTransition_jbrtk"), "jumpfallinbetween", "fall", SubResource("AnimationNodeStateMachineTransition_ke7fd"), "fall", "End", SubResource("AnimationNodeStateMachineTransition_i7x52")]
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jifuj"]
 animation = &"run"
 
@@ -2133,14 +2098,6 @@ animation = &"turn_around"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ogqb8"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wog5u"]
-advance_mode = 2
-advance_condition = &"start_jump"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hmjjj"]
-advance_mode = 2
-advance_condition = &"end_jump"
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4lcsd"]
 advance_mode = 2
 advance_condition = &"turn_around"
@@ -2182,8 +2139,6 @@ advance_condition = &"end_fall"
 states/End/position = Vector2(720.667, 98.9033)
 states/Fall/node = SubResource("AnimationNodeStateMachine_8mv2b")
 states/Fall/position = Vector2(346.035, 33.0969)
-states/Jump/node = SubResource("AnimationNodeStateMachine_ee4x4")
-states/Jump/position = Vector2(347.419, 191.938)
 states/Move/node = SubResource("AnimationNodeBlendSpace1D_sguy6")
 states/Move/position = Vector2(127.677, 100.084)
 states/Slide/node = SubResource("AnimationNodeStateMachine_4xh3m")
@@ -2195,15 +2150,17 @@ states/jump/node = SubResource("AnimationNodeAnimation_4uhc5")
 states/jump/position = Vector2(345.08, 98.5101)
 states/turn_around/node = SubResource("AnimationNodeAnimation_gwxkt")
 states/turn_around/position = Vector2(127.698, 179.444)
-transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_ogqb8"), "Move", "Jump", SubResource("AnimationNodeStateMachineTransition_wog5u"), "Jump", "Move", SubResource("AnimationNodeStateMachineTransition_hmjjj"), "Move", "turn_around", SubResource("AnimationNodeStateMachineTransition_4lcsd"), "turn_around", "Move", SubResource("AnimationNodeStateMachineTransition_wulqe"), "Move", "crouch", SubResource("AnimationNodeStateMachineTransition_f4fwj"), "crouch", "Move", SubResource("AnimationNodeStateMachineTransition_xtm50"), "Move", "Slide", SubResource("AnimationNodeStateMachineTransition_83vi5"), "Slide", "crouch", SubResource("AnimationNodeStateMachineTransition_r7bwo"), "Slide", "Move", SubResource("AnimationNodeStateMachineTransition_xgcqb"), "Move", "jump", SubResource("AnimationNodeStateMachineTransition_5mu4o"), "Fall", "Move", SubResource("AnimationNodeStateMachineTransition_j0bgh")]
-graph_offset = Vector2(-489, 4)
+transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_ogqb8"), "Move", "turn_around", SubResource("AnimationNodeStateMachineTransition_4lcsd"), "turn_around", "Move", SubResource("AnimationNodeStateMachineTransition_wulqe"), "Move", "crouch", SubResource("AnimationNodeStateMachineTransition_f4fwj"), "crouch", "Move", SubResource("AnimationNodeStateMachineTransition_xtm50"), "Move", "Slide", SubResource("AnimationNodeStateMachineTransition_83vi5"), "Slide", "crouch", SubResource("AnimationNodeStateMachineTransition_r7bwo"), "Slide", "Move", SubResource("AnimationNodeStateMachineTransition_xgcqb"), "Move", "jump", SubResource("AnimationNodeStateMachineTransition_5mu4o"), "Fall", "Move", SubResource("AnimationNodeStateMachineTransition_j0bgh")]
+graph_offset = Vector2(-534, 3)
 
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_kkkcj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(5, -40)
 sprite_frames = SubResource("SpriteFrames_80vwq")
-animation = &"jumpfallinbetween"
+animation = &"death"
+frame = 9
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, -18)
@@ -2220,12 +2177,9 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/crouch_start = false
 parameters/conditions/end_crouch = false
 parameters/conditions/end_fall = false
-parameters/conditions/end_jump = false
 parameters/conditions/start_jump = false
 parameters/conditions/start_slide = false
 parameters/conditions/turn_around = false
-parameters/Jump/conditions/end_jump = false
-parameters/Jump/conditions/start_fall = false
 parameters/Move/blend_position = 0.00134861
 parameters/Slide/conditions/slide_end = false
 parameters/crouch/Crouch/blend_position = 0.000674367
@@ -2251,23 +2205,29 @@ script = ExtResource("16_8asjh")
 
 [node name="Idle" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("16_c7ys4")
+jump_velocity = null
 
 [node name="Run" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("18_21q1q")
+jump_velocity = null
 
 [node name="TurnAround" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("35_f0tb5")
+jump_velocity = null
 
 [node name="Slide" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("36_3axkq")
+jump_velocity = null
 
 [node name="Crouch" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("19_u0ind")
+jump_velocity = null
 
 [node name="Jump" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("17_5dvr4")
 
 [node name="Fall" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("39_0i41o")
+jump_velocity = null
 
 [connection signal="animation_finished" from="AnimationTree" to="FiniteStateMachine/TurnAround" method="_on_animation_tree_animation_finished"]

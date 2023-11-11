@@ -1,5 +1,7 @@
 extends BaseState
 
+class_name Jump
+
 const START_JUMP = "parameters/conditions/start_jump"
 const END_JUMP = "parameters/conditions/end_jump"
 #const START_FALL = "parameters/Jump/conditions/start_fall"
@@ -8,7 +10,8 @@ const END_JUMP = "parameters/conditions/end_jump"
 func on_enter():
 	if !can_jump:
 		state_machine.previous_state()
-	player.velocity.y = jump_velocity
+	player.velocity.y = player.temp_jump_velocity
+	player.temp_jump_velocity = player.jump_velocity
 	tree.set(END_JUMP, false)
 	tree.set(START_JUMP, true)
 
@@ -30,7 +33,8 @@ func on_physics_process(delta):
 
 # Called when there is an input event while this state is active.
 func on_input(event: InputEvent):
-	pass
+	if event.is_action_pressed("w"):
+		double_jump()
 
 
 # Called when the state machine exits this state.
