@@ -50,15 +50,15 @@ animations = [{
 }]
 
 [node name="ColorRect" type="ColorRect"]
-offset_right = 2560.0
-offset_bottom = 1440.0
+offset_right = 3840.0
+offset_bottom = 2160.0
 color = Color(0.333333, 0.270588, 0.25098, 1)
 script = ExtResource("1_2bs0r")
 metadata/_edit_lock_ = true
 
 [node name="Background2" type="Sprite2D" parent="."]
-position = Vector2(1280, 720)
-scale = Vector2(2.66667, 3)
+position = Vector2(1920, 1080)
+scale = Vector2(4, 4.5)
 texture = ExtResource("1_1jlis")
 metadata/_edit_lock_ = true
 
@@ -86,8 +86,9 @@ texture = ExtResource("4_csaak")
 metadata/_edit_lock_ = true
 
 [node name="ShaderRect" parent="." instance=ExtResource("7_u0n2b")]
+visible = false
 layout_mode = 0
 offset_left = -83.0
 offset_top = -64.0
-offset_right = 2652.0
-offset_bottom = 1500.0
+offset_right = 3905.0
+offset_bottom = 2207.0

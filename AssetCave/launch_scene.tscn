@@ -8,8 +8,8 @@
 script = ExtResource("1_gkwpg")
 
 [node name="Label" type="Label" parent="."]
-offset_right = 2561.0
-offset_bottom = 1437.0
+offset_right = 3840.0
+offset_bottom = 2160.0
 theme = ExtResource("2_dqilv")
 theme_override_fonts/font = ExtResource("3_an38m")
 text = "LOADING"

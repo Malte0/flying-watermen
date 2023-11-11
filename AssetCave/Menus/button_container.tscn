@@ -2,7 +2,7 @@
 
 [node name="ButtonContainer" type="MarginContainer"]
 size_flags_vertical = 3
-theme_override_constants/margin_left = 700
+theme_override_constants/margin_left = 1100
 theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 700
+theme_override_constants/margin_right = 1100
 theme_override_constants/margin_bottom = 20

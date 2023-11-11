@@ -18,8 +18,8 @@ func on_physics_process(delta):
 	
 	
 	if abs(player.velocity.x) < 0.005:
-		if Input.is_action_pressed("a") or Input.is_action_pressed("d"):
-			state_machine.current_state = run_state
+		if Input.is_action_pressed("s"):
+			state_machine.current_state = crouch_state
 		else:
 			state_machine.current_state = idle_state
 		

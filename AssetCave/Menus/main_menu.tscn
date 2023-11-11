@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bvnmo76nd3yup"]
+[gd_scene load_steps=10 format=3 uid="uid://bvnmo76nd3yup"]
 
 [ext_resource type="Script" path="res://Menus/main_menu.gd" id="1_6237m"]
 [ext_resource type="FontFile" uid="uid://byk6d8y8ednja" path="res://Assets/EquipmentPro.ttf" id="2_2dtxk"]
@@ -7,9 +7,6 @@
 [ext_resource type="Theme" uid="uid://bhvqvvud37ufg" path="res://Menus/title.tres" id="4_eqhar"]
 [ext_resource type="PackedScene" uid="uid://dvi2ctp5dqjqf" path="res://Menus/my_menu_button.tscn" id="4_gdqr6"]
 [ext_resource type="Theme" uid="uid://j5dj8s7pejmn" path="res://Menus/default.tres" id="5_by8oy"]
-
-[sub_resource type="FontVariation" id="FontVariation_o1hpn"]
-base_font = ExtResource("2_2dtxk")
 
 [sub_resource type="FontVariation" id="FontVariation_607cd"]
 base_font = ExtResource("2_2dtxk")
@@ -25,65 +22,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6237m")
-
-[node name="Background" parent="." instance=ExtResource("2_de6dy")]
-layout_mode = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 2560.0
-offset_bottom = 1440.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 6
-theme = ExtResource("4_eqhar")
-text = "Asset Cave"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ButtonContainer" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("3_ceqny")]
-layout_mode = 2
-theme_override_constants/margin_top = 0
-
-[node name="Play" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/ButtonContainer"]
-layout_mode = 2
-theme = ExtResource("5_by8oy")
-theme_override_fonts/font = SubResource("FontVariation_o1hpn")
-theme_override_font_sizes/font_size = 150
-text = "Play"
-metadata/_edit_lock_ = true
-
-[node name="ButtonContainer2" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("3_ceqny")]
-layout_mode = 2
-
-[node name="Options" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/ButtonContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("5_by8oy")
-theme_override_fonts/font = SubResource("FontVariation_607cd")
-text = "Options"
-metadata/_edit_lock_ = true
-
-[node name="ButtonContainer3" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("3_ceqny")]
-layout_mode = 2
-theme_override_constants/margin_bottom = 80
-
-[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/ButtonContainer3"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("5_by8oy")
-theme_override_fonts/font = SubResource("FontVariation_lle70")
-text = "Quit"
-metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -116,6 +54,61 @@ offset_left = 966.0
 offset_top = 1076.0
 offset_right = 1635.0
 offset_bottom = 1236.0
+
+[node name="Background" parent="." instance=ExtResource("2_de6dy")]
+layout_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_right = 3840.0
+offset_bottom = 1900.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("4_eqhar")
+text = "Asset Cave"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ButtonContainer" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("3_ceqny")]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+theme = ExtResource("5_by8oy")
+text = "Play"
+metadata/_edit_lock_ = true
+
+[node name="ButtonContainer2" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("3_ceqny")]
+layout_mode = 2
+
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/ButtonContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_by8oy")
+theme_override_fonts/font = SubResource("FontVariation_607cd")
+text = "Options"
+metadata/_edit_lock_ = true
+
+[node name="ButtonContainer3" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("3_ceqny")]
+layout_mode = 2
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/ButtonContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_by8oy")
+theme_override_fonts/font = SubResource("FontVariation_lle70")
+text = "Quit"
+metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/ButtonContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/ButtonContainer2/Options" to="." method="_on_options_pressed"]

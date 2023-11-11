@@ -1,14 +1,11 @@
 extends BaseState
 
-const START_RUN = "parameters/Idle_Move/conditions/start_run"
-const STOP_RUN = "parameters/Idle_Move/conditions/stop_run"
 const TURN_AROUND = "parameters/Idle_Move/conditions/turn_around"
 #var right: bool
 
 # Called when the state machine enters this state.
 func on_enter():
-	tree.set(STOP_RUN, false)
-	tree.set(START_RUN, true)
+	pass
 	#right = dir >= 0
 
 
@@ -43,5 +40,4 @@ func on_input(event: InputEvent):
 
 # Called when the state machine exits this state.
 func on_exit():
-	tree.set(STOP_RUN, true)
-	tree.set(START_RUN, false)
+	pass

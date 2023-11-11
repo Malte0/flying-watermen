@@ -1,4 +1,4 @@
-[gd_scene load_steps=252 format=3 uid="uid://dae63ya3ql370"]
+[gd_scene load_steps=253 format=3 uid="uid://dae63ya3ql370"]
 
 [ext_resource type="Texture2D" uid="uid://dcbg7s3ifl3np" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_Attack.png" id="2_pktqb"]
 [ext_resource type="Texture2D" uid="uid://k170wxlpi2mp" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_Attack2.png" id="3_btqn2"]
@@ -35,6 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://c2gvpucismv7b" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_WallClimbNoMovement.png" id="26_hkyep"]
 [ext_resource type="Texture2D" uid="uid://dhymkmexounep" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_WallHang.png" id="27_osavr"]
 [ext_resource type="Texture2D" uid="uid://dw8enqeib7r2j" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_WallSlide.png" id="28_ifq1h"]
+[ext_resource type="FontFile" uid="uid://byk6d8y8ednja" path="res://Assets/EquipmentPro.ttf" id="29_q23bt"]
 [ext_resource type="Script" path="res://Characters/TurnAround.gd" id="35_f0tb5"]
 [ext_resource type="Script" path="res://Characters/Slide.gd" id="36_3axkq"]
 
@@ -2046,6 +2047,7 @@ advance_mode = 2
 advance_condition = &"slide_end"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5sqt2"]
+switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4xh3m"]
@@ -2137,8 +2139,11 @@ advance_condition = &"start_slide"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r7bwo"]
 advance_mode = 2
+advance_condition = &"crouch_start"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xgcqb"]
+priority = 2
+switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_uwuqo"]
@@ -2160,9 +2165,9 @@ graph_offset = Vector2(-469, -17)
 [node name="Player" type="CharacterBody2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(5, -41)
+position = Vector2(5, -40)
 sprite_frames = SubResource("SpriteFrames_80vwq")
-animation = &"attack2_no_move"
+animation = &"idle"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, -18)
@@ -2193,6 +2198,7 @@ offset_left = -49.0
 offset_top = -67.0
 offset_right = 49.0
 offset_bottom = -41.0
+theme_override_fonts/font = ExtResource("29_q23bt")
 text = "State: "
 horizontal_alignment = 1
 vertical_alignment = 1
