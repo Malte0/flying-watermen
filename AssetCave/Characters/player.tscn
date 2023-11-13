@@ -1,4 +1,4 @@
-[gd_scene load_steps=253 format=3 uid="uid://dae63ya3ql370"]
+[gd_scene load_steps=277 format=3 uid="uid://dae63ya3ql370"]
 
 [ext_resource type="Script" path="res://Characters/player.gd" id="1_kkkcj"]
 [ext_resource type="Texture2D" uid="uid://dcbg7s3ifl3np" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_Attack.png" id="2_pktqb"]
@@ -19,15 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://gsfl7pm3o3c8" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_Death.png" id="12_12fml"]
 [ext_resource type="Texture2D" uid="uid://bjpcmbinei1ah" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_Run.png" id="13_1jh5l"]
 [ext_resource type="Texture2D" uid="uid://bvx132aesxffe" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_DeathNoMovement.png" id="13_ahw6n"]
-[ext_resource type="Script" path="res://Characters/FiniteStateMachine.gd" id="15_0nmrk"]
 [ext_resource type="Texture2D" uid="uid://bsq5quxhh7y1c" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_Hit.png" id="15_s6osp"]
-[ext_resource type="Script" path="res://Characters/BaseState.gd" id="16_8asjh"]
-[ext_resource type="Script" path="res://Characters/Idle.gd" id="16_c7ys4"]
-[ext_resource type="Script" path="res://Characters/Jump.gd" id="17_5dvr4"]
-[ext_resource type="Script" path="res://Characters/Run.gd" id="18_21q1q"]
 [ext_resource type="Script" path="res://Characters/StateLabel.gd" id="18_ei7fb"]
 [ext_resource type="Texture2D" uid="uid://cq5wvum4d4655" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_Roll.png" id="19_3y5la"]
-[ext_resource type="Script" path="res://Characters/Crouch.gd" id="19_u0ind"]
 [ext_resource type="Texture2D" uid="uid://t6260v8e7e37" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_Slide.png" id="21_yxqar"]
 [ext_resource type="Texture2D" uid="uid://dvlk2c3whm5up" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_SlideTransitionEnd.png" id="22_v74fb"]
 [ext_resource type="Texture2D" uid="uid://bp2xnvbcor5ov" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_SlideTransitionStart.png" id="23_vexnk"]
@@ -37,9 +31,17 @@
 [ext_resource type="Texture2D" uid="uid://dhymkmexounep" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_WallHang.png" id="27_osavr"]
 [ext_resource type="Texture2D" uid="uid://dw8enqeib7r2j" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_WallSlide.png" id="28_ifq1h"]
 [ext_resource type="FontFile" uid="uid://byk6d8y8ednja" path="res://Assets/EquipmentPro.ttf" id="29_q23bt"]
-[ext_resource type="Script" path="res://Characters/TurnAround.gd" id="35_f0tb5"]
-[ext_resource type="Script" path="res://Characters/Slide.gd" id="36_3axkq"]
-[ext_resource type="Script" path="res://Characters/Fall.gd" id="39_0i41o"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="32_3knpo"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="33_26pg0"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="34_4lkih"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="35_ipd5f"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="36_8rjfd"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/animation_tree_state.gd" id="36_q4fne"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="37_yo8mi"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_is_active_guard.gd" id="39_8f8eg"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="39_ptthh"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/any_of_guard.gd" id="40_yw580"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="42_lgxki"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_87jqi"]
 atlas = ExtResource("2_pktqb")
@@ -1974,6 +1976,48 @@ _data = {
 "wall_slide": SubResource("Animation_ot2hv")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5q4o3"]
+animation = &"crouch_walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x85yi"]
+animation = &"crouch_walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_448i1"]
+animation = &"crouch"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_sogor"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_5q4o3")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_x85yi")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_448i1")
+blend_point_2/pos = 0.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hacne"]
+animation = &"crouch_slash"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r87ri"]
+animation = &"crouch_transition"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x1cu8"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_55qrr"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6vhcr"]
+states/Crouch/node = SubResource("AnimationNodeBlendSpace1D_sogor")
+states/Crouch/position = Vector2(550.296, 99.3949)
+states/End/position = Vector2(778, 95.8985)
+states/crouch_slash/node = SubResource("AnimationNodeAnimation_hacne")
+states/crouch_slash/position = Vector2(551.111, 7.66666)
+states/crouch_transition/node = SubResource("AnimationNodeAnimation_r87ri")
+states/crouch_transition/position = Vector2(367.333, 100.259)
+transitions = ["Start", "crouch_transition", SubResource("AnimationNodeStateMachineTransition_x1cu8"), "crouch_transition", "Crouch", SubResource("AnimationNodeStateMachineTransition_55qrr")]
+graph_offset = Vector2(-286, -21)
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_el3m8"]
 animation = &"fall"
 
@@ -1993,6 +2037,10 @@ states/fall/position = Vector2(547.333, 99.7037)
 states/jumpfallinbetween/node = SubResource("AnimationNodeAnimation_h4pug")
 states/jumpfallinbetween/position = Vector2(374.667, 100.222)
 transitions = ["Start", "jumpfallinbetween", SubResource("AnimationNodeStateMachineTransition_u2lse"), "jumpfallinbetween", "fall", SubResource("AnimationNodeStateMachineTransition_jrlh8")]
+graph_offset = Vector2(-62, 5)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4uhc5"]
+animation = &"jump"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jifuj"]
 animation = &"run"
@@ -2047,111 +2095,153 @@ states/slide_start/position = Vector2(342, 99.9259)
 transitions = ["Start", "slide_start", SubResource("AnimationNodeStateMachineTransition_t7f4y"), "slide_start", "slide", SubResource("AnimationNodeStateMachineTransition_e6kx7"), "slide", "slide_end", SubResource("AnimationNodeStateMachineTransition_kprq0"), "slide_end", "End", SubResource("AnimationNodeStateMachineTransition_5sqt2")]
 graph_offset = Vector2(-235, -19)
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5q4o3"]
-animation = &"crouch_walk"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x85yi"]
-animation = &"crouch_walk"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_448i1"]
-animation = &"crouch"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_sogor"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_5q4o3")
-blend_point_0/pos = -1.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_x85yi")
-blend_point_1/pos = 1.0
-blend_point_2/node = SubResource("AnimationNodeAnimation_448i1")
-blend_point_2/pos = 0.0
-blend_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hacne"]
-animation = &"crouch_slash"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r87ri"]
-animation = &"crouch_transition"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x1cu8"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_55qrr"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6vhcr"]
-states/Crouch/node = SubResource("AnimationNodeBlendSpace1D_sogor")
-states/Crouch/position = Vector2(550.667, 96.3333)
-states/End/position = Vector2(778, 95.8985)
-states/crouch_slash/node = SubResource("AnimationNodeAnimation_hacne")
-states/crouch_slash/position = Vector2(551.111, 7.66666)
-states/crouch_transition/node = SubResource("AnimationNodeAnimation_r87ri")
-states/crouch_transition/position = Vector2(367.333, 100.259)
-transitions = ["Start", "crouch_transition", SubResource("AnimationNodeStateMachineTransition_x1cu8"), "crouch_transition", "Crouch", SubResource("AnimationNodeStateMachineTransition_55qrr")]
-graph_offset = Vector2(-424, -78)
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4uhc5"]
-animation = &"jump"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gwxkt"]
 animation = &"turn_around"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ogqb8"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4lcsd"]
-advance_mode = 2
-advance_condition = &"turn_around"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wulqe"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f4fwj"]
-advance_mode = 2
-advance_condition = &"crouch_start"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xtm50"]
-advance_mode = 2
-advance_condition = &"end_crouch"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_83vi5"]
-advance_mode = 2
-advance_condition = &"start_slide"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r7bwo"]
-advance_mode = 2
-advance_condition = &"crouch_start"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xgcqb"]
-priority = 2
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5mu4o"]
-advance_mode = 2
-advance_condition = &"start_jump"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j0bgh"]
-advance_mode = 2
-advance_condition = &"end_fall"
-
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_uwuqo"]
-states/End/position = Vector2(720.667, 98.9033)
+states/Crouch/node = SubResource("AnimationNodeStateMachine_6vhcr")
+states/Crouch/position = Vector2(178.948, 8.67065)
+states/End/position = Vector2(580.667, 98.4642)
 states/Fall/node = SubResource("AnimationNodeStateMachine_8mv2b")
-states/Fall/position = Vector2(346.035, 33.0969)
+states/Fall/position = Vector2(179.338, 167.935)
+states/Jump/node = SubResource("AnimationNodeAnimation_4uhc5")
+states/Jump/position = Vector2(48.3254, 167.053)
 states/Move/node = SubResource("AnimationNodeBlendSpace1D_sguy6")
-states/Move/position = Vector2(127.677, 100.084)
+states/Move/position = Vector2(47.677, 90.3375)
 states/Slide/node = SubResource("AnimationNodeStateMachine_4xh3m")
-states/Slide/position = Vector2(54.7596, 19.7286)
-states/Start/position = Vector2(-8.667, 100.009)
-states/crouch/node = SubResource("AnimationNodeStateMachine_6vhcr")
-states/crouch/position = Vector2(194.168, 20.7352)
-states/jump/node = SubResource("AnimationNodeAnimation_4uhc5")
-states/jump/position = Vector2(345.08, 98.5101)
+states/Slide/position = Vector2(46.7045, 7.7519)
+states/Start/position = Vector2(-80.667, 89.4385)
 states/turn_around/node = SubResource("AnimationNodeAnimation_gwxkt")
-states/turn_around/position = Vector2(127.698, 179.444)
-transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_ogqb8"), "Move", "turn_around", SubResource("AnimationNodeStateMachineTransition_4lcsd"), "turn_around", "Move", SubResource("AnimationNodeStateMachineTransition_wulqe"), "Move", "crouch", SubResource("AnimationNodeStateMachineTransition_f4fwj"), "crouch", "Move", SubResource("AnimationNodeStateMachineTransition_xtm50"), "Move", "Slide", SubResource("AnimationNodeStateMachineTransition_83vi5"), "Slide", "crouch", SubResource("AnimationNodeStateMachineTransition_r7bwo"), "Slide", "Move", SubResource("AnimationNodeStateMachineTransition_xgcqb"), "Move", "jump", SubResource("AnimationNodeStateMachineTransition_5mu4o"), "Fall", "Move", SubResource("AnimationNodeStateMachineTransition_j0bgh")]
-graph_offset = Vector2(-534, 3)
+states/turn_around/position = Vector2(472.365, 25.799)
+transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_ogqb8")]
+graph_offset = Vector2(-527, -53)
+
+[sub_resource type="Resource" id="Resource_r58ym"]
+script = ExtResource("37_yo8mi")
+expression = "crouching == true and over_slide_threshold"
+
+[sub_resource type="Resource" id="Resource_jk8u2"]
+script = ExtResource("37_yo8mi")
+expression = "crouching == true"
+
+[sub_resource type="Resource" id="Resource_8wh4l"]
+script = ExtResource("37_yo8mi")
+expression = "!over_slide_threshold"
+
+[sub_resource type="Resource" id="Resource_wu70w"]
+script = ExtResource("37_yo8mi")
+expression = "crouching != true"
+
+[sub_resource type="Resource" id="Resource_7ckxi"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../Airborne/Falling")
+
+[sub_resource type="Resource" id="Resource_sktov"]
+script = ExtResource("42_lgxki")
+guard = SubResource("Resource_7ckxi")
+
+[sub_resource type="Resource" id="Resource_mbpsx"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../Grounded")
+
+[sub_resource type="Resource" id="Resource_1o2au"]
+script = ExtResource("37_yo8mi")
+expression = "air_jumps_left > 0"
+
+[sub_resource type="Resource" id="Resource_unbhb"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../Airborne")
+
+[sub_resource type="Resource" id="Resource_b3ndv"]
+script = ExtResource("39_ptthh")
+guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_1o2au"), SubResource("Resource_unbhb")])
+
+[sub_resource type="Resource" id="Resource_se5vv"]
+script = ExtResource("40_yw580")
+guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_mbpsx"), SubResource("Resource_b3ndv")])
+
+[sub_resource type="Resource" id="Resource_lov60"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../../Player/Grounded/Standing")
+
+[sub_resource type="Resource" id="Resource_wjpam"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../Move")
+
+[sub_resource type="Resource" id="Resource_ympur"]
+script = ExtResource("42_lgxki")
+guard = SubResource("Resource_wjpam")
+
+[sub_resource type="Resource" id="Resource_kgfci"]
+script = ExtResource("39_ptthh")
+guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_lov60"), SubResource("Resource_ympur")])
+
+[sub_resource type="Resource" id="Resource_mmkn4"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../../Player/Airborne/Jumping")
+
+[sub_resource type="Resource" id="Resource_x6w5p"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../Jump")
+
+[sub_resource type="Resource" id="Resource_o8ajg"]
+script = ExtResource("42_lgxki")
+guard = SubResource("Resource_x6w5p")
+
+[sub_resource type="Resource" id="Resource_1s1hb"]
+script = ExtResource("39_ptthh")
+guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_mmkn4"), SubResource("Resource_o8ajg")])
+
+[sub_resource type="Resource" id="Resource_5ffmn"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../../Player/Airborne/Falling")
+
+[sub_resource type="Resource" id="Resource_mx4sa"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../Fall")
+
+[sub_resource type="Resource" id="Resource_hyhjw"]
+script = ExtResource("42_lgxki")
+guard = SubResource("Resource_mx4sa")
+
+[sub_resource type="Resource" id="Resource_v67il"]
+script = ExtResource("39_ptthh")
+guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_5ffmn"), SubResource("Resource_hyhjw")])
+
+[sub_resource type="Resource" id="Resource_mw6ox"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../../Player/Grounded/Crouching/Sliding")
+
+[sub_resource type="Resource" id="Resource_qxur3"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../Slide")
+
+[sub_resource type="Resource" id="Resource_8b2tf"]
+script = ExtResource("42_lgxki")
+guard = SubResource("Resource_qxur3")
+
+[sub_resource type="Resource" id="Resource_4vltt"]
+script = ExtResource("39_ptthh")
+guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_mw6ox"), SubResource("Resource_8b2tf")])
+
+[sub_resource type="Resource" id="Resource_fibku"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../../Player/Grounded/Crouching/Crouch")
+
+[sub_resource type="Resource" id="Resource_0wgnt"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../Crouch")
+
+[sub_resource type="Resource" id="Resource_qxxo8"]
+script = ExtResource("42_lgxki")
+guard = SubResource("Resource_0wgnt")
+
+[sub_resource type="Resource" id="Resource_xgy02"]
+script = ExtResource("39_ptthh")
+guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_fibku"), SubResource("Resource_qxxo8")])
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_kkkcj")
@@ -2159,8 +2249,7 @@ script = ExtResource("1_kkkcj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(5, -40)
 sprite_frames = SubResource("SpriteFrames_80vwq")
-animation = &"death"
-frame = 9
+animation = &"attack"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, -18)
@@ -2174,17 +2263,12 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_uwuqo")
 anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/crouch_start = false
-parameters/conditions/end_crouch = false
-parameters/conditions/end_fall = false
-parameters/conditions/start_jump = false
-parameters/conditions/start_slide = false
-parameters/conditions/turn_around = false
-parameters/Move/blend_position = 0.00134861
+parameters/Crouch/Crouch/blend_position = -0.00075078
+parameters/Move/blend_position = 0.00075078
 parameters/Slide/conditions/slide_end = false
-parameters/crouch/Crouch/blend_position = 0.000674367
 
-[node name="StateLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+[node name="StateLabel" type="Label" parent="." node_paths=PackedStringArray("state_chart")]
+visible = false
 offset_left = -49.0
 offset_top = -67.0
 offset_right = 49.0
@@ -2194,40 +2278,144 @@ text = "State: "
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("18_ei7fb")
-state_machine = NodePath("../FiniteStateMachine")
+state_chart = NodePath("../StateChart")
 
-[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
-script = ExtResource("15_0nmrk")
-current_state = NodePath("Idle")
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("32_3knpo")
 
-[node name="BaseState" type="Node" parent="FiniteStateMachine"]
-script = ExtResource("16_8asjh")
+[node name="ParallelState" type="Node" parent="StateChart"]
+script = ExtResource("33_26pg0")
 
-[node name="Idle" type="Node" parent="FiniteStateMachine"]
-script = ExtResource("16_c7ys4")
-jump_velocity = null
+[node name="Player" type="Node" parent="StateChart/ParallelState"]
+script = ExtResource("34_4lkih")
+initial_state = NodePath("Grounded")
 
-[node name="Run" type="Node" parent="FiniteStateMachine"]
-script = ExtResource("18_21q1q")
-jump_velocity = null
+[node name="Grounded" type="Node" parent="StateChart/ParallelState/Player"]
+script = ExtResource("34_4lkih")
+initial_state = NodePath("Standing")
 
-[node name="TurnAround" type="Node" parent="FiniteStateMachine"]
-script = ExtResource("35_f0tb5")
-jump_velocity = null
+[node name="Standing" type="Node" parent="StateChart/ParallelState/Player/Grounded"]
+script = ExtResource("35_ipd5f")
 
-[node name="Slide" type="Node" parent="FiniteStateMachine"]
-script = ExtResource("36_3axkq")
-jump_velocity = null
+[node name="On Slide" type="Node" parent="StateChart/ParallelState/Player/Grounded/Standing"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../../Crouching/Sliding")
+event = &"tick"
+guard = SubResource("Resource_r58ym")
 
-[node name="Crouch" type="Node" parent="FiniteStateMachine"]
-script = ExtResource("19_u0ind")
-jump_velocity = null
+[node name="On Crouch" type="Node" parent="StateChart/ParallelState/Player/Grounded/Standing"]
+process_priority = 1
+script = ExtResource("36_8rjfd")
+to = NodePath("../../Crouching")
+event = &"tick"
+guard = SubResource("Resource_jk8u2")
 
-[node name="Jump" type="Node" parent="FiniteStateMachine"]
-script = ExtResource("17_5dvr4")
+[node name="Crouching" type="Node" parent="StateChart/ParallelState/Player/Grounded"]
+script = ExtResource("34_4lkih")
+initial_state = NodePath("Crouch")
 
-[node name="Fall" type="Node" parent="FiniteStateMachine"]
-script = ExtResource("39_0i41o")
-jump_velocity = null
+[node name="Crouch" type="Node" parent="StateChart/ParallelState/Player/Grounded/Crouching"]
+script = ExtResource("35_ipd5f")
 
-[connection signal="animation_finished" from="AnimationTree" to="FiniteStateMachine/TurnAround" method="_on_animation_tree_animation_finished"]
+[node name="Sliding" type="Node" parent="StateChart/ParallelState/Player/Grounded/Crouching"]
+script = ExtResource("35_ipd5f")
+
+[node name="On Slide End" type="Node" parent="StateChart/ParallelState/Player/Grounded/Crouching/Sliding"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../../Crouch")
+event = &"tick"
+guard = SubResource("Resource_8wh4l")
+
+[node name="On Crouch End" type="Node" parent="StateChart/ParallelState/Player/Grounded/Crouching"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../../Standing")
+event = &"tick"
+guard = SubResource("Resource_wu70w")
+
+[node name="Airborne" type="Node" parent="StateChart/ParallelState/Player"]
+script = ExtResource("34_4lkih")
+initial_state = NodePath("Falling")
+
+[node name="Jumping" type="Node" parent="StateChart/ParallelState/Player/Airborne"]
+script = ExtResource("35_ipd5f")
+
+[node name="Falling" type="Node" parent="StateChart/ParallelState/Player/Airborne"]
+script = ExtResource("35_ipd5f")
+
+[node name="On Grounded" type="Node" parent="StateChart/ParallelState/Player/Airborne"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../../Grounded")
+event = &"grounded"
+
+[node name="On Falling" type="Node" parent="StateChart/ParallelState/Player"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../Airborne/Falling")
+event = &"falling"
+guard = SubResource("Resource_sktov")
+
+[node name="On Jump" type="Node" parent="StateChart/ParallelState/Player"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../Airborne/Jumping")
+event = &"jump"
+guard = SubResource("Resource_se5vv")
+
+[node name="Animation" type="Node" parent="StateChart/ParallelState"]
+script = ExtResource("34_4lkih")
+initial_state = NodePath("Move")
+
+[node name="Move" type="Node" parent="StateChart/ParallelState/Animation"]
+script = ExtResource("36_q4fne")
+animation_tree = NodePath("../../../../AnimationTree")
+
+[node name="OnGrounded" type="Node" parent="StateChart/ParallelState/Animation"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../Move")
+event = &"tick"
+guard = SubResource("Resource_kgfci")
+
+[node name="Jump" type="Node" parent="StateChart/ParallelState/Animation"]
+script = ExtResource("36_q4fne")
+animation_tree = NodePath("../../../../AnimationTree")
+
+[node name="OnJump" type="Node" parent="StateChart/ParallelState/Animation"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../Jump")
+event = &"tick"
+guard = SubResource("Resource_1s1hb")
+
+[node name="Fall" type="Node" parent="StateChart/ParallelState/Animation"]
+script = ExtResource("36_q4fne")
+animation_tree = NodePath("../../../../AnimationTree")
+
+[node name="OnFalling" type="Node" parent="StateChart/ParallelState/Animation"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../Fall")
+event = &"tick"
+guard = SubResource("Resource_v67il")
+
+[node name="Slide" type="Node" parent="StateChart/ParallelState/Animation"]
+script = ExtResource("36_q4fne")
+animation_tree = NodePath("../../../../AnimationTree")
+
+[node name="OnSliding" type="Node" parent="StateChart/ParallelState/Animation"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../Slide")
+event = &"tick"
+guard = SubResource("Resource_4vltt")
+
+[node name="Crouch" type="Node" parent="StateChart/ParallelState/Animation"]
+script = ExtResource("36_q4fne")
+animation_tree = NodePath("../../../../AnimationTree")
+
+[node name="OnCrouch" type="Node" parent="StateChart/ParallelState/Animation"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../Crouch")
+event = &"tick"
+guard = SubResource("Resource_xgy02")
+
+[connection signal="state_entered" from="StateChart/ParallelState/Player/Grounded/Crouching" to="." method="_on_crouching_state_entered"]
+[connection signal="state_exited" from="StateChart/ParallelState/Player/Grounded/Crouching" to="." method="_on_crouching_state_exited"]
+[connection signal="state_entered" from="StateChart/ParallelState/Player/Grounded/Crouching/Sliding" to="." method="_on_sliding_state_entered"]
+[connection signal="state_exited" from="StateChart/ParallelState/Player/Grounded/Crouching/Sliding" to="." method="_on_sliding_state_exited"]
+[connection signal="state_input" from="StateChart/ParallelState/Player/Airborne" to="." method="_on_airborne_state_input"]
+[connection signal="state_entered" from="StateChart/ParallelState/Player/Airborne/Jumping" to="." method="_on_jumping_state_entered"]
