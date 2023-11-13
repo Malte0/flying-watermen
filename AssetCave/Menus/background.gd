@@ -9,7 +9,7 @@ func _ready():
 	cat.position.y = rand()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	randomize()
 	cat.move_local_x(2*direction)
 	if cat.position.x > 600 and direction == 1:

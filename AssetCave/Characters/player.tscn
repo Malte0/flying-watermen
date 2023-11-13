@@ -1,4 +1,4 @@
-[gd_scene load_steps=277 format=3 uid="uid://dae63ya3ql370"]
+[gd_scene load_steps=290 format=3 uid="uid://dae63ya3ql370"]
 
 [ext_resource type="Script" path="res://Characters/player.gd" id="1_kkkcj"]
 [ext_resource type="Texture2D" uid="uid://dcbg7s3ifl3np" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_Attack.png" id="2_pktqb"]
@@ -20,7 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://bjpcmbinei1ah" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_Run.png" id="13_1jh5l"]
 [ext_resource type="Texture2D" uid="uid://bvx132aesxffe" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_DeathNoMovement.png" id="13_ahw6n"]
 [ext_resource type="Texture2D" uid="uid://bsq5quxhh7y1c" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_Hit.png" id="15_s6osp"]
-[ext_resource type="Script" path="res://Characters/StateLabel.gd" id="18_ei7fb"]
 [ext_resource type="Texture2D" uid="uid://cq5wvum4d4655" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_Roll.png" id="19_3y5la"]
 [ext_resource type="Texture2D" uid="uid://t6260v8e7e37" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_Slide.png" id="21_yxqar"]
 [ext_resource type="Texture2D" uid="uid://dvlk2c3whm5up" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_SlideTransitionEnd.png" id="22_v74fb"]
@@ -30,7 +29,6 @@
 [ext_resource type="Texture2D" uid="uid://c2gvpucismv7b" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_WallClimbNoMovement.png" id="26_hkyep"]
 [ext_resource type="Texture2D" uid="uid://dhymkmexounep" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_WallHang.png" id="27_osavr"]
 [ext_resource type="Texture2D" uid="uid://dw8enqeib7r2j" path="res://Assets/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_WallSlide.png" id="28_ifq1h"]
-[ext_resource type="FontFile" uid="uid://byk6d8y8ednja" path="res://Assets/EquipmentPro.ttf" id="29_q23bt"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="32_3knpo"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="33_26pg0"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="34_4lkih"]
@@ -2018,6 +2016,9 @@ states/crouch_transition/position = Vector2(367.333, 100.259)
 transitions = ["Start", "crouch_transition", SubResource("AnimationNodeStateMachineTransition_x1cu8"), "crouch_transition", "Crouch", SubResource("AnimationNodeStateMachineTransition_55qrr")]
 graph_offset = Vector2(-286, -21)
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tagy2"]
+animation = &"dash"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_el3m8"]
 animation = &"fall"
 
@@ -2060,6 +2061,9 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_pqnox")
 blend_point_2/pos = 1.0
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6l3wg"]
+animation = &"roll"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h46x6"]
 animation = &"slide"
 
@@ -2098,26 +2102,35 @@ graph_offset = Vector2(-235, -19)
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gwxkt"]
 animation = &"turn_around"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pa76r"]
+animation = &"wall_slide"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ogqb8"]
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_uwuqo"]
 states/Crouch/node = SubResource("AnimationNodeStateMachine_6vhcr")
 states/Crouch/position = Vector2(178.948, 8.67065)
-states/End/position = Vector2(580.667, 98.4642)
+states/Dash/node = SubResource("AnimationNodeAnimation_tagy2")
+states/Dash/position = Vector2(807.333, 8.50392)
+states/End/position = Vector2(526.667, 90.602)
 states/Fall/node = SubResource("AnimationNodeStateMachine_8mv2b")
 states/Fall/position = Vector2(179.338, 167.935)
 states/Jump/node = SubResource("AnimationNodeAnimation_4uhc5")
 states/Jump/position = Vector2(48.3254, 167.053)
 states/Move/node = SubResource("AnimationNodeBlendSpace1D_sguy6")
 states/Move/position = Vector2(47.677, 90.3375)
+states/Roll/node = SubResource("AnimationNodeAnimation_6l3wg")
+states/Roll/position = Vector2(656.081, 168.179)
 states/Slide/node = SubResource("AnimationNodeStateMachine_4xh3m")
 states/Slide/position = Vector2(46.7045, 7.7519)
 states/Start/position = Vector2(-80.667, 89.4385)
-states/turn_around/node = SubResource("AnimationNodeAnimation_gwxkt")
-states/turn_around/position = Vector2(472.365, 25.799)
+states/TurnAround/node = SubResource("AnimationNodeAnimation_gwxkt")
+states/TurnAround/position = Vector2(656.122, 91.1101)
+states/WallSlide/node = SubResource("AnimationNodeAnimation_pa76r")
+states/WallSlide/position = Vector2(655.859, 9.33599)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_ogqb8")]
-graph_offset = Vector2(-527, -53)
+graph_offset = Vector2(-514, -30)
 
 [sub_resource type="Resource" id="Resource_r58ym"]
 script = ExtResource("37_yo8mi")
@@ -2137,31 +2150,55 @@ expression = "crouching != true"
 
 [sub_resource type="Resource" id="Resource_7ckxi"]
 script = ExtResource("39_8f8eg")
-state = NodePath("../Airborne/Falling")
+state = NodePath("../Airborne")
 
 [sub_resource type="Resource" id="Resource_sktov"]
 script = ExtResource("42_lgxki")
 guard = SubResource("Resource_7ckxi")
 
-[sub_resource type="Resource" id="Resource_mbpsx"]
+[sub_resource type="Resource" id="Resource_6pm8d"]
 script = ExtResource("39_8f8eg")
-state = NodePath("../Grounded")
+state = NodePath("../Airborne")
 
-[sub_resource type="Resource" id="Resource_1o2au"]
-script = ExtResource("37_yo8mi")
-expression = "air_jumps_left > 0"
+[sub_resource type="Resource" id="Resource_38wkj"]
+script = ExtResource("42_lgxki")
+guard = SubResource("Resource_6pm8d")
 
 [sub_resource type="Resource" id="Resource_unbhb"]
 script = ExtResource("39_8f8eg")
 state = NodePath("../Airborne")
 
+[sub_resource type="Resource" id="Resource_1o2au"]
+script = ExtResource("37_yo8mi")
+expression = "air_jumps_left > 0"
+
 [sub_resource type="Resource" id="Resource_b3ndv"]
 script = ExtResource("39_ptthh")
-guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_1o2au"), SubResource("Resource_unbhb")])
+guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_unbhb"), SubResource("Resource_1o2au")])
+
+[sub_resource type="Resource" id="Resource_hcnl0"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../Airborne/FallingCoyote")
 
 [sub_resource type="Resource" id="Resource_se5vv"]
 script = ExtResource("40_yw580")
-guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_mbpsx"), SubResource("Resource_b3ndv")])
+guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_38wkj"), SubResource("Resource_b3ndv"), SubResource("Resource_hcnl0")])
+
+[sub_resource type="Resource" id="Resource_cg3bt"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../WallSlide")
+
+[sub_resource type="Resource" id="Resource_6rl8s"]
+script = ExtResource("42_lgxki")
+guard = SubResource("Resource_cg3bt")
+
+[sub_resource type="Resource" id="Resource_p8ca0"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../Grounded")
+
+[sub_resource type="Resource" id="Resource_c7udc"]
+script = ExtResource("42_lgxki")
+guard = SubResource("Resource_p8ca0")
 
 [sub_resource type="Resource" id="Resource_lov60"]
 script = ExtResource("39_8f8eg")
@@ -2195,9 +2232,17 @@ guard = SubResource("Resource_x6w5p")
 script = ExtResource("39_ptthh")
 guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_mmkn4"), SubResource("Resource_o8ajg")])
 
-[sub_resource type="Resource" id="Resource_5ffmn"]
+[sub_resource type="Resource" id="Resource_cgqeu"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../../Player/Airborne/FallingCoyote")
+
+[sub_resource type="Resource" id="Resource_2g1be"]
 script = ExtResource("39_8f8eg")
 state = NodePath("../../Player/Airborne/Falling")
+
+[sub_resource type="Resource" id="Resource_heot1"]
+script = ExtResource("40_yw580")
+guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_cgqeu"), SubResource("Resource_2g1be")])
 
 [sub_resource type="Resource" id="Resource_mx4sa"]
 script = ExtResource("39_8f8eg")
@@ -2209,7 +2254,7 @@ guard = SubResource("Resource_mx4sa")
 
 [sub_resource type="Resource" id="Resource_v67il"]
 script = ExtResource("39_ptthh")
-guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_5ffmn"), SubResource("Resource_hyhjw")])
+guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_heot1"), SubResource("Resource_hyhjw")])
 
 [sub_resource type="Resource" id="Resource_mw6ox"]
 script = ExtResource("39_8f8eg")
@@ -2243,13 +2288,29 @@ guard = SubResource("Resource_0wgnt")
 script = ExtResource("39_ptthh")
 guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_fibku"), SubResource("Resource_qxxo8")])
 
+[sub_resource type="Resource" id="Resource_w2w0x"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../../Player/WallSlide")
+
+[sub_resource type="Resource" id="Resource_wfbno"]
+script = ExtResource("39_8f8eg")
+state = NodePath("../WallSlide")
+
+[sub_resource type="Resource" id="Resource_lc40i"]
+script = ExtResource("42_lgxki")
+guard = SubResource("Resource_wfbno")
+
+[sub_resource type="Resource" id="Resource_mklyr"]
+script = ExtResource("39_ptthh")
+guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_w2w0x"), SubResource("Resource_lc40i")])
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_kkkcj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(5, -40)
+position = Vector2(4, -40)
 sprite_frames = SubResource("SpriteFrames_80vwq")
-animation = &"attack"
+animation = &"wall_slide"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, -18)
@@ -2264,21 +2325,8 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_uwuqo")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Crouch/Crouch/blend_position = -0.00075078
-parameters/Move/blend_position = 0.00075078
+parameters/Move/blend_position = -0.000813007
 parameters/Slide/conditions/slide_end = false
-
-[node name="StateLabel" type="Label" parent="." node_paths=PackedStringArray("state_chart")]
-visible = false
-offset_left = -49.0
-offset_top = -67.0
-offset_right = 49.0
-offset_bottom = -41.0
-theme_override_fonts/font = ExtResource("29_q23bt")
-text = "State: "
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("18_ei7fb")
-state_chart = NodePath("../StateChart")
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("32_3knpo")
@@ -2339,17 +2387,28 @@ initial_state = NodePath("Falling")
 [node name="Jumping" type="Node" parent="StateChart/ParallelState/Player/Airborne"]
 script = ExtResource("35_ipd5f")
 
+[node name="On Falling" type="Node" parent="StateChart/ParallelState/Player/Airborne/Jumping"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../../Falling")
+event = &"falling"
+
+[node name="FallingCoyote" type="Node" parent="StateChart/ParallelState/Player/Airborne"]
+script = ExtResource("35_ipd5f")
+
+[node name="CoyoteDelay" type="Node" parent="StateChart/ParallelState/Player/Airborne/FallingCoyote"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../../Falling")
+delay_seconds = 0.2
+
 [node name="Falling" type="Node" parent="StateChart/ParallelState/Player/Airborne"]
 script = ExtResource("35_ipd5f")
 
-[node name="On Grounded" type="Node" parent="StateChart/ParallelState/Player/Airborne"]
-script = ExtResource("36_8rjfd")
-to = NodePath("../../Grounded")
-event = &"grounded"
+[node name="WallSlide" type="Node" parent="StateChart/ParallelState/Player"]
+script = ExtResource("35_ipd5f")
 
-[node name="On Falling" type="Node" parent="StateChart/ParallelState/Player"]
+[node name="On FallingCoyote" type="Node" parent="StateChart/ParallelState/Player"]
 script = ExtResource("36_8rjfd")
-to = NodePath("../Airborne/Falling")
+to = NodePath("../Airborne/FallingCoyote")
 event = &"falling"
 guard = SubResource("Resource_sktov")
 
@@ -2358,6 +2417,18 @@ script = ExtResource("36_8rjfd")
 to = NodePath("../Airborne/Jumping")
 event = &"jump"
 guard = SubResource("Resource_se5vv")
+
+[node name="On WallSlide" type="Node" parent="StateChart/ParallelState/Player"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../WallSlide")
+event = &"wall_slide"
+guard = SubResource("Resource_6rl8s")
+
+[node name="On Grounded" type="Node" parent="StateChart/ParallelState/Player"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../Grounded")
+event = &"grounded"
+guard = SubResource("Resource_c7udc")
 
 [node name="Animation" type="Node" parent="StateChart/ParallelState"]
 script = ExtResource("34_4lkih")
@@ -2413,9 +2484,30 @@ to = NodePath("../Crouch")
 event = &"tick"
 guard = SubResource("Resource_xgy02")
 
+[node name="WallSlide" type="Node" parent="StateChart/ParallelState/Animation"]
+script = ExtResource("36_q4fne")
+animation_tree = NodePath("../../../../AnimationTree")
+
+[node name="OnWallSlide" type="Node" parent="StateChart/ParallelState/Animation"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../WallSlide")
+event = &"tick"
+guard = SubResource("Resource_mklyr")
+
+[node name="Eye" type="RayCast2D" parent="."]
+position = Vector2(0, -31)
+target_position = Vector2(10, 0)
+
+[node name="Feet" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(10, 0)
+
 [connection signal="state_entered" from="StateChart/ParallelState/Player/Grounded/Crouching" to="." method="_on_crouching_state_entered"]
 [connection signal="state_exited" from="StateChart/ParallelState/Player/Grounded/Crouching" to="." method="_on_crouching_state_exited"]
 [connection signal="state_entered" from="StateChart/ParallelState/Player/Grounded/Crouching/Sliding" to="." method="_on_sliding_state_entered"]
 [connection signal="state_exited" from="StateChart/ParallelState/Player/Grounded/Crouching/Sliding" to="." method="_on_sliding_state_exited"]
-[connection signal="state_input" from="StateChart/ParallelState/Player/Airborne" to="." method="_on_airborne_state_input"]
 [connection signal="state_entered" from="StateChart/ParallelState/Player/Airborne/Jumping" to="." method="_on_jumping_state_entered"]
+[connection signal="state_input" from="StateChart/ParallelState/Player/Airborne/Jumping" to="." method="_on_airborn_not_coyote_state_input"]
+[connection signal="state_input" from="StateChart/ParallelState/Player/Airborne/Falling" to="." method="_on_airborn_not_coyote_state_input"]
+[connection signal="state_entered" from="StateChart/ParallelState/Player/WallSlide" to="." method="_on_wall_slide_state_entered"]
+[connection signal="state_exited" from="StateChart/ParallelState/Player/WallSlide" to="." method="_on_wall_slide_state_exited"]

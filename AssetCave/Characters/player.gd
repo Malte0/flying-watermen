@@ -24,49 +24,58 @@ extends CharacterBody2D
 @onready var state_chart: StateChart = $StateChart
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
+@onready var eye_cast: RayCast2D = $Eye
+@onready var feet_cast: RayCast2D = $Feet
+
+# Reset values
+@export var base_speed: float = 300.0
+@export var base_jump_velocity: float = -400.0
+@export var base_friction: float = 0.5
+@export var air_jumps: int = 1
+var base_fall_speed_factor: float = 1.0
+# Resettable variables
+var speed = base_speed
+var jump_velocity = base_jump_velocity
+var friction = base_friction
+var air_jumps_left = air_jumps
+var fall_speed_factor = base_fall_speed_factor
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction: float = 0.0
 var can_move: bool = true
 var slide_threshold: float = base_speed/2
-
-@export var base_speed: float = 300.0
-@export var base_jump_velocity: float = -400.0
-@export var base_friction: float = 0.5
-@export var air_jumps: int = 1
-var speed: float = base_speed
-var jump_velocity: float = base_jump_velocity
-var friction: float = base_friction
-var air_jumps_left: int = air_jumps
+const SPRITE_FLIP_OFFSET: int = 8
 
 func _ready():
 	animation_tree.active = true
+	#Initialize values so Guards don't complain
+	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
+	state_chart.set_expression_property("air_jumps_left", air_jumps_left)
+	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
+	state_chart.set_expression_property("velocity_x", velocity.x)
 
 
 func _physics_process(delta):
 	# Debug Info
 	state_chart.set_expression_property("velocity_x", velocity.x)
+	state_chart.set_expression_property("is_on_wall", is_on_wall())
 	
 	# For transitions without event condition
 	state_chart.send_event("tick")
 	
-	# handle left/right movement
-	direction = Input.get_axis("a", "d")
-	if abs(direction) > 0 and can_move:
-		velocity.x = lerp(velocity.x, direction * speed, 0.1)
-	else:
-		velocity.x = lerp(velocity.x, 0.0, friction)
-	
 	# handle gravity
-	if is_on_floor() and velocity.y >= 0:
+	if is_on_floor() and velocity.y == 0:
 		state_chart.send_event("grounded")
 		air_jumps_left = air_jumps 
 	else:
-		velocity.y += gravity * delta
+		velocity.y += gravity * delta * fall_speed_factor
 		if velocity.y > 0:
-			state_chart.send_event("falling")
-	
+			if is_on_wall() and (Input.is_action_pressed("a") or Input.is_action_pressed("d")):
+				state_chart.send_event("wall_slide")
+				air_jumps_left = air_jumps 
+			else:
+				state_chart.send_event("falling")
 	
 	if Input.is_action_just_pressed("w"): state_chart.send_event("jump")
 	
@@ -75,21 +84,43 @@ func _physics_process(delta):
 	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
 	
 	update_animation()
+	
+	# handle left/right movement
+	direction = Input.get_axis("a", "d")
+	if abs(direction) > 0 and can_move:
+		velocity.x = lerp(velocity.x, direction * speed, 0.1)
+	elif abs(velocity.x) < 0.1:
+		velocity.x = 0
+	else:
+		velocity.x = lerp(velocity.x, 0.0, friction)
+	
 	move_and_slide()
 
 
 func update_animation():
-	animation_tree.set("parameters/Crouch/Crouch/blend_position", direction)
-	animation_tree.set("parameters/Move/blend_position", direction)
-	if sprite.flip_h and direction > 0 and velocity.x > 0:
-		turn_around(10)
-	elif not sprite.flip_h and direction < 0 and velocity.x < 0:
-		turn_around(-10)
+	animation_tree.set("parameters/Crouch/Crouch/blend_position", abs(velocity.x) > 1)
+	animation_tree.set("parameters/Move/blend_position", abs(velocity.x) > 1)
+	# If player walks in different direction
+	if (sprite.flip_h and direction > 0 and velocity.x > 0) or (not sprite.flip_h and direction < 0 and velocity.x < 0):
+		flip_sprite()
+
+
+func flip_sprite():
+	eye_cast.rotate(PI)
+	feet_cast.rotate(PI)
+	if sprite.flip_h:
+		turn_around(SPRITE_FLIP_OFFSET)
+	elif not sprite.flip_h:
+		turn_around(-SPRITE_FLIP_OFFSET)
 
 
 func turn_around(move_sprite):
 	sprite.flip_h = !sprite.flip_h
 	sprite.move_local_x(move_sprite)
+
+
+func facing_wall():
+	return eye_cast.is_colliding() or feet_cast.is_colliding()
 
 
 func _on_crouching_state_entered():
@@ -110,9 +141,19 @@ func _on_sliding_state_exited():
 	can_move = true
 
 
-func _on_airborne_state_input(event):
+func _on_airborn_not_coyote_state_input(_event):
 	if Input.is_action_just_pressed("w") and air_jumps_left > 0: air_jumps_left -= 1
 
 
 func _on_jumping_state_entered():
 	velocity.y = jump_velocity + velocity.y/2
+
+
+func _on_wall_slide_state_entered():
+	velocity.y = velocity.y/10
+	fall_speed_factor = base_fall_speed_factor/10
+	if facing_wall(): flip_sprite()
+
+
+func _on_wall_slide_state_exited():
+	fall_speed_factor = base_fall_speed_factor
