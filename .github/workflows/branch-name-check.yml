@@ -12,12 +12,14 @@ jobs:
     - name: Checkout project # to gain access to the branch names
       uses: actions/checkout@v2
 
-    - name: Set up Git
-      run: |
-        git config --global user.email "actions@github.com" 
-        git config --global user.name "GitHub Actions"
+    # - name: Set up Git
+    #   run: |
+    #     git config --global user.email "actions@github.com" 
+    #     git config --global user.name "GitHub Actions"
 
-    - name: Get branch name
-      run: |
-        BRANCH_NAME=${GITHUB_REF#refs/heads/}
-        echo "Branch name is: $BRANCH_NAME"
+    - name: Extract branch name
+      shell: bash
+      run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      id: branch_name
+
+    - run: echo "$branch_name"
