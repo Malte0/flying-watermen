@@ -17,9 +17,16 @@ jobs:
         BRANCH: ${{github.event.pull_request.head.ref}}
       run: |
         if [ "$BRANCH" == "dev" ]; then
-            echo "is dev"
-        else
-            echo "$BRANCH"
-            echo "NOT DEV"
+            echo "Test OK!"
+            echo "This is the dev branch"
+            exit 0
+        elif [[ "$BRANCH" == "feat"* ]] || [[ "$BRANCH" == "bug"* ]] || [[ "$BRANCH" == "wip"* ]] || [[ "$BRANCH" == "junk"* ]] ;
+            echo "Test OK!"
+            echo "Branch is categorized"
+            exit 0
+        else 
+            echo "Bad branchname: $BRANCH"
+            echo "The branchname should include a category: 'feat', 'bug', 'wip' 'junk'"
+            echo "More info in 'Git Conventions' in the wiki"
             exit 1
         fi
