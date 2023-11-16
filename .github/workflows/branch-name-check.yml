@@ -19,6 +19,7 @@ jobs:
         if [ "$BRANCH" == "dev" ]; then
             echo "is dev"
         else
+            echo "$BRANCH"
             echo "NOT DEV"
             exit 1
         fi
