@@ -20,7 +20,7 @@ jobs:
             echo "Test OK!"
             echo "This is the dev branch"
             exit 0
-        elif [[ "$BRANCH" == "feat"* ]] || [[ "$BRANCH" == "bug"* ]] || [[ "$BRANCH" == "wip"* ]] || [[ "$BRANCH" == "junk"* ]] ;
+        elif [[ "$BRANCH" == "feat"* ]] || [[ "$BRANCH" == "bug"* ]] || [[ "$BRANCH" == "wip"* ]] || [[ "$BRANCH" == "junk"* ]]; then
             echo "Test OK!"
             echo "Branch is categorized"
             exit 0
