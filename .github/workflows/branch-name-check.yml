@@ -25,8 +25,8 @@ jobs:
             echo "Branch is categorized"
             exit 0
         else 
-            echo "Bad branchname: $BRANCH"
-            echo "The branchname should include a category: 'feat', 'bug', 'wip' 'junk'"
-            echo "More info in 'Git Conventions' in the wiki"
+            echo "Bad branchname: '$BRANCH'"
+            echo "The branchname should include a category: 'feat/', 'bug/', 'wip/' 'junk/'"
+            echo "See 'Git conventions' in our wiki for more info"
             exit 1
         fi
