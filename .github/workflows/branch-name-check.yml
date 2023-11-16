@@ -13,8 +13,11 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set up Git
-      run: git config --global user.email "actions@github.com" && git config --global user.name "GitHub Actions"
+      run: |
+        git config --global user.email "actions@github.com" 
+        git config --global user.name "GitHub Actions"
 
     - name: Get branch name
-      run: | 
-        echo "Branch name is: ${GITHUB_REF#refs/heads/}"
+      run: |
+        BRANCH_NAME=${GITHUB_REF#refs/heads/}
+        echo "Branch name is: $BRANCH_NAME"
