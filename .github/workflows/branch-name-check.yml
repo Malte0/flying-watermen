@@ -17,7 +17,7 @@ jobs:
         BRANCH: ${{github.event.pull_request.head.ref}}
       run: |
         if [ "$BRANCH" == "dev" ]; then
-            echo is dev"
+            echo "is dev"
         else
             echo "NOT DEV"
             exit 1
