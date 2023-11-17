@@ -1,12 +1,15 @@
-[gd_scene format=3 uid="uid://blfnowbs5o1al"]
+[gd_scene load_steps=2 format=3 uid="uid://blfnowbs5o1al"]
 
-[node name="title" type="Control"]
+[ext_resource type="Script" path="res://menus/title/Title.gd" id="1_o7t8j"]
+
+[node name="Title" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_o7t8j")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
