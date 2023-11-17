@@ -2494,6 +2494,29 @@ to = NodePath("../WallSlide")
 event = &"tick"
 guard = SubResource("Resource_mklyr")
 
+[node name="Inputs" type="Node" parent="StateChart/ParallelState"]
+script = ExtResource("33_26pg0")
+
+[node name="W" type="Node" parent="StateChart/ParallelState/Inputs"]
+script = ExtResource("34_4lkih")
+initial_state = NodePath("Not")
+
+[node name="Pressed" type="Node" parent="StateChart/ParallelState/Inputs/W"]
+script = ExtResource("35_ipd5f")
+
+[node name="Delay" type="Node" parent="StateChart/ParallelState/Inputs/W/Pressed"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../../Not")
+delay_seconds = 0.5
+
+[node name="Not" type="Node" parent="StateChart/ParallelState/Inputs/W"]
+script = ExtResource("35_ipd5f")
+
+[node name="On Press" type="Node" parent="StateChart/ParallelState/Inputs/W"]
+script = ExtResource("36_8rjfd")
+to = NodePath("../Pressed")
+event = &"wPressed"
+
 [node name="Eye" type="RayCast2D" parent="."]
 position = Vector2(0, -31)
 target_position = Vector2(10, 0)
@@ -2511,3 +2534,4 @@ target_position = Vector2(10, 0)
 [connection signal="state_input" from="StateChart/ParallelState/Player/Airborne/Falling" to="." method="_on_airborn_not_coyote_state_input"]
 [connection signal="state_entered" from="StateChart/ParallelState/Player/WallSlide" to="." method="_on_wall_slide_state_entered"]
 [connection signal="state_exited" from="StateChart/ParallelState/Player/WallSlide" to="." method="_on_wall_slide_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/ParallelState/Inputs/W/Pressed" to="." method="_on_pressed_state_physics_processing"]

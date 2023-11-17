@@ -67,13 +67,13 @@ func _physics_process(delta):
 	# handle gravity
 	if is_on_floor() and velocity.y == 0:
 		state_chart.send_event("grounded")
-		air_jumps_left = air_jumps 
+		air_jumps_left = air_jumps
 	else:
 		velocity.y += gravity * delta * fall_speed_factor
 		if velocity.y > 0:
 			if is_on_wall() and (Input.is_action_pressed("a") or Input.is_action_pressed("d")):
 				state_chart.send_event("wall_slide")
-				air_jumps_left = air_jumps 
+				air_jumps_left = air_jumps
 			else:
 				state_chart.send_event("falling")
 	
@@ -95,6 +95,11 @@ func _physics_process(delta):
 		velocity.x = lerp(velocity.x, 0.0, friction)
 	
 	move_and_slide()
+
+
+func _input(event):
+	if event.is_action_pressed("w"):
+		state_chart.send_event("wPressed")
 
 
 func update_animation():
@@ -157,3 +162,7 @@ func _on_wall_slide_state_entered():
 
 func _on_wall_slide_state_exited():
 	fall_speed_factor = base_fall_speed_factor
+
+
+func _on_pressed_state_physics_processing(delta):
+	if is_on_floor(): state_chart.send_event("jump")
