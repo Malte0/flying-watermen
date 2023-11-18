@@ -21,9 +21,9 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1m0bo"]
-radius = 8.0
-height = 36.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6p5f6"]
+radius = 30.0
+height = 128.0
 
 [sub_resource type="Resource" id="Resource_r58ym"]
 script = ExtResource("7_m5qsp")
@@ -100,21 +100,17 @@ script = ExtResource("1_n7144")
 sprite_frames = SubResource("SpriteFrames_w7iqa")
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(-1.49012e-08, -17.5)
-scale = Vector2(0.09375, 0.273438)
+position = Vector2(-1.43051e-06, -64)
+scale = Vector2(0.46875, 1)
 texture = ExtResource("12_pf2kw")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, -18)
-shape = SubResource("CapsuleShape2D_1m0bo")
+position = Vector2(0, -64)
+shape = SubResource("CapsuleShape2D_6p5f6")
 
-[node name="Eye" type="RayCast2D" parent="."]
-position = Vector2(0, -31)
-target_position = Vector2(10, 0)
-
-[node name="Feet" type="RayCast2D" parent="."]
-position = Vector2(0, -7)
-target_position = Vector2(10, 0)
+[node name="WallCheck" type="RayCast2D" parent="."]
+position = Vector2(32, -125)
+target_position = Vector2(-1, 121)
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("2_dhjab")

@@ -12,13 +12,13 @@ extends CharacterBody2D
 @onready var state_chart: StateChart = $StateChart
 #@onready var animation_tree: AnimationTree = $AnimationTree
 #@onready var animation_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
-@onready var eye_cast: RayCast2D = $Eye
-@onready var feet_cast: RayCast2D = $Feet
+@onready var wall_check: RayCast2D = $WallCheck
 
+var scale_speed: float = 2.5
 # Reset values
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var base_speed: float = 300.
-var base_jump_velocity: float = -400.0
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * scale_speed
+var base_speed: float = 300.0 * scale_speed
+var base_jump_velocity: float = -400.0 * scale_speed
 var base_friction: float = 0.5
 var air_jumps: int = 1
 var base_fall_speed_factor: float = 1.0
@@ -31,10 +31,10 @@ var air_jumps_left = air_jumps
 var fall_speed_factor = base_fall_speed_factor
 
 # Other information about the player
+const SPRITE_FLIP_OFFSET: int = 0
 var direction: float = 0.0
 var can_move: bool = true
 var slide_threshold: float = base_speed/2
-const SPRITE_FLIP_OFFSET: int = 0
 
 func _ready():
 #	animation_tree.active = true
@@ -100,8 +100,7 @@ func update_animation():
 
 
 func flip_sprite():
-	eye_cast.rotate(PI)
-	feet_cast.rotate(PI)
+	wall_check.position.x = -wall_check.position.x
 	if sprite.flip_h:
 		turn_around(SPRITE_FLIP_OFFSET)
 	elif not sprite.flip_h:
@@ -114,7 +113,7 @@ func turn_around(move_sprite):
 
 
 func facing_wall():
-	return eye_cast.is_colliding() or feet_cast.is_colliding()
+	return wall_check.is_colliding()
 
 
 func _on_crouching_state_entered():
