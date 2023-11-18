@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dae63ya3ql370"]
+[gd_scene load_steps=32 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dhjab"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="9_qrtxb"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="10_ddq3l"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/any_of_guard.gd" id="11_5fhyj"]
+[ext_resource type="Texture2D" uid="uid://ihorffrdym4j" path="res://icon.svg" id="12_pf2kw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w7iqa"]
 animations = [{
@@ -98,9 +99,22 @@ script = ExtResource("1_n7144")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_w7iqa")
 
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(-1.49012e-08, -17.5)
+scale = Vector2(0.09375, 0.273438)
+texture = ExtResource("12_pf2kw")
+
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, -18)
 shape = SubResource("CapsuleShape2D_1m0bo")
+
+[node name="Eye" type="RayCast2D" parent="."]
+position = Vector2(0, -31)
+target_position = Vector2(10, 0)
+
+[node name="Feet" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(10, 0)
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("2_dhjab")
@@ -226,14 +240,6 @@ script = ExtResource("5_dadqm")
 script = ExtResource("6_aaxtf")
 to = NodePath("../Pressed")
 event = &"wPressed"
-
-[node name="Eye" type="RayCast2D" parent="."]
-position = Vector2(0, -31)
-target_position = Vector2(10, 0)
-
-[node name="Feet" type="RayCast2D" parent="."]
-position = Vector2(0, -7)
-target_position = Vector2(10, 0)
 
 [connection signal="state_entered" from="StateChart/ParallelState/Player/Grounded/Crouching" to="." method="_on_crouching_state_entered"]
 [connection signal="state_exited" from="StateChart/ParallelState/Player/Grounded/Crouching" to="." method="_on_crouching_state_exited"]

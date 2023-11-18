@@ -15,12 +15,10 @@ extends CharacterBody2D
 @onready var eye_cast: RayCast2D = $Eye
 @onready var feet_cast: RayCast2D = $Feet
 
-var res_scale = ProjectSettings.get("display/window/size/viewport_height")/648
-
 # Reset values
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")*res_scale
-var base_speed: float = 300.0*res_scale
-var base_jump_velocity: float = -400.0*res_scale
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var base_speed: float = 300.
+var base_jump_velocity: float = -400.0
 var base_friction: float = 0.5
 var air_jumps: int = 1
 var base_fall_speed_factor: float = 1.0

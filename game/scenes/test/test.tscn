@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b7cqxaelqtkem"]
 
-[ext_resource type="PackedScene" uid="uid://dae63ya3ql370" path="res://entities/player/player.tscn" id="1_x5uly"]
+[ext_resource type="PackedScene" uid="uid://djmlmtr41m2ce" path="res://entities/player/player.tscn" id="1_x5uly"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sn4p6"]
 
@@ -8,10 +8,9 @@
 size = Vector2(494.5, 52.0833)
 
 [node name="Test" type="Node2D"]
-scale = Vector2(6, 6)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(316.5, 282.667)
+position = Vector2(620, 587)
 physics_material_override = SubResource("PhysicsMaterial_sn4p6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
@@ -20,4 +19,4 @@ shape = SubResource("RectangleShape2D_gjqhc")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_x5uly")]
-position = Vector2(318.833, 248.167)
+position = Vector2(624, 521)
