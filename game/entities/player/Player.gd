@@ -10,31 +10,40 @@ extends CharacterBody2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var state_chart: StateChart = $StateChart
+@onready var wall_check: RayCast2D = $WallCheck
 #@onready var animation_tree: AnimationTree = $AnimationTree
 #@onready var animation_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
-@onready var wall_check: RayCast2D = $WallCheck
 
-var scale_speed: float = 2.5
 # Reset values
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * scale_speed
-var base_speed: float = 300.0 * scale_speed
-var base_jump_velocity: float = -400.0 * scale_speed
+var base_scale_speed: float = 2.5
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * base_scale_speed
+var base_speed: float = 300.0 * base_scale_speed
+var base_jump_velocity: float = -400.0 * base_scale_speed
 var base_friction: float = 0.5
 var air_jumps: int = 1
 var base_fall_speed_factor: float = 1.0
-
 # Resettable variables
+var scale_speed = base_scale_speed
 var speed = base_speed
 var jump_velocity = base_jump_velocity
 var friction = base_friction
 var air_jumps_left = air_jumps
 var fall_speed_factor = base_fall_speed_factor
+var can_move: bool = true
+
+func reset_variables():
+	speed = base_speed
+	jump_velocity = base_jump_velocity
+	friction = base_friction
+	air_jumps_left = air_jumps
+	fall_speed_factor = base_fall_speed_factor
+	can_move = true
 
 # Other information about the player
 const SPRITE_FLIP_OFFSET: int = 0
 var direction: float = 0.0
-var can_move: bool = true
 var slide_threshold: float = base_speed/2
+
 
 func _ready():
 #	animation_tree.active = true
@@ -120,18 +129,9 @@ func _on_crouching_state_entered():
 	speed = base_speed/2
 
 
-func _on_crouching_state_exited():
-	speed = base_speed
-
-
 func _on_sliding_state_entered():
 	friction = base_friction/50
 	can_move = false
-
-
-func _on_sliding_state_exited():
-	friction = base_friction
-	can_move = true
 
 
 func _on_airborn_not_coyote_state_input(_event):
@@ -148,9 +148,14 @@ func _on_wall_slide_state_entered():
 	if facing_wall(): flip_sprite()
 
 
-func _on_wall_slide_state_exited():
-	fall_speed_factor = base_fall_speed_factor
-
-
 func _on_pressed_state_physics_processing(delta):
 	if is_on_floor(): state_chart.send_event("jump")
+
+
+func _on_airborne_state_entered():
+	friction = base_friction/10
+
+
+# Reset variables of any child states of the Movement state
+func _on_movement_child_state_exited():
+	reset_variables()

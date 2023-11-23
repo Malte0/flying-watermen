@@ -118,97 +118,97 @@ script = ExtResource("2_dhjab")
 [node name="ParallelState" type="Node" parent="StateChart"]
 script = ExtResource("3_7lhhd")
 
-[node name="Player" type="Node" parent="StateChart/ParallelState"]
+[node name="Movement" type="Node" parent="StateChart/ParallelState"]
 script = ExtResource("4_klwk4")
 initial_state = NodePath("Grounded")
 
-[node name="Grounded" type="Node" parent="StateChart/ParallelState/Player"]
+[node name="Grounded" type="Node" parent="StateChart/ParallelState/Movement"]
 script = ExtResource("4_klwk4")
 initial_state = NodePath("Standing")
 
-[node name="Standing" type="Node" parent="StateChart/ParallelState/Player/Grounded"]
+[node name="Standing" type="Node" parent="StateChart/ParallelState/Movement/Grounded"]
 script = ExtResource("5_dadqm")
 
-[node name="On Slide" type="Node" parent="StateChart/ParallelState/Player/Grounded/Standing"]
+[node name="On Slide" type="Node" parent="StateChart/ParallelState/Movement/Grounded/Standing"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Crouching/Sliding")
 event = &"tick"
 guard = SubResource("Resource_r58ym")
 
-[node name="On Crouch" type="Node" parent="StateChart/ParallelState/Player/Grounded/Standing"]
+[node name="On Crouch" type="Node" parent="StateChart/ParallelState/Movement/Grounded/Standing"]
 process_priority = 1
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Crouching")
 event = &"tick"
 guard = SubResource("Resource_jk8u2")
 
-[node name="Crouching" type="Node" parent="StateChart/ParallelState/Player/Grounded"]
+[node name="Crouching" type="Node" parent="StateChart/ParallelState/Movement/Grounded"]
 script = ExtResource("4_klwk4")
 initial_state = NodePath("Crouch")
 
-[node name="Crouch" type="Node" parent="StateChart/ParallelState/Player/Grounded/Crouching"]
+[node name="Crouch" type="Node" parent="StateChart/ParallelState/Movement/Grounded/Crouching"]
 script = ExtResource("5_dadqm")
 
-[node name="Sliding" type="Node" parent="StateChart/ParallelState/Player/Grounded/Crouching"]
+[node name="Sliding" type="Node" parent="StateChart/ParallelState/Movement/Grounded/Crouching"]
 script = ExtResource("5_dadqm")
 
-[node name="On Slide End" type="Node" parent="StateChart/ParallelState/Player/Grounded/Crouching/Sliding"]
+[node name="On Slide End" type="Node" parent="StateChart/ParallelState/Movement/Grounded/Crouching/Sliding"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Crouch")
 event = &"tick"
 guard = SubResource("Resource_8wh4l")
 
-[node name="On Crouch End" type="Node" parent="StateChart/ParallelState/Player/Grounded/Crouching"]
+[node name="On Crouch End" type="Node" parent="StateChart/ParallelState/Movement/Grounded/Crouching"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Standing")
 event = &"tick"
 guard = SubResource("Resource_wu70w")
 
-[node name="Airborne" type="Node" parent="StateChart/ParallelState/Player"]
+[node name="Airborne" type="Node" parent="StateChart/ParallelState/Movement"]
 script = ExtResource("4_klwk4")
 initial_state = NodePath("Falling")
 
-[node name="Jumping" type="Node" parent="StateChart/ParallelState/Player/Airborne"]
+[node name="Jumping" type="Node" parent="StateChart/ParallelState/Movement/Airborne"]
 script = ExtResource("5_dadqm")
 
-[node name="On Falling" type="Node" parent="StateChart/ParallelState/Player/Airborne/Jumping"]
+[node name="On Falling" type="Node" parent="StateChart/ParallelState/Movement/Airborne/Jumping"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Falling")
 event = &"falling"
 
-[node name="FallingCoyote" type="Node" parent="StateChart/ParallelState/Player/Airborne"]
+[node name="FallingCoyote" type="Node" parent="StateChart/ParallelState/Movement/Airborne"]
 script = ExtResource("5_dadqm")
 
-[node name="CoyoteDelay" type="Node" parent="StateChart/ParallelState/Player/Airborne/FallingCoyote"]
+[node name="CoyoteDelay" type="Node" parent="StateChart/ParallelState/Movement/Airborne/FallingCoyote"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Falling")
 delay_seconds = 0.2
 
-[node name="Falling" type="Node" parent="StateChart/ParallelState/Player/Airborne"]
+[node name="Falling" type="Node" parent="StateChart/ParallelState/Movement/Airborne"]
 script = ExtResource("5_dadqm")
 
-[node name="WallSlide" type="Node" parent="StateChart/ParallelState/Player"]
+[node name="WallSlide" type="Node" parent="StateChart/ParallelState/Movement"]
 script = ExtResource("5_dadqm")
 
-[node name="On FallingCoyote" type="Node" parent="StateChart/ParallelState/Player"]
+[node name="On FallingCoyote" type="Node" parent="StateChart/ParallelState/Movement"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../Airborne/FallingCoyote")
 event = &"falling"
 guard = SubResource("Resource_sktov")
 
-[node name="On Jump" type="Node" parent="StateChart/ParallelState/Player"]
+[node name="On Jump" type="Node" parent="StateChart/ParallelState/Movement"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../Airborne/Jumping")
 event = &"jump"
 guard = SubResource("Resource_se5vv")
 
-[node name="On WallSlide" type="Node" parent="StateChart/ParallelState/Player"]
+[node name="On WallSlide" type="Node" parent="StateChart/ParallelState/Movement"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../WallSlide")
 event = &"wall_slide"
 guard = SubResource("Resource_6rl8s")
 
-[node name="On Grounded" type="Node" parent="StateChart/ParallelState/Player"]
+[node name="On Grounded" type="Node" parent="StateChart/ParallelState/Movement"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../Grounded")
 event = &"grounded"
@@ -237,13 +237,16 @@ script = ExtResource("6_aaxtf")
 to = NodePath("../Pressed")
 event = &"wPressed"
 
-[connection signal="state_entered" from="StateChart/ParallelState/Player/Grounded/Crouching" to="." method="_on_crouching_state_entered"]
-[connection signal="state_exited" from="StateChart/ParallelState/Player/Grounded/Crouching" to="." method="_on_crouching_state_exited"]
-[connection signal="state_entered" from="StateChart/ParallelState/Player/Grounded/Crouching/Sliding" to="." method="_on_sliding_state_entered"]
-[connection signal="state_exited" from="StateChart/ParallelState/Player/Grounded/Crouching/Sliding" to="." method="_on_sliding_state_exited"]
-[connection signal="state_entered" from="StateChart/ParallelState/Player/Airborne/Jumping" to="." method="_on_jumping_state_entered"]
-[connection signal="state_input" from="StateChart/ParallelState/Player/Airborne/Jumping" to="." method="_on_airborn_not_coyote_state_input"]
-[connection signal="state_input" from="StateChart/ParallelState/Player/Airborne/Falling" to="." method="_on_airborn_not_coyote_state_input"]
-[connection signal="state_entered" from="StateChart/ParallelState/Player/WallSlide" to="." method="_on_wall_slide_state_entered"]
-[connection signal="state_exited" from="StateChart/ParallelState/Player/WallSlide" to="." method="_on_wall_slide_state_exited"]
+[connection signal="child_state_exited" from="StateChart/ParallelState/Movement" to="." method="_on_movement_child_state_exited"]
+[connection signal="state_exited" from="StateChart/ParallelState/Movement/Grounded" to="." method="_on_movement_child_state_exited"]
+[connection signal="state_entered" from="StateChart/ParallelState/Movement/Grounded/Crouching" to="." method="_on_crouching_state_entered"]
+[connection signal="state_exited" from="StateChart/ParallelState/Movement/Grounded/Crouching" to="." method="_on_movement_child_state_exited"]
+[connection signal="state_entered" from="StateChart/ParallelState/Movement/Grounded/Crouching/Sliding" to="." method="_on_sliding_state_entered"]
+[connection signal="state_exited" from="StateChart/ParallelState/Movement/Grounded/Crouching/Sliding" to="." method="_on_sliding_state_exited"]
+[connection signal="child_state_exited" from="StateChart/ParallelState/Movement/Airborne" to="." method="_on_movement_child_state_exited"]
+[connection signal="state_entered" from="StateChart/ParallelState/Movement/Airborne" to="." method="_on_airborne_state_entered"]
+[connection signal="state_entered" from="StateChart/ParallelState/Movement/Airborne/Jumping" to="." method="_on_jumping_state_entered"]
+[connection signal="state_input" from="StateChart/ParallelState/Movement/Airborne/Jumping" to="." method="_on_airborn_not_coyote_state_input"]
+[connection signal="state_input" from="StateChart/ParallelState/Movement/Airborne/Falling" to="." method="_on_airborn_not_coyote_state_input"]
+[connection signal="state_entered" from="StateChart/ParallelState/Movement/WallSlide" to="." method="_on_wall_slide_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Inputs/W/Pressed" to="." method="_on_pressed_state_physics_processing"]
