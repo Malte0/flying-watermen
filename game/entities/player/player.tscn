@@ -114,6 +114,9 @@ visible = false
 position = Vector2(28, -45)
 target_position = Vector2(0, 44)
 
+[node name="ShootPosition" type="Marker2D" parent="."]
+position = Vector2(0, -64)
+
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("2_dhjab")
 

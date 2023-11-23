@@ -26,6 +26,8 @@ script = ExtResource("3_n21ki")
 shape = SubResource("CircleShape2D_r2vr8")
 
 [node name="ImpactDetector" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactDetector"]
 shape = SubResource("CircleShape2D_pa8s0")

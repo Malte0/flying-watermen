@@ -14,6 +14,11 @@ extends CharacterBody2D
 #@onready var animation_tree: AnimationTree = $AnimationTree
 #@onready var animation_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 
+
+const ProjectileScene := preload("res://entities/Projectiles/projectile.tscn")
+@onready var shoot_position = $ShootPosition
+
+
 # Reset values
 var base_scale_speed: float = 2.5
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * base_scale_speed
@@ -90,6 +95,9 @@ func _physics_process(delta):
 		velocity.x = 0
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
+		
+	if(Input.is_action_just_pressed("right_click")):
+		ranged_attack(ProjectileScene)
 	
 	move_and_slide()
 
@@ -97,6 +105,7 @@ func _physics_process(delta):
 func _input(event: InputEvent):
 	if event.is_action_pressed("w"):
 		state_chart.send_event("wPressed")
+	
 
 
 func update_animation():
@@ -109,6 +118,16 @@ func update_animation():
 
 func flip_player():
 	scale.x *= -1
+
+
+
+#function to shoot a given projectile
+func ranged_attack(projectile: PackedScene) -> void:
+	var projectile_instance := projectile.instantiate()
+	projectile_instance.position = shoot_position.global_position
+	projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
+	add_child(projectile_instance)
+
 
 
 func facing_wall():

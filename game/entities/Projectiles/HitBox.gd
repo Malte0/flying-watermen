@@ -1,10 +1,10 @@
 #HitBox
-class_name HitBox, "HitBox.svg"
+class_name HitBox
 extends Area2D
 
-export var damage := 1
+@export var damage := 1
 
-onready var collision_shape := $CollisionShape2D
+@onready var collision_shape := $CollisionShape2D
 
 func _init():
 	collision_mask = 0
