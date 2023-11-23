@@ -27,7 +27,6 @@ var scale_speed = base_scale_speed
 var speed = base_speed
 var jump_velocity = base_jump_velocity
 var friction = base_friction
-var air_jumps_left = air_jumps
 var fall_speed_factor = base_fall_speed_factor
 var can_move: bool = true
 
@@ -35,11 +34,11 @@ func reset_variables():
 	speed = base_speed
 	jump_velocity = base_jump_velocity
 	friction = base_friction
-	air_jumps_left = air_jumps
 	fall_speed_factor = base_fall_speed_factor
 	can_move = true
 
 # Other information about the player
+var air_jumps_left = air_jumps
 const SPRITE_FLIP_OFFSET: int = 0
 var direction: float = 0.0
 var slide_threshold: float = base_speed/2
@@ -95,7 +94,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func _input(event):
+func _input(event: InputEvent):
 	if event.is_action_pressed("w"):
 		state_chart.send_event("wPressed")
 
@@ -103,22 +102,13 @@ func _input(event):
 func update_animation():
 #	animation_tree.set("parameters/Crouch/Crouch/blend_position", abs(velocity.x) > 1)
 #	animation_tree.set("parameters/Move/blend_position", abs(velocity.x) > 1)
-	# If player walks in different direction
-	if (sprite.flip_h and direction > 0 and velocity.x > 0) or (not sprite.flip_h and direction < 0 and velocity.x < 0):
-		flip_sprite()
+	# If player walks in different direction than sprite orienation
+	if (scale.y > 0 and direction < 0 and velocity.x < 0) or (scale.y < 0 and direction > 0 and velocity.x > 0):
+		flip_player()
 
 
-func flip_sprite():
-	wall_check.position.x = -wall_check.position.x
-	if sprite.flip_h:
-		turn_around(SPRITE_FLIP_OFFSET)
-	elif not sprite.flip_h:
-		turn_around(-SPRITE_FLIP_OFFSET)
-
-
-func turn_around(move_sprite):
-	sprite.flip_h = !sprite.flip_h
-	sprite.move_local_x(move_sprite)
+func flip_player():
+	scale.x *= -1
 
 
 func facing_wall():
@@ -145,7 +135,7 @@ func _on_jumping_state_entered():
 func _on_wall_slide_state_entered():
 	velocity.y = velocity.y/10
 	fall_speed_factor = base_fall_speed_factor/10
-	if facing_wall(): flip_sprite()
+	#if facing_wall(): flip_player()
 
 
 func _on_pressed_state_physics_processing(delta):
