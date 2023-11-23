@@ -36,6 +36,7 @@ var direction: float = 0.0
 var can_move: bool = true
 var slide_threshold: float = base_speed/2
 
+
 func _ready():
 #	animation_tree.active = true
 	#Initialize values so Guards don't complain
@@ -89,6 +90,8 @@ func _physics_process(delta):
 func _input(event):
 	if event.is_action_pressed("w"):
 		state_chart.send_event("wPressed")
+	if event.is_action_pressed("attack"):
+		state_chart.send_event("attackpressed")
 
 
 func update_animation():
@@ -154,3 +157,22 @@ func _on_wall_slide_state_exited():
 
 func _on_pressed_state_physics_processing(delta):
 	if is_on_floor(): state_chart.send_event("jump")
+
+
+func _on_area_2d_body_entered(body):
+	if body.is_in_group("Hit"):
+		#can_move = false
+		body.take_damage()
+	else:
+		pass # Replace with function body.
+
+
+@onready var shape = $AtkShape
+
+func _on_meele_attacks_child_state_entered():
+	#todo (wann wie worum rotieren)
+	#shape.rotate()
+	$AtkShape/CollisionShape2D.disabled = false
+
+func _on_meele_attacks_child_state_exited():
+	$AtkShape/CollisionShape2D.disabled = true
