@@ -1,11 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkiyrvy23egpd"]
+[gd_scene load_steps=5 format=3 uid="uid://dkiyrvy23egpd"]
 
 [ext_resource type="Script" path="res://entities/Projectiles/projectile.gd" id="1_dpk1i"]
 [ext_resource type="Texture2D" uid="uid://d2tpiw0kw5goq" path="res://assets/prototype-assets/projectile.png" id="2_inrcv"]
 [ext_resource type="Script" path="res://entities/Projectiles/HitBox.gd" id="3_n21ki"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_r2vr8"]
-radius = 14.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pa8s0"]
 radius = 14.0
@@ -17,17 +14,11 @@ script = ExtResource("1_dpk1i")
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_inrcv")
 
-[node name="HitBox" type="Area2D" parent="."]
-collision_mask = 0
-monitoring = false
-script = ExtResource("3_n21ki")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-shape = SubResource("CircleShape2D_r2vr8")
-
 [node name="ImpactDetector" type="Area2D" parent="."]
-collision_layer = 0
-monitorable = false
+collision_layer = 2
+script = ExtResource("3_n21ki")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactDetector"]
 shape = SubResource("CircleShape2D_pa8s0")
+
+[connection signal="body_entered" from="ImpactDetector" to="." method="_on_impact_detector_body_entered"]

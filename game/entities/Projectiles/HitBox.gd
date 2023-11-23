@@ -7,7 +7,7 @@ extends Area2D
 @onready var collision_shape := $CollisionShape2D
 
 func _init():
-	collision_mask = 0
+	collision_mask = 1
 	collision_layer = 2
 	
 func set_disabled(is_disabled: bool) -> void:

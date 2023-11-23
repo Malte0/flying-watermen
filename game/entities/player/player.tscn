@@ -94,6 +94,8 @@ script = ExtResource("9_qrtxb")
 guard = SubResource("Resource_p8ca0")
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+
 script = ExtResource("1_n7144")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

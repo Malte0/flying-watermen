@@ -16,16 +16,17 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	set_as_top_level(true)
 	
-	impact_detector.body_entered.connect(_on_impact)
 	velocity = direction * SPEED
 
 func _physics_process(delta):
 	# Add the gravity.
+	#impact_detector.body_entered.emit()
 	if not is_on_floor():
 		velocity.y += gravity * delta 
 
 
 	move_and_slide()
-	
-func _on_impact():
-	queue_free()
+
+
+func _on_impact_detector_body_entered(body):
+	queue_free() # Replace with function body.
