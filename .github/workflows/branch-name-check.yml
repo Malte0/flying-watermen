@@ -12,7 +12,7 @@ jobs:
     - name: Checkout project # to gain access to the branch names
       uses: actions/checkout@v2
       
-    - name: Extract branch name
+    - name: Check Branch Name
       env:
         BRANCH: ${{github.event.pull_request.head.ref}}
       run: |
