@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://jomk6sqhvgx5"]
 
 [ext_resource type="TileSet" uid="uid://duhrxcu81mi7" path="res://assets/prototype-assets/tileset.tres" id="1_wy44c"]
-[ext_resource type="PackedScene" uid="uid://dfrosblsqnvn3" path="res://entities/player/player_with_debugger.tscn" id="2_grj1j"]
+[ext_resource type="PackedScene" path="res://entities/player/player_with_debugger.tscn" id="2_grj1j"]
 [ext_resource type="Script" path="res://scenes/test/RigidBody2D.gd" id="3_5ctn8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_181cr"]
