@@ -1,13 +1,68 @@
-[gd_scene load_steps=3 format=3 uid="uid://jomk6sqhvgx5"]
+[gd_scene load_steps=12 format=3 uid="uid://jomk6sqhvgx5"]
 
 [ext_resource type="TileSet" uid="uid://duhrxcu81mi7" path="res://assets/prototype-assets/tileset.tres" id="1_wy44c"]
+[ext_resource type="Texture2D" uid="uid://r5uid30f77da" path="res://assets/background/Landscape09.png" id="2_bnnnd"]
 [ext_resource type="PackedScene" uid="uid://dfrosblsqnvn3" path="res://entities/player/player_with_debugger.tscn" id="2_grj1j"]
+[ext_resource type="Texture2D" uid="uid://bxox5hk640eh7" path="res://assets/background/Landscape08.png" id="3_0v0fc"]
+[ext_resource type="Texture2D" uid="uid://v8smyu5t56tc" path="res://assets/background/Landscape07.png" id="4_nq868"]
+[ext_resource type="Texture2D" uid="uid://rvu5eedj7kab" path="res://assets/background/Landscape06.png" id="5_cyh1d"]
+[ext_resource type="Texture2D" uid="uid://cug12shxbassf" path="res://assets/background/Landscape05.png" id="6_rdh3j"]
+[ext_resource type="Texture2D" uid="uid://d3gymdd5getiv" path="res://assets/background/Landscape04.png" id="7_w8c84"]
+[ext_resource type="Texture2D" uid="uid://8bb4jbmhpu4c" path="res://assets/background/Landscape03.png" id="8_iqgoq"]
+[ext_resource type="Texture2D" uid="uid://bdac37srrhp0m" path="res://assets/background/Landscape02.png" id="9_4bi0t"]
+[ext_resource type="Texture2D" uid="uid://cc7mu3hdti2xh" path="res://assets/background/Landscape01.png" id="11_ci4ik"]
 
 [node name="Main" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("1_wy44c")
 format = 2
-layer_0/tile_data = PackedInt32Array(393216, 3, 0, 393217, 65539, 0, 458752, 3, 0, 458753, 65539, 0, 458754, 3, 0, 458755, 65539, 0, 458756, 3, 0, 458757, 65539, 0, 458758, 3, 0, 458759, 65539, 0, 458760, 3, 0, 458761, 65539, 0, 458762, 3, 0, 458763, 65539, 0, 458764, 3, 0, 458765, 65539, 0, 393228, 3, 0, 393229, 65539, 0, 393230, 3, 0, 393231, 65539, 0, 393232, 3, 0, 393233, 65539, 0, 393234, 3, 0, 393235, 65539, 0, 393236, 3, 0, 393237, 65539, 0, 458772, 3, 0, 458773, 65539, 0, 458770, 3, 0, 458771, 65539, 0, 458768, 3, 0, 458769, 65539, 0, 458766, 3, 0, 458767, 65539, 0, 393220, 3, 0, 393221, 65539, 0, 393218, 3, 0, 393219, 65539, 0, 393222, 3, 0, 393223, 65539, 0, 393224, 3, 0, 393225, 65539, 0, 393226, 3, 0, 393227, 65539, 0, 458750, 3, 0, 458751, 65539, 0, 458748, 3, 0, 458749, 65539, 0, 458746, 3, 0, 458747, 65539, 0, 458744, 3, 0, 458745, 65539, 0, 524280, 3, 0, 524281, 65539, 0, 524282, 3, 0, 524283, 65539, 0, 524284, 3, 0, 524285, 65539, 0, 524286, 3, 0, 524287, 65539, 0, 458774, 3, 0, 458775, 65539, 0, 393238, 3, 0, 393239, 65539, 0, 393240, 3, 0, 393241, 65539, 0, 393242, 3, 0, 393243, 65539, 0, 458776, 3, 0, 458777, 65539, 0, 458778, 3, 0, 458779, 65539, 0, 327692, 3, 1, 327687, 3, 2, 327688, 65539, 2)
+layer_0/tile_data = PackedInt32Array(393216, 3, 0, 393217, 3, 0, 458752, 3, 0, 458753, 3, 0, 458754, 3, 0, 458755, 3, 0, 458756, 3, 0, 458757, 3, 0, 458758, 3, 0, 458759, 3, 0, 458760, 3, 0, 458761, 3, 0, 458762, 3, 0, 458763, 3, 0, 458764, 3, 0, 458765, 3, 0, 393228, 3, 0, 393229, 3, 0, 393230, 3, 0, 393231, 3, 0, 393232, 3, 0, 393233, 3, 0, 393234, 3, 0, 393235, 3, 0, 393236, 3, 0, 393237, 3, 0, 458772, 3, 0, 458773, 3, 0, 458770, 3, 0, 458771, 3, 0, 458768, 3, 0, 458769, 3, 0, 458766, 3, 0, 458767, 3, 0, 393220, 3, 0, 393221, 3, 0, 393218, 3, 0, 393219, 3, 0, 393222, 3, 0, 393223, 3, 0, 393224, 3, 0, 393225, 3, 0, 393226, 3, 0, 393227, 3, 0, 458750, 3, 0, 458751, 3, 0, 458748, 3, 0, 458749, 3, 0, 458746, 3, 0, 458747, 3, 0, 458744, 3, 0, 458745, 3, 0, 524280, 3, 0, 524281, 3, 0, 524282, 3, 0, 524283, 3, 0, 524284, 3, 0, 524285, 3, 0, 524286, 3, 0, 524287, 3, 0, 458774, 3, 0, 458775, 3, 0, 393238, 3, 0, 393239, 3, 0, 393240, 3, 0, 393241, 3, 0, 393242, 3, 0, 393243, 3, 0, 458776, 3, 0, 458777, 3, 0, 458778, 3, 0, 458779, 3, 0, 327692, 3, 0, 327687, 3, 0, 327688, 3, 0, 327672, 3, 0, 393208, 3, 0, 327673, 3, 0, 393209, 3, 0, 327674, 3, 0, 393210, 3, 0, 327675, 3, 0, 393211, 3, 0, 327676, 3, 0, 393212, 3, 0, 327677, 3, 0, 393213, 3, 0, 327678, 3, 0, 393214, 3, 0, 327679, 3, 0, 393215, 3, 0, 262144, 3, 0, 327680, 3, 0, 262145, 3, 0, 327681, 3, 0, 262146, 3, 0, 327682, 3, 0, 262147, 3, 0, 327683, 3, 0, 262148, 3, 0, 327684, 3, 0, 262149, 3, 0, 327685, 3, 0, 262150, 3, 0, 327686, 3, 0, 262151, 3, 0, 262152, 3, 0, 262153, 3, 0, 327689, 3, 0, 262154, 3, 0, 327690, 3, 0, 262155, 3, 0, 327691, 3, 0, 262156, 3, 0, 262157, 3, 0, 327693, 3, 0, 262158, 3, 0, 327694, 3, 0, 262159, 3, 0, 327695, 3, 0, 262160, 3, 0, 327696, 3, 0, 262161, 3, 0, 327697, 3, 0, 262162, 3, 0, 327698, 3, 0, 262163, 3, 0, 327699, 3, 0, 262164, 3, 0, 327700, 3, 0, 262165, 3, 0, 327701, 3, 0, 262166, 3, 0, 327702, 3, 0, 262167, 3, 0, 327703, 3, 0, 262168, 3, 0, 327704, 3, 0, 262169, 3, 0, 327705, 3, 0, 262170, 3, 0, 327706, 3, 0, 262171, 3, 0, 327707, 3, 0)
+
+[node name="Landscape09" type="Sprite2D" parent="."]
+position = Vector2(797, -217.5)
+scale = Vector2(1.4249, 0.841403)
+texture = ExtResource("2_bnnnd")
+
+[node name="Landscape08" type="Sprite2D" parent="."]
+position = Vector2(800, -217)
+scale = Vector2(1.43083, 0.842885)
+texture = ExtResource("3_0v0fc")
+
+[node name="Landscape07" type="Sprite2D" parent="."]
+position = Vector2(803, -221.75)
+scale = Vector2(1.42787, 0.840168)
+texture = ExtResource("4_nq868")
+
+[node name="Landscape06" type="Sprite2D" parent="."]
+position = Vector2(803, -214.5)
+scale = Vector2(1.43083, 0.841403)
+texture = ExtResource("5_cyh1d")
+
+[node name="Landscape05" type="Sprite2D" parent="."]
+position = Vector2(809, -210)
+scale = Vector2(1.43083, 0.836957)
+texture = ExtResource("6_rdh3j")
+
+[node name="Landscape04" type="Sprite2D" parent="."]
+position = Vector2(803, -216)
+scale = Vector2(1.42787, 0.842885)
+texture = ExtResource("7_w8c84")
+
+[node name="Landscape03" type="Sprite2D" parent="."]
+position = Vector2(798.5, -211.5)
+scale = Vector2(1.43231, 0.841403)
+texture = ExtResource("8_iqgoq")
+
+[node name="Landscape02" type="Sprite2D" parent="."]
+position = Vector2(801.5, -211.5)
+scale = Vector2(1.43528, 0.841403)
+texture = ExtResource("9_4bi0t")
 
 [node name="PlayerWithDebugger" parent="." instance=ExtResource("2_grj1j")]
+position = Vector2(0, -316)
+
+[node name="Landscape01" type="Sprite2D" parent="."]
+position = Vector2(804.5, -212.5)
+scale = Vector2(1.43231, 0.841403)
+texture = ExtResource("11_ci4ik")
