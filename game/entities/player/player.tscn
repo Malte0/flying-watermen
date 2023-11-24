@@ -93,7 +93,7 @@ state = NodePath("../Grounded")
 script = ExtResource("9_qrtxb")
 guard = SubResource("Resource_p8ca0")
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_n7144")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -105,7 +105,6 @@ scale = Vector2(0.5, 0.505376)
 texture = ExtResource("3_jqei2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -22.875)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_eyyjl")
