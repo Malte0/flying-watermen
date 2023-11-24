@@ -229,7 +229,7 @@ script = ExtResource("5_dadqm")
 [node name="Delay" type="Node" parent="StateChart/Player/Inputs/W/Pressed"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Not")
-delay_seconds = 0.2
+delay_seconds = 0.1
 
 [node name="Not" type="Node" parent="StateChart/Player/Inputs/W"]
 script = ExtResource("5_dadqm")
@@ -240,9 +240,9 @@ to = NodePath("../Pressed")
 event = &"wPressed"
 
 [connection signal="child_state_exited" from="StateChart/Player/Movement" to="." method="_on_movement_child_state_exited"]
-[connection signal="state_exited" from="StateChart/Player/Movement/Grounded" to="." method="_on_movement_child_state_exited"]
+[connection signal="child_state_exited" from="StateChart/Player/Movement/Grounded" to="." method="_on_movement_child_state_exited"]
+[connection signal="child_state_exited" from="StateChart/Player/Movement/Grounded/Crouching" to="." method="_on_movement_child_state_exited"]
 [connection signal="state_entered" from="StateChart/Player/Movement/Grounded/Crouching" to="." method="_on_crouching_state_entered"]
-[connection signal="state_exited" from="StateChart/Player/Movement/Grounded/Crouching" to="." method="_on_movement_child_state_exited"]
 [connection signal="state_entered" from="StateChart/Player/Movement/Grounded/Crouching/Sliding" to="." method="_on_sliding_state_entered"]
 [connection signal="state_exited" from="StateChart/Player/Movement/Grounded/Crouching/Sliding" to="." method="_on_sliding_state_exited"]
 [connection signal="child_state_exited" from="StateChart/Player/Movement/Airborne" to="." method="_on_movement_child_state_exited"]
