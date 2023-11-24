@@ -1,6 +1,5 @@
-extends Node2D
+extends RigidBody2D
 
-@onready var debugger: Control = $Player/StateChartDebugger
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,5 +8,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("f3"):
-		debugger.visible = !debugger.visible
+	pass
+
+
+func _on_body_entered(body):
+	print(body)
