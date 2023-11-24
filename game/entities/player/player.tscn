@@ -265,9 +265,11 @@ position = Vector2(0, -64)
 rotation = -3.23235
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AtkShape"]
-position = Vector2(64, -1)
+position = Vector2(-66.9055, -4.08063)
+rotation = 0.0872665
 shape = SubResource("RectangleShape2D_srmds")
 disabled = true
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [connection signal="state_entered" from="StateChart/ParallelState/Player/Grounded/Crouching" to="." method="_on_crouching_state_entered"]
 [connection signal="state_exited" from="StateChart/ParallelState/Player/Grounded/Crouching" to="." method="_on_crouching_state_exited"]
