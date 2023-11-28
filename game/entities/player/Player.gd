@@ -11,8 +11,8 @@ extends CharacterBody2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var state_chart: StateChart = $StateChart
 @onready var wall_check: RayCast2D = $WallCheck
-#@onready var animation_tree: AnimationTree = $AnimationTree
-#@onready var animation_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var animation_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 
 # Reset values
 var base_scale_speed: float = 2.5
@@ -45,7 +45,7 @@ var slide_threshold: float = base_speed/2
 
 
 func _ready():
-#	animation_tree.active = true
+	animation_tree.active = true
 	#Initialize values so Guards don't complain
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
 	state_chart.set_expression_property("air_jumps_left", air_jumps_left)
@@ -100,12 +100,11 @@ func _input(event: InputEvent):
 
 
 func update_animation():
-#	animation_tree.set("parameters/Crouch/Crouch/blend_position", abs(velocity.x) > 1)
-#	animation_tree.set("parameters/Move/blend_position", abs(velocity.x) > 1)
-	# If player walks in different direction than sprite orienation
+	animation_tree.set("parameters/Action/blend_position", abs(velocity.x) > 0)
+	# If player walks in different direction than sprite orienation		
 	if (scale.y > 0 and direction < 0 and velocity.x < 0) or (scale.y < 0 and direction > 0 and velocity.x > 0):
 		flip_player()
-
+	
 
 func flip_player():
 	scale.x *= -1
@@ -113,6 +112,9 @@ func flip_player():
 
 func facing_wall():
 	return wall_check.is_colliding()
+	
+
+
 
 
 func _on_crouching_state_entered():

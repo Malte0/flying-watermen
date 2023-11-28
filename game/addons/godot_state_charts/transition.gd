@@ -3,6 +3,7 @@
 class_name Transition
 extends Node
 
+
 ## The target state to which the transition should switch
 @export_node_path("State") var to:NodePath:
 	set(value):
