@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=57 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dhjab"]
@@ -46,6 +46,22 @@ region = Rect2(192, 0, 32, 24)
 atlas = ExtResource("2_kmxdh")
 region = Rect2(224, 0, 32, 24)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_glekb"]
+atlas = ExtResource("2_kmxdh")
+region = Rect2(32, 50, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j60wx"]
+atlas = ExtResource("2_kmxdh")
+region = Rect2(64, 50, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2fsj"]
+atlas = ExtResource("2_kmxdh")
+region = Rect2(96, 50, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tebn2"]
+atlas = ExtResource("2_kmxdh")
+region = Rect2(128, 50, 32, 24)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_w7iqa"]
 animations = [{
 "frames": [{
@@ -81,10 +97,24 @@ animations = [{
 "loop": true,
 "name": &"Move",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glekb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j60wx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2fsj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tebn2")
+}],
+"loop": true,
+"name": &"death",
+"speed": 10.0
 }]
-
-[sub_resource type="Animation" id="Animation_yuqjr"]
-length = 0.001
 
 [sub_resource type="Animation" id="Animation_evsxk"]
 resource_name = "Idle"
@@ -142,6 +172,9 @@ tracks/1/keys = {
 "update": 1,
 "values": ["Move"]
 }
+
+[sub_resource type="Animation" id="Animation_yuqjr"]
+length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qkppn"]
 _data = {
@@ -268,6 +301,7 @@ position = Vector2(0, -24)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_w7iqa")
 animation = &"Idle"
+frame = 1
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
