@@ -2,14 +2,14 @@ class_name Projectile
 extends CharacterBody2D
 
 
-@export var SPEED := 900.0
+@export var SPEED := 1250.0
 var direction := Vector2.ZERO
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-@onready var hitbox := $HitBox
-@onready var sprite := $Sprite
+
+
 @onready var impact_detector := $ImpactDetector
 
 
@@ -28,5 +28,5 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func _on_impact_detector_body_entered(body):
+func _on_impact_detector_body_entered(_body):
 	queue_free() # Replace with function body.

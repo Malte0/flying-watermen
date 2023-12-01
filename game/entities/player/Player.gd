@@ -157,7 +157,7 @@ func _on_wall_slide_state_entered():
 	#if facing_wall(): flip_player()
 
 
-func _on_pressed_state_physics_processing(delta):
+func _on_pressed_state_physics_processing(_delta):
 	if is_on_floor(): state_chart.send_event("jump")
 
 
