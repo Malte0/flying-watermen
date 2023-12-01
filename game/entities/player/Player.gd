@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Player
+
 ## Emitted when this node is clicked with a mouse
 #signal clicked(node:Node2D)
 
@@ -29,6 +31,11 @@ var jump_velocity = base_jump_velocity
 var friction = base_friction
 var fall_speed_factor = base_fall_speed_factor
 var can_move: bool = true
+# health and heat
+var MAX_HEALTH: int = 100
+var health: int = MAX_HEALTH
+var MAX_HEAT: int = 100
+var heat: int = 0 
 
 func reset_variables():
 	speed = base_speed
@@ -149,3 +156,20 @@ func _on_airborne_state_entered():
 # Reset variables of any child states of the Movement state
 func _on_movement_child_state_exited():
 	reset_variables()
+
+# health and heat systemsa
+func increase_heat(number: int):
+	heat = mini(number + heat, MAX_HEAT)
+
+func decrease_heat(number: int):
+	heat = maxi(heat - number, 0)
+
+func heal(number: int):
+	health = mini(health + number, MAX_HEALTH)
+	
+func damage(number: int):
+	health = maxi(health - number, 0)
+
+func damage_with_scaling(number: int):
+	var new_damage: int = number + number * heat / MAX_HEAT
+	damage(new_damage)
