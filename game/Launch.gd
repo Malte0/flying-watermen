@@ -8,7 +8,6 @@ func _ready():
 	DisplayServer.window_set_size(screen_size * 0.75)
 	DisplayServer.window_set_position((screen_size * 0.25) / 2)
 	DisplayServer.window_set_current_screen(screen)
-	#await get_tree().create_timer(1.0).timeout
 	get_tree().change_scene_to_file.call_deferred("res://menus/title/title.tscn")
 
 
