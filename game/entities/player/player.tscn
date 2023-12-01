@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=58 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dhjab"]
@@ -13,6 +13,22 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="10_ddq3l"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/any_of_guard.gd" id="11_5fhyj"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/animation_tree_state.gd" id="13_eid8a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glekb"]
+atlas = ExtResource("2_kmxdh")
+region = Rect2(32, 50, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j60wx"]
+atlas = ExtResource("2_kmxdh")
+region = Rect2(64, 50, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2fsj"]
+atlas = ExtResource("2_kmxdh")
+region = Rect2(96, 50, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tebn2"]
+atlas = ExtResource("2_kmxdh")
+region = Rect2(128, 50, 32, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6qa8q"]
 atlas = ExtResource("2_kmxdh")
@@ -46,24 +62,25 @@ region = Rect2(192, 0, 32, 24)
 atlas = ExtResource("2_kmxdh")
 region = Rect2(224, 0, 32, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_glekb"]
-atlas = ExtResource("2_kmxdh")
-region = Rect2(32, 50, 32, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j60wx"]
-atlas = ExtResource("2_kmxdh")
-region = Rect2(64, 50, 32, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q2fsj"]
-atlas = ExtResource("2_kmxdh")
-region = Rect2(96, 50, 32, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tebn2"]
-atlas = ExtResource("2_kmxdh")
-region = Rect2(128, 50, 32, 24)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_w7iqa"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glekb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j60wx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2fsj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tebn2")
+}],
+"loop": true,
+"name": &"Death",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6qa8q")
@@ -97,24 +114,38 @@ animations = [{
 "loop": true,
 "name": &"Move",
 "speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_glekb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j60wx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q2fsj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tebn2")
-}],
-"loop": true,
-"name": &"death",
-"speed": 10.0
 }]
+
+[sub_resource type="Animation" id="Animation_yuqjr"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_qg2ej"]
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Death"]
+}
 
 [sub_resource type="Animation" id="Animation_evsxk"]
 resource_name = "Idle"
@@ -173,11 +204,9 @@ tracks/1/keys = {
 "values": ["Move"]
 }
 
-[sub_resource type="Animation" id="Animation_yuqjr"]
-length = 0.001
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qkppn"]
 _data = {
+"Death": SubResource("Animation_qg2ej"),
 "Idle": SubResource("Animation_evsxk"),
 "Move": SubResource("Animation_78kx3"),
 "RESET": SubResource("Animation_yuqjr")
@@ -300,8 +329,7 @@ texture_filter = 1
 position = Vector2(0, -24)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_w7iqa")
-animation = &"Idle"
-frame = 1
+animation = &"Death"
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -313,7 +341,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_shgom")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/Action/blend_position = -0.00144303
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
