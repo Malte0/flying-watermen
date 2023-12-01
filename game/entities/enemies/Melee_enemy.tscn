@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://entities/enemies/health.gd" id="1_1ce82"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_yxerx"]
-[ext_resource type="Script" path="res://entities/enemies/movement.gd" id="2_rmc7g"]
+[ext_resource type="Script" path="res://entities/enemies/melee_enemy.gd" id="2_r07kk"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="2_toklf"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="3_kb0mq"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="5_xw2om"]
@@ -18,7 +18,7 @@ radius = 499.025
 script = ExtResource("1_1ce82")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-script = ExtResource("2_rmc7g")
+script = ExtResource("2_r07kk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 scale = Vector2(2, 2)
