@@ -96,8 +96,7 @@ func _physics_process(delta):
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
 		
-	if(Input.is_action_just_pressed("right_click")):
-		ranged_attack(ProjectileScene)
+	if(Input.is_action_just_pressed("right_click")): state_chart.send_event("_on_shot")
 	
 	move_and_slide()
 
@@ -118,15 +117,6 @@ func update_animation():
 
 func flip_player():
 	scale.x *= -1
-
-
-
-#function to shoot a given projectile
-func ranged_attack(projectile: PackedScene) -> void:
-	var projectile_instance := projectile.instantiate()
-	projectile_instance.position = shoot_position.global_position
-	projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
-	add_child(projectile_instance)
 
 
 
@@ -168,3 +158,10 @@ func _on_airborne_state_entered():
 # Reset variables of any child states of the Movement state
 func _on_movement_child_state_exited():
 	reset_variables()
+
+
+func _on_cant_shoot_state_entered():
+	var projectile_instance := ProjectileScene.instantiate()
+	projectile_instance.position = shoot_position.global_position
+	projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
+	add_child(projectile_instance)

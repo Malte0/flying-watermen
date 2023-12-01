@@ -95,7 +95,6 @@ guard = SubResource("Resource_p8ca0")
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
-
 script = ExtResource("1_n7144")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -117,7 +116,7 @@ position = Vector2(28, -45)
 target_position = Vector2(0, 44)
 
 [node name="ShootPosition" type="Marker2D" parent="."]
-position = Vector2(0, -64)
+position = Vector2(0, -23)
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("2_dhjab")
@@ -244,6 +243,26 @@ script = ExtResource("6_aaxtf")
 to = NodePath("../Pressed")
 event = &"wPressed"
 
+[node name="Shoot" type="Node" parent="StateChart/Player/Inputs"]
+script = ExtResource("4_klwk4")
+initial_state = NodePath("canShoot")
+
+[node name="canShoot" type="Node" parent="StateChart/Player/Inputs/Shoot"]
+script = ExtResource("5_dadqm")
+
+[node name="Transition" type="Node" parent="StateChart/Player/Inputs/Shoot/canShoot"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../cantShoot")
+event = &"_on_shot"
+
+[node name="cantShoot" type="Node" parent="StateChart/Player/Inputs/Shoot"]
+script = ExtResource("5_dadqm")
+
+[node name="Transition" type="Node" parent="StateChart/Player/Inputs/Shoot/cantShoot"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../canShoot")
+delay_seconds = 0.5
+
 [connection signal="child_state_exited" from="StateChart/Player/Movement" to="." method="_on_movement_child_state_exited"]
 [connection signal="child_state_exited" from="StateChart/Player/Movement/Grounded" to="." method="_on_movement_child_state_exited"]
 [connection signal="child_state_exited" from="StateChart/Player/Movement/Grounded/Crouching" to="." method="_on_movement_child_state_exited"]
@@ -257,3 +276,4 @@ event = &"wPressed"
 [connection signal="state_input" from="StateChart/Player/Movement/Airborne/Falling" to="." method="_on_airborn_not_coyote_state_input"]
 [connection signal="state_entered" from="StateChart/Player/Movement/WallSlide" to="." method="_on_wall_slide_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Player/Inputs/W/Pressed" to="." method="_on_pressed_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Player/Inputs/Shoot/cantShoot" to="." method="_on_cant_shoot_state_entered"]

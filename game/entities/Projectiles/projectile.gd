@@ -2,6 +2,8 @@ class_name Projectile
 extends CharacterBody2D
 
 
+@export var damage := 20
+
 @export var SPEED := 1250.0
 var direction := Vector2.ZERO
 
@@ -28,5 +30,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func _on_impact_detector_body_entered(_body):
-	queue_free() # Replace with function body.
+func _on_impact_detector_body_entered(body):
+	if body.owner.has_method("take_damage"):
+		body.owner.take_damage(damage)
+	queue_free()
