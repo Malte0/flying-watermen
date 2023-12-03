@@ -36,6 +36,10 @@ var MAX_HEALTH: int = 100
 var health: int = MAX_HEALTH
 var MAX_HEAT: int = 100
 var heat: int = 0 
+# health timer
+const time_between: float = 0.5
+const heal_over_time_amount: int = 5
+var heal_amount_to_do: int = 0
 
 func reset_variables():
 	speed = base_speed
@@ -173,3 +177,20 @@ func damage(number: int):
 func damage_with_scaling(number: int):
 	var new_damage: int = number + number * heat / MAX_HEAT
 	damage(new_damage)
+
+func heal_over_time(totalHeal: int):
+	$Heal_over_time_Timer.wait_time = time_between
+	if ( totalHeal <= heal_over_time_amount):
+		heal(totalHeal)
+	else :
+		heal(heal_over_time_amount)
+		heal_amount_to_do = totalHeal - heal_over_time_amount + heal_amount_to_do
+		$Heal_over_time_Timer.start()
+
+
+func _on_heal_over_time_timer_timeout():
+	if (heal_amount_to_do > 0):
+		var healnum: int = mini(heal_amount_to_do, heal_over_time_amount)
+		heal(healnum)
+		heal_amount_to_do = heal_amount_to_do - healnum
+		$Heal_over_time_Timer.start()
