@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://jomk6sqhvgx5"]
+[gd_scene load_steps=13 format=3 uid="uid://jomk6sqhvgx5"]
 
 [ext_resource type="Script" path="res://scenes/test/test.gd" id="1_ps2k6"]
 [ext_resource type="TileSet" uid="uid://duhrxcu81mi7" path="res://assets/prototype-assets/tileset.tres" id="1_wy44c"]
@@ -6,9 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://ihorffrdym4j" path="res://icon.svg" id="3_n53fm"]
 [ext_resource type="PackedScene" uid="uid://djmlmtr41m2ce" path="res://entities/player/player.tscn" id="5_wejlo"]
 [ext_resource type="PackedScene" uid="uid://cihcop35erg48" path="res://scenes/ui/ui.tscn" id="6_rwr2e"]
-
-[ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/Melee_enemy.tscn" id="7_qvsmb"]
 [ext_resource type="PackedScene" uid="uid://w6jot4hm1u0n" path="res://scenes/test/ui_healthbar.tscn" id="7_7fnkh"]
+[ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/Melee_enemy.tscn" id="7_qvsmb"]
 [ext_resource type="Script" path="res://entities/pfuetze.gd" id="8_rjvbh"]
 [ext_resource type="Texture2D" uid="uid://utp3bloip30k" path="res://assets/prototype-assets/pfuetze.png" id="9_6g48k"]
 
@@ -48,10 +47,15 @@ position = Vector2(155, 434)
 process_callback = 0
 metadata/_edit_lock_ = true
 
+[node name="Heal_over_time_Timer" type="Timer" parent="Player"]
+process_callback = 0
+one_shot = true
+
 [node name="UI" parent="." instance=ExtResource("6_rwr2e")]
 
 [node name="Melee_enemy" parent="." instance=ExtResource("7_qvsmb")]
 position = Vector2(1222.72, 325)
+
 [node name="UI_Healthbar" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_7fnkh")]
 player = NodePath("../Player")
 
@@ -69,3 +73,4 @@ scale = Vector2(0.171875, 0.0726732)
 texture = ExtResource("9_6g48k")
 
 [connection signal="body_entered" from="RigidBody2D" to="RigidBody2D" method="_on_body_entered"]
+[connection signal="timeout" from="Player/Heal_over_time_Timer" to="Player" method="_on_heal_over_time_timer_timeout"]
