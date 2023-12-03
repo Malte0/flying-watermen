@@ -12,6 +12,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	update()
 	get_node("Heat_Lable").text = str(player.heat) + " / " + str(player.MAX_HEAT)
 
 func setPlayer(object):
