@@ -8,7 +8,7 @@ func _ready():
 	DisplayServer.window_set_size(screen_size * 0.75)
 	DisplayServer.window_set_position((screen_size * 0.25) / 2)
 	DisplayServer.window_set_current_screen(screen)
-	get_tree().change_scene_to_file("res://menus/title/title.tscn")
+	get_tree().change_scene_to_file("res://scenes/test/map.tscn")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
