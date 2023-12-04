@@ -4,12 +4,12 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_yxerx"]
 [ext_resource type="Script" path="res://entities/enemies/melee_enemy.gd" id="2_r07kk"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="2_toklf"]
+[ext_resource type="Texture2D" uid="uid://ca55500apap66" path="res://assets/prototype-assets/enemy.PNG" id="3_4jtid"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="3_kb0mq"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="5_xw2om"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kx5ic"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_dss5a"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_86clg"]
+radius = 13.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ol33t"]
 radius = 499.025
@@ -24,12 +24,12 @@ script = ExtResource("2_r07kk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 scale = Vector2(2, 2)
-shape = SubResource("RectangleShape2D_kx5ic")
+shape = SubResource("CircleShape2D_86clg")
 
 [node name="Dummy_body" type="Sprite2D" parent="CharacterBody2D"]
-modulate = Color(0.662745, 0.32549, 0.32549, 1)
-scale = Vector2(40, 40)
-texture = SubResource("CanvasTexture_dss5a")
+position = Vector2(0, -12)
+scale = Vector2(0.0964117, 0.0875117)
+texture = ExtResource("3_4jtid")
 
 [node name="Aggro_collider" type="Area2D" parent="CharacterBody2D"]
 collision_layer = 0
