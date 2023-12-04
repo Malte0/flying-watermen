@@ -11,9 +11,12 @@ const JUMP_VELOCITY = -500
 const JUMP_COOLDOWN = 0.5
 var last_jump = 0
 
-const MAX_DAMAGE_DISTANCE = 500
-const DISTANCE_STEP = 100
-const DAMAGE = 2
+const MAX_DAMAGE_DISTANCE = 300
+const DISTANCE_MULTIPLIER = 100
+const HEAT_INFLICTION_PER_SECOND = 10
+const DAMAGE_PER_SECOND = 10
+const DAMAGE_INTERVAL_SECONDS = 0.1
+var damage_timer = 0
 
 # reverse dependency?
 @onready var playerBody: CharacterBody2D = get_tree().get_root().get_node("Main").get_node("Player")
@@ -28,7 +31,7 @@ func _physics_process(delta):
 	if is_on_wall():
 		jump()
 	last_jump += delta
-	check_damage()
+	check_damage(delta)
 	move()
 
 func jump():
@@ -59,14 +62,16 @@ func _on_aggro_collider_body_entered(body: CharacterBody2D):
 func _on_aggro_collider_body_exited(body: CharacterBody2D):
 	isAggro = false
 
-func deal_distance_damage(distance_to_player: float):
-	var damage: int = floor((DISTANCE_STEP/distance_to_player) * DAMAGE)
+func deal_distance_damage(distance_to_player: float, delta):
+	var heat: int = ceili((DISTANCE_MULTIPLIER/distance_to_player) * HEAT_INFLICTION_PER_SECOND * DAMAGE_INTERVAL_SECONDS)
+	damage_timer += delta
+	if playerBody.has_method("increase_heat") and (damage_timer >= DAMAGE_INTERVAL_SECONDS):
+		playerBody.increase_heat(heat)
+		playerBody.damage_with_scaling(DAMAGE_PER_SECOND * DAMAGE_INTERVAL_SECONDS)
+		damage_timer = 0
 
-	print("Deal ", damage, " damage to Player")
-  
-
-func check_damage():
+func check_damage(delta):
 	var player_position = playerBody.global_position
 	var distance_to_player = global_position.distance_to(player_position)
 	if distance_to_player < MAX_DAMAGE_DISTANCE:
-		deal_distance_damage(distance_to_player)
+		deal_distance_damage(distance_to_player, delta)
