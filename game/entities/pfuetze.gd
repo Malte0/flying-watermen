@@ -19,5 +19,5 @@ func _on_body_exited(body):
 
 func _process(delta):
 	if player_inside and player: 
-		player.heal(25) 
+		player.heal_over_time(25) 
 		self.queue_free()
