@@ -40,7 +40,7 @@ var can_move: bool = true
 var MAX_HEALTH: int = 100
 var health: int = MAX_HEALTH
 var MAX_HEAT: int = 100
-var heat: int = 0 
+var heat: int = 0
 # health timer
 const time_between: float = 0.5
 const heal_over_time_amount: int = 5
@@ -115,7 +115,8 @@ func _physics_process(delta):
 func _input(event: InputEvent):
 	if event.is_action_pressed("w"):
 		state_chart.send_event("wPressed")
-	
+	if event.is_action_pressed("attack"):
+		state_chart.send_event("attackpressed")
 
 
 func update_animation():
@@ -128,7 +129,6 @@ func update_animation():
 
 func flip_player():
 	scale.x *= -1
-
 
 
 func facing_wall():
@@ -171,6 +171,23 @@ func _on_movement_child_state_exited():
 	reset_variables()
 
 
+func _on_area_2d_body_entered(body):
+	if body.is_in_group("Hit"):
+		#can_move = false
+		body.take_damage()
+	else:
+		pass # Replace with function body.
+
+
+@onready var shape = $AtkShape
+
+func _on_meele_attacks_child_state_entered():
+	#todo (wann wie worum rotieren)
+	#shape.rotate()
+	$AtkShape/CollisionShape2D.disabled = false
+
+func _on_meele_attacks_child_state_exited():
+	$AtkShape/CollisionShape2D.disabled = true
 
 func _on_cant_shoot_state_entered():
 	var projectile_instance := ProjectileScene.instantiate()

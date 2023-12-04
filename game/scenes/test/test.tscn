@@ -1,18 +1,15 @@
 [gd_scene load_steps=13 format=3 uid="uid://jomk6sqhvgx5"]
 
-
 [ext_resource type="Script" path="res://scenes/test/test.gd" id="1_ps2k6"]
 [ext_resource type="TileSet" uid="uid://duhrxcu81mi7" path="res://assets/prototype-assets/tileset.tres" id="1_wy44c"]
 [ext_resource type="Script" path="res://scenes/test/Collider.gd" id="3_7pie0"]
 [ext_resource type="Texture2D" uid="uid://ihorffrdym4j" path="res://icon.svg" id="3_n53fm"]
 [ext_resource type="PackedScene" uid="uid://djmlmtr41m2ce" path="res://entities/player/player.tscn" id="5_wejlo"]
 [ext_resource type="PackedScene" uid="uid://cihcop35erg48" path="res://scenes/ui/ui.tscn" id="6_rwr2e"]
-
 [ext_resource type="PackedScene" uid="uid://w6jot4hm1u0n" path="res://scenes/test/ui_healthbar.tscn" id="7_7fnkh"]
 [ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/Melee_enemy.tscn" id="7_qvsmb"]
 [ext_resource type="Script" path="res://entities/pfuetze.gd" id="8_rjvbh"]
 [ext_resource type="Texture2D" uid="uid://utp3bloip30k" path="res://assets/prototype-assets/pfuetze.png" id="9_6g48k"]
-
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5bb0u"]
 size = Vector2(128, 127)
@@ -31,6 +28,7 @@ layer_0/tile_data = PackedInt32Array(393216, 3, 0, 393217, 65539, 0, 458752, 3, 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(2000, 408)
 collision_layer = 0
+collision_mask = 3
 max_contacts_reported = 10
 contact_monitor = true
 script = ExtResource("3_7pie0")
@@ -59,12 +57,12 @@ one_shot = true
 [node name="Melee_enemy" parent="." instance=ExtResource("7_qvsmb")]
 position = Vector2(1222.72, 325)
 
-
 [node name="UI_Healthbar" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_7fnkh")]
 player = NodePath("../Player")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(1285, 473)
+collision_mask = 3
 script = ExtResource("8_rjvbh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
