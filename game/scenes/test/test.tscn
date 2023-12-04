@@ -28,6 +28,7 @@ layer_0/tile_data = PackedInt32Array(393216, 3, 0, 393217, 65539, 0, 458752, 3, 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(2000, 408)
 collision_layer = 0
+collision_mask = 3
 max_contacts_reported = 10
 contact_monitor = true
 script = ExtResource("3_7pie0")
@@ -47,6 +48,10 @@ position = Vector2(155, 434)
 process_callback = 0
 metadata/_edit_lock_ = true
 
+[node name="Heal_over_time_Timer" type="Timer" parent="Player"]
+process_callback = 0
+one_shot = true
+
 [node name="UI" parent="." instance=ExtResource("6_rwr2e")]
 
 [node name="Melee_enemy" parent="." instance=ExtResource("7_qvsmb")]
@@ -57,6 +62,7 @@ player = NodePath("../Player")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(1285, 473)
+collision_mask = 3
 script = ExtResource("8_rjvbh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -69,3 +75,4 @@ scale = Vector2(0.171875, 0.0726732)
 texture = ExtResource("9_6g48k")
 
 [connection signal="body_entered" from="RigidBody2D" to="RigidBody2D" method="_on_body_entered"]
+[connection signal="timeout" from="Player/Heal_over_time_Timer" to="Player" method="_on_heal_over_time_timer_timeout"]
