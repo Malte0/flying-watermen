@@ -17,8 +17,8 @@ extends CharacterBody2D
 # Reset values
 var base_scale_speed: float = 2.5
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * base_scale_speed
-var base_speed: float = 150.0 * base_scale_speed
-var base_jump_velocity: float = -200.0 * base_scale_speed
+var base_speed: float = 400.0 * base_scale_speed
+var base_jump_velocity: float = -300.0 * base_scale_speed
 var base_friction: float = 0.5
 var air_jumps: int = 1
 var base_fall_speed_factor: float = 1.0
