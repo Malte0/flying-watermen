@@ -169,6 +169,8 @@ func heal(number: int):
 	
 func damage(number: int):
 	health = maxi(health - number, 0)
+	if self.health == 0 :
+		get_tree().change_scene_to_file("res://menus/game over/GameOver.tscn")
 
 func damage_with_scaling(number: int):
 	var new_damage: int = number + number * heat / MAX_HEAT
