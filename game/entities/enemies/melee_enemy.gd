@@ -61,7 +61,9 @@ func _on_aggro_collider_body_exited(body: CharacterBody2D):
 
 func deal_distance_damage(distance_to_player: float):
 	var damage: int = floor((DISTANCE_STEP/distance_to_player) * DAMAGE)
+
 	print("Deal ", damage, " damage to Player")
+  
 
 func check_damage():
 	var player_position = playerBody.global_position
