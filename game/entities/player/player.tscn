@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=57 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dhjab"]
@@ -248,10 +248,6 @@ states/Action/node = SubResource("AnimationNodeBlendSpace1D_qogtd")
 states/Action/position = Vector2(574, 100)
 transitions = ["Start", "Action", SubResource("AnimationNodeStateMachineTransition_8lfbf")]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eyyjl"]
-radius = 14.0
-height = 58.0
-
 [sub_resource type="Resource" id="Resource_r58ym"]
 script = ExtResource("7_m5qsp")
 expression = "crouching == true and over_slide_threshold"
@@ -329,7 +325,7 @@ texture_filter = 1
 position = Vector2(0, -24)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_w7iqa")
-animation = &"Idle"
+animation = &"Move"
 autoplay = "Idle"
 flip_h = true
 
@@ -344,10 +340,10 @@ tree_root = SubResource("AnimationNodeStateMachine_shgom")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Action/blend_position = -0.00144303
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, -14)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_eyyjl")
+polygon = PackedVector2Array(-14, 11.5001, -11.9999, 18, -9.99992, 22, -5.99991, 24, 8.5001, 28, 14.0001, 27.9999, 13.9999, -28.5001, 7.49992, -23, 1.99993, -20, -6.50007, -20, -14, -9.99995)
 
 [node name="WallCheck" type="RayCast2D" parent="."]
 visible = false

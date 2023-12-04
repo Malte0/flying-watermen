@@ -15,10 +15,10 @@ extends CharacterBody2D
 @onready var animation_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 
 # Reset values
-var base_scale_speed: float = 2.5
+var base_scale_speed: float = 1.5
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * base_scale_speed
-var base_speed: float = 400.0 * base_scale_speed
-var base_jump_velocity: float = -300.0 * base_scale_speed
+var base_speed: float = 300.0 * base_scale_speed
+var base_jump_velocity: float = -400.0 * base_scale_speed
 var base_friction: float = 0.5
 var air_jumps: int = 1
 var base_fall_speed_factor: float = 1.0
