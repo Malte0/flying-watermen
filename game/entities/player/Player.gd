@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Player
+
 ## Emitted when this node is clicked with a mouse
 #signal clicked(node:Node2D)
 
@@ -13,6 +15,11 @@ extends CharacterBody2D
 @onready var wall_check: RayCast2D = $WallCheck
 #@onready var animation_tree: AnimationTree = $AnimationTree
 #@onready var animation_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
+
+
+const ProjectileScene := preload("res://entities/Projectiles/projectile.tscn")
+@onready var shoot_position = $ShootPosition
+
 
 # Reset values
 var base_scale_speed: float = 2.5
@@ -29,6 +36,15 @@ var jump_velocity = base_jump_velocity
 var friction = base_friction
 var fall_speed_factor = base_fall_speed_factor
 var can_move: bool = true
+# health and heat
+var MAX_HEALTH: int = 100
+var health: int = MAX_HEALTH
+var MAX_HEAT: int = 100
+var heat: int = 0
+# health timer
+const time_between: float = 0.5
+const heal_over_time_amount: int = 5
+var heal_amount_to_do: int = 0
 
 func reset_variables():
 	speed = base_speed
@@ -90,6 +106,8 @@ func _physics_process(delta):
 		velocity.x = 0
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
+		
+	if(Input.is_action_just_pressed("right_click")): state_chart.send_event("_on_shot")
 	
 	move_and_slide()
 
@@ -140,7 +158,7 @@ func _on_wall_slide_state_entered():
 	#if facing_wall(): flip_player()
 
 
-func _on_pressed_state_physics_processing(delta):
+func _on_pressed_state_physics_processing(_delta):
 	if is_on_floor(): state_chart.send_event("jump")
 
 
@@ -170,3 +188,44 @@ func _on_meele_attacks_child_state_entered():
 
 func _on_meele_attacks_child_state_exited():
 	$AtkShape/CollisionShape2D.disabled = true
+
+func _on_cant_shoot_state_entered():
+	var projectile_instance := ProjectileScene.instantiate()
+	projectile_instance.position = shoot_position.global_position
+	projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
+	add_child(projectile_instance)
+
+# health and heat systemsa
+func increase_heat(number: int):
+	heat = mini(number + heat, MAX_HEAT)
+
+func decrease_heat(number: int):
+	heat = maxi(heat - number, 0)
+
+func heal(number: int):
+	health = mini(health + number, MAX_HEALTH)
+	
+func damage(number: int):
+	health = maxi(health - number, 0)
+
+func damage_with_scaling(number: int):
+	var new_damage: int = number + number * heat / MAX_HEAT
+	damage(new_damage)
+
+func heal_over_time(totalHeal: int):
+	$Heal_over_time_Timer.wait_time = time_between
+	if ( totalHeal <= heal_over_time_amount):
+		heal(totalHeal)
+	else :
+		heal(heal_over_time_amount)
+		heal_amount_to_do = totalHeal - heal_over_time_amount + heal_amount_to_do
+		$Heal_over_time_Timer.start()
+
+
+func _on_heal_over_time_timer_timeout():
+	if (heal_amount_to_do > 0):
+		var healnum: int = mini(heal_amount_to_do, heal_over_time_amount)
+		heal(healnum)
+		heal_amount_to_do = heal_amount_to_do - healnum
+		$Heal_over_time_Timer.start()
+
