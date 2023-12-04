@@ -42,8 +42,8 @@ var health: int = MAX_HEALTH
 var MAX_HEAT: int = 100
 var heat: int = 0
 # health timer
-const time_between: float = 0.5
-const heal_over_time_amount: int = 5
+const time_between: float = 0.1
+const heal_over_time_amount: int = 1
 var heal_amount_to_do: int = 0
 
 func reset_variables():
@@ -231,3 +231,7 @@ func _on_heal_over_time_timer_timeout():
 		heal_amount_to_do = heal_amount_to_do - healnum
 		$Heal_over_time_Timer.start()
 
+
+
+func _on_reduce_heat_timeout():
+	decrease_heat(1) # Replace with function body.
