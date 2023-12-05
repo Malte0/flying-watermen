@@ -39,12 +39,13 @@ var can_move: bool = true
 # health and heat
 var MAX_HEALTH: int = 100
 var health: int = MAX_HEALTH
-var MAX_HEAT: int = 100
+const MAX_HEAT: int = 100
 var heat: int = 0
 # health timer
 const time_between: float = 0.1
 const heal_over_time_amount: int = 1
 var heal_amount_to_do: int = 0
+var heatprev: int = heat
 
 func reset_variables():
 	speed = base_speed
@@ -213,7 +214,10 @@ func damage(number: int):
 		get_tree().change_scene_to_file("res://menus/game over/GameOver.tscn")
 
 func damage_with_scaling(number: int):
-	var new_damage: int = number + number * heat / MAX_HEAT
+	# using float to avoid division by int warning
+	var heatMaxf := MAX_HEAT as float
+	var scaling_Factor := (number * heat / heatMaxf) as int
+	var new_damage: int = number + scaling_Factor
 	damage(new_damage)
 
 func heal_over_time(totalHeal: int):
@@ -236,4 +240,6 @@ func _on_heal_over_time_timer_timeout():
 
 
 func _on_reduce_heat_timeout():
-	decrease_heat(1) # Replace with function body.
+	if heat == heatprev:
+		decrease_heat(1)
+	heatprev = heat
