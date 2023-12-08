@@ -218,7 +218,7 @@ func heal_over_time(totalHeal: int):
 	$Heal_over_time_Timer.wait_time = time_between
 	if ( totalHeal <= heal_over_time_amount):
 		heal(totalHeal)
-	else :
+	else:
 		heal(heal_over_time_amount)
 		heal_amount_to_do = totalHeal - heal_over_time_amount + heal_amount_to_do
 		$Heal_over_time_Timer.start()
