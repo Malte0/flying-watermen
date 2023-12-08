@@ -13,8 +13,8 @@ class_name Player
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var state_chart: StateChart = $StateChart
 @onready var wall_check: RayCast2D = $WallCheck
-#@onready var animation_tree: AnimationTree = $AnimationTree
-#@onready var animation_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var animation_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 
 
 const ProjectileScene := preload("res://entities/Projectiles/projectile.tscn")
@@ -22,7 +22,7 @@ const ProjectileScene := preload("res://entities/Projectiles/projectile.tscn")
 
 
 # Reset values
-var base_scale_speed: float = 2.5
+var base_scale_speed: float = 1.5
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * base_scale_speed
 var base_speed: float = 300.0 * base_scale_speed
 var base_jump_velocity: float = -400.0 * base_scale_speed
@@ -39,12 +39,13 @@ var can_move: bool = true
 # health and heat
 var MAX_HEALTH: int = 100
 var health: int = MAX_HEALTH
-var MAX_HEAT: int = 100
+const MAX_HEAT: int = 100
 var heat: int = 0
 # health timer
 const time_between: float = 0.1
 const heal_over_time_amount: int = 1
 var heal_amount_to_do: int = 0
+var heatprev: int = heat
 
 func reset_variables():
 	speed = base_speed
@@ -61,7 +62,7 @@ var slide_threshold: float = base_speed/2
 
 
 func _ready():
-#	animation_tree.active = true
+	animation_tree.active = true
 	#Initialize values so Guards don't complain
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
 	state_chart.set_expression_property("air_jumps_left", air_jumps_left)
@@ -120,12 +121,11 @@ func _input(event: InputEvent):
 
 
 func update_animation():
-#	animation_tree.set("parameters/Crouch/Crouch/blend_position", abs(velocity.x) > 1)
-#	animation_tree.set("parameters/Move/blend_position", abs(velocity.x) > 1)
-	# If player walks in different direction than sprite orienation
+	animation_tree.set("parameters/Action/blend_position", abs(velocity.x) > 0)
+	# If player walks in different direction than sprite orienation		
 	if (scale.y > 0 and direction < 0 and velocity.x < 0) or (scale.y < 0 and direction > 0 and velocity.x > 0):
 		flip_player()
-
+	
 
 func flip_player():
 	scale.x *= -1
@@ -133,6 +133,9 @@ func flip_player():
 
 func facing_wall():
 	return wall_check.is_colliding()
+	
+
+
 
 
 func _on_crouching_state_entered():
@@ -208,17 +211,20 @@ func heal(number: int):
 func damage(number: int):
 	health = maxi(health - number, 0)
 	if self.health == 0 :
-		get_tree().change_scene_to_file("res://menus/game over/GameOver.tscn")
+		get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
 
 func damage_with_scaling(number: int):
-	var new_damage: int = number + number * heat / MAX_HEAT
+	# using float to avoid division by int warning
+	var heatMaxf := MAX_HEAT as float
+	var scaling_Factor := (number * heat / heatMaxf) as int
+	var new_damage: int = number + scaling_Factor
 	damage(new_damage)
 
 func heal_over_time(totalHeal: int):
 	$Heal_over_time_Timer.wait_time = time_between
 	if ( totalHeal <= heal_over_time_amount):
 		heal(totalHeal)
-	else:
+	else :
 		heal(heal_over_time_amount)
 		heal_amount_to_do = totalHeal - heal_over_time_amount + heal_amount_to_do
 		$Heal_over_time_Timer.start()
@@ -234,4 +240,6 @@ func _on_heal_over_time_timer_timeout():
 
 
 func _on_reduce_heat_timeout():
-	decrease_heat(1) # Replace with function body.
+	if heat == heatprev:
+		decrease_heat(1)
+	heatprev = heat

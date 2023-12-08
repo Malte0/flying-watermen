@@ -48,11 +48,11 @@ position = Vector2(155, 434)
 process_callback = 0
 metadata/_edit_lock_ = true
 
-[node name="Heal_over_time_Timer" type="Timer" parent="Player"]
+[node name="Heal_over_time_Timer2" type="Timer" parent="Player"]
 process_callback = 0
 one_shot = true
 
-[node name="Reduce_Heat" type="Timer" parent="Player"]
+[node name="Reduce_Heat2" type="Timer" parent="Player"]
 process_callback = 0
 wait_time = 0.5
 autostart = true
@@ -80,5 +80,5 @@ scale = Vector2(0.171875, 0.0726732)
 texture = ExtResource("9_6g48k")
 
 [connection signal="body_entered" from="RigidBody2D" to="RigidBody2D" method="_on_body_entered"]
-[connection signal="timeout" from="Player/Heal_over_time_Timer" to="Player" method="_on_heal_over_time_timer_timeout"]
-[connection signal="timeout" from="Player/Reduce_Heat" to="Player" method="_on_reduce_heat_timeout"]
+[connection signal="timeout" from="Player/Heal_over_time_Timer2" to="Player" method="_on_heal_over_time_timer_timeout"]
+[connection signal="timeout" from="Player/Reduce_Heat2" to="Player" method="_on_reduce_heat_timeout"]
