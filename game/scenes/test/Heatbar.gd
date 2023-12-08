@@ -14,6 +14,7 @@ func _ready():
 func _process(delta):
 	update()
 	get_node("Heat_Lable").text = str(player.heat) + " / " + str(player.MAX_HEAT)
+	
 
 func setPlayer(object):
 	player = object

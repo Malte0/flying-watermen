@@ -6,6 +6,7 @@ extends CanvasLayer
 func _ready():
 	var player = get_tree().get_first_node_in_group("player")
 	debugger.debug_node(player)
+	$Panel/Healthbar.player = player
 	debugger.visible = false
 
 
