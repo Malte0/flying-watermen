@@ -15,10 +15,8 @@ class_name Player
 @onready var wall_check: RayCast2D = $WallCheck
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
-
-
-const ProjectileScene := preload("res://entities/Projectiles/projectile.tscn")
 @onready var shoot_position = $ShootPosition
+const PROJECTILESCENE := preload("res://entities/Projectiles/projectile.tscn")
 
 
 # Reset values
@@ -107,8 +105,6 @@ func _physics_process(delta):
 		velocity.x = 0
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
-		
-	if(Input.is_action_just_pressed("right_click")): state_chart.send_event("_on_shot")
 	
 	move_and_slide()
 
@@ -133,9 +129,6 @@ func flip_player():
 
 func facing_wall():
 	return wall_check.is_colliding()
-	
-
-
 
 
 func _on_crouching_state_entered():
@@ -178,40 +171,36 @@ func _on_area_2d_body_entered(body):
 	if body.is_in_group("Hit"):
 		#can_move = false
 		body.take_damage()
-	else:
-		pass # Replace with function body.
 
-
-@onready var shape = $AtkShape
 
 func _on_meele_attacks_child_state_entered():
 	#todo (wann wie worum rotieren)
 	#shape.rotate()
 	$AtkShape/CollisionShape2D.disabled = false
 
+
 func _on_meele_attacks_child_state_exited():
 	$AtkShape/CollisionShape2D.disabled = true
 
-func _on_cant_shoot_state_entered():
-	var projectile_instance := ProjectileScene.instantiate()
-	projectile_instance.position = shoot_position.global_position
-	projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
-	add_child(projectile_instance)
 
 # health and heat systemsa
 func increase_heat(number: int):
 	heat = mini(number + heat, MAX_HEAT)
 
+
 func decrease_heat(number: int):
 	heat = maxi(heat - number, 0)
 
+
 func heal(number: int):
 	health = mini(health + number, MAX_HEALTH)
-	
+
+
 func damage(number: int):
 	health = maxi(health - number, 0)
 	if self.health == 0 :
 		get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
+
 
 func damage_with_scaling(number: int):
 	# using float to avoid division by int warning
@@ -219,6 +208,7 @@ func damage_with_scaling(number: int):
 	var scaling_Factor := (number * heat / heatMaxf) as int
 	var new_damage: int = number + scaling_Factor
 	damage(new_damage)
+
 
 func heal_over_time(totalHeal: int):
 	$Heal_over_time_Timer.wait_time = time_between
@@ -238,8 +228,17 @@ func _on_heal_over_time_timer_timeout():
 		$Heal_over_time_Timer.start()
 
 
-
 func _on_reduce_heat_timeout():
 	if heat == heatprev:
 		decrease_heat(1)
 	heatprev = heat
+
+
+func _on_can_shoot_state_input(event: InputEvent) -> void:
+	if event.is_action_pressed("right_click"):
+		state_chart.send_event("_on_shot")
+		var projectile_instance := PROJECTILESCENE.instantiate()
+		projectile_instance.position = shoot_position.global_position
+		projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
+		projectile_instance.player_speed = velocity
+		add_child(projectile_instance)

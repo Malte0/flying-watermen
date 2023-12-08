@@ -1,32 +1,27 @@
-class_name Projectile
 extends CharacterBody2D
 
+class_name Projectile
 
 @export var damage := 20
+@export var speed := 1250.0
 
-@export var SPEED := 1250.0
+var player_speed := Vector2.ZERO
 var direction := Vector2.ZERO
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
-
 
 @onready var impact_detector := $ImpactDetector
 
 
 func _ready():
 	set_as_top_level(true)
-	
-	velocity = direction * SPEED
+	velocity = direction * speed
+	velocity += player_speed
 
 func _physics_process(delta):
 	# Add the gravity.
-	#impact_detector.body_entered.emit()
 	if not is_on_floor():
 		velocity.y += gravity * delta 
-
-
+	
 	move_and_slide()
 
 
