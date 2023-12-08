@@ -7,10 +7,9 @@
 script = ExtResource("1_731mw")
 
 [node name="Background" type="TextureRect" parent="."]
-offset_left = -4.0
-offset_top = -5.0
-offset_right = 1159.0
-offset_bottom = 646.0
+offset_left = -6.0
+offset_right = 1152.0
+offset_bottom = 648.0
 texture = ExtResource("2_rj6x5")
 expand_mode = 1
 

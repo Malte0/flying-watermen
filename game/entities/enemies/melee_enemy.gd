@@ -56,11 +56,13 @@ func aggro_movement():
 	var aggro_direction = sign(playerBody.global_position.x - global_position.x)
 	velocity.x = AGGRO_MOVEMENT_SPEED * aggro_direction;
 
-func _on_aggro_collider_body_entered(body: CharacterBody2D):
-	isAggro = true
+func _on_aggro_collider_body_entered(body: Node2D):
+	if body is CharacterBody2D:
+		isAggro = true
 
-func _on_aggro_collider_body_exited(body: CharacterBody2D):
-	isAggro = false
+func _on_aggro_collider_body_exited(body: Node2D):
+	if body is CharacterBody2D:
+		isAggro = false
 
 func deal_distance_damage(distance_to_player: float, delta):
 	var heat: int = ceili((DISTANCE_MULTIPLIER/distance_to_player) * HEAT_INFLICTION_PER_SECOND * DAMAGE_INTERVAL_SECONDS)
