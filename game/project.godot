@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="flying-watermen"
-run/main_scene="res://launch.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+run/main_scene="res://Launch.tscn"
+config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://Global.gd"
+Globals="*res://global.gd"
 
 [display]
 

@@ -211,7 +211,7 @@ func heal(number: int):
 func damage(number: int):
 	health = maxi(health - number, 0)
 	if self.health == 0 :
-		get_tree().change_scene_to_file("res://menus/game over/GameOver.tscn")
+		get_tree().change_scene_to_file.call_deferred("res://menus/game over/GameOver.tscn")
 
 func damage_with_scaling(number: int):
 	# using float to avoid division by int warning

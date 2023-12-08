@@ -8,7 +8,7 @@ func _ready():
 	DisplayServer.window_set_size(screen_size * 0.75)
 	DisplayServer.window_set_position((screen_size * 0.25) / 2)
 	DisplayServer.window_set_current_screen(screen)
-	get_tree().change_scene_to_file(Global.main_scene)
+	get_tree().change_scene_to_file.call_deferred(Globals.main_scene)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

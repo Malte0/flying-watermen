@@ -21,4 +21,3 @@ func setPlayer(object):
 func update():
 	# updates health and heat
 	value = player.health * 100 / player.MAX_HEALTH
-

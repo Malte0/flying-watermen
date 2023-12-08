@@ -6,9 +6,14 @@ extends CanvasLayer
 func _ready():
 	var player = get_tree().get_first_node_in_group("player")
 	debugger.debug_node(player)
+	debugger.visible = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("f3"):
+	pass
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("f3"):
 		debugger.visible = !debugger.visible
