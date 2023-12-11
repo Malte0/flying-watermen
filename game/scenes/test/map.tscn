@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://mrf2lku3uiqc"]
+[gd_scene load_steps=42 format=3 uid="uid://mrf2lku3uiqc"]
 
 [ext_resource type="Shader" path="res://scenes/test/mapShader.gdshader" id="1_4wi60"]
 [ext_resource type="Texture2D" uid="uid://b6yrhnp1t37o8" path="res://assets/prototype-assets/Tiles.png" id="1_ljrfd"]
@@ -9,9 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://ihorffrdym4j" path="res://icon.svg" id="4_23juu"]
 [ext_resource type="Texture2D" uid="uid://cjv4di3su4jvf" path="res://assets/prototype-assets/background/Green-Tree.png" id="5_1qnrw"]
 [ext_resource type="PackedScene" uid="uid://cihcop35erg48" path="res://scenes/ui/ui.tscn" id="5_vx7we"]
-[ext_resource type="Script" path="res://entities/pfuetze.gd" id="7_ln4pl"]
-[ext_resource type="Texture2D" uid="uid://utp3bloip30k" path="res://assets/prototype-assets/pfuetze.png" id="8_rnupn"]
 [ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/Melee_enemy.tscn" id="9_hf5qv"]
+[ext_resource type="PackedScene" uid="uid://dpiypck5f1v6f" path="res://entities/objects/pfuetze.tscn" id="10_oa7xq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7de0"]
 shader = ExtResource("1_4wi60")
@@ -29763,9 +29762,6 @@ distance = -2.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mmcy6"]
 size = Vector2(128, 127)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f8yqx"]
-size = Vector2(223, 20)
-
 [node name="prototype" type="Node2D"]
 metadata/_edit_horizontal_guides_ = []
 
@@ -29858,21 +29854,7 @@ metadata/_edit_lock_ = true
 
 [node name="UI" parent="." instance=ExtResource("5_vx7we")]
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(6122, 1756)
-collision_mask = 3
-script = ExtResource("7_ln4pl")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -3)
-shape = SubResource("RectangleShape2D_f8yqx")
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-position = Vector2(1, 48)
-scale = Vector2(0.171875, 0.0726732)
-texture = ExtResource("8_rnupn")
-metadata/_edit_lock_ = true
+[node name="Area2D" parent="." instance=ExtResource("10_oa7xq")]
 
 [node name="Melee_enemy" parent="." instance=ExtResource("9_hf5qv")]
 position = Vector2(6406, 1684)
