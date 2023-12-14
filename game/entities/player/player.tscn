@@ -330,17 +330,20 @@ texture_filter = 1
 position = Vector2(0, -24)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_w7iqa")
-animation = &"Move"
+animation = &"Idle"
 autoplay = "Idle"
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-speed_scale = 0.6
 libraries = {
 "": SubResource("AnimationLibrary_qkppn")
 }
+speed_scale = 0.6
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qkppn")
+}
 tree_root = SubResource("AnimationNodeStateMachine_shgom")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Action/blend_position = -0.00144303
@@ -656,6 +659,10 @@ one_shot = true
 wait_time = 0.4
 autostart = true
 
+[node name="Damage_by_Heat" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
 [connection signal="state_physics_processing" from="StateChart/Player/Inputs/W/Pressed" to="." method="_on_pressed_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Player/Inputs/Shooting/CantShoot" to="." method="_on_cant_shoot_state_entered"]
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement" to="." method="_on_movement_child_state_exited"]
@@ -674,3 +681,4 @@ autostart = true
 [connection signal="body_entered" from="AtkShape" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Heal_over_time_Timer" to="." method="_on_heal_over_time_timer_timeout"]
 [connection signal="timeout" from="Reduce_Heat" to="." method="_on_reduce_heat_timeout"]
+[connection signal="timeout" from="Damage_by_Heat" to="." method="_on_damage_by_heat_timeout"]
