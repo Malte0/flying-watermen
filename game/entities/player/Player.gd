@@ -215,9 +215,8 @@ func damage(number: int):
 
 func damage_with_scaling(number: int):
 	# using float to avoid division by int warning
-	var heatMaxf := MAX_HEAT as float
-	var scaling_Factor := (number * heat / heatMaxf) as int
-	var new_damage: int = number
+	var scaling_Factor: int = 1 # for now unused
+	var new_damage: int = number * scaling_Factor
 	damage(new_damage)
 
 func heal_over_time(totalHeal: int):
