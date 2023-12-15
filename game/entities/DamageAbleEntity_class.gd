@@ -11,13 +11,11 @@ func _init(health: int, element: Element):
 
 func takeDamage(amount: int, damage_type: Element):
 	if damage_type == entity_element:
-		entity_health += amount
 		return
 	entity_health -= amount
 	if entity_health <= 0:
 		die()
 
-# The elemenental damage mechanic above might have made this obsolete
 func restoreHealth(amount: int):
 	entity_health += amount
 
