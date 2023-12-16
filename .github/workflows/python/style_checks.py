@@ -5,6 +5,7 @@ from style_config import style_config
 isFunction = False
 functionLength = 0
 shouldNotHaveUnscopedVariablesAnyMore = False # yes, this is a long name xD
+consecutiveLineBreaks = 0
 
 def hasCamelCase(line: str):
     keyWordsToSearch = ['func', 'var', 'const']
@@ -75,6 +76,26 @@ def missnamedBoolean(line: str):
                 return True
     return False
 
+def hasTooManyLineBreaks(line: str):
+    global consecutiveLineBreaks
+    if line == "\n":
+        consecutiveLineBreaks += 1
+    else:
+        consecutiveLineBreaks = 0
+    return consecutiveLineBreaks > 1
+
+def hasOddColonFormat(line: str):
+    return re.search(r" : ", line) is not None
+
+def hasUninitializedVariable(line: str):
+    if 'var' in line:
+        return re.search(r"=", line) is None
+    return False
+
+def hasUselessIndentation(line: str):
+    noBreak = line.replace("\n", "")
+    return noBreak == '\t'
+
 checks = {
     "camelCase": hasCamelCase,
     "deep nesting": hasDeepNesting,
@@ -85,6 +106,10 @@ checks = {
     "too long line": hasTooLongLine,
     "missnamed boolean": missnamedBoolean, 
     "scattered variable declaration": hasScatteredVariableDeclaration,
+    "too many linebreacks": hasTooManyLineBreaks,
+    "weird colon format": hasOddColonFormat, # var example : type = value, <- this is weird
+    "Uninitialized variable": hasUninitializedVariable,
+    # "useless indentation": hasUselessIndentation, # this is not working yet, it's a bit tricky
 }
 
 def resetGlobals():
