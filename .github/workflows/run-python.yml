@@ -1,0 +1,23 @@
+# This script will call the python scripts
+
+name: Run Python
+
+on:
+  workflow_call:
+
+env:
+  PYTHON_DIR: python
+
+jobs:
+  run-python:
+    name: Run Python
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check-out repository
+      uses: actions/checkout@v2
+      with:
+        path: ${{ env.DEVOPS_DIR }}
+
+    - name: Run Python
+      run: python ${{ env.DEVOPS_DIR }}/run-check.py
+      shell: sh
