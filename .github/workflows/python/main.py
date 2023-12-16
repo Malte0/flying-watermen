@@ -10,7 +10,7 @@ from style_checks import checkCodeStyle
 # number of issues found as int
 checksToRun = { "codeStyle": checkCodeStyle }
 
-godotLocation = "../../../game"
+godotLocation = "../../../game" if "python" in os.getcwd() else "./game"
 ignoreFolders = [".godot", "addons"]
 
 def run_checks():
@@ -18,8 +18,6 @@ def run_checks():
   for checkName in checksToRun:
     print("Running check: " + checkName)
     pathlist = Path(godotLocation).rglob('*.gd')
-    print("Found " + str(len(list(pathlist))) + " files to check")
-    print("Checking files..." + os.getcwd())
     for path in pathlist:
       if any([ignoreFolder in str(path) for ignoreFolder in ignoreFolders]):
         continue
