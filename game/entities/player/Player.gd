@@ -201,14 +201,12 @@ func damage(number: int):
 	if self.health == 0 :
 		get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
 
-
 func damage_with_scaling(number: int):
 	# using float to avoid division by int warning
 	var heatMaxf := MAX_HEAT as float
 	var scaling_Factor := (number * heat / heatMaxf) as int
 	var new_damage: int = number + scaling_Factor
 	damage(new_damage)
-
 
 func heal_over_time(totalHeal: int):
 	$Heal_over_time_Timer.wait_time = time_between
