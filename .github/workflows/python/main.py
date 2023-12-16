@@ -26,6 +26,9 @@ def run_checks():
         numberOfIssues += checksToRun[checkName](fileConents, str(path))
   
   print("Total issues found: " + str(numberOfIssues))
+  return numberOfIssues
 
 if __name__== "__main__":
-  run_checks()
+  numberOfIssues = run_checks()
+  if numberOfIssues > 0:
+    exit(1)
