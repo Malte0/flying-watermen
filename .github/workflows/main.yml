@@ -10,3 +10,5 @@ on:
 jobs:
   branch-name-check:
     uses: ./.github/workflows/branch-name-check.yml
+  other-checks:
+    uses: ./.github/workflows/run-python.yml
