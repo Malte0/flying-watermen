@@ -18,6 +18,7 @@ def run_checks():
   for checkName in checksToRun:
     print("Running check: " + checkName)
     pathlist = Path(godotLocation).rglob('*.gd')
+    print("Found " + str(len(list(pathlist))) + " files to check")
     for path in pathlist:
       if any([ignoreFolder in str(path) for ignoreFolder in ignoreFolders]):
         continue
