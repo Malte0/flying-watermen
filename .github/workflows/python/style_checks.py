@@ -118,11 +118,18 @@ def resetGlobals():
     functionLength = 0
     shouldNotHaveUnscopedVariablesAnyMore = False
 
+def removeComments(line: str):
+    try:
+        commentIndex = line.index("#")
+        return line[:commentIndex]
+    except:
+        return line
+
 def checkCodeStyle(lines: list[str], filePath: str):
     resetGlobals()
     numberOfIssues = 0
     for lineNumber in range(len(lines)):
-        line = lines[lineNumber]
+        line = removeComments(lines[lineNumber])
         for checkName in checks:
             if checks[checkName](line):
                 print("Found " + checkName + ":")
