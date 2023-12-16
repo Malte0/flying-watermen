@@ -8,9 +8,12 @@ shouldNotHaveUnscopedVariablesAnyMore = False # yes, this is a long name xD
 
 def hasCamelCase(line: str):
     keyWordsToSearch = ['func', 'var', 'const']
+    namesToIgnore = ['_on']
     words = line.split(" ")
     for i in range(len(words)):
         if words[i] in keyWordsToSearch:
+            if words[i+1] in namesToIgnore:
+                continue
             if re.search(r"[a-z][A-Z]", words[i+1]) is not None:
                 return True
     return False
