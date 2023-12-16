@@ -88,7 +88,7 @@ def hasOddColonFormat(line: str):
     return re.search(r" : ", line) is not None
 
 def hasUninitializedVariable(line: str):
-    if 'var' in line:
+    if 'var' in line and not '()' in line:
         return re.search(r"=", line) is None
     return False
 
@@ -101,14 +101,14 @@ checks = {
     "deep nesting": hasDeepNesting,
     "no explicit type": usesAutoType,
     "brackets on if-statements": hasBracketsOnIfStatements,
-    "one-letter-variable": hasOneLetterVariable, 
+    "one-letter-variable (that is not i)": hasOneLetterVariable, 
     "too long function": hasTooLongFunction,
     "too long line": hasTooLongLine,
     "missnamed boolean": missnamedBoolean, 
     "scattered variable declaration": hasScatteredVariableDeclaration,
-    "too many linebreacks": hasTooManyLineBreaks,
+    "too many linebreaks": hasTooManyLineBreaks,
     "weird colon format": hasOddColonFormat, # var example : type = value, <- this is weird
-    "Uninitialized variable": hasUninitializedVariable,
+    "uninitialized variable": hasUninitializedVariable,
     # "useless indentation": hasUselessIndentation, # this is not working yet, it's a bit tricky
 }
 
