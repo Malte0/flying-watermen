@@ -15,7 +15,7 @@ def hasCamelCase(line: str):
                 return True
     return False
 
-def hasDeepIndentaion(line: str):
+def hasDeepNesting(line: str):
     return line.startswith("\t" * style_config["maxIndentation"])
 
 def usesAutoType(line: str):
@@ -74,7 +74,7 @@ def missnamedBoolean(line: str):
 
 checks = {
     "camelCase": hasCamelCase,
-    "deepIndent": hasDeepIndentaion,
+    "deep nesting": hasDeepNesting,
     "no explicit type": usesAutoType,
     "brackets on if-statements": hasBracketsOnIfStatements,
     "one-letter-variable": hasOneLetterVariable, 

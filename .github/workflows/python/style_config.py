@@ -1,6 +1,6 @@
 
 style_config = {
     "maxIndentation": 4,
-    "maxLineLength": 80,
+    "maxLineLength": 100,
     "maxFunctionLength": 20,
 }
