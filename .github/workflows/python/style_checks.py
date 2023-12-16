@@ -98,7 +98,7 @@ def checkCodeStyle(lines: list[str], filePath: str):
         for checkName in checks:
             if checks[checkName](line):
                 print("Found " + checkName + ":")
-                print("\tFilepath: " + filePath)
+                print("\tFilepath: " + filePath.replace("game/", ""))
                 print("\tLine: " + str(lineNumber+1))
                 print("\t" + line.strip())
                 print("")
