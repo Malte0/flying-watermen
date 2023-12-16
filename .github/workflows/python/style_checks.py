@@ -26,6 +26,7 @@ checks = {
 }
 
 def checkCodeStyle(lines: list[str], filePath: str):
+    print("Checking file: " + filePath)
     numberOfIssues = 0
     for lineNumber in range(len(lines)):
         line = lines[lineNumber]
