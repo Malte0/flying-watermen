@@ -5,12 +5,16 @@ from style_config import style_config
 isFunction = False
 functionLength = 0
 shouldNotHaveUnscopedVariablesAnyMore = False # yes, this is a long name xD
+consecutiveLineBreaks = 0
 
 def hasCamelCase(line: str):
     keyWordsToSearch = ['func', 'var', 'const']
+    namesToIgnore = ['_on']
     words = line.split(" ")
     for i in range(len(words)):
         if words[i] in keyWordsToSearch:
+            if words[i+1] in namesToIgnore:
+                continue
             if re.search(r"[a-z][A-Z]", words[i+1]) is not None:
                 return True
     return False
@@ -72,16 +76,40 @@ def missnamedBoolean(line: str):
                 return True
     return False
 
+def hasTooManyLineBreaks(line: str):
+    global consecutiveLineBreaks
+    if line == "\n":
+        consecutiveLineBreaks += 1
+    else:
+        consecutiveLineBreaks = 0
+    return consecutiveLineBreaks > 1
+
+def hasOddColonFormat(line: str):
+    return re.search(r" : ", line) is not None
+
+def hasUninitializedVariable(line: str):
+    if 'var' in line and not '()' in line:
+        return re.search(r"=", line) is None
+    return False
+
+def hasUselessIndentation(line: str):
+    noBreak = line.replace("\n", "")
+    return noBreak == '\t'
+
 checks = {
     "camelCase": hasCamelCase,
     "deep nesting": hasDeepNesting,
     "no explicit type": usesAutoType,
     "brackets on if-statements": hasBracketsOnIfStatements,
-    "one-letter-variable": hasOneLetterVariable, 
+    "one-letter-variable (that is not i)": hasOneLetterVariable, 
     "too long function": hasTooLongFunction,
     "too long line": hasTooLongLine,
     "missnamed boolean": missnamedBoolean, 
     "scattered variable declaration": hasScatteredVariableDeclaration,
+    "too many linebreaks": hasTooManyLineBreaks,
+    "weird colon format": hasOddColonFormat, # var example : type = value, <- this is weird
+    "uninitialized variable": hasUninitializedVariable,
+    # "useless indentation": hasUselessIndentation, # this is not working yet, it's a bit tricky
 }
 
 def resetGlobals():
@@ -90,11 +118,18 @@ def resetGlobals():
     functionLength = 0
     shouldNotHaveUnscopedVariablesAnyMore = False
 
+def removeComments(line: str):
+    try:
+        commentIndex = line.index("#")
+        return line[:commentIndex]
+    except:
+        return line
+
 def checkCodeStyle(lines: list[str], filePath: str):
     resetGlobals()
     numberOfIssues = 0
     for lineNumber in range(len(lines)):
-        line = lines[lineNumber]
+        line = removeComments(lines[lineNumber])
         for checkName in checks:
             if checks[checkName](line):
                 print("Found " + checkName + ":")
