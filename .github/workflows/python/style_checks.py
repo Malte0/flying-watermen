@@ -96,6 +96,11 @@ def hasUselessIndentation(line: str):
     noBreak = line.replace("\n", "")
     return noBreak == '\t'
 
+def hasTooManyArguments(line: str):
+    if 'func' in line:
+        return line.count(",")+1 > style_config["maxFunctionArguments"]
+    return False
+
 checks = {
     "camelCase": hasCamelCase,
     "deep nesting": hasDeepNesting,
@@ -109,6 +114,7 @@ checks = {
     "too many linebreaks": hasTooManyLineBreaks,
     "weird colon format": hasOddColonFormat, # var example : type = value, <- this is weird
     "uninitialized variable": hasUninitializedVariable,
+    "function with too many arguments": hasTooManyArguments,
     # "useless indentation": hasUselessIndentation, # this is not working yet, it's a bit tricky
 }
 
