@@ -8,23 +8,23 @@ class_name Player extends DamageAbleEntity
 @onready var health_bar: TextureProgressBar = $PlayerUI/HealthBar
 @onready var heat_bar: ProgressBar = $PlayerUI/HeatBar
 
-const ProjectileScene := preload("res://entities/Projectiles/projectile.tscn")
-@onready var shoot_position = $ShootPosition
+const ProjectileScene: PackedScene = preload("res://entities/Projectiles/projectile.tscn")
+@onready var shoot_position: Marker2D = $ShootPosition
 
 # Reset values
 var base_scale_speed: float = 1.5
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * base_scale_speed
+var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity") * base_scale_speed
 var base_speed: float = 300.0 * base_scale_speed
 var base_jump_velocity: float = -400.0 * base_scale_speed
 var base_friction: float = 0.5
 var air_jumps: int = 1
 var base_fall_speed_factor: float = 1.0
 # Resettable variables
-var scale_speed = base_scale_speed
-var speed = base_speed
-var jump_velocity = base_jump_velocity
-var friction = base_friction
-var fall_speed_factor = base_fall_speed_factor
+var scale_speed: float = base_scale_speed
+var speed: float = base_speed
+var jump_velocity: float = base_jump_velocity
+var friction: float = base_friction
+var fall_speed_factor: float = base_fall_speed_factor
 var can_move: bool = true
 
 ##############
@@ -62,14 +62,14 @@ func _on_heat_tick_timeout():
 func update_heat_bar(new_heat: int):
 	heat_bar.value = new_heat
 
-# Regenerates healthAmount across healthAmount // Heal_over_time_step seconds
-func heal_over_time(healthAmount: int):
-	heal_over_time_left = healthAmount
+# Regenerates heal_amount across healthAmount // Heal_over_time_step seconds
+func heal_over_time(heal_amount: int):
+	heal_over_time_left = heal_amount
 
 # Heals the player for healthAmount during duration seconds
 func _on_heal_tick_timeout():
 	if heal_over_time_left > 0:
-		var amountToHeal = mini(heal_over_time_left, Heal_over_time_step)
+		var amountToHeal: int = mini(heal_over_time_left, Heal_over_time_step)
 		restore_health(amountToHeal)
 		heal_over_time_left = maxi(heal_over_time_left - Heal_over_time_step, 0)
 
@@ -189,7 +189,7 @@ func _on_area_2d_body_entered(body):
 	else:
 		pass # Replace with function body.
 
-@onready var shape = $AtkShape
+@onready var shape: Area2D = $AtkShape
 
 func _on_meele_attacks_child_state_entered():
 	$AtkShape/CollisionShape2D.disabled = false
@@ -198,7 +198,7 @@ func _on_meele_attacks_child_state_exited():
 	$AtkShape/CollisionShape2D.disabled = true
 
 func _on_cant_shoot_state_entered():
-	var projectile_instance := ProjectileScene.instantiate()
+	var projectile_instance: CharacterBody2D = ProjectileScene.instantiate()
 	projectile_instance.position = shoot_position.global_position
 	projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
 	add_child(projectile_instance)

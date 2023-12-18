@@ -1,20 +1,20 @@
 extends Enemy
 
-@onready var wall_detection = $DirectionalNodes/wall_detetion
-@onready var health_bar = $EnemyHealthBar
+@onready var wall_detection: RayCast2D = $DirectionalNodes/wall_detetion
+@onready var health_bar: Node2D = $EnemyHealthBar
 @onready var nodes_to_flip: Node2D = $DirectionalNodes
-var player: Player = null # change dependency
-const DAMAGE_PER_TICK = 2
+var player: Player = null # change dependency get_tree().get_first_node_in_group("player")
+const DAMAGE_PER_TICK: int = 2
 
-const DAMAGE_DISTANCE = 200
-const HEAT_DISTANCE = 300
-const HEAT_PER_TICK = 3
+const DAMAGE_DISTANCE: int = 200
+const HEAT_DISTANCE: int = 300
+const HEAT_PER_TICK: int = 3
 
 #var can_see_player: bool = false
 var is_hunting: bool = false
 
 func _init():
-	var max_health = 100
+	var max_health: int = 100
 	super(max_health)
 	move(Movement_Direction.Right)
 

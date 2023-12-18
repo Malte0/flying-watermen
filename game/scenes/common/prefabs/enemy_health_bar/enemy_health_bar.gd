@@ -7,7 +7,7 @@ const interpolation_speed: int = 100
 
 func _process(delta):
 	if target_value != health_bar.value:
-		var sig = sign(target_value - health_bar.value)
+		var sig: int = sign(target_value - health_bar.value)
 		health_bar.value += sig * delta * interpolation_speed
 
 func change_health(new_health):

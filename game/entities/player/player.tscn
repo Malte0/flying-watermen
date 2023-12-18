@@ -334,7 +334,6 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_w7iqa")
 animation = &"Idle"
 autoplay = "Idle"
-frame = 3
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
