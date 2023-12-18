@@ -1,18 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2mdlfdoukqoq"]
+[gd_scene load_steps=6 format=3 uid="uid://c2mdlfdoukqoq"]
 
-[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_yxerx"]
 [ext_resource type="Texture2D" uid="uid://dvtm1er0mqhwv" path="res://assets/prototype-assets/enemy_directed.PNG" id="2_jkvcn"]
 [ext_resource type="Script" path="res://entities/enemies/melee_enemy/melee_enemy.gd" id="2_r07kk"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="2_toklf"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="3_kb0mq"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="5_xw2om"]
 [ext_resource type="PackedScene" uid="uid://c2usu4wrw5gtw" path="res://scenes/common/prefabs/enemy_health_bar/Enemy_health_bar.tscn" id="7_cbg30"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_86clg"]
 radius = 13.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ol33t"]
-radius = 482.0
+radius = 450.004
 
 [node name="Melee_enemy" type="CharacterBody2D"]
 script = ExtResource("2_r07kk")
@@ -21,53 +17,38 @@ script = ExtResource("2_r07kk")
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_86clg")
 
-[node name="Flip" type="Node2D" parent="."]
+[node name="DirectionalNodes" type="Node2D" parent="."]
 
-[node name="Enemy_graphics" type="Node2D" parent="Flip"]
+[node name="Enemy_graphics" type="Node2D" parent="DirectionalNodes"]
 
-[node name="flame_image" type="Sprite2D" parent="Flip/Enemy_graphics"]
+[node name="flame_image" type="Sprite2D" parent="DirectionalNodes/Enemy_graphics"]
 position = Vector2(0, -12)
 scale = Vector2(0.0964117, 0.0875117)
 texture = ExtResource("2_jkvcn")
 
-[node name="wall_detetion" type="RayCast2D" parent="Flip"]
+[node name="wall_detetion" type="RayCast2D" parent="DirectionalNodes"]
 target_position = Vector2(50, 0)
 
-[node name="detection_range" type="Area2D" parent="."]
-visible = false
+[node name="ViewArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_range"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ViewArea"]
 shape = SubResource("CircleShape2D_ol33t")
-
-[node name="StateChart" type="Node" parent="."]
-script = ExtResource("1_yxerx")
-
-[node name="CompoundState" type="Node" parent="StateChart"]
-script = ExtResource("2_toklf")
-initial_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="StateChart/CompoundState"]
-script = ExtResource("3_kb0mq")
-
-[node name="To_Attacking" type="Node" parent="StateChart/CompoundState/Idle"]
-script = ExtResource("5_xw2om")
-to = NodePath("../../Attacking")
-event = &"player_detected"
-
-[node name="Attacking" type="Node" parent="StateChart/CompoundState"]
-script = ExtResource("3_kb0mq")
-
-[node name="To_Idle" type="Node" parent="StateChart/CompoundState/Attacking"]
-script = ExtResource("5_xw2om")
-to = NodePath("../../Idle")
-event = &"deaggro"
 
 [node name="EnemyHealthBar" parent="." instance=ExtResource("7_cbg30")]
 position = Vector2(0, -47)
 scale = Vector2(0.5, 0.5)
 
+[node name="AggroCooldown" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="DamageTick" type="Timer" parent="."]
+wait_time = 0.06
+autostart = true
+
 [connection signal="change_health" from="." to="." method="_on_change_health"]
-[connection signal="body_entered" from="detection_range" to="." method="_on_detection_range_body_entered"]
-[connection signal="body_exited" from="detection_range" to="." method="_on_detection_range_body_exited"]
+[connection signal="body_entered" from="ViewArea" to="." method="_on_player_detection_range_body_entered"]
+[connection signal="body_exited" from="ViewArea" to="." method="_on_player_detection_range_body_exited"]
+[connection signal="timeout" from="AggroCooldown" to="." method="_on_aggro_cooldown_timeout"]
+[connection signal="timeout" from="DamageTick" to="." method="_on_damage_tick_timeout"]

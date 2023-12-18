@@ -5,6 +5,8 @@ class_name Player extends DamageAbleEntity
 @onready var wall_check: RayCast2D = $WallCheck
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
+@onready var health_bar: TextureProgressBar = $PlayerUI/HealthBar
+@onready var heat_bar: ProgressBar = $PlayerUI/HeatBar
 
 const ProjectileScene := preload("res://entities/Projectiles/projectile.tscn")
 @onready var shoot_position = $ShootPosition
@@ -26,13 +28,14 @@ var fall_speed_factor = base_fall_speed_factor
 var can_move: bool = true
 
 ##############
-@onready var Heat_reduction_delay = $Timers/Heat_reduction_delay
-@onready var Heat_damage_tick = $Timers/Heat_tick
-@onready var Heal_tick = $Timers/Heal_tick
+@onready var Heat_reduction_delay = $Timers/HeatReductionDelay
+@onready var Heat_damage_tick = $Timers/HeatTick
+@onready var Heal_tick = $Timers/HealTick
 
-const Max_heat: int = 100
-const Heat_damage_threshold: int = 90
-const Heat_damage_per_second: int = 5
+const max_heat: int = 100
+const heat_damage_threshold: int = 90
+const heat_damage_per_second: int = 4
+const heat_reduction_rate: int = 4
 var heat: int = 0
 
 const Heal_over_time_step = 5
@@ -44,15 +47,20 @@ func _init():
 
 # Called to increase the players heat
 func increase_heat(amount: int):
-	heat = mini(heat + amount, Max_heat)
+	heat = mini(heat + amount, max_heat)
 	Heat_reduction_delay.start()
+	update_heat_bar(heat)
 
 # Signal called by the heat tick timer
 func _on_heat_tick_timeout():
-	if heat >= Heat_damage_threshold:
-		take_damage(Heat_damage_per_second, Element.Fire)
+	if heat >= heat_damage_threshold:
+		take_damage(heat_damage_per_second, Element.Fire)
 	if Heat_reduction_delay.is_stopped():
-		heat = maxi(heat - 1, 0)
+		heat = maxi(heat - heat_reduction_rate, 0)
+		update_heat_bar(heat)
+
+func update_heat_bar(new_heat: int):
+	heat_bar.value = new_heat
 
 # Regenerates healthAmount across healthAmount // Heal_over_time_step seconds
 func heal_over_time(healthAmount: int):
@@ -197,3 +205,7 @@ func _on_cant_shoot_state_entered():
 
 func _on_entity_death():
 	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
+
+func _on_change_health(new_health):
+	health_bar.value = new_health
+

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddtcyva8rby38"
-path="res://.godot/imported/flame_icon.png-12e4f842c6a7214340bde6295e0e8937.ctex"
+uid="uid://hlx5fvikrtuv"
+path="res://.godot/imported/playerHealthbarProgress.png-4a0dbc0bd280079a70d659caccb1dbcb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/common/prefabs/enemy_health_bar/assets/flame_icon.png"
-dest_files=["res://.godot/imported/flame_icon.png-12e4f842c6a7214340bde6295e0e8937.ctex"]
+source_file="res://entities/player/assets/playerHealthbarProgress.png"
+dest_files=["res://.godot/imported/playerHealthbarProgress.png-4a0dbc0bd280079a70d659caccb1dbcb.ctex"]
 
 [params]
 

@@ -3,14 +3,12 @@ class_name Enemy extends DamageAbleEntity
 
 enum Movement_Direction { Left = -1, Right = 1, No = 0 }
 var movement_direction: Movement_Direction = Movement_Direction.No
-
 var movement_speed: int = 100
+var movement_speed_aggro: int = 200
 
 var weight: float = 1
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var jump_force: int = -500
-
-var has_detected_player: bool = false
 
 func _init(_max_health):
 	super(Element.Fire, _max_health)
@@ -31,11 +29,3 @@ func move(direction: Movement_Direction):
 	movement_direction = direction
 
 #endregion
-
-func on_player_detected(player: Player):
-	print("FOUND PLAYER")
-	has_detected_player = true
-
-func forget_player():
-	print("forget Player")
-	has_detected_player = false
