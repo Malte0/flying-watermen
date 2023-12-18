@@ -208,4 +208,3 @@ func _on_entity_death():
 
 func _on_change_health(new_health):
 	health_bar.value = new_health
-
