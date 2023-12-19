@@ -332,6 +332,7 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_w7iqa")
 animation = &"Idle"
 autoplay = "Idle"
+frame = 1
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -366,102 +367,6 @@ script = ExtResource("2_dhjab")
 
 [node name="Player" type="Node" parent="StateChart"]
 script = ExtResource("3_7lhhd")
-
-[node name="Movement" type="Node" parent="StateChart/Player"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Grounded")
-
-[node name="Grounded" type="Node" parent="StateChart/Player/Movement"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Standing")
-
-[node name="Standing" type="Node" parent="StateChart/Player/Movement/Grounded"]
-script = ExtResource("5_dadqm")
-
-[node name="On Slide" type="Node" parent="StateChart/Player/Movement/Grounded/Standing"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Crouching/Sliding")
-event = &"tick"
-guard = SubResource("Resource_r58ym")
-
-[node name="On Crouch" type="Node" parent="StateChart/Player/Movement/Grounded/Standing"]
-process_priority = 1
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Crouching")
-event = &"tick"
-guard = SubResource("Resource_jk8u2")
-
-[node name="Crouching" type="Node" parent="StateChart/Player/Movement/Grounded"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Crouch")
-
-[node name="Crouch" type="Node" parent="StateChart/Player/Movement/Grounded/Crouching"]
-script = ExtResource("5_dadqm")
-
-[node name="Sliding" type="Node" parent="StateChart/Player/Movement/Grounded/Crouching"]
-script = ExtResource("5_dadqm")
-
-[node name="On Slide End" type="Node" parent="StateChart/Player/Movement/Grounded/Crouching/Sliding"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Crouch")
-event = &"tick"
-guard = SubResource("Resource_8wh4l")
-
-[node name="On Crouch End" type="Node" parent="StateChart/Player/Movement/Grounded/Crouching"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Standing")
-event = &"tick"
-guard = SubResource("Resource_wu70w")
-
-[node name="Airborne" type="Node" parent="StateChart/Player/Movement"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Falling")
-
-[node name="Jumping" type="Node" parent="StateChart/Player/Movement/Airborne"]
-script = ExtResource("5_dadqm")
-
-[node name="On Falling" type="Node" parent="StateChart/Player/Movement/Airborne/Jumping"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Falling")
-event = &"falling"
-
-[node name="FallingCoyote" type="Node" parent="StateChart/Player/Movement/Airborne"]
-script = ExtResource("5_dadqm")
-
-[node name="CoyoteDelay" type="Node" parent="StateChart/Player/Movement/Airborne/FallingCoyote"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Falling")
-delay_seconds = 0.2
-
-[node name="Falling" type="Node" parent="StateChart/Player/Movement/Airborne"]
-script = ExtResource("5_dadqm")
-
-[node name="WallSlide" type="Node" parent="StateChart/Player/Movement"]
-script = ExtResource("5_dadqm")
-
-[node name="On FallingCoyote" type="Node" parent="StateChart/Player/Movement"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../Airborne/FallingCoyote")
-event = &"falling"
-guard = SubResource("Resource_sktov")
-
-[node name="On Jump" type="Node" parent="StateChart/Player/Movement"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../Airborne/Jumping")
-event = &"jump"
-guard = SubResource("Resource_se5vv")
-
-[node name="On WallSlide" type="Node" parent="StateChart/Player/Movement"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../WallSlide")
-event = &"wall_slide"
-guard = SubResource("Resource_6rl8s")
-
-[node name="On Grounded" type="Node" parent="StateChart/Player/Movement"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../Grounded")
-event = &"grounded"
-guard = SubResource("Resource_c7udc")
 
 [node name="AnimationControl" type="Node" parent="StateChart/Player"]
 script = ExtResource("4_klwk4")
