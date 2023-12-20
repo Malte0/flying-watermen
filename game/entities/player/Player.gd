@@ -27,15 +27,14 @@ var friction: float = base_friction
 var fall_speed_factor: float = base_fall_speed_factor
 var can_move: bool = true
 
-##############
 @onready var Heat_reduction_delay = $Timers/HeatReductionDelay
 @onready var Heat_damage_tick = $Timers/HeatTick
 @onready var Heal_tick = $Timers/HealTick
 
 const max_heat: int = 100
 const heat_damage_threshold: int = 90
-const heat_damage_per_second: int = 4
-const heat_reduction_rate: int = 4
+const heat_damage_per_second: int = 3
+const heat_reduction_rate: int = 10
 var heat: int = 0
 
 const Heal_over_time_step = 5
@@ -198,7 +197,7 @@ func _on_meele_attacks_child_state_exited():
 	$AtkShape/CollisionShape2D.disabled = true
 
 func _on_cant_shoot_state_entered():
-	var projectile_instance: CharacterBody2D = ProjectileScene.instantiate()
+	var projectile_instance: Projectile = ProjectileScene.instantiate()
 	projectile_instance.position = shoot_position.global_position
 	projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
 	add_child(projectile_instance)

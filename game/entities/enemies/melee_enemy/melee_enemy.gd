@@ -3,29 +3,32 @@ extends Enemy
 @onready var wall_detection: RayCast2D = $DirectionalNodes/wall_detetion
 @onready var health_bar: Node2D = $EnemyHealthBar
 @onready var nodes_to_flip: Node2D = $DirectionalNodes
-var player: Player = null # change dependency get_tree().get_first_node_in_group("player")
+@onready var aggro_cooldown: Timer = $AggroCooldown
+@onready var player: Player = get_node("/root/Player")
+
+const HEAT_DISTANCE: int = 350
+const HEAT_PER_TICK: int = 2
+const DAMAGE_DISTANCE: int = 150
 const DAMAGE_PER_TICK: int = 2
 
-const DAMAGE_DISTANCE: int = 200
-const HEAT_DISTANCE: int = 300
-const HEAT_PER_TICK: int = 3
-
-#var can_see_player: bool = false
-var is_hunting: bool = false
+var is_aggro: bool = false
+var movement_speed_aggro: int = 250
+var movement_speed_calm: int = 100
 
 func _init():
 	var max_health: int = 100
 	super(max_health)
+	movement_speed = movement_speed_calm
 	move(Movement_Direction.Right)
 
 func _physics_process(delta):
-	if is_hunting:
-		hunt_player()
-	else:
-		idle()
+	hunt_player() if is_aggro else idle()
 	super(delta)
 
 func hunt_player():
+	if wall_detection.is_colliding():
+		jump(1)
+	
 	if player == null:
 		return
 	var player_distance = player.global_position.x - global_position.x
@@ -52,20 +55,31 @@ func _on_change_health(new_health):
 	health_bar.change_health(new_health)
 
 func _on_player_detection_range_body_entered(body):
-	is_hunting = true
 	if body is Player:
-		player = body
-		movement_speed = 200
+		aggro_cooldown.stop()
+		if not is_aggro:
+			player = body
+			# Expermiment: This introduces some anticipation into the behaviour
+			jump(0.2)
+			movement_speed = 0
+			await get_tree().create_timer(0.4).timeout
+			movement_speed = movement_speed_aggro
+	is_aggro = true
 
 func _on_player_detection_range_body_exited(body):
-	is_hunting = false
-	movement_speed = 100
+	aggro_cooldown.start()
 
 func _on_damage_tick_timeout():
 	if player == null:
 		return
 	var player_distance = player.global_position.x - global_position.x
 	if abs(player_distance) < DAMAGE_DISTANCE:
-		player.take_damage(DAMAGE_PER_TICK, Element.Fire)
+		var damage_amount: int = ceili(((DAMAGE_DISTANCE - abs(player_distance)) / DAMAGE_DISTANCE) * DAMAGE_PER_TICK)
+		player.take_damage(damage_amount, Element.Fire)
 	if abs(player_distance) < HEAT_DISTANCE:
-		player.increase_heat(HEAT_PER_TICK)
+		var heat_amount: int = ceili(((HEAT_DISTANCE - abs(player_distance)) / HEAT_DISTANCE) * HEAT_PER_TICK)
+		player.increase_heat(heat_amount)
+
+func _on_aggro_cooldown_timeout():
+	is_aggro = false
+	movement_speed = movement_speed_calm

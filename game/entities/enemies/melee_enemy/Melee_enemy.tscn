@@ -8,7 +8,7 @@
 radius = 13.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ol33t"]
-radius = 450.004
+radius = 362.006
 
 [node name="Melee_enemy" type="CharacterBody2D"]
 script = ExtResource("2_r07kk")
@@ -41,10 +41,11 @@ position = Vector2(0, -47)
 scale = Vector2(0.5, 0.5)
 
 [node name="AggroCooldown" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
+one_shot = true
 
 [node name="DamageTick" type="Timer" parent="."]
-wait_time = 0.06
+wait_time = 0.05
 autostart = true
 
 [connection signal="change_health" from="." to="." method="_on_change_health"]
