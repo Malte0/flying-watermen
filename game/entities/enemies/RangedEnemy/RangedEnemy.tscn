@@ -15,6 +15,8 @@ radius = 362.006
 [node name="RangedEnemy" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
 script = ExtResource("1_itytb")
 health_component = NodePath("HealthComponent")
+weight = 0.3
+jump_force = -150
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -12)
@@ -57,3 +59,13 @@ one_shot = true
 [node name="DamageTick" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
+
+[node name="WingTick" type="Timer" parent="."]
+autostart = true
+
+[node name="tmpDirectionChange" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[connection signal="timeout" from="WingTick" to="." method="_on_wing_tick_timeout"]
+[connection signal="timeout" from="tmpDirectionChange" to="." method="_on_tmp_direction_change_timeout"]

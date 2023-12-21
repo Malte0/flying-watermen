@@ -29855,9 +29855,6 @@ metadata/_edit_lock_ = true
 
 [node name="UI" parent="." instance=ExtResource("5_vx7we")]
 
-[node name="Melee_enemy" parent="." instance=ExtResource("9_hf5qv")]
-position = Vector2(1484, 1598)
-
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.92549, 0.92549, 0.92549, 1)
 
@@ -29867,4 +29864,8 @@ position = Vector2(4377, 1768)
 [node name="Puddle2" parent="." instance=ExtResource("10_oa7xq")]
 position = Vector2(5975, 1763)
 
+[node name="Melee_enemy" parent="." instance=ExtResource("9_hf5qv")]
+position = Vector2(2122, 1506)
+
 [node name="RangedEnemy" parent="." instance=ExtResource("12_awfkx")]
+position = Vector2(1423, 1443)

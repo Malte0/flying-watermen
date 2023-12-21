@@ -1,9 +1,6 @@
 extends Enemy
 
-extends Enemy
-
 @onready var nodes_to_flip: Node2D = $DirectionalNodes
-@onready var wall_detection: RayCast2D = $DirectionalNodes/WallDetection
 @onready var aggro_cooldown_timer: Timer = $AggroCooldown
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 
@@ -25,9 +22,6 @@ func _physics_process(delta):
 	super(delta)
 
 func hunt_player():
-	if wall_detection.is_colliding():
-		jump(1)
-	
 	var player_distance = player.global_position.x - global_position.x
 	var player_direction = sign(player_distance)
 	if abs(player_distance) < 20: # this is just some random small value
@@ -37,8 +31,7 @@ func hunt_player():
 		flip_move_direction()
 
 func idle():
-	if wall_detection.is_colliding():
-		flip_move_direction()
+	pass
 
 func flip_move_direction():
 	if movement_direction == Movement_Direction.Left:
@@ -84,3 +77,10 @@ func become_aggro():
 func _on_health_component_health_change(_new_health, delta_health):
 	if delta_health < 0:
 		become_aggro()
+
+func _on_wing_tick_timeout():
+	print("fly")
+	velocity.y = jump_force
+
+func _on_tmp_direction_change_timeout():
+	flip_move_direction()
