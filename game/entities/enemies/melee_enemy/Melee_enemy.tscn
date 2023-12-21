@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://c2mdlfdoukqoq"]
+
+[ext_resource type="Texture2D" uid="uid://dvtm1er0mqhwv" path="res://assets/prototype-assets/enemy_directed.PNG" id="2_jkvcn"]
+[ext_resource type="Script" path="res://entities/enemies/melee_enemy/melee_enemy.gd" id="2_r07kk"]
+[ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="4_7dbns"]
+[ext_resource type="Texture2D" uid="uid://32uxotk6128m" path="res://entities/enemies/assets/healthbar_under.png" id="4_ap5gi"]
+[ext_resource type="Texture2D" uid="uid://drqht0p82ryru" path="res://entities/enemies/assets/healthbar_progress.png" id="5_x4f6e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_86clg"]
+radius = 13.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ol33t"]
+radius = 362.006
+
+[node name="Melee_enemy" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("2_r07kk")
+health_component = NodePath("HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_86clg")
+
+[node name="DirectionalNodes" type="Node2D" parent="."]
+
+[node name="EnemyGraphics" type="Node2D" parent="DirectionalNodes"]
+
+[node name="FlameImage" type="Sprite2D" parent="DirectionalNodes/EnemyGraphics"]
+position = Vector2(0, -12)
+scale = Vector2(0.0964117, 0.0875117)
+texture = ExtResource("2_jkvcn")
+
+[node name="WallDetection" type="RayCast2D" parent="DirectionalNodes"]
+position = Vector2(37, -32)
+
+[node name="ViewArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ViewArea"]
+shape = SubResource("CircleShape2D_ol33t")
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_7dbns")]
+
+[node name="HealthBar" type="TextureProgressBar" parent="HealthComponent"]
+offset_left = -51.0
+offset_top = -69.0
+offset_right = 149.0
+offset_bottom = -29.0
+scale = Vector2(0.5, 0.5)
+value = 100.0
+texture_under = ExtResource("4_ap5gi")
+texture_progress = ExtResource("5_x4f6e")
+
+[node name="AggroCooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="DamageTick" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[connection signal="body_entered" from="ViewArea" to="." method="_on_view_area_body_entered"]
+[connection signal="body_exited" from="ViewArea" to="." method="_on_view_area_body_exited"]
+[connection signal="health_change" from="HealthComponent" to="." method="_on_health_component_health_change"]
+[connection signal="timeout" from="AggroCooldown" to="." method="_on_aggro_cooldown_timeout"]
+[connection signal="timeout" from="DamageTick" to="." method="_on_damage_tick_timeout"]

@@ -6,7 +6,7 @@
 script/source = "extends Node2D
 
 func _on_button_pressed():
-	get_tree().change_scene_to_file(\"res://scenes/test/test.tscn\")
+	get_tree().change_scene_to_file(Globals.main_scene)
 "
 
 [node name="GameOver" type="Node2D"]
