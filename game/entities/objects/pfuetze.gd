@@ -1,7 +1,7 @@
 extends Area2D
 
-var player_inside = false 
-var player 
+var player_inside: bool = false 
+var player: Player
 
 func _ready():
 	connect("body_entered", Callable(self, "_on_body_entered"))
@@ -17,7 +17,7 @@ func _on_body_exited(body):
 		player_inside = false
 		player = null 
 
-func _process(delta):
+func _process(_delta):
 	if player_inside and player: 
 		player.heal_over_time(25) 
 		self.queue_free()

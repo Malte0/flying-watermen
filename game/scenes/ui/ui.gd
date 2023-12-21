@@ -6,11 +6,8 @@ extends CanvasLayer
 func _ready():
 	var player: Player = get_tree().get_first_node_in_group("player")
 	debugger.debug_node(player)
+	$Panel/HealthBar.player = player
 	debugger.visible = false
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("f3"):

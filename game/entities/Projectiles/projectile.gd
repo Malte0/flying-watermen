@@ -3,16 +3,18 @@ class_name Projectile extends CharacterBody2D
 @export var SPEED: int = 1500
 @export var DAMAGE: int = 20
 
+var player_speed := Vector2.ZERO
 var direction: Vector2 = Vector2.ZERO
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var impact_detector: Area2D = $ImpactDetector
 
 func _ready():
 	velocity = direction * SPEED
+	velocity += player_speed
 
 func _physics_process(delta):
 	if not is_on_floor():
-		velocity.y += gravity * delta 
+		velocity.y += gravity * delta
 	move_and_slide()
 
 func _on_impact_detector_body_entered(body):

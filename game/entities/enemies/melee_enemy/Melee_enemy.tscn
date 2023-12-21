@@ -42,17 +42,9 @@ collision_mask = 3
 shape = SubResource("CircleShape2D_ol33t")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("4_7dbns")]
-health_bar = NodePath("../HealthBar")
+health_bar = NodePath("HealthBar")
 
-[node name="AggroCooldown" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
-[node name="DamageTick" type="Timer" parent="."]
-wait_time = 0.05
-autostart = true
-
-[node name="HealthBar" type="TextureProgressBar" parent="."]
+[node name="HealthBar" type="TextureProgressBar" parent="HealthComponent"]
 offset_left = -51.0
 offset_top = -69.0
 offset_right = 149.0
@@ -61,6 +53,14 @@ scale = Vector2(0.5, 0.5)
 value = 100.0
 texture_under = ExtResource("4_ap5gi")
 texture_progress = ExtResource("5_x4f6e")
+
+[node name="AggroCooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="DamageTick" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
 
 [connection signal="body_entered" from="ViewArea" to="." method="_on_view_area_body_entered"]
 [connection signal="body_exited" from="ViewArea" to="." method="_on_view_area_body_exited"]

@@ -1,16 +1,13 @@
 class_name Player extends CharacterBody2D
 
-@export var health_component: HealthComponent
-
+@onready var health_component: HealthComponent = $HealthComponent
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var state_chart: StateChart = $StateChart
 @onready var wall_check: RayCast2D = $WallCheck
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
-@onready var health_bar: TextureProgressBar = $PlayerUI/HealthBar
-@onready var heat_bar: ProgressBar = $PlayerUI/HeatBar
 
-const ProjectileScene: PackedScene = preload("res://entities/Projectiles/projectile.tscn")
+const PROJECTILE_SCENE: PackedScene = preload("res://entities/Projectiles/projectile.tscn")
 @onready var shoot_position: Marker2D = $ShootPosition
 
 # Reset values
@@ -35,7 +32,7 @@ var can_move: bool = true
 
 const max_heat: int = 100
 const heat_damage_threshold: int = 90
-const heat_damage_per_second: int = 3
+const heat_damage_per_second: int = 1
 const heat_reduction_rate: int = 10
 var heat: int = 0
 
@@ -46,7 +43,6 @@ var heal_over_time_left = 0
 func increase_heat(amount: int):
 	heat = mini(heat + amount, max_heat)
 	Heat_reduction_delay.start()
-	update_heat_bar(heat)
 
 # Signal called by the heat tick timer
 func _on_heat_tick_timeout():
@@ -54,10 +50,6 @@ func _on_heat_tick_timeout():
 		health_component.take_damage(heat_damage_per_second, Element.Type.Fire)
 	if Heat_reduction_delay.is_stopped():
 		heat = maxi(heat - heat_reduction_rate, 0)
-		update_heat_bar(heat)
-
-func update_heat_bar(new_heat: int):
-	heat_bar.value = new_heat
 
 # Regenerates heal_amount across healthAmount // Heal_over_time_step seconds
 func heal_over_time(heal_amount: int):
@@ -128,8 +120,6 @@ func _physics_process(delta):
 		velocity.x = 0
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
-		
-	if(Input.is_action_just_pressed("right_click")): state_chart.send_event("_on_shot")
 	
 	move_and_slide()
 
@@ -183,10 +173,6 @@ func _on_area_2d_body_entered(body):
 	if body.is_in_group("Hit"):
 		#can_move = false
 		body.take_damage()
-	else:
-		pass # Replace with function body.
-
-@onready var shape: Area2D = $AtkShape
 
 func _on_meele_attacks_child_state_entered():
 	$AtkShape/CollisionShape2D.disabled = false
@@ -194,14 +180,14 @@ func _on_meele_attacks_child_state_entered():
 func _on_meele_attacks_child_state_exited():
 	$AtkShape/CollisionShape2D.disabled = true
 
-func _on_cant_shoot_state_entered():
-	var projectile_instance: Projectile = ProjectileScene.instantiate()
-	projectile_instance.position = shoot_position.global_position
-	projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
-	add_child(projectile_instance)
-
-func _on_health_component_health_change(new_health, delta_health):
-	health_bar.value = new_health
+func _on_can_shoot_state_input(event: InputEvent) -> void:
+	if event.is_action_pressed("right_click"):
+		state_chart.send_event("_on_shot")
+		var projectile_instance := PROJECTILE_SCENE.instantiate()
+		projectile_instance.position = shoot_position.global_position
+		projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
+		projectile_instance.player_speed = velocity
+		add_child(projectile_instance)
 
 func _on_health_component_death():
 	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")

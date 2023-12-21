@@ -1,17 +1,16 @@
-[gd_scene load_steps=44 format=3 uid="uid://mrf2lku3uiqc"]
+[gd_scene load_steps=42 format=3 uid="uid://mrf2lku3uiqc"]
 
 [ext_resource type="Shader" path="res://scenes/test/mapShader.gdshader" id="1_4wi60"]
 [ext_resource type="Texture2D" uid="uid://b6yrhnp1t37o8" path="res://assets/prototype-assets/Tiles.png" id="1_ljrfd"]
+[ext_resource type="Script" path="res://scenes/test/test.gd" id="1_vcmdm"]
 [ext_resource type="PackedScene" uid="uid://djmlmtr41m2ce" path="res://entities/player/player.tscn" id="2_4wjh0"]
 [ext_resource type="Texture2D" uid="uid://bhohuwngei70j" path="res://assets/prototype-assets/background/Background.png" id="2_u8dnj"]
-[ext_resource type="Script" path="res://scenes/test/Collider.gd" id="3_ewvew"]
 [ext_resource type="Texture2D" uid="uid://bh54h4p65hhol" path="res://assets/prototype-assets/background/Dark-Tree.png" id="3_t2egc"]
 [ext_resource type="Texture2D" uid="uid://ihorffrdym4j" path="res://icon.svg" id="4_23juu"]
 [ext_resource type="Texture2D" uid="uid://cjv4di3su4jvf" path="res://assets/prototype-assets/background/Green-Tree.png" id="5_1qnrw"]
 [ext_resource type="PackedScene" uid="uid://cihcop35erg48" path="res://scenes/ui/ui.tscn" id="5_vx7we"]
-[ext_resource type="Script" path="res://entities/pfuetze.gd" id="7_ln4pl"]
-[ext_resource type="Texture2D" uid="uid://utp3bloip30k" path="res://assets/prototype-assets/pfuetze.png" id="8_rnupn"]
 [ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/melee_enemy/Melee_enemy.tscn" id="9_hf5qv"]
+[ext_resource type="PackedScene" uid="uid://dpiypck5f1v6f" path="res://entities/objects/pfuetze.tscn" id="10_oa7xq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7de0"]
 shader = ExtResource("1_4wi60")
@@ -29763,10 +29762,8 @@ distance = -2.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mmcy6"]
 size = Vector2(128, 127)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f8yqx"]
-size = Vector2(223, 20)
-
 [node name="prototype" type="Node2D"]
+script = ExtResource("1_vcmdm")
 metadata/_edit_horizontal_guides_ = []
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
@@ -29846,7 +29843,6 @@ collision_layer = 0
 collision_mask = 3
 max_contacts_reported = 10
 contact_monitor = true
-script = ExtResource("3_ewvew")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("RectangleShape2D_mmcy6")
@@ -29858,26 +29854,14 @@ metadata/_edit_lock_ = true
 
 [node name="UI" parent="." instance=ExtResource("5_vx7we")]
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(6122, 1756)
-collision_mask = 3
-script = ExtResource("7_ln4pl")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -3)
-shape = SubResource("RectangleShape2D_f8yqx")
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-position = Vector2(1, 48)
-scale = Vector2(0.171875, 0.0726732)
-texture = ExtResource("8_rnupn")
-metadata/_edit_lock_ = true
-
 [node name="Melee_enemy" parent="." instance=ExtResource("9_hf5qv")]
 position = Vector2(1484, 1598)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.92549, 0.92549, 0.92549, 1)
 
-[connection signal="body_entered" from="RigidBody2D" to="RigidBody2D" method="_on_body_entered"]
+[node name="Puddle" parent="." instance=ExtResource("10_oa7xq")]
+position = Vector2(4377, 1768)
+
+[node name="Puddle2" parent="." instance=ExtResource("10_oa7xq")]
+position = Vector2(5975, 1763)

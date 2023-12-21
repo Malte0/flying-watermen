@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=59 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dhjab"]
@@ -13,8 +13,6 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="10_ddq3l"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/any_of_guard.gd" id="11_5fhyj"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/animation_tree_state.gd" id="13_eid8a"]
-[ext_resource type="Texture2D" uid="uid://b5ey8o6vlytd0" path="res://entities/player/assets/playerHealthbarUnder.png" id="14_0gt0x"]
-[ext_resource type="Texture2D" uid="uid://hlx5fvikrtuv" path="res://entities/player/assets/playerHealthbarProgress.png" id="15_xgj2b"]
 [ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="16_vgsyb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_glekb"]
@@ -322,12 +320,11 @@ guard = SubResource("Resource_p8ca0")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srmds"]
 size = Vector2(39.3125, 28)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component") groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_n7144")
-health_component = NodePath("HealthComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -336,7 +333,7 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_w7iqa")
 animation = &"Idle"
 autoplay = "Idle"
-frame = 2
+frame = 1
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -371,102 +368,6 @@ script = ExtResource("2_dhjab")
 
 [node name="Player" type="Node" parent="StateChart"]
 script = ExtResource("3_7lhhd")
-
-[node name="Movement" type="Node" parent="StateChart/Player"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Grounded")
-
-[node name="Grounded" type="Node" parent="StateChart/Player/Movement"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Standing")
-
-[node name="Standing" type="Node" parent="StateChart/Player/Movement/Grounded"]
-script = ExtResource("5_dadqm")
-
-[node name="On Slide" type="Node" parent="StateChart/Player/Movement/Grounded/Standing"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Crouching/Sliding")
-event = &"tick"
-guard = SubResource("Resource_r58ym")
-
-[node name="On Crouch" type="Node" parent="StateChart/Player/Movement/Grounded/Standing"]
-process_priority = 1
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Crouching")
-event = &"tick"
-guard = SubResource("Resource_jk8u2")
-
-[node name="Crouching" type="Node" parent="StateChart/Player/Movement/Grounded"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Crouch")
-
-[node name="Crouch" type="Node" parent="StateChart/Player/Movement/Grounded/Crouching"]
-script = ExtResource("5_dadqm")
-
-[node name="Sliding" type="Node" parent="StateChart/Player/Movement/Grounded/Crouching"]
-script = ExtResource("5_dadqm")
-
-[node name="On Slide End" type="Node" parent="StateChart/Player/Movement/Grounded/Crouching/Sliding"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Crouch")
-event = &"tick"
-guard = SubResource("Resource_8wh4l")
-
-[node name="On Crouch End" type="Node" parent="StateChart/Player/Movement/Grounded/Crouching"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Standing")
-event = &"tick"
-guard = SubResource("Resource_wu70w")
-
-[node name="Airborne" type="Node" parent="StateChart/Player/Movement"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Falling")
-
-[node name="Jumping" type="Node" parent="StateChart/Player/Movement/Airborne"]
-script = ExtResource("5_dadqm")
-
-[node name="On Falling" type="Node" parent="StateChart/Player/Movement/Airborne/Jumping"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Falling")
-event = &"falling"
-
-[node name="FallingCoyote" type="Node" parent="StateChart/Player/Movement/Airborne"]
-script = ExtResource("5_dadqm")
-
-[node name="CoyoteDelay" type="Node" parent="StateChart/Player/Movement/Airborne/FallingCoyote"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Falling")
-delay_seconds = 0.2
-
-[node name="Falling" type="Node" parent="StateChart/Player/Movement/Airborne"]
-script = ExtResource("5_dadqm")
-
-[node name="WallSlide" type="Node" parent="StateChart/Player/Movement"]
-script = ExtResource("5_dadqm")
-
-[node name="On FallingCoyote" type="Node" parent="StateChart/Player/Movement"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../Airborne/FallingCoyote")
-event = &"falling"
-guard = SubResource("Resource_sktov")
-
-[node name="On Jump" type="Node" parent="StateChart/Player/Movement"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../Airborne/Jumping")
-event = &"jump"
-guard = SubResource("Resource_se5vv")
-
-[node name="On WallSlide" type="Node" parent="StateChart/Player/Movement"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../WallSlide")
-event = &"wall_slide"
-guard = SubResource("Resource_6rl8s")
-
-[node name="On Grounded" type="Node" parent="StateChart/Player/Movement"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../Grounded")
-event = &"grounded"
-guard = SubResource("Resource_c7udc")
 
 [node name="AnimationControl" type="Node" parent="StateChart/Player"]
 script = ExtResource("4_klwk4")
@@ -669,28 +570,12 @@ autostart = true
 [node name="HealTick" type="Timer" parent="Timers"]
 autostart = true
 
-[node name="PlayerUI" type="CanvasLayer" parent="."]
-
-[node name="HealthBar" type="TextureProgressBar" parent="PlayerUI"]
-offset_right = 40.0
-offset_bottom = 40.0
-value = 100.0
-texture_under = ExtResource("14_0gt0x")
-texture_progress = ExtResource("15_xgj2b")
-
-[node name="HeatBar" type="ProgressBar" parent="PlayerUI"]
-offset_left = 3.0
-offset_top = 41.0
-offset_right = 197.0
-offset_bottom = 76.0
-show_percentage = false
-
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("16_vgsyb")]
-health_bar = NodePath("../PlayerUI/HealthBar")
+[node name="HealthComponent" parent="." instance=ExtResource("16_vgsyb")]
 element = 0
+health_bar = NodePath("")
 
 [connection signal="state_physics_processing" from="StateChart/Player/Inputs/W/Pressed" to="." method="_on_pressed_state_physics_processing"]
-[connection signal="state_entered" from="StateChart/Player/Inputs/Shooting/CantShoot" to="." method="_on_cant_shoot_state_entered"]
+[connection signal="state_input" from="StateChart/Player/Inputs/Shooting/CanShoot" to="." method="_on_can_shoot_state_input"]
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement" to="." method="_on_movement_child_state_exited"]
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement/Grounded" to="." method="_on_movement_child_state_exited"]
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement/Grounded/Crouching" to="." method="_on_movement_child_state_exited"]

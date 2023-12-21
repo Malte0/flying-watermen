@@ -8,7 +8,7 @@ extends Enemy
 const HEAT_RADIUS: int = 350
 const HEAT_PER_TICK: int = 2
 const DAMAGE_RADIUS: int = 150
-const DAMAGE_PER_TICK: int = 2
+const DAMAGE_PER_TICK: int = 1
 
 const MOVEMENT_SPEED_CALM: int = 100
 const MOVEMENT_SPEED_AGGRO: int = 250
@@ -79,6 +79,6 @@ func become_aggro():
 		await get_tree().create_timer(0.4).timeout
 		movement_speed = MOVEMENT_SPEED_AGGRO
 
-func _on_health_component_health_change(new_health, delta_health):
+func _on_health_component_health_change(_new_health, delta_health):
 	if delta_health < 0:
 		become_aggro()
