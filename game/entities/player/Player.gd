@@ -1,4 +1,6 @@
-class_name Player extends DamageAbleEntity
+class_name Player extends CharacterBody2D
+
+@export var health_component: HealthComponent
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var state_chart: StateChart = $StateChart
@@ -40,10 +42,6 @@ var heat: int = 0
 const Heal_over_time_step = 5
 var heal_over_time_left = 0
 
-func _init():
-	var max_health = 100
-	super(Element.Water, max_health)
-
 # Called to increase the players heat
 func increase_heat(amount: int):
 	heat = mini(heat + amount, max_heat)
@@ -53,7 +51,7 @@ func increase_heat(amount: int):
 # Signal called by the heat tick timer
 func _on_heat_tick_timeout():
 	if heat >= heat_damage_threshold:
-		take_damage(heat_damage_per_second, Element.Fire)
+		health_component.take_damage(heat_damage_per_second, Element.Type.Fire)
 	if Heat_reduction_delay.is_stopped():
 		heat = maxi(heat - heat_reduction_rate, 0)
 		update_heat_bar(heat)
@@ -69,7 +67,7 @@ func heal_over_time(heal_amount: int):
 func _on_heal_tick_timeout():
 	if heal_over_time_left > 0:
 		var amountToHeal: int = mini(heal_over_time_left, Heal_over_time_step)
-		restore_health(amountToHeal)
+		health_component.restore_health(amountToHeal)
 		heal_over_time_left = maxi(heal_over_time_left - Heal_over_time_step, 0)
 
 func reset_variables():
@@ -202,8 +200,8 @@ func _on_cant_shoot_state_entered():
 	projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
 	add_child(projectile_instance)
 
-func _on_entity_death():
-	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
-
-func _on_change_health(new_health):
+func _on_health_component_health_change(new_health, delta_health):
 	health_bar.value = new_health
+
+func _on_health_component_death():
+	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")

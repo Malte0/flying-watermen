@@ -17,7 +17,7 @@ func _physics_process(delta):
 
 func _on_impact_detector_body_entered(body):
 	if body is Enemy:
-		body.take_damage(DAMAGE, DamageAbleEntity.Element.Water)
+		body.health_component.take_damage(DAMAGE, Element.Type.Water)
 	queue_free()
 
 func _on_life_timer_timeout():

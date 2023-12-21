@@ -1,24 +1,22 @@
 extends Enemy
 
-@onready var wall_detection: RayCast2D = $DirectionalNodes/wall_detetion
-@onready var health_bar: Node2D = $EnemyHealthBar
 @onready var nodes_to_flip: Node2D = $DirectionalNodes
-@onready var aggro_cooldown: Timer = $AggroCooldown
-@onready var player: Player = get_node("/root/Player")
+@onready var wall_detection: RayCast2D = $DirectionalNodes/WallDetetion
+@onready var health_bar: Node2D = $EnemyHealthBar
+@onready var aggro_cooldown_timer: Timer = $AggroCooldown
+@onready var player: Player = get_tree().get_first_node_in_group("player")
 
-const HEAT_DISTANCE: int = 350
+const HEAT_RADIUS: int = 350
 const HEAT_PER_TICK: int = 2
-const DAMAGE_DISTANCE: int = 150
+const DAMAGE_RADIUS: int = 150
 const DAMAGE_PER_TICK: int = 2
 
+const MOVEMENT_SPEED_CALM: int = 100
+const MOVEMENT_SPEED_AGGRO: int = 250
 var is_aggro: bool = false
-var movement_speed_aggro: int = 250
-var movement_speed_calm: int = 100
 
 func _init():
-	var max_health: int = 100
-	super(max_health)
-	movement_speed = movement_speed_calm
+	movement_speed = MOVEMENT_SPEED_CALM
 	move(Movement_Direction.Right)
 
 func _physics_process(delta):
@@ -29,13 +27,10 @@ func hunt_player():
 	if wall_detection.is_colliding():
 		jump(1)
 	
-	if player == null:
-		return
 	var player_distance = player.global_position.x - global_position.x
 	var player_direction = sign(player_distance)
 	if abs(player_distance) < 20: # this is just some random small value
-		if movement_direction != Movement_Direction.No:
-			movement_direction = Movement_Direction.No
+		movement_direction = Movement_Direction.No
 		return
 	if player_direction != movement_direction:
 		flip_move_direction()
@@ -51,35 +46,35 @@ func flip_move_direction():
 		move(Movement_Direction.Left)
 	nodes_to_flip.scale.x = movement_direction
 
-func _on_change_health(new_health):
-	health_bar.change_health(new_health)
-
-func _on_player_detection_range_body_entered(body):
-	if body is Player:
-		aggro_cooldown.stop()
-		if not is_aggro:
-			player = body
-			# Expermiment: This introduces some anticipation into the behaviour
-			jump(0.2)
-			movement_speed = 0
-			await get_tree().create_timer(0.4).timeout
-			movement_speed = movement_speed_aggro
-	is_aggro = true
-
-func _on_player_detection_range_body_exited(body):
-	aggro_cooldown.start()
+func scale_by_distance(max_distance: int, player_distance: float, value_to_scale: int):
+	return ceili(((max_distance - abs(player_distance)) / max_distance) * value_to_scale)
 
 func _on_damage_tick_timeout():
-	if player == null:
-		return
 	var player_distance = player.global_position.x - global_position.x
-	if abs(player_distance) < DAMAGE_DISTANCE:
-		var damage_amount: int = ceili(((DAMAGE_DISTANCE - abs(player_distance)) / DAMAGE_DISTANCE) * DAMAGE_PER_TICK)
-		player.take_damage(damage_amount, Element.Fire)
-	if abs(player_distance) < HEAT_DISTANCE:
-		var heat_amount: int = ceili(((HEAT_DISTANCE - abs(player_distance)) / HEAT_DISTANCE) * HEAT_PER_TICK)
-		player.increase_heat(heat_amount)
+	if abs(player_distance) < DAMAGE_RADIUS:
+		var damage: int = scale_by_distance(DAMAGE_RADIUS, player_distance, DAMAGE_PER_TICK)
+		player.health_component.take_damage(damage, Element.Type.Fire)
+	if abs(player_distance) < HEAT_RADIUS:
+		var heat: int = scale_by_distance(HEAT_RADIUS, player_distance, HEAT_PER_TICK)
+		player.increase_heat(heat)
+
+func _on_view_area_body_entered(body):
+	if body is Player:
+		start_aggro()
+
+func _on_view_area_body_exited(body):
+	aggro_cooldown_timer.start()
 
 func _on_aggro_cooldown_timeout():
 	is_aggro = false
-	movement_speed = movement_speed_calm
+	movement_speed = MOVEMENT_SPEED_CALM
+
+func start_aggro():
+	aggro_cooldown_timer.stop()
+	if not is_aggro:
+		# Expermiment: This introduces some anticipation into the behaviour
+		jump(0.2)
+		movement_speed = 0
+		await get_tree().create_timer(0.4).timeout
+		movement_speed = MOVEMENT_SPEED_AGGRO
+	is_aggro = true

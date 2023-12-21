@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://32uxotk6128m"
-path="res://.godot/imported/healthbar_under.png-381439634d8a88e5658a70f1301c1aa9.ctex"
+path="res://.godot/imported/healthbar_under.png-f10d74d54a0f47387e1297e0b399f52f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/common/prefabs/enemy_health_bar/assets/healthbar_under.png"
-dest_files=["res://.godot/imported/healthbar_under.png-381439634d8a88e5658a70f1301c1aa9.ctex"]
+source_file="res://entities/enemies/assets/healthbar_under.png"
+dest_files=["res://.godot/imported/healthbar_under.png-f10d74d54a0f47387e1297e0b399f52f.ctex"]
 
 [params]
 
