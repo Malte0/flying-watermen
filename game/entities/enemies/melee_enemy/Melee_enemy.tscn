@@ -30,7 +30,7 @@ position = Vector2(0, -12)
 scale = Vector2(0.0964117, 0.0875117)
 texture = ExtResource("2_jkvcn")
 
-[node name="WallDetetion" type="RayCast2D" parent="DirectionalNodes"]
+[node name="WallDetection" type="RayCast2D" parent="DirectionalNodes"]
 position = Vector2(37, -32)
 
 [node name="ViewArea" type="Area2D" parent="."]
@@ -46,6 +46,7 @@ health_bar = NodePath("../HealthBar")
 [node name="AggroCooldown" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+autostart = true
 
 [node name="DamageTick" type="Timer" parent="."]
 wait_time = 0.05
@@ -63,5 +64,6 @@ texture_progress = ExtResource("5_x4f6e")
 
 [connection signal="body_entered" from="ViewArea" to="." method="_on_view_area_body_entered"]
 [connection signal="body_exited" from="ViewArea" to="." method="_on_view_area_body_exited"]
+[connection signal="health_change" from="HealthComponent" to="." method="_on_health_component_health_change"]
 [connection signal="timeout" from="AggroCooldown" to="." method="_on_aggro_cooldown_timeout"]
 [connection signal="timeout" from="DamageTick" to="." method="_on_damage_tick_timeout"]

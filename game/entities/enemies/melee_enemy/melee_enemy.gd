@@ -1,8 +1,7 @@
 extends Enemy
 
 @onready var nodes_to_flip: Node2D = $DirectionalNodes
-@onready var wall_detection: RayCast2D = $DirectionalNodes/WallDetetion
-@onready var health_bar: Node2D = $EnemyHealthBar
+@onready var wall_detection: RayCast2D = $DirectionalNodes/WallDetection
 @onready var aggro_cooldown_timer: Timer = $AggroCooldown
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 
@@ -60,21 +59,26 @@ func _on_damage_tick_timeout():
 
 func _on_view_area_body_entered(body):
 	if body is Player:
-		start_aggro()
+		become_aggro()
 
 func _on_view_area_body_exited(body):
-	aggro_cooldown_timer.start()
+	if body is Player:
+		aggro_cooldown_timer.start()
 
 func _on_aggro_cooldown_timeout():
 	is_aggro = false
 	movement_speed = MOVEMENT_SPEED_CALM
 
-func start_aggro():
+func become_aggro():
 	aggro_cooldown_timer.stop()
 	if not is_aggro:
+		is_aggro = true
 		# Expermiment: This introduces some anticipation into the behaviour
 		jump(0.2)
 		movement_speed = 0
 		await get_tree().create_timer(0.4).timeout
 		movement_speed = MOVEMENT_SPEED_AGGRO
-	is_aggro = true
+
+func _on_health_component_health_change(new_health, delta_health):
+	if delta_health < 0:
+		become_aggro()
