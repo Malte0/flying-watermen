@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=61 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dhjab"]
@@ -13,6 +13,9 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="10_ddq3l"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/any_of_guard.gd" id="11_5fhyj"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/animation_tree_state.gd" id="13_eid8a"]
+[ext_resource type="Texture2D" uid="uid://b5ey8o6vlytd0" path="res://entities/player/assets/playerHealthbarUnder.png" id="14_0gt0x"]
+[ext_resource type="Texture2D" uid="uid://hlx5fvikrtuv" path="res://entities/player/assets/playerHealthbarProgress.png" id="15_xgj2b"]
+[ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="16_vgsyb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_glekb"]
 atlas = ExtResource("2_kmxdh")
@@ -319,11 +322,12 @@ guard = SubResource("Resource_p8ca0")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srmds"]
 size = Vector2(39.3125, 28)
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component") groups=["player"]]
 scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_n7144")
+health_component = NodePath("HealthComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -332,7 +336,7 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_w7iqa")
 animation = &"Idle"
 autoplay = "Idle"
-frame = 3
+frame = 2
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -653,16 +657,37 @@ position = Vector2(39.6563, 1.90735e-06)
 shape = SubResource("RectangleShape2D_srmds")
 disabled = true
 
-[node name="Heal_over_time_Timer" type="Timer" parent="."]
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="HeatReductionDelay" type="Timer" parent="Timers"]
+wait_time = 2.0
 one_shot = true
 
-[node name="Reduce_Heat" type="Timer" parent="."]
-wait_time = 0.4
+[node name="HeatTick" type="Timer" parent="Timers"]
 autostart = true
 
-[node name="Damage_by_Heat" type="Timer" parent="."]
-wait_time = 0.5
+[node name="HealTick" type="Timer" parent="Timers"]
 autostart = true
+
+[node name="PlayerUI" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" type="TextureProgressBar" parent="PlayerUI"]
+offset_right = 40.0
+offset_bottom = 40.0
+value = 100.0
+texture_under = ExtResource("14_0gt0x")
+texture_progress = ExtResource("15_xgj2b")
+
+[node name="HeatBar" type="ProgressBar" parent="PlayerUI"]
+offset_left = 3.0
+offset_top = 41.0
+offset_right = 197.0
+offset_bottom = 76.0
+show_percentage = false
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("16_vgsyb")]
+health_bar = NodePath("../PlayerUI/HealthBar")
+element = 0
 
 [connection signal="state_physics_processing" from="StateChart/Player/Inputs/W/Pressed" to="." method="_on_pressed_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Player/Inputs/Shooting/CantShoot" to="." method="_on_cant_shoot_state_entered"]
@@ -680,6 +705,7 @@ autostart = true
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_movement_child_state_exited"]
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_meele_attacks_child_state_exited"]
 [connection signal="body_entered" from="AtkShape" to="." method="_on_area_2d_body_entered"]
-[connection signal="timeout" from="Heal_over_time_Timer" to="." method="_on_heal_over_time_timer_timeout"]
-[connection signal="timeout" from="Reduce_Heat" to="." method="_on_reduce_heat_timeout"]
-[connection signal="timeout" from="Damage_by_Heat" to="." method="_on_damage_by_heat_timeout"]
+[connection signal="timeout" from="Timers/HeatTick" to="." method="_on_heat_tick_timeout"]
+[connection signal="timeout" from="Timers/HealTick" to="." method="_on_heal_tick_timeout"]
+[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
+[connection signal="health_change" from="HealthComponent" to="." method="_on_health_component_health_change"]

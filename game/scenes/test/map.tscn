@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://mrf2lku3uiqc"]
+[gd_scene load_steps=44 format=3 uid="uid://mrf2lku3uiqc"]
 
 [ext_resource type="Shader" path="res://scenes/test/mapShader.gdshader" id="1_4wi60"]
 [ext_resource type="Texture2D" uid="uid://b6yrhnp1t37o8" path="res://assets/prototype-assets/Tiles.png" id="1_ljrfd"]
@@ -9,10 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://ihorffrdym4j" path="res://icon.svg" id="4_23juu"]
 [ext_resource type="Texture2D" uid="uid://cjv4di3su4jvf" path="res://assets/prototype-assets/background/Green-Tree.png" id="5_1qnrw"]
 [ext_resource type="PackedScene" uid="uid://cihcop35erg48" path="res://scenes/ui/ui.tscn" id="5_vx7we"]
-[ext_resource type="PackedScene" uid="uid://w6jot4hm1u0n" path="res://scenes/test/ui_healthbar.tscn" id="6_b1rgv"]
 [ext_resource type="Script" path="res://entities/pfuetze.gd" id="7_ln4pl"]
 [ext_resource type="Texture2D" uid="uid://utp3bloip30k" path="res://assets/prototype-assets/pfuetze.png" id="8_rnupn"]
-[ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/Melee_enemy.tscn" id="9_hf5qv"]
+[ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/melee_enemy/Melee_enemy.tscn" id="9_hf5qv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7de0"]
 shader = ExtResource("1_4wi60")
@@ -29859,9 +29858,6 @@ metadata/_edit_lock_ = true
 
 [node name="UI" parent="." instance=ExtResource("5_vx7we")]
 
-[node name="UI_Healthbar" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_b1rgv")]
-player = NodePath("../Player")
-
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(6122, 1756)
 collision_mask = 3
@@ -29879,7 +29875,7 @@ texture = ExtResource("8_rnupn")
 metadata/_edit_lock_ = true
 
 [node name="Melee_enemy" parent="." instance=ExtResource("9_hf5qv")]
-position = Vector2(6406, 1684)
+position = Vector2(1484, 1598)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.92549, 0.92549, 0.92549, 1)
