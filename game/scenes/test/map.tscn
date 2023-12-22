@@ -29868,4 +29868,4 @@ position = Vector2(5975, 1763)
 position = Vector2(2122, 1506)
 
 [node name="RangedEnemy" parent="." instance=ExtResource("12_awfkx")]
-position = Vector2(1423, 1443)
+position = Vector2(1424, 1446)

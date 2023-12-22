@@ -7,7 +7,7 @@ class_name Player extends CharacterBody2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 
-const PROJECTILE_SCENE: PackedScene = preload("res://entities/Projectiles/projectile.tscn")
+const PROJECTILE_SCENE: PackedScene = preload("res://entities/Projectiles/WaterProjectile.tscn")
 @onready var shoot_position: Marker2D = $ShootPosition
 
 # Reset values
@@ -97,8 +97,7 @@ func _physics_process(delta):
 		air_jumps_left = air_jumps
 	else:
 		velocity.y += gravity * delta * fall_speed_factor
-		if not velocity.y > 0:
-			return
+	if velocity.y > 0:
 		if is_on_wall() and (Input.is_action_pressed("a") or Input.is_action_pressed("d")):
 			state_chart.send_event("wall_slide")
 			air_jumps_left = air_jumps
@@ -133,7 +132,7 @@ func _input(event: InputEvent):
 func update_animation():
 	animation_tree.set("parameters/Action/blend_position", abs(velocity.x) > 0)
 	# If player walks in different direction than sprite orienation
-	if sign(scale.y) != sign(direction) and velocity.x != 0:
+	if sign(scale.y) != sign(direction) and sign(direction) != 0:
 		flip_player()
 
 func flip_player():
