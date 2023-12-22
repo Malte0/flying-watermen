@@ -333,7 +333,6 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_w7iqa")
 animation = &"Idle"
 autoplay = "Idle"
-frame = 1
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -353,7 +352,7 @@ parameters/Action/blend_position = -0.00144303
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, -14)
 rotation = 1.5708
-polygon = PackedVector2Array(-14, 11.5001, -11.9999, 18, -9.99992, 22, -5.99991, 24, 8.5001, 28, 14.0001, 27.9999, 13.9999, -28.5001, 7.49992, -23, 1.99993, -20, -6.50007, -20, -14, -9.99995)
+polygon = PackedVector2Array(-11.5, 10.5, -9.99994, 17.5, -7.49993, 19.5, -3.99992, 21, 8.00008, 22, 14.0001, 20.9999, 13.9999, -18.5001, 7.49993, -19.5, 1.99993, -20, -5.00006, -16, -10.5, -7.49996)
 
 [node name="WallCheck" type="RayCast2D" parent="."]
 visible = false
@@ -572,7 +571,6 @@ autostart = true
 
 [node name="HealthComponent" parent="." instance=ExtResource("16_vgsyb")]
 element = 0
-health_bar = NodePath("")
 
 [connection signal="state_physics_processing" from="StateChart/Player/Inputs/W/Pressed" to="." method="_on_pressed_state_physics_processing"]
 [connection signal="state_input" from="StateChart/Player/Inputs/Shooting/CanShoot" to="." method="_on_can_shoot_state_input"]
