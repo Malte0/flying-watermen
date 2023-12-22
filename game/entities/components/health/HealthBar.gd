@@ -1,6 +1,6 @@
 extends TextureProgressBar
 
-var player: Player
+var player: Player = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,12 +9,11 @@ func _ready():
 	tint_progress.r = 0
 	tint_progress.g = 0
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 	#value = player.health * 100 / player.MAX_HEALTH
 	#get_node("HEALTH_Lable").text = str(player.health) + " / " + str(player.MAX_HEALTH)
 
-func setPlayer(object):
+func set_player(object):
 	player = object

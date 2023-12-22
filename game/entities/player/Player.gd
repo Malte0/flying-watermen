@@ -26,9 +26,9 @@ var friction: float = base_friction
 var fall_speed_factor: float = base_fall_speed_factor
 var can_move: bool = true
 
-@onready var Heat_reduction_delay = $Timers/HeatReductionDelay
-@onready var Heat_damage_tick = $Timers/HeatTick
-@onready var Heal_tick = $Timers/HealTick
+@onready var Heat_reduction_delay: Timer = $Timers/HeatReductionDelay
+@onready var Heat_damage_tick: Timer = $Timers/HeatTick
+@onready var Heal_tick: Timer = $Timers/HealTick
 
 const max_heat: int = 100
 const heat_damage_threshold: int = 90
@@ -36,8 +36,8 @@ const heat_damage_per_second: int = 1
 const heat_reduction_rate: int = 10
 var heat: int = 0
 
-const Heal_over_time_step = 5
-var heal_over_time_left = 0
+const Heal_over_time_step: int = 5
+var heal_over_time_left: int = 0
 
 # Called to increase the players heat
 func increase_heat(amount: int):
@@ -70,7 +70,7 @@ func reset_variables():
 	can_move = true
 
 # Other information about the player
-var air_jumps_left = air_jumps
+var air_jumps_left: int = air_jumps
 const SPRITE_FLIP_OFFSET: int = 0
 var direction: float = 0.0
 var slide_threshold: float = base_speed/2
@@ -97,12 +97,13 @@ func _physics_process(delta):
 		air_jumps_left = air_jumps
 	else:
 		velocity.y += gravity * delta * fall_speed_factor
-		if velocity.y > 0:
-			if is_on_wall() and (Input.is_action_pressed("a") or Input.is_action_pressed("d")):
-				state_chart.send_event("wall_slide")
-				air_jumps_left = air_jumps
-			else:
-				state_chart.send_event("falling")
+		if not velocity.y > 0:
+			return
+		if is_on_wall() and (Input.is_action_pressed("a") or Input.is_action_pressed("d")):
+			state_chart.send_event("wall_slide")
+			air_jumps_left = air_jumps
+		else:
+			state_chart.send_event("falling")
 
 	if Input.is_action_just_pressed("w"): state_chart.send_event("jump")
 
@@ -131,8 +132,8 @@ func _input(event: InputEvent):
 
 func update_animation():
 	animation_tree.set("parameters/Action/blend_position", abs(velocity.x) > 0)
-	# If player walks in different direction than sprite orienation		
-	if (scale.y > 0 and direction < 0 and velocity.x < 0) or (scale.y < 0 and direction > 0 and velocity.x > 0):
+	# If player walks in different direction than sprite orienation
+	if sign(scale.y) != sign(direction) and velocity.x != 0:
 		flip_player()
 
 func flip_player():
@@ -183,7 +184,7 @@ func _on_meele_attacks_child_state_exited():
 func _on_can_shoot_state_input(event: InputEvent) -> void:
 	if event.is_action_pressed("right_click"):
 		state_chart.send_event("_on_shot")
-		var projectile_instance := PROJECTILE_SCENE.instantiate()
+		var projectile_instance: Projectile = PROJECTILE_SCENE.instantiate()
 		projectile_instance.position = shoot_position.global_position
 		projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
 		projectile_instance.player_speed = velocity

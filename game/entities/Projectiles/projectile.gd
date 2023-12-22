@@ -3,7 +3,7 @@ class_name Projectile extends CharacterBody2D
 @export var SPEED: int = 1500
 @export var DAMAGE: int = 20
 
-var player_speed := Vector2.ZERO
+var player_speed: Vector2 = Vector2.ZERO
 var direction: Vector2 = Vector2.ZERO
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var impact_detector: Area2D = $ImpactDetector
