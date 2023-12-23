@@ -3,12 +3,12 @@ extends Enemy
 @onready var nodes_to_flip: Node2D = $DirectionalNodes
 @onready var aggro_cooldown_timer: Timer = $AggroCooldown
 @onready var player: Player = get_tree().get_first_node_in_group("player")
+@onready var ground_distance: RayCast2D = $GroundDistance
 const PROJECTILE_SCENE: PackedScene = preload("res://entities/Projectiles/FireProjectile.tscn")
 const SHOOTING_PRECISION: float = PI/10 # Angle in radians that gets randomly applied to shots
 
 const MOVEMENT_SPEED_CALM: int = 100
 const MOVEMENT_SPEED_AGGRO: int = 250
-var target_height: int = 1600
 var is_aggro: bool = false
 
 func _init():
@@ -18,7 +18,7 @@ func _init():
 func _physics_process(delta):
 	if is_aggro:
 		hunt_player()
-	if position.y > target_height:
+	if ground_distance.is_colliding():
 		velocity.y = jump_force
 	super(delta)
 

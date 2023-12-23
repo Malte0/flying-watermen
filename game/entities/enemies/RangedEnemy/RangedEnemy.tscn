@@ -34,6 +34,7 @@ scale = Vector2(0.16, 0.146)
 texture = ExtResource("2_4ume1")
 
 [node name="ViewArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 3
 
@@ -64,6 +65,9 @@ autostart = true
 [node name="DirectionChange" type="Timer" parent="."]
 wait_time = 4.0
 autostart = true
+
+[node name="GroundDistance" type="RayCast2D" parent="."]
+target_position = Vector2(0, 250)
 
 [connection signal="body_entered" from="ViewArea" to="." method="_on_view_area_body_entered"]
 [connection signal="body_exited" from="ViewArea" to="." method="_on_view_area_body_exited"]

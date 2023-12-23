@@ -22,7 +22,6 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_impact_detector_body_entered(body):
-	print("Impatc")
 	var health_component: HealthComponent = body.get_node_or_null("HealthComponent")
 	if health_component:
 		health_component.take_damage(damage, element)
