@@ -131,7 +131,7 @@ func _input(event: InputEvent):
 
 func update_animation():
 	animation_tree.set("parameters/Action/blend_position", abs(velocity.x) > 0)
-	# If player walks in different direction than sprite orienation		
+	# If player walks in different direction than sprite orientation
 	if (scale.y > 0 and direction < 0 and velocity.x < 0) or (scale.y < 0 and direction > 0 and velocity.x > 0):
 		flip_player()
 
