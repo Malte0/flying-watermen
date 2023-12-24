@@ -7,7 +7,6 @@ extends Enemy
 const PROJECTILE_SCENE: PackedScene = preload("res://entities/projectiles/FireProjectile.tscn")
 const SHOOTING_PRECISION: float = PI/10 # Angle in radians that gets randomly applied to shots
 
-
 const MOVEMENT_SPEED_CALM: int = 100
 const MOVEMENT_SPEED_AGGRO: int = 250
 var is_aggro: bool = false
