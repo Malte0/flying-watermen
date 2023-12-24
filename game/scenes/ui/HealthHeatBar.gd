@@ -2,7 +2,7 @@ extends TextureProgressBar
 
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 @onready var health_label: Label = $HealthLabel
-@onready var max_health = player.health_component.max_health
+@onready var max_health: int = player.health_component.max_health
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
