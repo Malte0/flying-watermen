@@ -29877,17 +29877,18 @@ position = Vector2(4377, 1768)
 position = Vector2(5975, 1763)
 
 [node name="RangedEnemy" parent="." instance=ExtResource("11_2fedg")]
-position = Vector2(2148, 1298)
+position = Vector2(1327, 1311)
+carried_item = ExtResource("13_l88ic")
 
 [node name="Melee_enemy" parent="." instance=ExtResource("12_rd14a")]
 position = Vector2(2032, 1401)
 
 [node name="Sodium" parent="." instance=ExtResource("13_l88ic")]
-position = Vector2(1579, 1532)
+position = Vector2(339, 1549)
 
 [node name="IceChemical" parent="." instance=ExtResource("14_4gyg8")]
-position = Vector2(1477, 1534)
+position = Vector2(248, 1548)
 
 [node name="FoamChemical" parent="." instance=ExtResource("15_cbfrv")]
-position = Vector2(1366, 1535)
+position = Vector2(146, 1555)
 item = SubResource("Resource_2rmo4")

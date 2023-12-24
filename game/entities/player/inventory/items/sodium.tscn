@@ -11,6 +11,7 @@ radius = 27.0185
 radius = 15.0
 
 [node name="Sodium" type="CharacterBody2D" node_paths=PackedStringArray("collect_area")]
+top_level = true
 collision_layer = 0
 script = ExtResource("1_57fmi")
 collect_area = NodePath("CollectDetector")
