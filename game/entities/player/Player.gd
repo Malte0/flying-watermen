@@ -1,5 +1,6 @@
 class_name Player extends CharacterBody2D
 
+@onready var inventory: Inventory = $Inventory
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var state_chart: StateChart = $StateChart

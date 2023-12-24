@@ -1,4 +1,4 @@
-extends Node2D
+class_name Inventory extends Node2D
 
 var item_in_inventory: Item = null
 
