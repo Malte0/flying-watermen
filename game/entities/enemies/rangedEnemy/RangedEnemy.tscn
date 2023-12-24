@@ -67,7 +67,7 @@ wait_time = 4.0
 autostart = true
 
 [node name="GroundDistance" type="RayCast2D" parent="."]
-target_position = Vector2(0, 250)
+target_position = Vector2(0, 200)
 
 [connection signal="body_entered" from="ViewArea" to="." method="_on_view_area_body_entered"]
 [connection signal="body_exited" from="ViewArea" to="." method="_on_view_area_body_exited"]
