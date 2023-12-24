@@ -13,7 +13,7 @@ class_name Player extends CharacterBody2D
 
 # Reset values
 var base_scale_speed: float = 1.5
-var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity") * base_scale_speed
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") * base_scale_speed
 var base_speed: float = 300.0 * base_scale_speed
 var base_jump_velocity: float = -400.0 * base_scale_speed
 var base_friction: float = 0.5
