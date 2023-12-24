@@ -7,7 +7,7 @@ class_name Player extends CharacterBody2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 
-const PROJECTILE_SCENE: PackedScene = preload("res://entities/Projectiles/WaterProjectile.tscn")
+@onready var projectile_scene: PackedScene = load("res://entities/projectiles/WaterProjectile.tscn")
 @onready var shoot_position: Marker2D = $ShootPosition
 
 # Reset values
@@ -183,7 +183,7 @@ func _on_meele_attacks_child_state_exited():
 func _on_can_shoot_state_input(event: InputEvent) -> void:
 	if event.is_action_pressed("right_click"):
 		state_chart.send_event("_on_shot")
-		var projectile_instance: Projectile = PROJECTILE_SCENE.instantiate()
+		var projectile_instance: Projectile = projectile_scene.instantiate()
 		projectile_instance.position = shoot_position.global_position
 		projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
 		projectile_instance.player_speed = velocity

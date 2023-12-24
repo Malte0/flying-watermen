@@ -1,26 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://cionb67ql6rka"]
+[gd_scene load_steps=4 format=3 uid="uid://nkxypfhgjitc"]
 
-[ext_resource type="Texture2D" uid="uid://d2tpiw0kw5goq" path="res://assets/prototype-assets/projectile.png" id="1_6vmdc"]
-[ext_resource type="Script" path="res://entities/Projectiles/Projectile.gd" id="1_gtblg"]
+[ext_resource type="Script" path="res://entities/projectiles/Projectile.gd" id="1_cmlw7"]
+[ext_resource type="Texture2D" uid="uid://d2tpiw0kw5goq" path="res://assets/prototype-assets/projectile.png" id="2_4kjmi"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dc03s"]
-radius = 15.0333
+[sub_resource type="CircleShape2D" id="CircleShape2D_mrbfx"]
+radius = 17.0
 
-[node name="WaterProjectile" type="CharacterBody2D"]
+[node name="WaterProjectile" type="CharacterBody2D" node_paths=PackedStringArray("impact_detector")]
 top_level = true
-script = ExtResource("1_gtblg")
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_cmlw7")
+impact_detector = NodePath("ImpactDetector")
+speed = 1600
 
 [node name="ImpactDetector" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactDetector"]
-shape = SubResource("CircleShape2D_dc03s")
-debug_color = Color(0.858824, 0.227451, 0.705882, 0.419608)
+shape = SubResource("CircleShape2D_mrbfx")
+debug_color = Color(0.886275, 0.321569, 0.215686, 0.419608)
 
-[node name="Icon" type="Sprite2D" parent="."]
-modulate = Color(0.305882, 0.6, 0.741176, 1)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.313726, 0.654902, 0.878431, 1)
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_6vmdc")
+texture = ExtResource("2_4kjmi")
 
 [connection signal="body_entered" from="ImpactDetector" to="." method="_on_impact_detector_body_entered"]
