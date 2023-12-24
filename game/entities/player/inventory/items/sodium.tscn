@@ -10,11 +10,14 @@ radius = 27.0185
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6qja"]
 radius = 15.0
 
-[node name="Sodium" type="CharacterBody2D"]
+[node name="Sodium" type="CharacterBody2D" node_paths=PackedStringArray("collect_area")]
+collision_layer = 0
 script = ExtResource("1_57fmi")
+collect_area = NodePath("CollectDetector")
 item = ExtResource("2_h61t5")
 
 [node name="CollectDetector" type="Area2D" parent="."]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectDetector"]
 shape = SubResource("CircleShape2D_kxb6s")
@@ -27,5 +30,3 @@ shape = SubResource("CircleShape2D_d6qja")
 self_modulate = Color(1, 1, 0.294118, 1)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_awvln")
-
-[connection signal="body_entered" from="CollectDetector" to="." method="_on_collect_detector_body_entered"]

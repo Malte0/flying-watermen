@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://mrf2lku3uiqc"]
+[gd_scene load_steps=48 format=3 uid="uid://mrf2lku3uiqc"]
 
 [ext_resource type="Shader" path="res://scenes/test/mapShader.gdshader" id="1_4wi60"]
 [ext_resource type="Texture2D" uid="uid://b6yrhnp1t37o8" path="res://assets/prototype-assets/Tiles.png" id="1_ljrfd"]
@@ -11,7 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://cihcop35erg48" path="res://scenes/ui/ui.tscn" id="5_vx7we"]
 [ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/meleeEnemy/MeleeEnemy.tscn" id="9_hf5qv"]
 [ext_resource type="PackedScene" uid="uid://dpiypck5f1v6f" path="res://entities/objects/pfuetze.tscn" id="10_oa7xq"]
-[ext_resource type="PackedScene" uid="uid://dmeutg1f6t7sl" path="res://entities/enemies/rangedEnemy/RangedEnemy.tscn" id="12_awfkx"]
+[ext_resource type="PackedScene" uid="uid://dmeutg1f6t7sl" path="res://entities/enemies/rangedEnemy/RangedEnemy.tscn" id="11_2fedg"]
+[ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/meleeEnemy/MeleeEnemy.tscn" id="12_rd14a"]
+[ext_resource type="PackedScene" uid="uid://dvv2sij5v2epd" path="res://entities/player/inventory/items/Sodium.tscn" id="13_l88ic"]
+[ext_resource type="PackedScene" uid="uid://dp6qth5jvcdhd" path="res://entities/player/inventory/items/IceChemical.tscn" id="14_4gyg8"]
+[ext_resource type="PackedScene" uid="uid://bree81gljy661" path="res://entities/player/inventory/items/FoamChemical.tscn" id="15_cbfrv"]
+[ext_resource type="Script" path="res://entities/player/inventory/Item.gd" id="16_58hv2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7de0"]
 shader = ExtResource("1_4wi60")
@@ -29763,6 +29768,11 @@ distance = -2.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mmcy6"]
 size = Vector2(128, 127)
 
+[sub_resource type="Resource" id="Resource_2rmo4"]
+resource_local_to_scene = true
+script = ExtResource("16_58hv2")
+name = "foam"
+
 [node name="prototype" type="Node2D"]
 script = ExtResource("1_vcmdm")
 metadata/_edit_horizontal_guides_ = []
@@ -29866,8 +29876,18 @@ position = Vector2(4377, 1768)
 [node name="Puddle2" parent="." instance=ExtResource("10_oa7xq")]
 position = Vector2(5975, 1763)
 
-[node name="Melee_enemy" parent="." instance=ExtResource("9_hf5qv")]
-position = Vector2(2122, 1506)
+[node name="RangedEnemy" parent="." instance=ExtResource("11_2fedg")]
+position = Vector2(2148, 1298)
 
-[node name="RangedEnemy" parent="." instance=ExtResource("12_awfkx")]
-position = Vector2(1498, 1414)
+[node name="Melee_enemy" parent="." instance=ExtResource("12_rd14a")]
+position = Vector2(2032, 1401)
+
+[node name="Sodium" parent="." instance=ExtResource("13_l88ic")]
+position = Vector2(1579, 1532)
+
+[node name="IceChemical" parent="." instance=ExtResource("14_4gyg8")]
+position = Vector2(1477, 1534)
+
+[node name="FoamChemical" parent="." instance=ExtResource("15_cbfrv")]
+position = Vector2(1366, 1535)
+item = SubResource("Resource_2rmo4")

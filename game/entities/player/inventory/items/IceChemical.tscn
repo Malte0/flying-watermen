@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dp6qth5jvcdhd"]
+
+[ext_resource type="Script" path="res://entities/player/inventory/Collectable.gd" id="1_ujfqn"]
+[ext_resource type="Resource" uid="uid://pwcbidt3iwb8" path="res://entities/player/inventory/items/iceChemical.tres" id="2_m2hpk"]
+[ext_resource type="Texture2D" uid="uid://d2tpiw0kw5goq" path="res://assets/prototype-assets/projectile.png" id="3_fmalr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4q55v"]
+radius = 27.0185
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d4i5v"]
+radius = 15.0
+
+[node name="IceChemical" type="CharacterBody2D" node_paths=PackedStringArray("collect_area")]
+collision_layer = 0
+script = ExtResource("1_ujfqn")
+collect_area = NodePath("CollectDetector")
+item = ExtResource("2_m2hpk")
+
+[node name="CollectDetector" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectDetector"]
+shape = SubResource("CircleShape2D_4q55v")
+debug_color = Color(0, 0.635294, 0.423529, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d4i5v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.439216, 0.831373, 1, 1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_fmalr")
