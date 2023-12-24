@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ihorffrdym4j" path="res://icon.svg" id="3_n53fm"]
 [ext_resource type="PackedScene" uid="uid://djmlmtr41m2ce" path="res://entities/player/player.tscn" id="5_wejlo"]
 [ext_resource type="PackedScene" uid="uid://cihcop35erg48" path="res://scenes/ui/ui.tscn" id="6_rwr2e"]
-[ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/melee_enemy/MeleeEnemy.tscn" id="7_qvsmb"]
+[ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/meleeEnemy/MeleeEnemy.tscn" id="7_qvsmb"]
 [ext_resource type="Script" path="res://entities/objects/pfuetze.gd" id="8_rjvbh"]
 [ext_resource type="Texture2D" uid="uid://utp3bloip30k" path="res://assets/prototype-assets/pfuetze.png" id="9_6g48k"]
 
