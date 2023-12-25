@@ -2,7 +2,7 @@ class_name Collectable extends CharacterBody2D
 
 @export var collect_area: Area2D
 @export var item: Item
-const COLLECT_DURATION: float = 0.04
+const COLLECT_DURATION: float = 0.03
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():

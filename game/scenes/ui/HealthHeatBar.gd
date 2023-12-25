@@ -9,9 +9,10 @@ func _ready():
 	player.health_component.health_change.connect(_on_player_health_change)
 	value = 100
 
-func _on_player_health_change(new_health: int, delta_health: int):
-	value = (new_health / max_health) * 100
+func _on_player_health_change(new_health: int, _delta_health: int):
+	@warning_ignore("integer_division")
+	value = new_health * 100 / max_health
 	health_label.text = str(new_health) + " / " + str(max_health)
 
 func _process(_delta):
-	tint_progress = Color("blue").lerp(Color("red"), player.heat / player.max_heat)
+	tint_progress = Color("blue").lerp(Color("red"), player.heat / float(player.max_heat))
