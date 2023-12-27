@@ -1,6 +1,6 @@
 extends TextureProgressBar
 
-var player: Player
+var player: Player = null
 var health: HealthComponent:
 	get: return player.health_component
 

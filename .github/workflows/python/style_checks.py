@@ -23,6 +23,8 @@ def hasDeepNesting(line: str):
     return line.startswith("\t" * style_config["maxIndentation"])
 
 def usesAutoType(line: str):
+    if '(' in line:
+        return False
     hasAutoType = re.search(r":=", line) is not None
     hasNoType = any([keyWord in line for keyWord in ["var", "const"]]) and re.search(r":", line) is None
     return hasAutoType or hasNoType
@@ -64,7 +66,7 @@ def hasScatteredVariableDeclaration(line: str):
     return False
 
 def hasTooLongLine(line: str):
-    return len(line) > style_config["maxLineLength"]
+    return len(line) > style_config["maxLineLength"] and not '@onready' in line
 
 def missnamedBoolean(line: str):
     words = line.split(" ")
@@ -88,8 +90,9 @@ def hasOddColonFormat(line: str):
     return re.search(r" : ", line) is not None
 
 def hasUninitializedVariable(line: str):
-    if 'var' in line and not '()' in line:
-        return re.search(r"=", line) is None
+    if 'var' in line:
+        if not ('@export' in line or line.count(":") > 1 or line.count("(") > 0):
+            return re.search(r"=", line) is None
     return False
 
 def hasUselessIndentation(line: str):

@@ -26,8 +26,8 @@ func hunt_player():
 	if wall_detection.is_colliding():
 		jump(1)
 	
-	var player_distance = player.global_position.x - global_position.x
-	var player_direction = sign(player_distance)
+	var player_distance: float = player.global_position.x - global_position.x
+	var player_direction: int = sign(player_distance)
 	if abs(player_distance) < 20: # this is just some random small value
 		movement_direction = Movement_Direction.No
 		return
@@ -49,7 +49,7 @@ func scale_by_distance(max_distance: int, player_distance: float, value_to_scale
 	return ceili(((max_distance - abs(player_distance)) / max_distance) * value_to_scale)
 
 func _on_damage_tick_timeout():
-	var player_distance = player.global_position.x - global_position.x
+	var player_distance: float = player.global_position.x - global_position.x
 	if abs(player_distance) < DAMAGE_RADIUS:
 		var damage: int = scale_by_distance(DAMAGE_RADIUS, player_distance, DAMAGE_PER_TICK)
 		player.health_component.take_damage(damage, Element.Type.Fire)
