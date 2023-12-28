@@ -27,7 +27,7 @@ func take_damage(amount: int, damage_type: Element.Type):
 	health_change.emit(current_health, -amount)
 
 func restore_health(amount: int):
-	current_health = maxi(current_health + amount, max_health)
+	current_health = mini(current_health + amount, max_health)
 	health_change.emit(current_health, amount)
 
 func die():

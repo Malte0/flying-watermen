@@ -336,6 +336,7 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_w7iqa")
 animation = &"Idle"
 autoplay = "Idle"
+frame = 2
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -574,12 +575,6 @@ autostart = true
 
 [node name="HealthComponent" parent="." instance=ExtResource("16_vgsyb")]
 element = 0
-
-[node name="Inventory" type="Node2D" parent="."]
-script = ExtResource("15_8nkrm")
-
-[node name="Inventory" type="Node2D" parent="."]
-script = ExtResource("15_8nkrm")
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("15_8nkrm")
