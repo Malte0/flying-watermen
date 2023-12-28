@@ -53,7 +53,7 @@ func _on_heat_tick_timeout():
 
 # Regenerates heal_amount across healthAmount // Heal_over_time_step seconds
 func heal_over_time(heal_amount: int):
-	heal_over_time_left = heal_amount
+	heal_over_time_left += heal_amount
 
 # Heals the player for healthAmount during duration seconds
 func _on_heal_tick_timeout():
@@ -131,7 +131,7 @@ func _input(event: InputEvent):
 
 func update_animation():
 	animation_tree.set("parameters/Action/blend_position", abs(velocity.x) > 0)
-	# If player walks in different direction than sprite orienation
+	# If player walks in different direction than sprite orientation
 	if sign(scale.y) != sign(direction) and sign(direction) != 0:
 		flip_player()
 

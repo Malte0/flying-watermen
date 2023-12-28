@@ -9,9 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://ihorffrdym4j" path="res://icon.svg" id="4_23juu"]
 [ext_resource type="Texture2D" uid="uid://cjv4di3su4jvf" path="res://assets/prototype-assets/background/Green-Tree.png" id="5_1qnrw"]
 [ext_resource type="PackedScene" uid="uid://cihcop35erg48" path="res://scenes/ui/ui.tscn" id="5_vx7we"]
+[ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/meleeEnemy/MeleeEnemy.tscn" id="9_hf5qv"]
 [ext_resource type="PackedScene" uid="uid://dpiypck5f1v6f" path="res://entities/objects/pfuetze.tscn" id="10_oa7xq"]
-[ext_resource type="PackedScene" uid="uid://dmeutg1f6t7sl" path="res://entities/enemies/rangedEnemy/RangedEnemy.tscn" id="11_2fedg"]
-[ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/meleeEnemy/MeleeEnemy.tscn" id="12_rd14a"]
+[ext_resource type="PackedScene" uid="uid://dmeutg1f6t7sl" path="res://entities/enemies/rangedEnemy/RangedEnemy.tscn" id="12_awfkx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7de0"]
 shader = ExtResource("1_4wi60")
@@ -29831,7 +29831,7 @@ position = Vector2(8835, 2247)
 shape = SubResource("WorldBoundaryShape2D_coapx")
 
 [node name="Player" parent="." instance=ExtResource("2_4wjh0")]
-position = Vector2(654, 1749)
+position = Vector2(646, 1749)
 scale = Vector2(1.5, 1.5)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -29839,11 +29839,13 @@ process_callback = 0
 metadata/_edit_lock_ = true
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(4746, 1673)
+position = Vector2(4746, 1712.8)
 collision_layer = 0
 collision_mask = 3
+sleeping = true
 max_contacts_reported = 10
 contact_monitor = true
+linear_velocity = Vector2(-0.000293493, -0.000138178)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("RectangleShape2D_mmcy6")
@@ -29864,8 +29866,8 @@ position = Vector2(4377, 1768)
 [node name="Puddle2" parent="." instance=ExtResource("10_oa7xq")]
 position = Vector2(5975, 1763)
 
-[node name="RangedEnemy" parent="." instance=ExtResource("11_2fedg")]
-position = Vector2(1300, 1423)
+[node name="Melee_enemy" parent="." instance=ExtResource("9_hf5qv")]
+position = Vector2(2122, 1506)
 
-[node name="Melee_enemy" parent="." instance=ExtResource("12_rd14a")]
-position = Vector2(2032, 1401)
+[node name="RangedEnemy" parent="." instance=ExtResource("12_awfkx")]
+position = Vector2(1498, 1414)
