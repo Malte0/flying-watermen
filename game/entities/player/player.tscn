@@ -328,6 +328,11 @@ floor_constant_speed = true
 floor_snap_length = 23.0
 script = ExtResource("1_n7144")
 
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -14)
+rotation = 1.5708
+polygon = PackedVector2Array(-14, 11.5001, -11.9999, 18, -9.99992, 22, -5.99991, 24, 8.5001, 28, 14.0001, 27.9999, 13.9999, -28.5001, 7.49992, -23, 1.99993, -20, -6.50007, -20, -14, -9.99995)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -24)
@@ -335,7 +340,7 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_w7iqa")
 animation = &"Idle"
 autoplay = "Idle"
-frame = 1
+frame = 2
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -352,7 +357,7 @@ tree_root = SubResource("AnimationNodeStateMachine_shgom")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Action/blend_position = -0.00144303
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, -14)
 rotation = 1.5708
 polygon = PackedVector2Array(-11.5, 10.5, -9.99994, 17.5, -7.49993, 19.5, -3.99992, 21, 8.00008, 22, 14.0001, 20.9999, 13.9999, -18.5001, 7.49993, -19.5, 1.99993, -20, -5.00006, -16, -10.5, -7.49996)
@@ -588,8 +593,8 @@ element = 0
 [connection signal="state_input" from="StateChart/Player/Mechanics/Movement/Airborne/Falling" to="." method="_on_airborn_not_coyote_state_input"]
 [connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/WallSlide" to="." method="_on_wall_slide_state_entered"]
 [connection signal="child_state_entered" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_meele_attacks_child_state_entered"]
-[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_movement_child_state_exited"]
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_meele_attacks_child_state_exited"]
+[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_movement_child_state_exited"]
 [connection signal="body_entered" from="AtkShape" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timers/HeatTick" to="." method="_on_heat_tick_timeout"]
 [connection signal="timeout" from="Timers/HealTick" to="." method="_on_heal_tick_timeout"]

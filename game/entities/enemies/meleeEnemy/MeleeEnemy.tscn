@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c2mdlfdoukqoq"]
 
 [ext_resource type="Texture2D" uid="uid://dvtm1er0mqhwv" path="res://entities/enemies/assets/meleeEnemyDirected.PNG" id="2_jkvcn"]
-[ext_resource type="Script" path="res://entities/enemies/melee_enemy/MeleeEnemy.gd" id="2_r07kk"]
+[ext_resource type="Script" path="res://entities/enemies/meleeEnemy/MeleeEnemy.gd" id="2_r07kk"]
 [ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="4_7dbns"]
 [ext_resource type="Texture2D" uid="uid://32uxotk6128m" path="res://entities/enemies/assets/healthbar_under.png" id="4_ap5gi"]
 [ext_resource type="Texture2D" uid="uid://drqht0p82ryru" path="res://entities/enemies/assets/healthbar_progress.png" id="5_x4f6e"]
@@ -12,7 +12,7 @@ radius = 28.0179
 [sub_resource type="CircleShape2D" id="CircleShape2D_ol33t"]
 radius = 362.006
 
-[node name="Melee_enemy" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
+[node name="MeleeEnemy" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("2_r07kk")

@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://dmeutg1f6t7sl"]
+
+[ext_resource type="Script" path="res://entities/enemies/rangedEnemy/RangedEnemy.gd" id="1_itytb"]
+[ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="1_otr82"]
+[ext_resource type="Texture2D" uid="uid://cd1p17mer6550" path="res://entities/enemies/assets/rangedEnemyDirected.png" id="2_4ume1"]
+[ext_resource type="Texture2D" uid="uid://32uxotk6128m" path="res://entities/enemies/assets/healthbar_under.png" id="2_n8t0v"]
+[ext_resource type="Texture2D" uid="uid://drqht0p82ryru" path="res://entities/enemies/assets/healthbar_progress.png" id="3_wwf3b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rm63b"]
+size = Vector2(74, 47)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5bvq1"]
+radius = 414.0
+
+[node name="RangedEnemy" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
+collision_layer = 4
+script = ExtResource("1_itytb")
+health_component = NodePath("HealthComponent")
+weight = 0.3
+jump_force = -150
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -11.5)
+shape = SubResource("RectangleShape2D_rm63b")
+debug_color = Color(0.67451, 0.505882, 0.0235294, 0.419608)
+
+[node name="DirectionalNodes" type="Node2D" parent="."]
+
+[node name="EnemyGraphics" type="Node2D" parent="DirectionalNodes"]
+
+[node name="FlameImage" type="Sprite2D" parent="DirectionalNodes/EnemyGraphics"]
+position = Vector2(0, -12)
+scale = Vector2(0.16, 0.146)
+texture = ExtResource("2_4ume1")
+
+[node name="ViewArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ViewArea"]
+shape = SubResource("CircleShape2D_5bvq1")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("1_otr82")]
+health_bar = NodePath("HealthBar")
+
+[node name="HealthBar" type="TextureProgressBar" parent="HealthComponent"]
+offset_left = -51.0
+offset_top = -69.0
+offset_right = 149.0
+offset_bottom = -29.0
+scale = Vector2(0.5, 0.5)
+value = 100.0
+texture_under = ExtResource("2_n8t0v")
+texture_progress = ExtResource("3_wwf3b")
+
+[node name="AggroCooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="FireRate" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="DirectionChange" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="GroundDistance" type="RayCast2D" parent="."]
+target_position = Vector2(0, 200)
+
+[connection signal="body_entered" from="ViewArea" to="." method="_on_view_area_body_entered"]
+[connection signal="body_exited" from="ViewArea" to="." method="_on_view_area_body_exited"]
+[connection signal="health_change" from="HealthComponent" to="." method="_on_health_component_health_change"]
+[connection signal="timeout" from="AggroCooldown" to="." method="_on_aggro_cooldown_timeout"]
+[connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
+[connection signal="timeout" from="DirectionChange" to="." method="_on_direction_change_timeout"]
