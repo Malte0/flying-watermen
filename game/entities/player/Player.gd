@@ -53,7 +53,7 @@ func _on_heat_tick_timeout():
 
 # Regenerates heal_amount across healthAmount // Heal_over_time_step seconds
 func heal_over_time(heal_amount: int):
-	heal_over_time_left = heal_amount
+	heal_over_time_left += heal_amount
 
 # Heals the player for healthAmount during duration seconds
 func _on_heal_tick_timeout():
