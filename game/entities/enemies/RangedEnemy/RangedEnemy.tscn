@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmeutg1f6t7sl"]
+[gd_scene load_steps=8 format=3 uid="uid://dmeutg1f6t7sl"]
 
 [ext_resource type="Script" path="res://entities/enemies/RangedEnemy/RangedEnemy.gd" id="1_itytb"]
 [ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="1_otr82"]
 [ext_resource type="Texture2D" uid="uid://cd1p17mer6550" path="res://entities/enemies/assets/rangedEnemyDirected.png" id="2_4ume1"]
 [ext_resource type="Texture2D" uid="uid://32uxotk6128m" path="res://entities/enemies/assets/healthbar_under.png" id="2_n8t0v"]
 [ext_resource type="Texture2D" uid="uid://drqht0p82ryru" path="res://entities/enemies/assets/healthbar_progress.png" id="3_wwf3b"]
-[ext_resource type="Script" path="res://entities/enemies/RangedEnemy/GroundDistance.gd" id="6_8x0ff"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rm63b"]
 size = Vector2(74, 47)
@@ -69,7 +68,7 @@ autostart = true
 
 [node name="GroundDistance" type="RayCast2D" parent="."]
 target_position = Vector2(0, 1000)
-script = ExtResource("6_8x0ff")
+collide_with_areas = true
 
 [connection signal="body_entered" from="ViewArea" to="." method="_on_view_area_body_entered"]
 [connection signal="body_exited" from="ViewArea" to="." method="_on_view_area_body_exited"]

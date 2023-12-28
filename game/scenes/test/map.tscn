@@ -29831,7 +29831,7 @@ position = Vector2(8835, 2247)
 shape = SubResource("WorldBoundaryShape2D_coapx")
 
 [node name="Player" parent="." instance=ExtResource("2_4wjh0")]
-position = Vector2(654, 1749)
+position = Vector2(646, 1749)
 scale = Vector2(1.5, 1.5)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -29839,11 +29839,13 @@ process_callback = 0
 metadata/_edit_lock_ = true
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(4746, 1673)
+position = Vector2(4746, 1712.8)
 collision_layer = 0
 collision_mask = 3
+sleeping = true
 max_contacts_reported = 10
 contact_monitor = true
+linear_velocity = Vector2(-0.000293493, -0.000138178)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("RectangleShape2D_mmcy6")
@@ -29868,4 +29870,4 @@ position = Vector2(5975, 1763)
 position = Vector2(2122, 1506)
 
 [node name="RangedEnemy" parent="." instance=ExtResource("12_awfkx")]
-position = Vector2(1424, 1446)
+position = Vector2(1481, 1412)
