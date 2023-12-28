@@ -15,7 +15,7 @@ func _physics_process(delta):
 
 func _body_entered(body):
 	if body is Player:
-		body.inventory.add_item(item)
+		body.inventory.set_item_in_inventory(item)
 		var tween = create_tween()
 		tween.tween_property(self, "position", body.position, COLLECT_DURATION)
 		tween.tween_property(self, "scale", Vector2.ZERO, COLLECT_DURATION)

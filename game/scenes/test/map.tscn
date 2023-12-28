@@ -29772,6 +29772,8 @@ size = Vector2(128, 127)
 resource_local_to_scene = true
 script = ExtResource("16_58hv2")
 name = "foam"
+max_amount = 4
+amount = 4
 
 [node name="prototype" type="Node2D"]
 script = ExtResource("1_vcmdm")

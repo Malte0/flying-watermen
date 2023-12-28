@@ -56,13 +56,31 @@ offset_right = 52.29
 offset_bottom = 2.62
 metadata/_edit_use_anchors_ = true
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-offset_left = 962.0
-offset_top = 549.0
-offset_right = 1064.0
-offset_bottom = 574.0
+[node name="Panel2" type="Panel" parent="."]
 script = ExtResource("6_gvkls")
 
-[node name="Inventory" type="RichTextLabel" parent="PanelContainer"]
+[node name="Inventory" type="RichTextLabel" parent="Panel2"]
 layout_mode = 2
+offset_left = 962.0
+offset_top = 549.0
+offset_right = 1083.0
+offset_bottom = 632.0
 text = "Inventory"
+
+[node name="Use _E_" type="RichTextLabel" parent="Panel2"]
+layout_mode = 2
+offset_left = 962.0
+offset_top = 575.0
+offset_right = 1083.0
+offset_bottom = 658.0
+text = "Use 'E'"
+
+[node name="ProgressBar" type="ProgressBar" parent="Panel2"]
+layout_mode = 0
+offset_left = 1071.0
+offset_top = 500.0
+offset_right = 1087.0
+offset_bottom = 600.0
+value = 25.0
+fill_mode = 3
+show_percentage = false
