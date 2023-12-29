@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_kh7e8")
 name = "sodium"
+max_amount = 4

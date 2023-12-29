@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_8y0ub")
 name = "ice"
+max_amount = 1

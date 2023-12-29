@@ -189,6 +189,8 @@ func _on_can_shoot_state_input(event: InputEvent) -> void:
 		projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
 		projectile_instance.player_speed = velocity
 		add_child(projectile_instance)
+		
+		inventory.use_active_item(1)
 
 func _on_health_component_death():
 	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")

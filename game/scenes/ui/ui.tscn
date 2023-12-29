@@ -67,6 +67,14 @@ offset_right = 1083.0
 offset_bottom = 632.0
 text = "Inventory"
 
+[node name="ActiveItem" type="RichTextLabel" parent="Panel2"]
+layout_mode = 2
+offset_left = 1040.0
+offset_top = 597.0
+offset_right = 1161.0
+offset_bottom = 634.0
+text = "Inventory"
+
 [node name="Use _E_" type="RichTextLabel" parent="Panel2"]
 layout_mode = 2
 offset_left = 962.0
@@ -75,7 +83,7 @@ offset_right = 1083.0
 offset_bottom = 658.0
 text = "Use 'E'"
 
-[node name="ProgressBar" type="ProgressBar" parent="Panel2"]
+[node name="ItemBar" type="ProgressBar" parent="Panel2"]
 layout_mode = 0
 offset_left = 1071.0
 offset_top = 500.0
