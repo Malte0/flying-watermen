@@ -31,6 +31,6 @@ func drop_item():
 		call_deferred("spawn_item")
 
 func spawn_item():
-		var item_instance = carried_item.instantiate()
-		item_instance.position = position
-		get_parent().add_child(item_instance)
+	var item_instance = carried_item.instantiate()
+	item_instance.position = position
+	get_parent().add_child(item_instance)

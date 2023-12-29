@@ -1,7 +1,8 @@
 extends Panel
 
-@onready var inventory_text: RichTextLabel = $Inventory
+@onready var inventory_text: RichTextLabel = $InventoryItem
 @onready var active_item_text: RichTextLabel = $ActiveItem
+@onready var active_item_amount: RichTextLabel = $ActiveItemAmount
 @onready var use_item_text: RichTextLabel = $"Use _E_"
 @onready var active_item_meter: ProgressBar = $ItemBar
 @onready var player: Player = get_tree().get_first_node_in_group("player")
@@ -30,5 +31,6 @@ func update_active_item(item: Item):
 func update_item_bar(amount: int, max_amount: int):
 	active_item_meter.visible = amount > 0
 	active_item_text.visible = amount > 0
-	print(max_amount)
+	active_item_amount.visible = amount > 0
+	active_item_amount.text = str(amount)+"/"+str(max_amount)
 	active_item_meter.value = (amount / float(max_amount)) * 100
