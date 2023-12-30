@@ -335,6 +335,7 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_w7iqa")
 animation = &"Idle"
 autoplay = "Idle"
+frame = 3
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -423,113 +424,118 @@ delay_seconds = 0.5
 
 [node name="Mechanics" type="Node" parent="StateChart/Player"]
 script = ExtResource("4_klwk4")
-initial_state = NodePath("Movement")
+initial_state = NodePath("Interruptible")
 
-[node name="Movement" type="Node" parent="StateChart/Player/Mechanics"]
+[node name="Interruptible" type="Node" parent="StateChart/Player/Mechanics"]
 script = ExtResource("4_klwk4")
 initial_state = NodePath("Grounded")
 
-[node name="Grounded" type="Node" parent="StateChart/Player/Mechanics/Movement"]
+[node name="Grounded" type="Node" parent="StateChart/Player/Mechanics/Interruptible"]
 script = ExtResource("4_klwk4")
 initial_state = NodePath("Standing")
 
-[node name="Standing" type="Node" parent="StateChart/Player/Mechanics/Movement/Grounded"]
+[node name="Standing" type="Node" parent="StateChart/Player/Mechanics/Interruptible/Grounded"]
 script = ExtResource("5_dadqm")
 
-[node name="On Slide" type="Node" parent="StateChart/Player/Mechanics/Movement/Grounded/Standing"]
+[node name="On Slide" type="Node" parent="StateChart/Player/Mechanics/Interruptible/Grounded/Standing"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Crouching/Sliding")
 event = &"tick"
 guard = SubResource("Resource_r58ym")
 
-[node name="On Crouch" type="Node" parent="StateChart/Player/Mechanics/Movement/Grounded/Standing"]
+[node name="On Crouch" type="Node" parent="StateChart/Player/Mechanics/Interruptible/Grounded/Standing"]
 process_priority = 1
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Crouching")
 event = &"tick"
 guard = SubResource("Resource_jk8u2")
 
-[node name="Crouching" type="Node" parent="StateChart/Player/Mechanics/Movement/Grounded"]
+[node name="Crouching" type="Node" parent="StateChart/Player/Mechanics/Interruptible/Grounded"]
 script = ExtResource("4_klwk4")
 initial_state = NodePath("Crouch")
 
-[node name="Crouch" type="Node" parent="StateChart/Player/Mechanics/Movement/Grounded/Crouching"]
+[node name="Crouch" type="Node" parent="StateChart/Player/Mechanics/Interruptible/Grounded/Crouching"]
 script = ExtResource("5_dadqm")
 
-[node name="Sliding" type="Node" parent="StateChart/Player/Mechanics/Movement/Grounded/Crouching"]
+[node name="Sliding" type="Node" parent="StateChart/Player/Mechanics/Interruptible/Grounded/Crouching"]
 script = ExtResource("5_dadqm")
 
-[node name="On Slide End" type="Node" parent="StateChart/Player/Mechanics/Movement/Grounded/Crouching/Sliding"]
+[node name="On Slide End" type="Node" parent="StateChart/Player/Mechanics/Interruptible/Grounded/Crouching/Sliding"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Crouch")
 event = &"tick"
 guard = SubResource("Resource_8wh4l")
 
-[node name="On Crouch End" type="Node" parent="StateChart/Player/Mechanics/Movement/Grounded/Crouching"]
+[node name="On Crouch End" type="Node" parent="StateChart/Player/Mechanics/Interruptible/Grounded/Crouching"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Standing")
 event = &"tick"
 guard = SubResource("Resource_wu70w")
 
-[node name="onAtk" type="Node" parent="StateChart/Player/Mechanics/Movement/Grounded"]
+[node name="onAtk" type="Node" parent="StateChart/Player/Mechanics/Interruptible/Grounded"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../../Combat/MeeleAttacks/GAtk")
 event = &"attackpressed"
 
-[node name="Airborne" type="Node" parent="StateChart/Player/Mechanics/Movement"]
+[node name="Airborne" type="Node" parent="StateChart/Player/Mechanics/Interruptible"]
 script = ExtResource("4_klwk4")
 initial_state = NodePath("Falling")
 
-[node name="Jumping" type="Node" parent="StateChart/Player/Mechanics/Movement/Airborne"]
+[node name="Jumping" type="Node" parent="StateChart/Player/Mechanics/Interruptible/Airborne"]
 script = ExtResource("5_dadqm")
 
-[node name="On Falling" type="Node" parent="StateChart/Player/Mechanics/Movement/Airborne/Jumping"]
+[node name="On Falling" type="Node" parent="StateChart/Player/Mechanics/Interruptible/Airborne/Jumping"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Falling")
 event = &"falling"
 
-[node name="FallingCoyote" type="Node" parent="StateChart/Player/Mechanics/Movement/Airborne"]
+[node name="FallingCoyote" type="Node" parent="StateChart/Player/Mechanics/Interruptible/Airborne"]
 script = ExtResource("5_dadqm")
 
-[node name="CoyoteDelay" type="Node" parent="StateChart/Player/Mechanics/Movement/Airborne/FallingCoyote"]
+[node name="CoyoteDelay" type="Node" parent="StateChart/Player/Mechanics/Interruptible/Airborne/FallingCoyote"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Falling")
 delay_seconds = 0.2
 
-[node name="Falling" type="Node" parent="StateChart/Player/Mechanics/Movement/Airborne"]
+[node name="Falling" type="Node" parent="StateChart/Player/Mechanics/Interruptible/Airborne"]
 script = ExtResource("5_dadqm")
 
-[node name="onAtk" type="Node" parent="StateChart/Player/Mechanics/Movement/Airborne"]
+[node name="onAtk" type="Node" parent="StateChart/Player/Mechanics/Interruptible/Airborne"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../../Combat/MeeleAttacks/AAtk")
 event = &"attackpressed"
 
-[node name="WallSlide" type="Node" parent="StateChart/Player/Mechanics/Movement"]
+[node name="WallSlide" type="Node" parent="StateChart/Player/Mechanics/Interruptible"]
 script = ExtResource("5_dadqm")
 
-[node name="On FallingCoyote" type="Node" parent="StateChart/Player/Mechanics/Movement"]
+[node name="On FallingCoyote" type="Node" parent="StateChart/Player/Mechanics/Interruptible"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../Airborne/FallingCoyote")
 event = &"falling"
 guard = SubResource("Resource_sktov")
 
-[node name="On Jump" type="Node" parent="StateChart/Player/Mechanics/Movement"]
+[node name="On Jump" type="Node" parent="StateChart/Player/Mechanics/Interruptible"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../Airborne/Jumping")
 event = &"jump"
 guard = SubResource("Resource_se5vv")
 
-[node name="On WallSlide" type="Node" parent="StateChart/Player/Mechanics/Movement"]
+[node name="On WallSlide" type="Node" parent="StateChart/Player/Mechanics/Interruptible"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../WallSlide")
 event = &"wall_slide"
 guard = SubResource("Resource_6rl8s")
 
-[node name="On Grounded" type="Node" parent="StateChart/Player/Mechanics/Movement"]
+[node name="On Grounded" type="Node" parent="StateChart/Player/Mechanics/Interruptible"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../Grounded")
 event = &"grounded"
 guard = SubResource("Resource_c7udc")
+
+[node name="On Dash" type="Node" parent="StateChart/Player/Mechanics/Interruptible"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Dash")
+event = &"dash"
 
 [node name="Combat" type="Node" parent="StateChart/Player/Mechanics"]
 script = ExtResource("4_klwk4")
@@ -547,7 +553,15 @@ script = ExtResource("5_dadqm")
 
 [node name="onAtk" type="Node" parent="StateChart/Player/Mechanics/Combat/MeeleAttacks"]
 script = ExtResource("6_aaxtf")
-to = NodePath("../../../Movement/Grounded")
+to = NodePath("../../../Interruptible/Grounded")
+delay_seconds = 0.3
+
+[node name="Dash" type="Node" parent="StateChart/Player/Mechanics"]
+script = ExtResource("5_dadqm")
+
+[node name="On Dash End" type="Node" parent="StateChart/Player/Mechanics/Dash"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../..")
 delay_seconds = 0.3
 
 [node name="AtkShape" type="Area2D" parent="."]
@@ -576,19 +590,21 @@ element = 0
 
 [connection signal="state_physics_processing" from="StateChart/Player/Inputs/W/Pressed" to="." method="_on_pressed_state_physics_processing"]
 [connection signal="state_input" from="StateChart/Player/Inputs/Shooting/CanShoot" to="." method="_on_can_shoot_state_input"]
-[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement" to="." method="_on_movement_child_state_exited"]
-[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement/Grounded" to="." method="_on_movement_child_state_exited"]
-[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement/Grounded/Crouching" to="." method="_on_movement_child_state_exited"]
-[connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Grounded/Crouching" to="." method="_on_crouching_state_entered"]
-[connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Grounded/Crouching/Sliding" to="." method="_on_sliding_state_entered"]
-[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement/Airborne" to="." method="_on_movement_child_state_exited"]
-[connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Airborne/Jumping" to="." method="_on_jumping_state_entered"]
-[connection signal="state_input" from="StateChart/Player/Mechanics/Movement/Airborne/Jumping" to="." method="_on_airborn_not_coyote_state_input"]
-[connection signal="state_input" from="StateChart/Player/Mechanics/Movement/Airborne/Falling" to="." method="_on_airborn_not_coyote_state_input"]
-[connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/WallSlide" to="." method="_on_wall_slide_state_entered"]
+[connection signal="child_state_exited" from="StateChart/Player/Mechanics" to="." method="_on_movement_child_state_exited"]
+[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Interruptible" to="." method="_on_movement_child_state_exited"]
+[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Interruptible/Grounded" to="." method="_on_movement_child_state_exited"]
+[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Interruptible/Grounded/Crouching" to="." method="_on_movement_child_state_exited"]
+[connection signal="state_entered" from="StateChart/Player/Mechanics/Interruptible/Grounded/Crouching" to="." method="_on_crouching_state_entered"]
+[connection signal="state_entered" from="StateChart/Player/Mechanics/Interruptible/Grounded/Crouching/Sliding" to="." method="_on_sliding_state_entered"]
+[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Interruptible/Airborne" to="." method="_on_movement_child_state_exited"]
+[connection signal="state_entered" from="StateChart/Player/Mechanics/Interruptible/Airborne/Jumping" to="." method="_on_jumping_state_entered"]
+[connection signal="state_input" from="StateChart/Player/Mechanics/Interruptible/Airborne/Jumping" to="." method="_on_airborn_not_coyote_state_input"]
+[connection signal="state_input" from="StateChart/Player/Mechanics/Interruptible/Airborne/Falling" to="." method="_on_airborn_not_coyote_state_input"]
+[connection signal="state_entered" from="StateChart/Player/Mechanics/Interruptible/WallSlide" to="." method="_on_wall_slide_state_entered"]
 [connection signal="child_state_entered" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_meele_attacks_child_state_entered"]
-[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_meele_attacks_child_state_exited"]
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_movement_child_state_exited"]
+[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_meele_attacks_child_state_exited"]
+[connection signal="state_entered" from="StateChart/Player/Mechanics/Dash" to="." method="_on_dash_state_entered"]
 [connection signal="body_entered" from="AtkShape" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timers/HeatTick" to="." method="_on_heat_tick_timeout"]
 [connection signal="timeout" from="Timers/HealTick" to="." method="_on_heal_tick_timeout"]

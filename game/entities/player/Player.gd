@@ -68,6 +68,8 @@ func reset_variables():
 	friction = base_friction
 	fall_speed_factor = base_fall_speed_factor
 	can_move = true
+	collision_mask = 0b101
+	collision_layer = 0b01
 
 # Other information about the player
 var air_jumps_left: int = air_jumps
@@ -104,8 +106,6 @@ func _physics_process(delta):
 		else:
 			state_chart.send_event("falling")
 
-	if Input.is_action_just_pressed("w"): state_chart.send_event("jump")
-
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
 	state_chart.set_expression_property("air_jumps_left", air_jumps_left)
 	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
@@ -126,12 +126,14 @@ func _physics_process(delta):
 func _input(event: InputEvent):
 	if event.is_action_pressed("w"):
 		state_chart.send_event("wPressed")
+		state_chart.send_event("jump")
 	if event.is_action_pressed("attack"):
 		state_chart.send_event("attackpressed")
+	if event.is_action_pressed("lshift"):
+		state_chart.send_event("dash")
 
 func update_animation():
 	animation_tree.set("parameters/Action/blend_position", abs(velocity.x) > 0)
-	# If player walks in different direction than sprite orientation
 	if sign(scale.y) != sign(direction) and sign(direction) != 0:
 		flip_player()
 
@@ -191,3 +193,10 @@ func _on_can_shoot_state_input(event: InputEvent) -> void:
 
 func _on_health_component_death():
 	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
+
+func _on_dash_state_entered() -> void:
+	can_move = false
+	friction = 0
+	velocity.x = signi(scale.y) * base_speed * 2
+	collision_mask = 0b1
+	collision_layer = 0b
