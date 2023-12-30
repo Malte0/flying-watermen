@@ -25,7 +25,7 @@ func _physics_process(delta):
 func hunt_player():
 	if wall_detection.is_colliding():
 		jump(1)
-	
+
 	var player_distance: float = player.global_position.x - global_position.x
 	var player_direction: int = sign(player_distance)
 	if abs(player_distance) < 20: # this is just some random small value
@@ -55,7 +55,7 @@ func _on_damage_tick_timeout():
 		player.health_component.take_damage(damage, Element.Type.Fire)
 	if abs(player_distance) < HEAT_RADIUS:
 		var heat: int = scale_by_distance(HEAT_RADIUS, player_distance, HEAT_PER_TICK)
-		player.increase_heat(heat)
+		player.heat_component.increase_heat(heat)
 
 func _on_view_area_body_entered(body):
 	if body is Player:

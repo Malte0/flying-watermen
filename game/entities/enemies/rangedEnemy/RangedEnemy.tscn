@@ -41,8 +41,8 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ViewArea"]
 shape = SubResource("CircleShape2D_5bvq1")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("1_otr82")]
-health_bar = NodePath("HealthBar")
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_health_bar") instance=ExtResource("1_otr82")]
+_health_bar = NodePath("HealthBar")
 
 [node name="HealthBar" type="TextureProgressBar" parent="HealthComponent"]
 offset_left = -51.0
@@ -71,7 +71,6 @@ target_position = Vector2(0, 200)
 
 [connection signal="body_entered" from="ViewArea" to="." method="_on_view_area_body_entered"]
 [connection signal="body_exited" from="ViewArea" to="." method="_on_view_area_body_exited"]
-[connection signal="health_change" from="HealthComponent" to="." method="_on_health_component_health_change"]
 [connection signal="timeout" from="AggroCooldown" to="." method="_on_aggro_cooldown_timeout"]
 [connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
 [connection signal="timeout" from="DirectionChange" to="." method="_on_direction_change_timeout"]

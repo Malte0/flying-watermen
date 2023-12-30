@@ -1,11 +1,13 @@
-[gd_scene load_steps=59 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=36 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dhjab"]
-[ext_resource type="Texture2D" uid="uid://cokmlgw1b3wsr" path="res://assets/prototype-assets/slime-Sheet.png" id="2_kmxdh"]
+[ext_resource type="Texture2D" uid="uid://bt38xi7oyn7xv" path="res://entities/player/assets/defaultState.png" id="2_nfb20"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="3_7lhhd"]
+[ext_resource type="PackedScene" uid="uid://bvq77pvlf1qxo" path="res://entities/components/health/heat/HeatComponent.tscn" id="3_kjfn2"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_klwk4"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_dadqm"]
+[ext_resource type="Texture2D" uid="uid://d0qc6euyej0r2" path="res://entities/player/assets/iceState.png" id="5_ghnpr"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_aaxtf"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="7_m5qsp"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_is_active_guard.gd" id="8_3t36e"]
@@ -15,239 +17,8 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/animation_tree_state.gd" id="13_eid8a"]
 [ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="16_vgsyb"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_glekb"]
-atlas = ExtResource("2_kmxdh")
-region = Rect2(32, 50, 32, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j60wx"]
-atlas = ExtResource("2_kmxdh")
-region = Rect2(64, 50, 32, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q2fsj"]
-atlas = ExtResource("2_kmxdh")
-region = Rect2(96, 50, 32, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tebn2"]
-atlas = ExtResource("2_kmxdh")
-region = Rect2(128, 50, 32, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6qa8q"]
-atlas = ExtResource("2_kmxdh")
-region = Rect2(0, 0, 32, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bbh0e"]
-atlas = ExtResource("2_kmxdh")
-region = Rect2(32, 0, 32, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_krutb"]
-atlas = ExtResource("2_kmxdh")
-region = Rect2(64, 0, 32, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g6lj7"]
-atlas = ExtResource("2_kmxdh")
-region = Rect2(96, 0, 32, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ni1ut"]
-atlas = ExtResource("2_kmxdh")
-region = Rect2(128, 0, 32, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n6utp"]
-atlas = ExtResource("2_kmxdh")
-region = Rect2(160, 0, 32, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wpnnx"]
-atlas = ExtResource("2_kmxdh")
-region = Rect2(192, 0, 32, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8qqyf"]
-atlas = ExtResource("2_kmxdh")
-region = Rect2(224, 0, 32, 24)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_w7iqa"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_glekb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j60wx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q2fsj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tebn2")
-}],
-"loop": true,
-"name": &"Death",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6qa8q")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bbh0e")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_krutb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g6lj7")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ni1ut")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n6utp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wpnnx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8qqyf")
-}],
-"loop": true,
-"name": &"Move",
-"speed": 10.0
-}]
-
-[sub_resource type="Animation" id="Animation_qg2ej"]
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["Death"]
-}
-
-[sub_resource type="Animation" id="Animation_evsxk"]
-resource_name = "Idle"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["Idle"]
-}
-
-[sub_resource type="Animation" id="Animation_78kx3"]
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["Move"]
-}
-
-[sub_resource type="Animation" id="Animation_yuqjr"]
-length = 0.001
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qkppn"]
-_data = {
-"Death": SubResource("Animation_qg2ej"),
-"Idle": SubResource("Animation_evsxk"),
-"Move": SubResource("Animation_78kx3"),
-"RESET": SubResource("Animation_yuqjr")
-}
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rsc3a"]
-animation = &"Idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0hu4d"]
-animation = &"Move"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ty1kj"]
-animation = &"Move"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p4b6h"]
-animation = &"Idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_omt3n"]
-animation = &"Idle"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_qogtd"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_rsc3a")
-blend_point_0/pos = 0.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_0hu4d")
-blend_point_1/pos = 1.0
-blend_point_2/node = SubResource("AnimationNodeAnimation_ty1kj")
-blend_point_2/pos = -1.0
-blend_point_3/node = SubResource("AnimationNodeAnimation_p4b6h")
-blend_point_3/pos = -0.3
-blend_point_4/node = SubResource("AnimationNodeAnimation_omt3n")
-blend_point_4/pos = 0.3
-blend_mode = 1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8lfbf"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_shgom"]
-states/Action/node = SubResource("AnimationNodeBlendSpace1D_qogtd")
-states/Action/position = Vector2(574, 100)
-transitions = ["Start", "Action", SubResource("AnimationNodeStateMachineTransition_8lfbf")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ockj"]
+size = Vector2(38, 29.5)
 
 [sub_resource type="Resource" id="Resource_r58ym"]
 script = ExtResource("7_m5qsp")
@@ -328,41 +99,39 @@ floor_constant_speed = true
 floor_snap_length = 23.0
 script = ExtResource("1_n7144")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
-position = Vector2(0, -24)
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_w7iqa")
-animation = &"Idle"
-autoplay = "Idle"
-flip_h = true
+[node name="HealthComponent" parent="." instance=ExtResource("16_vgsyb")]
+element = 0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_qkppn")
-}
-speed_scale = 0.6
+[node name="HeatComponent" parent="." node_paths=PackedStringArray("health_component", "heat_reduction_delay", "heat_tick") instance=ExtResource("3_kjfn2")]
+health_component = NodePath("../HealthComponent")
+heat_reduction_delay = NodePath("../Timers/HeatReductionDelay")
+heat_tick = NodePath("../Timers/HeatTick")
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_qkppn")
-}
-tree_root = SubResource("AnimationNodeStateMachine_shgom")
-anim_player = NodePath("../AnimationPlayer")
-parameters/Action/blend_position = -0.00144303
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14.75)
+shape = SubResource("RectangleShape2D_8ockj")
+debug_color = Color(0.917647, 0.172549, 0.568627, 0.419608)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(0, -14)
-rotation = 1.5708
-polygon = PackedVector2Array(-11.5, 10.5, -9.99994, 17.5, -7.49993, 19.5, -3.99992, 21, 8.00008, 22, 14.0001, 20.9999, 13.9999, -18.5001, 7.49993, -19.5, 1.99993, -20, -5.00006, -16, -10.5, -7.49996)
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="iceImage" type="Sprite2D" parent="Node2D"]
+visible = false
+position = Vector2(0, -13.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_ghnpr")
+
+[node name="defaultImage" type="Sprite2D" parent="Node2D"]
+position = Vector2(0, -13.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_nfb20")
+
+[node name="ShootPosition" type="Marker2D" parent="."]
+position = Vector2(0, -23)
 
 [node name="WallCheck" type="RayCast2D" parent="."]
 visible = false
 position = Vector2(28, -45)
 target_position = Vector2(0, 44)
-
-[node name="ShootPosition" type="Marker2D" parent="."]
-position = Vector2(0, -23)
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("2_dhjab")
@@ -376,7 +145,6 @@ initial_state = NodePath("Action")
 
 [node name="Action" type="Node" parent="StateChart/Player/AnimationControl"]
 script = ExtResource("13_eid8a")
-animation_tree = NodePath("../../../../AnimationTree")
 
 [node name="Inputs" type="Node" parent="StateChart/Player"]
 script = ExtResource("3_7lhhd")
@@ -561,18 +329,17 @@ disabled = true
 
 [node name="Timers" type="Node2D" parent="."]
 
+[node name="HeatTick" type="Timer" parent="Timers"]
+autostart = true
+
 [node name="HeatReductionDelay" type="Timer" parent="Timers"]
 wait_time = 2.0
 one_shot = true
 
-[node name="HeatTick" type="Timer" parent="Timers"]
-autostart = true
-
 [node name="HealTick" type="Timer" parent="Timers"]
 autostart = true
 
-[node name="HealthComponent" parent="." instance=ExtResource("16_vgsyb")]
-element = 0
+[node name="Abilities" type="Node2D" parent="."]
 
 [connection signal="state_physics_processing" from="StateChart/Player/Inputs/W/Pressed" to="." method="_on_pressed_state_physics_processing"]
 [connection signal="state_input" from="StateChart/Player/Inputs/Shooting/CanShoot" to="." method="_on_can_shoot_state_input"]
@@ -587,10 +354,6 @@ element = 0
 [connection signal="state_input" from="StateChart/Player/Mechanics/Movement/Airborne/Falling" to="." method="_on_airborn_not_coyote_state_input"]
 [connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/WallSlide" to="." method="_on_wall_slide_state_entered"]
 [connection signal="child_state_entered" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_meele_attacks_child_state_entered"]
-[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_meele_attacks_child_state_exited"]
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_movement_child_state_exited"]
+[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_meele_attacks_child_state_exited"]
 [connection signal="body_entered" from="AtkShape" to="." method="_on_area_2d_body_entered"]
-[connection signal="timeout" from="Timers/HeatTick" to="." method="_on_heat_tick_timeout"]
-[connection signal="timeout" from="Timers/HealTick" to="." method="_on_heal_tick_timeout"]
-[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
-[connection signal="health_change" from="HealthComponent" to="." method="_on_health_component_health_change"]
