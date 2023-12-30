@@ -10,7 +10,7 @@ consecutiveLineBreaks = 0
 def hasCamelCase(line: str):
     keyWordsToSearch = ['func', 'var', 'const']
     namesToIgnore = ['_on']
-    words = line.split(" ")
+    words = line.strip().split(" ")
     for i in range(len(words)):
         if words[i] in keyWordsToSearch:
             if words[i+1] in namesToIgnore:
@@ -34,7 +34,7 @@ def hasBracketsOnIfStatements(line: str):
 
 def hasOneLetterVariable(line: str):
     keyWordsToSearch = ['func', 'var', 'const']
-    words = line.split(" ")
+    words = line.strip().split(" ")
     for i in range(len(words)):
         if words[i] in keyWordsToSearch:
             if len(words[i+1]) == 1 and words[i+1] != "i":
@@ -69,7 +69,7 @@ def hasTooLongLine(line: str):
     return len(line) > style_config["maxLineLength"] and not '@onready' in line
 
 def missnamedBoolean(line: str):
-    words = line.split(" ")
+    words = line.strip().split(" ")
     for i in range(len(words)):
         if i == 0:
             continue
