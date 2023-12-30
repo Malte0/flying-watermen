@@ -13,6 +13,8 @@ const HEAT_REDUCTION_PER_TICK: int = 10
 
 var heat: int = 0
 
+signal heat_changed(new_heat: int, delta_heat: int)
+
 func _ready():
 	heat = 0
 	if get_parent() is Player:
@@ -27,6 +29,7 @@ func _process(_delta: float):
 
 func increase_heat(amount: int):
 	heat = mini(heat + amount, MAX_HEAT)
+	heat_changed.emit(heat, amount)
 	heat_reduction_delay.start()
 
 func _on_heat_tick():

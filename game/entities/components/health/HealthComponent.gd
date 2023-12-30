@@ -12,8 +12,9 @@ const HEALTH_BAR_INTERPOLATION_SPEED: float = 1
 
 var heal_over_time_left: int = 0
 var health: int = 100
+var is_immune: bool = false
 
-signal health_changed(new_health, delta_health)
+signal health_changed(new_health: int, delta_health: int)
 signal death
 
 func _ready():
@@ -31,6 +32,8 @@ func _process(_delta):
 		_health_bar.value = move_toward(_health_bar.value, health, HEALTH_BAR_INTERPOLATION_SPEED)
 
 func take_damage(amount: int, damage_type: Element.Type):
+	if is_immune:
+		return
 	if damage_type != Element.Type.Neutral and damage_type == element:
 		return
 	health -= amount

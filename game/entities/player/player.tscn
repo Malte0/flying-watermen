@@ -1,10 +1,10 @@
-[gd_scene load_steps=36 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=37 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dhjab"]
 [ext_resource type="Texture2D" uid="uid://bt38xi7oyn7xv" path="res://entities/player/assets/defaultState.png" id="2_nfb20"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="3_7lhhd"]
-[ext_resource type="PackedScene" uid="uid://bvq77pvlf1qxo" path="res://entities/components/health/heat/HeatComponent.tscn" id="3_kjfn2"]
+[ext_resource type="PackedScene" uid="uid://bvq77pvlf1qxo" path="res://entities/components/heat/HeatComponent.tscn" id="3_kjfn2"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_klwk4"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_dadqm"]
 [ext_resource type="Texture2D" uid="uid://d0qc6euyej0r2" path="res://entities/player/assets/iceState.png" id="5_ghnpr"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/any_of_guard.gd" id="11_5fhyj"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/animation_tree_state.gd" id="13_eid8a"]
 [ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="16_vgsyb"]
+[ext_resource type="Script" path="res://entities/player/chemicalEffects/IceState.gd" id="17_irds6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ockj"]
 size = Vector2(38, 29.5)
@@ -99,8 +100,9 @@ floor_constant_speed = true
 floor_snap_length = 23.0
 script = ExtResource("1_n7144")
 
-[node name="HealthComponent" parent="." instance=ExtResource("16_vgsyb")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_heal_tick") instance=ExtResource("16_vgsyb")]
 element = 0
+_heal_tick = NodePath("../Timers/HealTick")
 
 [node name="HeatComponent" parent="." node_paths=PackedStringArray("health_component", "heat_reduction_delay", "heat_tick") instance=ExtResource("3_kjfn2")]
 health_component = NodePath("../HealthComponent")
@@ -112,15 +114,15 @@ position = Vector2(0, -14.75)
 shape = SubResource("RectangleShape2D_8ockj")
 debug_color = Color(0.917647, 0.172549, 0.568627, 0.419608)
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Sprites" type="Node2D" parent="."]
 
-[node name="iceImage" type="Sprite2D" parent="Node2D"]
+[node name="iceImage" type="Sprite2D" parent="Sprites"]
 visible = false
 position = Vector2(0, -13.5)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_ghnpr")
 
-[node name="defaultImage" type="Sprite2D" parent="Node2D"]
+[node name="defaultImage" type="Sprite2D" parent="Sprites"]
 position = Vector2(0, -13.5)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_nfb20")
@@ -339,7 +341,34 @@ one_shot = true
 [node name="HealTick" type="Timer" parent="Timers"]
 autostart = true
 
-[node name="Abilities" type="Node2D" parent="."]
+[node name="effects" type="Node2D" parent="." node_paths=PackedStringArray("player", "heat_component", "effects_state_chart")]
+script = ExtResource("17_irds6")
+player = NodePath("..")
+heat_component = NodePath("../HeatComponent")
+effects_state_chart = NodePath("../ChemicalStates")
+
+[node name="ChemicalStates" type="Node" parent="."]
+script = ExtResource("2_dhjab")
+
+[node name="Root" type="Node" parent="ChemicalStates"]
+script = ExtResource("4_klwk4")
+initial_state = NodePath("Default")
+
+[node name="Default" type="Node" parent="ChemicalStates/Root"]
+script = ExtResource("5_dadqm")
+
+[node name="ToIce" type="Node" parent="ChemicalStates/Root/Default"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Ice")
+event = &"to_ice"
+
+[node name="Ice" type="Node" parent="ChemicalStates/Root"]
+script = ExtResource("5_dadqm")
+
+[node name="ToDefault" type="Node" parent="ChemicalStates/Root/Ice"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Default")
+event = &"to_default"
 
 [connection signal="state_physics_processing" from="StateChart/Player/Inputs/W/Pressed" to="." method="_on_pressed_state_physics_processing"]
 [connection signal="state_input" from="StateChart/Player/Inputs/Shooting/CanShoot" to="." method="_on_can_shoot_state_input"]
@@ -357,3 +386,4 @@ autostart = true
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_movement_child_state_exited"]
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_meele_attacks_child_state_exited"]
 [connection signal="body_entered" from="AtkShape" to="." method="_on_area_2d_body_entered"]
+[connection signal="state_physics_processing" from="ChemicalStates/Root/Default" to="." method="_on_default_state_physics_processing"]

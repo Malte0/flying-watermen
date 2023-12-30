@@ -30,9 +30,6 @@ const SPRITE_FLIP_OFFSET: int = 0
 var direction: float = 0.0
 var slide_threshold: float = base_speed/2
 
-var is_in_ice_state: bool = false
-var ice_friction: float = 0.01
-
 func reset_variables():
 	speed = base_speed
 	jump_velocity = base_jump_velocity
@@ -41,17 +38,14 @@ func reset_variables():
 	can_move = true
 
 func _ready():
+	health_component.death.connect(_on_death)
 	#Initialize values so Guards don't complain
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
 	state_chart.set_expression_property("air_jumps_left", air_jumps_left)
 	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
 	state_chart.set_expression_property("velocity_x", velocity.x)
 
-func _physics_process(delta):
-	# For transitions without event condition
-	state_chart.send_event("tick")
-
-	# handle gravity
+func apply_gravity(delta: float):
 	if is_on_floor() and velocity.y == 0:
 		state_chart.send_event("grounded")
 		air_jumps_left = air_jumps
@@ -64,34 +58,31 @@ func _physics_process(delta):
 		else:
 			state_chart.send_event("falling")
 
-	if is_in_ice_state:
-		velocity.x = lerp(velocity.x, 0.0, ice_friction)
-		move_and_slide()
-		return
+func _physics_process(delta: float):
+	# For transitions without event condition
+	state_chart.send_event("tick")
+	apply_gravity(delta)
 
-	if Input.is_action_just_pressed("w"): state_chart.send_event("jump")
-
-	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
-	state_chart.set_expression_property("air_jumps_left", air_jumps_left)
-	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
-
-	if sign(scale.y) != sign(direction) and sign(direction) != 0:
-		flip_player()
-
-	# handle left/right movement
-	direction = Input.get_axis("a", "d")
-	if abs(direction) > 0 and can_move:
-		velocity.x = lerp(velocity.x, direction * speed, 0.1)
-	elif abs(velocity.x) < 0.1:
+	if abs(velocity.x) < 0.1:
 		velocity.x = 0
-	else:
+	elif direction == 0:
 		velocity.x = lerp(velocity.x, 0.0, friction)
 
 	move_and_slide()
 
+func _on_default_state_physics_processing(_delta):
+	# handle left/right movement
+	direction = Input.get_axis("a", "d")
+	if abs(direction) > 0 and can_move:
+		velocity.x = lerp(velocity.x, direction * speed, 0.1)
+
+	if sign(scale.y) != sign(direction) and sign(direction) != 0:
+		flip_player()
+
+	if Input.is_action_just_pressed("w"):
+		state_chart.send_event("jump")
+
 func _input(event: InputEvent):
-	if event.is_action_pressed("activate_ability"):
-		toggle_ice_state()
 	if event.is_action_pressed("w"):
 		state_chart.send_event("wPressed")
 	if event.is_action_pressed("attack"):
@@ -151,11 +142,7 @@ func _on_can_shoot_state_input(event: InputEvent) -> void:
 		projectile_instance.player_speed = velocity
 		add_child(projectile_instance)
 
-func _on_health_component_death():
+func _on_death():
 	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
 
-func toggle_ice_state():
-	print("toggle ice")
-	is_in_ice_state = not is_in_ice_state
-	$Node2D/defaultImage.visible = not is_in_ice_state
-	$Node2D/iceImage.visible = is_in_ice_state
+
