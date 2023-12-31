@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=30 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dhjab"]
@@ -12,11 +12,9 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="7_m5qsp"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_is_active_guard.gd" id="8_3t36e"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="9_qrtxb"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="10_ddq3l"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/any_of_guard.gd" id="11_5fhyj"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/animation_tree_state.gd" id="13_eid8a"]
 [ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="16_vgsyb"]
 [ext_resource type="Script" path="res://entities/player/chemicalEffects/IceState.gd" id="17_irds6"]
+[ext_resource type="Script" path="res://entities/player/chemicalEffects/ChemicalStateManager.gd" id="18_bvu0j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ockj"]
 size = Vector2(38, 29.5)
@@ -45,33 +43,9 @@ state = NodePath("../Airborne")
 script = ExtResource("9_qrtxb")
 guard = SubResource("Resource_7ckxi")
 
-[sub_resource type="Resource" id="Resource_6pm8d"]
-script = ExtResource("8_3t36e")
-state = NodePath("../Airborne")
-
-[sub_resource type="Resource" id="Resource_38wkj"]
-script = ExtResource("9_qrtxb")
-guard = SubResource("Resource_6pm8d")
-
-[sub_resource type="Resource" id="Resource_unbhb"]
-script = ExtResource("8_3t36e")
-state = NodePath("../Airborne")
-
-[sub_resource type="Resource" id="Resource_1o2au"]
+[sub_resource type="Resource" id="Resource_y14vn"]
 script = ExtResource("7_m5qsp")
-expression = "air_jumps_left > 0"
-
-[sub_resource type="Resource" id="Resource_b3ndv"]
-script = ExtResource("10_ddq3l")
-guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_unbhb"), SubResource("Resource_1o2au")])
-
-[sub_resource type="Resource" id="Resource_hcnl0"]
-script = ExtResource("8_3t36e")
-state = NodePath("../Airborne/FallingCoyote")
-
-[sub_resource type="Resource" id="Resource_se5vv"]
-script = ExtResource("11_5fhyj")
-guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_38wkj"), SubResource("Resource_b3ndv"), SubResource("Resource_hcnl0")])
+expression = "jumps_left > 0"
 
 [sub_resource type="Resource" id="Resource_cg3bt"]
 script = ExtResource("8_3t36e")
@@ -91,6 +65,10 @@ guard = SubResource("Resource_p8ca0")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srmds"]
 size = Vector2(39.3125, 28)
+
+[sub_resource type="Resource" id="Resource_7pa6p"]
+script = ExtResource("7_m5qsp")
+expression = "active_chemical == \"ice\""
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(2, 2)
@@ -116,13 +94,13 @@ debug_color = Color(0.917647, 0.172549, 0.568627, 0.419608)
 
 [node name="Sprites" type="Node2D" parent="."]
 
-[node name="iceImage" type="Sprite2D" parent="Sprites"]
+[node name="ice" type="Sprite2D" parent="Sprites"]
 visible = false
 position = Vector2(0, -13.5)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_ghnpr")
 
-[node name="defaultImage" type="Sprite2D" parent="Sprites"]
+[node name="default" type="Sprite2D" parent="Sprites"]
 position = Vector2(0, -13.5)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_nfb20")
@@ -141,52 +119,22 @@ script = ExtResource("2_dhjab")
 [node name="Player" type="Node" parent="StateChart"]
 script = ExtResource("3_7lhhd")
 
-[node name="AnimationControl" type="Node" parent="StateChart/Player"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Action")
-
-[node name="Action" type="Node" parent="StateChart/Player/AnimationControl"]
-script = ExtResource("13_eid8a")
-
-[node name="Inputs" type="Node" parent="StateChart/Player"]
-script = ExtResource("3_7lhhd")
-
-[node name="W" type="Node" parent="StateChart/Player/Inputs"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Not")
-
-[node name="Pressed" type="Node" parent="StateChart/Player/Inputs/W"]
-script = ExtResource("5_dadqm")
-
-[node name="Delay" type="Node" parent="StateChart/Player/Inputs/W/Pressed"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Not")
-delay_seconds = 0.1
-
-[node name="Not" type="Node" parent="StateChart/Player/Inputs/W"]
-script = ExtResource("5_dadqm")
-
-[node name="On Press" type="Node" parent="StateChart/Player/Inputs/W"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../Pressed")
-event = &"wPressed"
-
-[node name="Shooting" type="Node" parent="StateChart/Player/Inputs"]
+[node name="Shooting" type="Node" parent="StateChart/Player"]
 script = ExtResource("4_klwk4")
 initial_state = NodePath("CanShoot")
 
-[node name="CanShoot" type="Node" parent="StateChart/Player/Inputs/Shooting"]
+[node name="CanShoot" type="Node" parent="StateChart/Player/Shooting"]
 script = ExtResource("5_dadqm")
 
-[node name="OnShot" type="Node" parent="StateChart/Player/Inputs/Shooting/CanShoot"]
+[node name="OnShot" type="Node" parent="StateChart/Player/Shooting/CanShoot"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../CantShoot")
 event = &"_on_shot"
 
-[node name="CantShoot" type="Node" parent="StateChart/Player/Inputs/Shooting"]
+[node name="CantShoot" type="Node" parent="StateChart/Player/Shooting"]
 script = ExtResource("5_dadqm")
 
-[node name="Cooldown" type="Node" parent="StateChart/Player/Inputs/Shooting/CantShoot"]
+[node name="Cooldown" type="Node" parent="StateChart/Player/Shooting/CantShoot"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../CanShoot")
 delay_seconds = 0.5
@@ -241,11 +189,6 @@ to = NodePath("../../Standing")
 event = &"tick"
 guard = SubResource("Resource_wu70w")
 
-[node name="onAtk" type="Node" parent="StateChart/Player/Mechanics/Movement/Grounded"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../../Combat/MeeleAttacks/GAtk")
-event = &"attackpressed"
-
 [node name="Airborne" type="Node" parent="StateChart/Player/Mechanics/Movement"]
 script = ExtResource("4_klwk4")
 initial_state = NodePath("Falling")
@@ -269,11 +212,6 @@ delay_seconds = 0.2
 [node name="Falling" type="Node" parent="StateChart/Player/Mechanics/Movement/Airborne"]
 script = ExtResource("5_dadqm")
 
-[node name="onAtk" type="Node" parent="StateChart/Player/Mechanics/Movement/Airborne"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../../Combat/MeeleAttacks/AAtk")
-event = &"attackpressed"
-
 [node name="WallSlide" type="Node" parent="StateChart/Player/Mechanics/Movement"]
 script = ExtResource("5_dadqm")
 
@@ -287,7 +225,7 @@ guard = SubResource("Resource_sktov")
 script = ExtResource("6_aaxtf")
 to = NodePath("../Airborne/Jumping")
 event = &"jump"
-guard = SubResource("Resource_se5vv")
+guard = SubResource("Resource_y14vn")
 
 [node name="On WallSlide" type="Node" parent="StateChart/Player/Mechanics/Movement"]
 script = ExtResource("6_aaxtf")
@@ -300,25 +238,6 @@ script = ExtResource("6_aaxtf")
 to = NodePath("../Grounded")
 event = &"grounded"
 guard = SubResource("Resource_c7udc")
-
-[node name="Combat" type="Node" parent="StateChart/Player/Mechanics"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("MeeleAttacks")
-
-[node name="MeeleAttacks" type="Node" parent="StateChart/Player/Mechanics/Combat"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("GAtk")
-
-[node name="GAtk" type="Node" parent="StateChart/Player/Mechanics/Combat/MeeleAttacks"]
-script = ExtResource("5_dadqm")
-
-[node name="AAtk" type="Node" parent="StateChart/Player/Mechanics/Combat/MeeleAttacks"]
-script = ExtResource("5_dadqm")
-
-[node name="onAtk" type="Node" parent="StateChart/Player/Mechanics/Combat/MeeleAttacks"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../../Movement/Grounded")
-delay_seconds = 0.3
 
 [node name="AtkShape" type="Area2D" parent="."]
 position = Vector2(0, -23)
@@ -341,37 +260,45 @@ one_shot = true
 [node name="HealTick" type="Timer" parent="Timers"]
 autostart = true
 
-[node name="effects" type="Node2D" parent="." node_paths=PackedStringArray("player", "heat_component", "effects_state_chart")]
-script = ExtResource("17_irds6")
+[node name="ChemicalEffectsManager" type="Node2D" parent="." node_paths=PackedStringArray("chemical_state_chart", "player", "player_sprite_container")]
+script = ExtResource("18_bvu0j")
+chemical_state_chart = NodePath("ChemicalStates")
 player = NodePath("..")
-heat_component = NodePath("../HeatComponent")
-effects_state_chart = NodePath("../ChemicalStates")
+player_sprite_container = NodePath("../Sprites")
 
-[node name="ChemicalStates" type="Node" parent="."]
+[node name="effects" type="Node2D" parent="ChemicalEffectsManager"]
+
+[node name="ice" type="Node2D" parent="ChemicalEffectsManager/effects" node_paths=PackedStringArray("player", "heat_component", "chemical_state_chart")]
+script = ExtResource("17_irds6")
+player = NodePath("../../..")
+heat_component = NodePath("../../../HeatComponent")
+chemical_state_chart = NodePath("../../ChemicalStates")
+
+[node name="ChemicalStates" type="Node" parent="ChemicalEffectsManager"]
 script = ExtResource("2_dhjab")
 
-[node name="Root" type="Node" parent="ChemicalStates"]
+[node name="Root" type="Node" parent="ChemicalEffectsManager/ChemicalStates"]
 script = ExtResource("4_klwk4")
 initial_state = NodePath("Default")
 
-[node name="Default" type="Node" parent="ChemicalStates/Root"]
+[node name="Default" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root"]
 script = ExtResource("5_dadqm")
 
-[node name="ToIce" type="Node" parent="ChemicalStates/Root/Default"]
+[node name="ToIce" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root/Default"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Ice")
-event = &"to_ice"
+event = &"to_chemical"
+guard = SubResource("Resource_7pa6p")
 
-[node name="Ice" type="Node" parent="ChemicalStates/Root"]
+[node name="Ice" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root"]
 script = ExtResource("5_dadqm")
 
-[node name="ToDefault" type="Node" parent="ChemicalStates/Root/Ice"]
+[node name="ToDefault" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root/Ice"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Default")
 event = &"to_default"
 
-[connection signal="state_physics_processing" from="StateChart/Player/Inputs/W/Pressed" to="." method="_on_pressed_state_physics_processing"]
-[connection signal="state_input" from="StateChart/Player/Inputs/Shooting/CanShoot" to="." method="_on_can_shoot_state_input"]
+[connection signal="state_input" from="StateChart/Player/Shooting/CanShoot" to="." method="_on_can_shoot_state_input"]
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement" to="." method="_on_movement_child_state_exited"]
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement/Grounded" to="." method="_on_movement_child_state_exited"]
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement/Grounded/Crouching" to="." method="_on_movement_child_state_exited"]
@@ -380,10 +307,9 @@ event = &"to_default"
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement/Airborne" to="." method="_on_movement_child_state_exited"]
 [connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Airborne/Jumping" to="." method="_on_jumping_state_entered"]
 [connection signal="state_input" from="StateChart/Player/Mechanics/Movement/Airborne/Jumping" to="." method="_on_airborn_not_coyote_state_input"]
-[connection signal="state_input" from="StateChart/Player/Mechanics/Movement/Airborne/Falling" to="." method="_on_airborn_not_coyote_state_input"]
+[connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Airborne/Falling" to="." method="_on_falling_state_entered"]
 [connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/WallSlide" to="." method="_on_wall_slide_state_entered"]
-[connection signal="child_state_entered" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_meele_attacks_child_state_entered"]
-[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_movement_child_state_exited"]
-[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_meele_attacks_child_state_exited"]
-[connection signal="body_entered" from="AtkShape" to="." method="_on_area_2d_body_entered"]
-[connection signal="state_physics_processing" from="ChemicalStates/Root/Default" to="." method="_on_default_state_physics_processing"]
+[connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Default" to="ChemicalEffectsManager" method="_on_default_state_entered"]
+[connection signal="state_physics_processing" from="ChemicalEffectsManager/ChemicalStates/Root/Default" to="." method="_on_default_state_physics_processing"]
+[connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Ice" to="ChemicalEffectsManager" method="_on_ice_state_entered"]
+[connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Ice" to="ChemicalEffectsManager/effects/ice" method="_on_ice_state_entered"]
