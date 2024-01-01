@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from style_checks import checkCodeStyle
+from special_checks import hasUnusedVariable
 
 # functions in dictionary:
 # arguments:
@@ -8,7 +9,10 @@ from style_checks import checkCodeStyle
 # path to the file as str
 # returns:
 # number of issues found as int
-checksToRun = { "codeStyle": checkCodeStyle }
+checksToRun = { 
+  "Code style": checkCodeStyle, 
+  "Unused variable": hasUnusedVariable
+}
 
 godotLocation = "../../../game" if "python" in os.getcwd() else "./game"
 ignoreFolders = [".godot", "addons"]
