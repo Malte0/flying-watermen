@@ -1,6 +1,7 @@
 
 import re;
 from style_config import style_config
+from log_feedback import log
 
 isFunction = False
 functionLength = 0
@@ -32,12 +33,13 @@ def usesAutoType(line: str):
 def hasBracketsOnIfStatements(line: str):
     return re.search(r"if \(", line) is not None
 
-def hasOneLetterVariable(line: str):
+def hasShortVariableName(line: str):
     keyWordsToSearch = ['func', 'var', 'const']
-    words = line.split(" ")
+    lineWithoutColon = line.replace(":", "")
+    words = lineWithoutColon.split(" ")
     for i in range(len(words)):
         if words[i] in keyWordsToSearch:
-            if len(words[i+1]) == 1 and words[i+1] != "i":
+            if len(words[i+1]) < 3 and words[i+1] != "i":
                 return True
     return False
 
@@ -116,7 +118,7 @@ checks = {
     "deep nesting": hasDeepNesting,
     "no explicit type": usesAutoType,
     "brackets on if-statements": hasBracketsOnIfStatements,
-    "one-letter-variable (that is not i)": hasOneLetterVariable, 
+    "one-letter-variable (that is not i)": hasShortVariableName, 
     "too long function before": hasTooLongFunction,
     "too long line": hasTooLongLine,
     "missnamed boolean": missnamedBoolean, 
@@ -149,11 +151,7 @@ def checkCodeStyle(lines: list[str], filePath: str):
         line = removeComments(lines[lineNumber])
         for checkName in checks:
             if checks[checkName](line):
-                print("Found " + checkName + ":")
-                print("\tFilepath: " + filePath.replace("game/", ""))
-                print("\tLine: " + str(lineNumber+1))
-                print("\t" + line.strip())
-                print("")
+                log(checkName, filePath, lineNumber, line)
                 numberOfIssues += 1
 
     return numberOfIssues
