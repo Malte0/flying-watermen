@@ -6,8 +6,8 @@ class_name HealthComponent extends Node2D
 const HEALTH_BAR_INTERPOLATION_SPEED: int = 1
 var current_health: int = 100
 
-signal health_change(new_health, delta_health)
-signal death
+signal health_change(new_health: int, delta_health: int)
+signal death()
 
 func _ready():
 	current_health = max_health

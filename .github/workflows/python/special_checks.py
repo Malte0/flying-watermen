@@ -1,13 +1,16 @@
 
 from log_feedback import log
 
+def cleanLine(line: str):
+    charsToRemove = ["\n", "\t", ":"]
+    for char in charsToRemove:
+        line = line.replace(char, "")
+    return line
+
 def findVariableNamesAndLineNumbers(lines: list[str]):
     variableNames = []
-    charsToRemove = ["\n", "\t", ":"]
     for lineNumber in range(len(lines)):
-        line = lines[lineNumber]
-        for char in charsToRemove:
-            line = line.replace(char, "")
+        line = cleanLine(lines[lineNumber])
         words = line.split(" ")
         if "var" in words:
             variableName = words[words.index("var")+1]
@@ -17,10 +20,11 @@ def findVariableNamesAndLineNumbers(lines: list[str]):
             variableNames.append((variableName, lineNumber))
     return variableNames
 
-def isNotUsed(variableName: list[tuple], lines: list[str]):
+def isNotUsed(varAndLineNumber: list[tuple], lines: list[str]):
     for lineNumber in range(len(lines)):
-        line = lines[lineNumber]
-        if variableName[0] in line and not lineNumber == variableName[1]:
+        line = cleanLine(lines[lineNumber])
+        words = line.split(" ")
+        if any([varAndLineNumber[0] == w] for w in words) and lineNumber != varAndLineNumber[1]:
             return False
     return True
 
