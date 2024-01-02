@@ -12,12 +12,9 @@ size = Vector2(74, 47)
 [sub_resource type="CircleShape2D" id="CircleShape2D_5bvq1"]
 radius = 414.0
 
-[node name="RangedEnemy" type="CharacterBody2D" node_paths=PackedStringArray("health_component") groups=["Enemy"]]
+[node name="RangedEnemy" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 4
 script = ExtResource("1_itytb")
-health_component = NodePath("HealthComponent")
-weight = 0.3
-jump_force = -150
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -11.5)

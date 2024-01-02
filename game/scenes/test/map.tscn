@@ -29873,5 +29873,9 @@ position = Vector2(2122, 1506)
 [node name="RangedEnemy" parent="." instance=ExtResource("12_awfkx")]
 position = Vector2(1498, 1414)
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="EnemyManager" type="Node2D" parent="."]
 script = ExtResource("13_pav4w")
+
+[node name="SpawnRate" type="Timer" parent="EnemyManager"]
+wait_time = 20.0
+autostart = true

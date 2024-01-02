@@ -13,6 +13,7 @@ collision_mask = 0
 script = ExtResource("1_cmlw7")
 impact_detector = NodePath("ImpactDetector")
 speed = 1600
+damage = 50
 
 [node name="ImpactDetector" type="Area2D" parent="."]
 collision_layer = 0
