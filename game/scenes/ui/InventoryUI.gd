@@ -1,10 +1,11 @@
 extends Panel
 
 @onready var inventory_text: RichTextLabel = $InventoryItem
-@onready var active_item_text: RichTextLabel = $ActiveItem
-@onready var active_item_amount: RichTextLabel = $ActiveItemAmount
+@onready var active_item: Panel = $ActiveItem
+@onready var active_item_name: RichTextLabel = $ActiveItem/Name
+@onready var active_item_amount: RichTextLabel = $ActiveItem/Amount
+@onready var active_item_meter: ProgressBar = $ActiveItem/ItemBar
 @onready var use_item_text: RichTextLabel = $"Use _E_"
-@onready var active_item_meter: ProgressBar = $ItemBar
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 
 func _ready():
@@ -23,14 +24,12 @@ func update_item_in_inventory(new_item: Item, _old_item: Item):
 		use_item_text.text = ""
 
 func update_active_item(item: Item):
-	active_item_text.visible = item != null
+	active_item_name.visible = item != null
 	if item:
-		active_item_text.text = item.name
+		active_item_name.text = item.name
 		update_item_bar(item.max_amount, item.max_amount)
 
 func update_item_bar(amount: int, max_amount: int):
-	active_item_meter.visible = amount > 0
-	active_item_text.visible = amount > 0
-	active_item_amount.visible = amount > 0
+	active_item.visible = amount > 0
 	active_item_amount.text = str(amount)+"/"+str(max_amount)
 	active_item_meter.value = (amount / float(max_amount)) * 100

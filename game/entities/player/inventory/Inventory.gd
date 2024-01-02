@@ -19,10 +19,10 @@ func set_active_item(item: Item):
 
 func use_active_item(amount: int):
 	if active_item:
-		active_item_left = maxi(active_item_left - amount, 0) 
+		active_item_left = maxi(active_item_left - amount, 0)
 		on_item_used.emit(active_item_left, active_item.max_amount)
 
-func _process(_delta):
-	if Input.is_action_just_pressed("use_item") and item_in_inventory:
+func _input(event):
+	if event.is_action_pressed("use_item") and item_in_inventory:
 		set_active_item(item_in_inventory)
 		set_item_in_inventory(null)
