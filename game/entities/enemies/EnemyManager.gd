@@ -5,6 +5,8 @@ extends Node2D
 @onready var spawn_timer: Timer = $SpawnRate
 
 const SPAWN_OFFSET: int = 800
+# amount of enemies that will spawn ahead of player vs behind
+const SPAWN_POSITION_BIAS: float = 0.7
 @onready var ENEMY_SPAWN_PROBABILITIES: Dictionary = {
 	"rangedEnemy": {
 		"weight": 0.3,
@@ -34,27 +36,33 @@ func test_enemy_probabilities():
 
 func _ready():
 	test_enemy_probabilities()
-	spawn_timer.timeout.connect(spawn_enemy)
+	spawn_timer.timeout.connect(spawn_random_enemy)
 	for e in enemies:
-		var enemy = e as Enemy
+		var enemy: Enemy = e as Enemy
 		connect_enemy_signals(enemy)
-	spawn_enemy()
+	spawn_random_enemy()
 
 func connect_enemy_signals(enemy: Enemy):
 	enemy.health_component.death.connect(_on_enemy_death)
 
 func _on_enemy_death():
-	spawn_enemy()
+	spawn_random_enemy()
 
-func spawn_enemy():
+func create_enemy_instance(scene: PackedScene) -> Enemy:
+	var enemy_instance: Enemy = scene.instantiate()
+	var x_offset: int = SPAWN_OFFSET if randf() < SPAWN_POSITION_BIAS else -SPAWN_OFFSET
+	var x_position: int = player.global_position.x+x_offset
+	var y_position: int = player.global_position.y-1000
+	enemy_instance.global_position = Vector2(x_position, y_position)
+	return enemy_instance
+
+func spawn_random_enemy():
 	var random: float = randf()
 	var current_prob: float = 0
 	for key in ENEMY_SPAWN_PROBABILITIES:
-		var enemy: Dictionary = ENEMY_SPAWN_PROBABILITIES[key]
-		current_prob += enemy["weight"]
+		var enemy_type: Dictionary = ENEMY_SPAWN_PROBABILITIES[key]
+		current_prob += enemy_type["weight"]
 		if random < current_prob:
-			var enemy_instance: Enemy = enemy["scene"].instantiate()
-			var offset: int = SPAWN_OFFSET if randf() < 0.5 else -SPAWN_OFFSET
-			enemy_instance.global_position = Vector2(player.global_position.x+offset, player.global_position.y-1000)
+			var enemy_instance: Enemy = create_enemy_instance(enemy_type["scene"])
 			get_parent().add_child.call_deferred(enemy_instance)
 			connect_enemy_signals.call_deferred(enemy_instance)
