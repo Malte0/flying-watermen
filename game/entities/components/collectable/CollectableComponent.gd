@@ -17,8 +17,8 @@ func _input(event):
 	if event.is_action_pressed("pick_up_item") and player_in_radius:
 		player_in_radius.inventory.set_item_in_inventory(item)
 		var tween = create_tween()
-		tween.tween_property(self, "position", player_in_radius.position, COLLECT_DURATION)
-		tween.tween_property(self, "scale", Vector2.ZERO, COLLECT_DURATION)
+		tween.tween_property(get_parent(), "position", player_in_radius.position, COLLECT_DURATION)
+		tween.tween_property(get_parent(), "scale", Vector2.ZERO, COLLECT_DURATION)
 		tween.finished.connect(get_parent().queue_free)
 
 func _body_entered(body):

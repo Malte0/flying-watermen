@@ -5,7 +5,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_a1cd5"]
 radius = 35.1283
 
-[node name="Collectable" type="Node2D"]
+[node name="CollectableComponent" type="Node2D"]
 script = ExtResource("1_ucd6e")
 
 [node name="CollectArea" type="Area2D" parent="."]

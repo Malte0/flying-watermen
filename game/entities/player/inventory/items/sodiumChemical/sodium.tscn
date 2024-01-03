@@ -19,5 +19,5 @@ self_modulate = Color(1, 1, 0.294118, 1)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("1_u02hw")
 
-[node name="Collectable" parent="." instance=ExtResource("2_n2dkp")]
+[node name="CollectableComponent" parent="." instance=ExtResource("2_n2dkp")]
 item = ExtResource("2_h61t5")
