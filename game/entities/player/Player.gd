@@ -87,10 +87,10 @@ func _physics_process(delta):
 	# Debug Info
 	state_chart.set_expression_property("velocity_x", velocity.x)
 	state_chart.set_expression_property("is_on_wall", is_on_wall())
-	
+
 	# For transitions without event condition
 	state_chart.send_event("tick")
-	
+
 	# handle gravity
 	if is_on_floor() and velocity.y == 0:
 		state_chart.send_event("grounded")
@@ -120,14 +120,12 @@ func _physics_process(delta):
 		velocity.x = 0
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
-	
+
 	move_and_slide()
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("w"):
 		state_chart.send_event("wPressed")
-	if event.is_action_pressed("attack"):
-		state_chart.send_event("attackpressed")
 
 func update_animation():
 	animation_tree.set("parameters/Action/blend_position", abs(velocity.x) > 0)
@@ -168,17 +166,6 @@ func _on_airborne_state_entered():
 # Reset variables of any child states of the Movement state
 func _on_movement_child_state_exited():
 	reset_variables()
-
-func _on_area_2d_body_entered(body):
-	if body.is_in_group("Hit"):
-		#can_move = false
-		body.take_damage()
-
-func _on_meele_attacks_child_state_entered():
-	$AtkShape/CollisionShape2D.disabled = false
-
-func _on_meele_attacks_child_state_exited():
-	$AtkShape/CollisionShape2D.disabled = true
 
 func _on_can_shoot_state_input(event: InputEvent) -> void:
 	if event.is_action_pressed("right_click"):
