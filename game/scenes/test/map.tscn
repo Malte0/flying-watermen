@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://mrf2lku3uiqc"]
+[gd_scene load_steps=44 format=3 uid="uid://mrf2lku3uiqc"]
 
 [ext_resource type="Shader" path="res://scenes/test/mapShader.gdshader" id="1_4wi60"]
 [ext_resource type="Texture2D" uid="uid://b6yrhnp1t37o8" path="res://assets/prototype-assets/Tiles.png" id="1_ljrfd"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/meleeEnemy/MeleeEnemy.tscn" id="9_hf5qv"]
 [ext_resource type="PackedScene" uid="uid://dpiypck5f1v6f" path="res://entities/objects/pfuetze.tscn" id="10_oa7xq"]
 [ext_resource type="PackedScene" uid="uid://dmeutg1f6t7sl" path="res://entities/enemies/rangedEnemy/RangedEnemy.tscn" id="12_awfkx"]
+[ext_resource type="PackedScene" uid="uid://o5qajbk6mfjn" path="res://entities/well/Well.tscn" id="13_agghq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7de0"]
 shader = ExtResource("1_4wi60")
@@ -29871,3 +29872,6 @@ position = Vector2(2122, 1506)
 
 [node name="RangedEnemy" parent="." instance=ExtResource("12_awfkx")]
 position = Vector2(1498, 1414)
+
+[node name="Well" parent="." instance=ExtResource("13_agghq")]
+position = Vector2(158, 1776)
