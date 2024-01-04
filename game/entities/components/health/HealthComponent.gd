@@ -6,8 +6,8 @@ class_name HealthComponent extends Node2D
 const HEALTH_BAR_INTERPOLATION_SPEED: int = 1
 var current_health: int = 100
 
-signal health_change(new_health, delta_health)
-signal death
+signal health_change(new_health: int, delta_health: int)
+signal death()
 
 func _ready():
 	current_health = max_health
@@ -27,7 +27,7 @@ func take_damage(amount: int, damage_type: Element.Type):
 	health_change.emit(current_health, -amount)
 
 func restore_health(amount: int):
-	current_health = maxi(current_health + amount, max_health)
+	current_health = mini(current_health + amount, max_health)
 	health_change.emit(current_health, amount)
 
 func die():

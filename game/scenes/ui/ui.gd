@@ -1,12 +1,11 @@
 extends CanvasLayer
 
 @onready var debugger: Control = $StateChartDebugger
+@onready var player: Player = get_tree().get_first_node_in_group("player")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var player: Player = get_tree().get_first_node_in_group("player")
 	debugger.debug_node(player)
-	$Panel/HealthBar.player = player
 	debugger.visible = false
 
 func _input(event: InputEvent) -> void:
