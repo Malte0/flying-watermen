@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://b4fvrd7j4w435"]
+
+[ext_resource type="Texture2D" uid="uid://cnu5ci26bctkq" path="res://assets/forest-assets/baumrot3.png" id="1_8lccx"]
+[ext_resource type="Shader" path="res://shader/windShader.gdshader" id="1_ffnfv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sohnw"]
+shader = ExtResource("1_ffnfv")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.099
+shader_parameter/maxStrength = 0.226
+shader_parameter/strengthScale = 50.0
+shader_parameter/interval = 5.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = null
+shader_parameter/heightOffset = 0.431
+shader_parameter/offset = 0.0
+
+[sub_resource type="Gradient" id="Gradient_qq3y5"]
+offsets = PackedFloat32Array(0, 0.998258)
+colors = PackedColorArray(0.423651, 0.423651, 0.423651, 1, 0.785714, 0.272559, 0.200134, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4268h"]
+gradient = SubResource("Gradient_qq3y5")
+
+[sub_resource type="Curve" id="Curve_a5oa5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_bda6h"]
+curve = SubResource("Curve_a5oa5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4tgv4"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 100, 1)
+gravity = Vector3(0, 100, 0)
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_bda6h")
+color_ramp = SubResource("GradientTexture1D_4268h")
+
+[node name="Tree" type="Sprite2D"]
+material = SubResource("ShaderMaterial_sohnw")
+texture = ExtResource("1_8lccx")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_4tgv4")
