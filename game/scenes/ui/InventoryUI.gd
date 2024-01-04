@@ -12,8 +12,9 @@ func _ready():
 	inventory.on_item_in_inventory_updated.connect(update_item_in_inventory)
 	inventory.on_item_activated.connect(update_active_item)
 	inventory.on_item_used.connect(update_item_bar)
+	update_item_in_inventory(inventory.item_in_inventory, null)
 	update_item_bar(inventory.active_item_left, inventory.active_item_left)
-	update_item_in_inventory(inventory.item_in_inventory, inventory.item_in_inventory)
+	update_active_item(inventory.active_item)
 
 func update_item_in_inventory(new_item: Item, _old_item: Item):
 	if new_item:
