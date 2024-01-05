@@ -184,11 +184,12 @@ func _on_meele_attacks_child_state_exited():
 func _on_can_shoot_state_input(event: InputEvent) -> void:
 	if event.is_action_pressed("right_click"):
 		state_chart.send_event("_on_shot")
-		var projectile_instance: Projectile = projectile_scene.instantiate()
+		var projectile_node: Node2D = projectile_scene.instantiate()
+		var projectile_instance: Projectile = projectile_node.get_node("Projectile")
 		projectile_instance.position = shoot_position.global_position
 		projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
 		projectile_instance.player_speed = velocity
-		add_child(projectile_instance)
+		add_child(projectile_node)
 		
 		inventory.use_active_item(1)
 
