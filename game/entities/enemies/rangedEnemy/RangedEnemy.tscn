@@ -71,6 +71,7 @@ target_position = Vector2(0, 200)
 
 [connection signal="body_entered" from="ViewArea" to="." method="_on_view_area_body_entered"]
 [connection signal="body_exited" from="ViewArea" to="." method="_on_view_area_body_exited"]
+[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="health_change" from="HealthComponent" to="." method="_on_health_component_health_change"]
 [connection signal="timeout" from="AggroCooldown" to="." method="_on_aggro_cooldown_timeout"]
 [connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
