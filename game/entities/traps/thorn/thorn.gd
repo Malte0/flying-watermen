@@ -7,8 +7,8 @@ const damage: int = 10
 var body_inside : bool = false
 var take_damage: bool = false
 
-func _ready():
-	$Area2D/Timer.start()
+#func _ready():
+	#$Area2D/Timer.start()
 	
 func _process(delta):
 	if body_inside && take_damage:
@@ -16,23 +16,19 @@ func _process(delta):
 		take_damage = false
 		
 
-	
-	
 func _on_area_2d_body_entered(body):
 	if body == player:
 		body_inside = true
-		print("player inside")
+		$Area2D/Timer.start()
 		
 
 
 func _on_area_2d_body_exited(body):
 	if body == player:
 		body_inside = false
-		print("player outside")
+		$Area2D/Timer.stop()
 	
 
 func _on_timer_timeout():
 	take_damage = true
-	$Area2D/Timer.start()
-	print("timer")
 	
