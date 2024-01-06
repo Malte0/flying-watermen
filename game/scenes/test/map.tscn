@@ -11,9 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://cihcop35erg48" path="res://scenes/ui/ui.tscn" id="5_vx7we"]
 [ext_resource type="PackedScene" uid="uid://dpiypck5f1v6f" path="res://entities/objects/pfuetze.tscn" id="10_oa7xq"]
 [ext_resource type="PackedScene" uid="uid://dmeutg1f6t7sl" path="res://entities/enemies/rangedEnemy/RangedEnemy.tscn" id="11_2fedg"]
-[ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/meleeEnemy/MeleeEnemy.tscn" id="12_rd14a"]
 [ext_resource type="PackedScene" uid="uid://dvv2sij5v2epd" path="res://entities/player/inventory/items/sodiumChemical/sodium.tscn" id="13_l88ic"]
 [ext_resource type="PackedScene" uid="uid://dp6qth5jvcdhd" path="res://entities/player/inventory/items/iceChemical/IceChemical.tscn" id="14_4gyg8"]
+[ext_resource type="PackedScene" uid="uid://o5qajbk6mfjn" path="res://entities/well/Well.tscn" id="15_6rq0o"]
 [ext_resource type="PackedScene" uid="uid://bree81gljy661" path="res://entities/player/inventory/items/foamChemical/FoamChemical.tscn" id="15_cbfrv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7de0"]
@@ -29873,11 +29873,6 @@ position = Vector2(5975, 1763)
 position = Vector2(1327, 1311)
 carried_item = ExtResource("13_l88ic")
 
-[node name="Well" parent="." instance=ExtResource("13_agghq")]
-position = Vector2(158, 1776)
-[node name="Melee_enemy" parent="." instance=ExtResource("12_rd14a")]
-position = Vector2(2032, 1401)
-
 [node name="Sodium" parent="." instance=ExtResource("13_l88ic")]
 position = Vector2(339, 1549)
 
@@ -29886,3 +29881,6 @@ position = Vector2(248, 1548)
 
 [node name="FoamChemical" parent="." instance=ExtResource("15_cbfrv")]
 position = Vector2(146, 1555)
+
+[node name="Well" parent="." instance=ExtResource("15_6rq0o")]
+position = Vector2(954, 1778)

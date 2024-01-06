@@ -22,4 +22,18 @@ position = Vector2(13, -41)
 scale = Vector2(2, 2)
 texture = ExtResource("2_3bfi4")
 
+[node name="FillLabel" type="Panel" parent="."]
+visible = false
+offset_left = -22.0
+offset_top = -140.0
+offset_right = 25.0
+offset_bottom = -116.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="FillLabel"]
+offset_left = 2.0
+offset_right = 48.0
+offset_bottom = 24.0
+text = "Fill 'E'"
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

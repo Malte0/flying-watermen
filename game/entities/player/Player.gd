@@ -40,6 +40,9 @@ var heat: int = 0
 const Heal_over_time_step: int = 5
 var heal_over_time_left: int = 0
 
+## Callback for player interaction
+var on_interact := func(): print("Noting to interact")
+
 # Called to increase the players heat
 func increase_heat(amount: int):
 	heat = mini(heat + amount, max_heat)
@@ -88,10 +91,10 @@ func _physics_process(delta):
 	# Debug Info
 	state_chart.set_expression_property("velocity_x", velocity.x)
 	state_chart.set_expression_property("is_on_wall", is_on_wall())
-	
+
 	# For transitions without event condition
 	state_chart.send_event("tick")
-	
+
 	# handle gravity
 	if is_on_floor() and velocity.y == 0:
 		state_chart.send_event("grounded")
@@ -121,7 +124,7 @@ func _physics_process(delta):
 		velocity.x = 0
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
-	
+
 	move_and_slide()
 
 func _input(event: InputEvent):
@@ -129,6 +132,8 @@ func _input(event: InputEvent):
 		state_chart.send_event("wPressed")
 	if event.is_action_pressed("attack"):
 		state_chart.send_event("attackpressed")
+	if event.is_action_pressed("interact"):
+		on_interact.call()
 
 func update_animation():
 	animation_tree.set("parameters/Action/blend_position", abs(velocity.x) > 0)
@@ -189,7 +194,7 @@ func _on_can_shoot_state_input(event: InputEvent) -> void:
 		projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
 		projectile_instance.player_speed = velocity
 		add_child(projectile_instance)
-		
+
 		inventory.use_active_item(1)
 
 func _on_health_component_death():
