@@ -41,7 +41,7 @@ const Heal_over_time_step: int = 5
 var heal_over_time_left: int = 0
 
 ## Callback for player interaction
-var on_interact := func(): print("Noting to interact")
+var on_interact = func(): print("Noting to interact")
 
 # Called to increase the players heat
 func increase_heat(amount: int):
