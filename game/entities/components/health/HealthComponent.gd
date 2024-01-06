@@ -12,10 +12,10 @@ const HEALTH_BAR_INTERPOLATION_SPEED: float = 1
 
 var heal_over_time_left: int = 0
 var health: int = 100
-var is_immune: bool = false
+var is_invincible: bool = false
 
 signal health_changed(new_health: int, delta_health: int)
-signal death
+signal death()
 
 func _ready():
 	health = max_health
@@ -24,7 +24,7 @@ func _ready():
 		if not _health_bar: print_debug("Player Healthbar not found")
 	if _health_bar:
 		_health_bar.max_value = max_health
-		_health_bar.value = max_health
+		_health_bar.value = health
 	if _heal_tick: _heal_tick.timeout.connect(_on_heal_tick)
 
 func _process(_delta):
@@ -32,7 +32,7 @@ func _process(_delta):
 		_health_bar.value = move_toward(_health_bar.value, health, HEALTH_BAR_INTERPOLATION_SPEED)
 
 func take_damage(amount: int, damage_type: Element.Type):
-	if is_immune:
+	if is_invincible:
 		return
 	if damage_type != Element.Type.Neutral and damage_type == element:
 		return
@@ -42,7 +42,7 @@ func take_damage(amount: int, damage_type: Element.Type):
 		die()
 
 func heal(amount: int):
-	health = maxi(health + amount, max_health)
+	health = mini(health + amount, max_health)
 	health_changed.emit(health, amount)
 
 func heal_over_time(amount: int):

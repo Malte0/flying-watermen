@@ -15,10 +15,11 @@ func enter_ice_state():
 	heat_component.heat = 0
 	player.direction = 0
 	player.friction = ICE_FRICTION
-	player.health_component.is_immune = true
+	player.health_component.is_invincible = true
 
 func exit_ice_state():
-	player.health_component.is_immune = false
+	heat_component.heat = 0
+	player.health_component.is_invincible = false
 	chemical_state_chart.send_event("to_default")
 
 # Replace this by depleting the inventory item bar
