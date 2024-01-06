@@ -6,7 +6,7 @@ extends Node2D
 const FULL_TEXTURE = preload("res://entities/well/assets/wellFull.png")
 const EMPTY_TEXTURE = preload("res://entities/well/assets/wellEmpty.png")
 
-var is_full = false
+var is_full: bool = false
 signal well_filled()
 
 ## Fills the well, but only once
