@@ -336,7 +336,6 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_w7iqa")
 animation = &"Idle"
 autoplay = "Idle"
-frame = 1
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -547,7 +546,7 @@ script = ExtResource("5_dadqm")
 [node name="ToCanAttack" type="Node" parent="MeleeAttack/AttackStateChart/Root/CannotAttack"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../CanAttack")
-delay_seconds = 0.3
+delay_seconds = 0.1
 
 [node name="CanAttack" type="Node" parent="MeleeAttack/AttackStateChart/Root"]
 script = ExtResource("5_dadqm")
