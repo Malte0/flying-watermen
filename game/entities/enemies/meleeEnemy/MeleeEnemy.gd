@@ -79,6 +79,6 @@ func become_aggro():
 		await get_tree().create_timer(0.4).timeout
 		movement_speed = MOVEMENT_SPEED_AGGRO
 
-func _on_health_component_health_change(_new_health, delta_health):
+func _on_health_component_health_changed(_new_health, delta_health):
 	if delta_health < 0:
 		become_aggro()

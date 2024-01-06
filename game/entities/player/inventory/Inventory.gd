@@ -13,16 +13,22 @@ func set_item_in_inventory(item: Item):
 	item_in_inventory = item
 
 func set_active_item(item: Item):
-	on_item_activated.emit(item)
+	if item:
+		active_item_left = item.max_amount
+	else:
+		active_item_left = 0
+		on_item_used.emit(active_item_left, 0)
 	active_item = item
-	active_item_left = item.max_amount
+	on_item_activated.emit(item)
 
 func use_active_item(amount: int):
 	if active_item:
 		active_item_left = maxi(active_item_left - amount, 0)
-		on_item_used.emit(active_item_left, active_item.max_amount)
+		if active_item_left == 0:
+			on_item_used.emit(active_item_left, active_item.max_amount)
+			set_active_item(null)
 
 func _input(event):
-	if event.is_action_pressed("use_item") and item_in_inventory:
+	if event.is_action_pressed("activate_item") and item_in_inventory:
 		set_active_item(item_in_inventory)
 		set_item_in_inventory(null)

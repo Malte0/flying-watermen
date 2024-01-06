@@ -27,10 +27,5 @@ func _on_heat_changed(new_heat: int, _delta_heat: int):
 	if new_heat >= heat_component.MAX_HEAT and is_in_ice_state:
 		exit_ice_state()
 
-# Use x to exit the ability
-func _input(event: InputEvent):
-	if event.is_action_pressed("exit_chemical_effect") and is_in_ice_state:
-		exit_ice_state()
-
 func _on_ice_state_entered():
 	enter_ice_state()
