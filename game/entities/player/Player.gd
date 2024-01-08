@@ -87,7 +87,7 @@ func _on_default_state_physics_processing(_delta):
 func _input(event: InputEvent):
 	if event.is_action_pressed("attack"):
 		state_chart.send_event("attackpressed")
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_pressed("jump"):
 		state_chart.send_event("jump")
 
 func flip_player():
@@ -111,9 +111,6 @@ func _on_wall_slide_state_entered():
 	velocity.y = velocity.y/10
 	fall_speed_factor = base_fall_speed_factor/10
 
-func _on_falling_state_entered():
-	friction = base_friction/10
-
 func _on_airborne_state_entered():
 	friction = base_friction/10
 
@@ -129,7 +126,7 @@ func _on_can_shoot_state_input(event: InputEvent) -> void:
 		projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
 		projectile_instance.player_speed = velocity
 		add_child(projectile_instance)
-		
+
 		inventory.use_active_item(1)
 
 func _on_death():

@@ -24,8 +24,8 @@ func set_active_item(item: Item):
 func use_active_item(amount: int):
 	if active_item:
 		active_item_left = maxi(active_item_left - amount, 0)
+		on_item_used.emit(active_item_left, active_item.max_amount)
 		if active_item_left == 0:
-			on_item_used.emit(active_item_left, active_item.max_amount)
 			set_active_item(null)
 
 func _input(event):

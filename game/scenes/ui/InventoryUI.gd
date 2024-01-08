@@ -5,7 +5,7 @@ extends Control
 @onready var active_item_name: RichTextLabel = $ActiveItem/Name
 @onready var active_item_amount: RichTextLabel = $ActiveItem/Amount
 @onready var active_item_meter: ProgressBar = $ActiveItem/ItemBar
-@onready var use_item_text: RichTextLabel = $"Use _Q_"
+@onready var use_item_text: RichTextLabel = $"Use _F_"
 @onready var inventory: Inventory = get_tree().get_first_node_in_group("player").inventory
 
 func _ready():

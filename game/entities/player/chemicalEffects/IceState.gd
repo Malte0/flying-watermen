@@ -19,6 +19,7 @@ func enter_ice_state():
 
 func exit_ice_state():
 	heat_component.heat = 0
+	player.friction = player.base_friction
 	player.health_component.is_invincible = false
 	chemical_state_chart.send_event("to_default")
 

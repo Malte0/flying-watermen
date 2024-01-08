@@ -5,7 +5,7 @@ class_name ChemicalStateManager extends Node
 @export var player_sprite_container: Node2D
 
 func _input(event: InputEvent):
-	if event.is_action_pressed("use_item"):
+	if event.is_action_pressed("activate_item"):
 		if player.inventory.active_item:
 			var active_chemical: String = player.inventory.active_item.name
 			chemical_state_chart.set_expression_property("active_chemical", active_chemical)
