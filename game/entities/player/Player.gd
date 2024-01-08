@@ -69,11 +69,10 @@ func reset_variables():
 	fall_speed_factor = base_fall_speed_factor
 	can_move = true
 	collision_mask = 0b101
-	collision_layer = 0b01
+	collision_layer = 0b10
 
 # Other information about the player
 var air_jumps_left: int = air_jumps
-const SPRITE_FLIP_OFFSET: int = 0
 var direction: float = 0.0
 var slide_threshold: float = base_speed/2
 
