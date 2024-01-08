@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=60 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dhjab"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="10_ddq3l"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/any_of_guard.gd" id="11_5fhyj"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/animation_tree_state.gd" id="13_eid8a"]
+[ext_resource type="Script" path="res://entities/player/inventory/Inventory.gd" id="15_8nkrm"]
 [ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="16_vgsyb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_glekb"]
@@ -343,7 +344,7 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_w7iqa")
 animation = &"Idle"
 autoplay = "Idle"
-frame = 3
+frame = 2
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -622,6 +623,9 @@ autostart = true
 [node name="HealthComponent" parent="." instance=ExtResource("16_vgsyb")]
 element = 0
 
+[node name="Inventory" type="Node2D" parent="."]
+script = ExtResource("15_8nkrm")
+
 [connection signal="state_physics_processing" from="StateChart/Player/Inputs/W/Pressed" to="." method="_on_pressed_state_physics_processing"]
 [connection signal="state_input" from="StateChart/Player/Inputs/Shooting/CanShoot" to="." method="_on_can_shoot_state_input"]
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics" to="." method="_on_movement_child_state_exited"]
@@ -636,9 +640,9 @@ element = 0
 [connection signal="state_input" from="StateChart/Player/Mechanics/Interruptible/Airborne/Falling" to="." method="_on_airborn_not_coyote_state_input"]
 [connection signal="state_entered" from="StateChart/Player/Mechanics/Interruptible/WallSlide" to="." method="_on_wall_slide_state_entered"]
 [connection signal="child_state_entered" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_meele_attacks_child_state_entered"]
-[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_meele_attacks_child_state_exited"]
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_movement_child_state_exited"]
 [connection signal="state_entered" from="StateChart/Player/Mechanics/Dash" to="." method="_on_dash_state_entered"]
+[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Combat/MeeleAttacks" to="." method="_on_meele_attacks_child_state_exited"]
 [connection signal="body_entered" from="AtkShape" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timers/HeatTick" to="." method="_on_heat_tick_timeout"]
 [connection signal="timeout" from="Timers/HealTick" to="." method="_on_heal_tick_timeout"]
