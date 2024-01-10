@@ -27,7 +27,6 @@ var can_move: bool = true
 var jumps_left: int = jumps
 
 # Other information about the player
-const SPRITE_FLIP_OFFSET: int = 0
 var direction: float = 0.0
 var slide_threshold: float = base_speed/2
 
@@ -45,6 +44,9 @@ func _ready():
 	state_chart.set_expression_property("jumps_left", jumps_left)
 	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
 	state_chart.set_expression_property("velocity_x", velocity.x)
+
+## Callback for player interaction
+var on_interact = func(): print("Noting to interact")
 
 func apply_gravity(delta: float):
 	if is_on_floor() and velocity.y == 0:
@@ -67,7 +69,6 @@ func _physics_process(delta: float):
 	if direction == 0:
 		velocity.x = lerp(velocity.x, 0.0, friction)
 
-	move_and_slide()
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
 	state_chart.set_expression_property("jumps_left", jumps_left)
 	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
@@ -79,6 +80,10 @@ func _on_default_state_physics_processing(_delta):
 		velocity.x = lerp(velocity.x, direction * speed, 0.1)
 	elif abs(velocity.x) < 0.1:
 		velocity.x = 0
+	else:
+		velocity.x = lerp(velocity.x, 0.0, friction)
+
+	move_and_slide()
 
 	if sign(scale.y) != sign(direction) and sign(direction) != 0:
 		flip_player()
@@ -86,6 +91,8 @@ func _on_default_state_physics_processing(_delta):
 func _input(event: InputEvent):
 	if event.is_action_pressed("attack"):
 		state_chart.send_event("attackpressed")
+	if event.is_action_pressed("interact"):
+		on_interact.call()
 	if event.is_action_pressed("jump"):
 		state_chart.send_event("jump")
 

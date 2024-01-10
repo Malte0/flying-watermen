@@ -60,7 +60,7 @@ def hasTooLongFunction(line: str):
 
 def hasScatteredVariableDeclaration(line: str):
     global shouldNotHaveUnscopedVariablesAnyMore
-    if line.startswith("func"):
+    if "func" in line:
         return False
     if shouldNotHaveUnscopedVariablesAnyMore and not line.startswith("\t"):
         return 'var' in line or 'const' in line
