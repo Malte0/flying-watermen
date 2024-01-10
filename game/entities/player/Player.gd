@@ -39,7 +39,6 @@ func reset_variables():
 	can_move = true
 
 func _ready():
-	$AtkShape/CollisionShape2D.disabled = true
 	health_component.death.connect(_on_death)
 	#Initialize values so Guards don't complain
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
