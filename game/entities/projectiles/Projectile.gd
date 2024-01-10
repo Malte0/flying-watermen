@@ -26,5 +26,5 @@ func _on_impact_detector_body_entered(body):
 	if health_component:
 		health_component.take_damage(damage, element)
 	if body is Player and element != Element.Type.Water:
-		body.increase_heat(damage)
+		body.heat_component.increase_heat(damage)
 	queue_free()
