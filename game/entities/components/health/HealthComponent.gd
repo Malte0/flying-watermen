@@ -3,7 +3,6 @@ class_name HealthComponent extends Node2D
 @export var element: Element.Type = Element.Type.Neutral
 @export var max_health: int = 100
 @export var health_bar: TextureProgressBar
-const HEALTH_BAR_INTERPOLATION_SPEED: int = 1
 var current_health: int = 100
 var can_take_damage: bool = true
 ## Optional for heal_over_time
@@ -43,8 +42,8 @@ func take_damage(amount: int, damage_type: Element.Type):
 		return
 	if can_take_damage or not(get_parent() is Player):
 		iframes()
-	  health -= amount
-	  health_changed.emit(health, -amount)
+		health -= amount
+		health_changed.emit(health, -amount)
 	if health <= 0:
 		die()
 
@@ -67,6 +66,6 @@ func die():
 
 func iframes():
 	can_take_damage = false
-	var iframe_length : float = 1
+	var iframe_length : float = 0.3
 	await get_tree().create_timer(iframe_length).timeout
 	can_take_damage = true
