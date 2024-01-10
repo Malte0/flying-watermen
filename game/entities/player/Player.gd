@@ -87,7 +87,7 @@ func _on_default_state_physics_processing(_delta):
 func _input(event: InputEvent):
 	if event.is_action_pressed("attack"):
 		state_chart.send_event("attackpressed")
-	if Input.is_action_pressed("jump"):
+	if event.is_action_pressed("jump"):
 		state_chart.send_event("jump")
 
 func flip_player():
