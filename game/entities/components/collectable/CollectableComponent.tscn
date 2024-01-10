@@ -23,5 +23,5 @@ offset_bottom = -39.0
 
 [node name="PickUpText" type="RichTextLabel" parent="PanelContainer"]
 layout_mode = 2
-text = "'F' To pick up"
+text = "'E' To pick up"
 fit_content = true
