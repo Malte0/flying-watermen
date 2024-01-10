@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b7py4c84rndkt" path="res://entities/enemies/spawning/EnemySpawnArea.tscn" id="14_nc86j"]
 [ext_resource type="PackedScene" uid="uid://dvv2sij5v2epd" path="res://entities/player/inventory/items/sodiumChemical/sodium.tscn" id="13_l88ic"]
 [ext_resource type="PackedScene" uid="uid://dp6qth5jvcdhd" path="res://entities/player/inventory/items/iceChemical/IceChemical.tscn" id="14_4gyg8"]
+[ext_resource type="PackedScene" uid="uid://o5qajbk6mfjn" path="res://entities/well/Well.tscn" id="15_6rq0o"]
 [ext_resource type="PackedScene" uid="uid://bree81gljy661" path="res://entities/player/inventory/items/foamChemical/FoamChemical.tscn" id="15_cbfrv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7de0"]
@@ -29877,9 +29878,6 @@ position = Vector2(5975, 1763)
 position = Vector2(1327, 1311)
 carried_item = ExtResource("13_l88ic")
 
-[node name="RangedEnemy" parent="." instance=ExtResource("12_awfkx")]
-position = Vector2(1498, 1414)
-
 [node name="EnemyManager" parent="." instance=ExtResource("13_v2vux")]
 
 [node name="EnemySpawnArea" parent="." instance=ExtResource("14_nc86j")]
@@ -29899,3 +29897,6 @@ position = Vector2(248, 1548)
 
 [node name="FoamChemical" parent="." instance=ExtResource("15_cbfrv")]
 position = Vector2(146, 1555)
+
+[node name="Well" parent="." instance=ExtResource("15_6rq0o")]
+position = Vector2(954, 1778)

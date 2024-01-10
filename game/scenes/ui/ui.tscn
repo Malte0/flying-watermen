@@ -24,7 +24,7 @@ offset_right = 178.0
 offset_bottom = 35.0
 metadata/_edit_use_anchors_ = true
 
-[node name="HealthBar" type="TextureProgressBar" parent="Panel"]
+[node name="PlayerHealthBar" type="TextureProgressBar" parent="Panel" groups=["playerHealthHeatBar"]]
 texture_filter = 1
 layout_mode = 1
 offset_right = 170.0
@@ -41,20 +41,10 @@ script = ExtResource("5_4qthl")
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
-[node name="HealthLabel" type="Label" parent="Panel/HealthBar"]
-visible = false
-modulate = Color(0, 0, 0, 1)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.0557647
-anchor_top = 0.153286
-anchor_right = 0.674765
-anchor_bottom = 0.799286
-offset_left = -2.48
-offset_top = -2.292
-offset_right = 52.29
-offset_bottom = 2.62
-metadata/_edit_use_anchors_ = true
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="Panel2" type="Control" parent="."]
 layout_mode = 3
@@ -100,10 +90,10 @@ offset_right = 1049.0
 offset_bottom = 629.0
 text = "Inventory"
 
-[node name="Use _E_" type="RichTextLabel" parent="Panel2"]
+[node name="Use _F_" type="RichTextLabel" parent="Panel2"]
 layout_mode = 2
 offset_left = 939.0
 offset_top = 571.0
 offset_right = 1060.0
 offset_bottom = 654.0
-text = "Use 'E'"
+text = "Use 'F'"
