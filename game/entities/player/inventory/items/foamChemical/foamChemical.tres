@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://nvvgxuilpt4g"]
+
+[ext_resource type="Script" path="res://entities/player/inventory/Item.gd" id="1_jdhnv"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_jdhnv")
+name = "foam"
+max_amount = 12

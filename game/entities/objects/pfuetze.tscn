@@ -20,3 +20,6 @@ position = Vector2(1, 48)
 scale = Vector2(0.171875, 0.0726732)
 texture = ExtResource("2_8qdcc")
 metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

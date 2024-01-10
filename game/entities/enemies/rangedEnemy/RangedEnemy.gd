@@ -11,7 +11,7 @@ const MOVEMENT_SPEED_CALM: int = 100
 const MOVEMENT_SPEED_AGGRO: int = 250
 var is_aggro: bool = false
 
-func _init():
+func _ready():
 	movement_speed = MOVEMENT_SPEED_CALM
 	move(Movement_Direction.Right)
 
@@ -55,7 +55,7 @@ func become_aggro():
 	is_aggro = true
 	movement_speed = MOVEMENT_SPEED_AGGRO
 
-func _on_health_component_health_change(_new_health, delta_health):
+func _on_health_component_health_changed(_new_health, delta_health):
 	if delta_health < 0:
 		become_aggro()
 
