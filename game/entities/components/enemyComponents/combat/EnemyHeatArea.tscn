@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://u07y0x28am7y"]
+
+[ext_resource type="Script" path="res://entities/components/enemyComponents/combat/EnemyHeatArea.gd" id="1_2kjb2"]
+
+[node name="EnemyHeatArea" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_2kjb2")
+
+[node name="HeatTick" type="Timer" parent="."]
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="HeatTick" to="." method="_on_heat_tick_timeout"]
