@@ -6,4 +6,4 @@
 resource_local_to_scene = true
 script = ExtResource("1_jdhnv")
 name = "foam"
-max_amount = 12
+max_amount = 100

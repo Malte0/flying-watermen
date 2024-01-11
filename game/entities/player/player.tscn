@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=34 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dhjab"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://entities/player/MeleeAttack.gd" id="14_y8i2u"]
 [ext_resource type="Script" path="res://entities/player/inventory/Inventory.gd" id="15_8nkrm"]
 [ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="16_vgsyb"]
+[ext_resource type="Script" path="res://entities/player/chemicalEffects/FoamState.gd" id="17_3kck4"]
 [ext_resource type="Script" path="res://entities/player/chemicalEffects/IceState.gd" id="17_irds6"]
 [ext_resource type="Script" path="res://entities/player/chemicalEffects/ChemicalStateManager.gd" id="18_bvu0j"]
 
@@ -71,6 +72,10 @@ size = Vector2(67.9999, 45.5001)
 [sub_resource type="Resource" id="Resource_7pa6p"]
 script = ExtResource("7_m5qsp")
 expression = "active_chemical == \"ice\""
+
+[sub_resource type="Resource" id="Resource_7761j"]
+script = ExtResource("7_m5qsp")
+expression = ""
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(2, 2)
@@ -321,6 +326,11 @@ player = NodePath("../../..")
 heat_component = NodePath("../../../HeatComponent")
 chemical_state_chart = NodePath("../../ChemicalStates")
 
+[node name="foam" type="Node2D" parent="ChemicalEffectsManager/effects" node_paths=PackedStringArray("player", "chemical_state_chart")]
+script = ExtResource("17_3kck4")
+player = NodePath("../../..")
+chemical_state_chart = NodePath("../../ChemicalStates")
+
 [node name="ChemicalStates" type="Node" parent="ChemicalEffectsManager"]
 script = ExtResource("2_dhjab")
 
@@ -337,10 +347,24 @@ to = NodePath("../../Ice")
 event = &"to_chemical"
 guard = SubResource("Resource_7pa6p")
 
+[node name="ToFoam" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root/Default"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Foam")
+event = &"to_chemical"
+guard = SubResource("Resource_7761j")
+
 [node name="Ice" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root"]
 script = ExtResource("5_dadqm")
 
 [node name="ToDefault" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root/Ice"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Default")
+event = &"to_default"
+
+[node name="Foam" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root"]
+script = ExtResource("5_dadqm")
+
+[node name="ToDefault" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root/Foam"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Default")
 event = &"to_default"
@@ -370,3 +394,5 @@ script = ExtResource("15_8nkrm")
 [connection signal="state_physics_processing" from="ChemicalEffectsManager/ChemicalStates/Root/Default" to="." method="_on_default_state_physics_processing"]
 [connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Ice" to="ChemicalEffectsManager" method="_on_ice_state_entered"]
 [connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Ice" to="ChemicalEffectsManager/effects/ice" method="_on_ice_state_entered"]
+[connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Foam" to="ChemicalEffectsManager" method="_on_foam_state_entered"]
+[connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Foam" to="ChemicalEffectsManager/effects/foam" method="_on_foam_state_entered"]
