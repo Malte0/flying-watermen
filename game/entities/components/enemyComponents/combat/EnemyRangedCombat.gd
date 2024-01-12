@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var projectile_scene: PackedScene = preload("res://entities/projectiles/FireProjectile.tscn")
+@export var projectile_scene: PackedScene
 @export var aggro_component: AggroComponent
 
 @onready var player: Player = get_tree().get_first_node_in_group("player")

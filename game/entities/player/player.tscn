@@ -65,11 +65,12 @@ state = NodePath("../Grounded")
 script = ExtResource("9_qrtxb")
 guard = SubResource("Resource_p8ca0")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_obf3n"]
-size = Vector2(67.9998, 44.5003)
 [sub_resource type="Resource" id="Resource_scptp"]
 script = ExtResource("8_3t36e")
 state = NodePath("../../../../Cooldowns/Dash/Useable")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_obf3n"]
+size = Vector2(67.9998, 44.5003)
 
 [sub_resource type="Resource" id="Resource_7pa6p"]
 script = ExtResource("7_m5qsp")
@@ -248,10 +249,6 @@ to = NodePath("../Grounded")
 event = &"grounded"
 guard = SubResource("Resource_c7udc")
 
-[node name="MeleeAttack" parent="." node_paths=PackedStringArray("attack_shape") instance=ExtResource("14_pebxf")]
-collision_mask = 4
-attack_shape = NodePath("AttackShape")
-attack_color = Color(0.188235, 0.560784, 0.709804, 1)
 [node name="On Dash" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Dash")
@@ -288,6 +285,11 @@ script = ExtResource("5_dadqm")
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Cooldown")
 event = &"dash"
+
+[node name="MeleeAttack" parent="." node_paths=PackedStringArray("attack_shape") instance=ExtResource("14_pebxf")]
+collision_mask = 4
+attack_shape = NodePath("AttackShape")
+attack_color = Color(0.188235, 0.560784, 0.709804, 1)
 
 [node name="AttackShape" type="CollisionShape2D" parent="MeleeAttack"]
 position = Vector2(45.5001, -16.9998)
