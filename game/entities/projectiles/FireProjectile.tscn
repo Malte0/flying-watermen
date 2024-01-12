@@ -1,14 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://1kqni5b4lpm"]
+[gd_scene load_steps=2 format=3 uid="uid://1kqni5b4lpm"]
 
 [ext_resource type="PackedScene" uid="uid://bchthkskvre5u" path="res://entities/projectiles/Projectile.tscn" id="2_uorqn"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrn60"]
-size = Vector2(1236, 767)
 
 [node name="FireProjectile" type="Node2D"]
 
 [node name="Projectile" parent="." instance=ExtResource("2_uorqn")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(608, -393.5)
-shape = SubResource("RectangleShape2D_jrn60")
+element = 1
+collisionMask = 3

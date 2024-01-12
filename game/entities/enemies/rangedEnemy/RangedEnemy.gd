@@ -65,10 +65,11 @@ func _on_direction_change_timeout() -> void:
 
 func _on_fire_rate_timeout() -> void:
 	if is_aggro:
-		var projectile_instance: Projectile = PROJECTILE_SCENE.instantiate()
+		var projectile_node: Node2D = PROJECTILE_SCENE.instantiate()
+		var projectile_instance: Projectile = projectile_node.get_node("Projectile")
 		var random_angle: float = randf()*SHOOTING_PRECISION - (SHOOTING_PRECISION/2)
 		projectile_instance.position = position
 		var new_direction = position.direction_to(player.position).rotated(random_angle)
 		projectile_instance.direction = new_direction
 		projectile_instance.player_speed = velocity
-		get_parent().add_child(projectile_instance)
+		get_parent().add_child(projectile_node)
