@@ -3,7 +3,6 @@ class_name HealthComponent extends Node2D
 @export var element: Element.Type = Element.Type.Neutral
 @export var max_health: int = 100
 @export var health_bar: TextureProgressBar
-var current_health: int = 100
 var can_take_damage: bool = true
 ## Optional for heal_over_time
 @export var _heal_tick: Timer
