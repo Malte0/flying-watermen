@@ -36,6 +36,8 @@ func reset_variables():
 	friction = base_friction
 	fall_speed_factor = base_fall_speed_factor
 	can_move = true
+	collision_mask = 0b101
+	collision_layer = 0b10
 
 func _ready():
 	health_component.death.connect(_on_death)
@@ -46,7 +48,7 @@ func _ready():
 	state_chart.set_expression_property("velocity_x", velocity.x)
 
 ## Callback for player interaction
-var on_interact = func(): print("Noting to interact")
+var on_interact = func(): print("Nothing to interact")
 
 func apply_gravity(delta: float):
 	if is_on_floor() and velocity.y == 0:
@@ -95,6 +97,8 @@ func _input(event: InputEvent):
 		on_interact.call()
 	if event.is_action_pressed("jump"):
 		state_chart.send_event("jump")
+	if event.is_action_pressed("lshift"):
+		state_chart.send_event("dash")
 
 func flip_player():
 	scale.x *= -1
@@ -137,3 +141,10 @@ func _on_can_shoot_state_input(event: InputEvent) -> void:
 
 func _on_death():
 	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
+
+func _on_dash_state_entered() -> void:
+	can_move = false
+	friction = 0
+	velocity.x = signi(scale.y) * base_speed * 2
+	collision_mask = 0b1
+	collision_layer = 0b
