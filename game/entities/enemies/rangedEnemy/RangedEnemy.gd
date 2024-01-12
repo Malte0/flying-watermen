@@ -23,8 +23,8 @@ func _physics_process(delta: float):
 	if not aggro_component.is_aggro:
 		return
 
-	var player_distance: float = player.global_position.x - global_position.x
-	var player_direction: int = sign(player_distance)
+	var player_distance: float = player.global_position.distance_to(global_position)
+	var player_direction: int = sign(player.global_position.x - global_position.x)
 	if abs(player_distance) < MOVEMENT_EPSILON_PIXELS:
 		movement_component.movement_direction = movement_component.Movement_Direction.No
 		return
