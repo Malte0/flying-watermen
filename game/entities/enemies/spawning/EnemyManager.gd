@@ -3,7 +3,9 @@ class_name EnemyManager extends Node2D
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 @onready var spawn_timer: Timer = $SpawnRate
 
-@onready var ENEMY_SPAWN_PROBABILITIES: Dictionary = {
+const SPAWN_OFFSET_X: int = 800
+
+@onready var enemy_spawn_probabilities: Dictionary = {
 	"rangedEnemy": {
 		"weight": 0.3,
 		"scene": load("res://entities/enemies/rangedEnemy/RangedEnemy.tscn")
@@ -17,8 +19,8 @@ class_name EnemyManager extends Node2D
 #region Test
 func test_enemy_probabilities():
 	var total_probability: float = 0
-	for key in ENEMY_SPAWN_PROBABILITIES:
-		var enemy: Dictionary = ENEMY_SPAWN_PROBABILITIES[key]
+	for key in enemy_spawn_probabilities:
+		var enemy: Dictionary = enemy_spawn_probabilities[key]
 		if not enemy["weight"]:
 			push_warning("Weight missing in "+key)
 			continue
@@ -32,16 +34,22 @@ func test_enemy_probabilities():
 
 func _ready():
 	test_enemy_probabilities()
-	spawn_timer.timeout.connect(func(): spawn_random_enemy(Vector2(player.global_position.x, 0)))
+	spawn_timer.timeout.connect(steady_spawn)
 
-func spawn_random_enemy(position: Vector2):
+func steady_spawn():
+	print("jesj")
+	var positon_x: float = player.global_position.x + SPAWN_OFFSET_X
+	var position_y: int = 0
+	spawn_random_enemy(Vector2(positon_x, position_y))
+
+func spawn_random_enemy(_position: Vector2):
 	var random: float = randf()
 	var current_prob: float = 0
-	for key in ENEMY_SPAWN_PROBABILITIES:
-		var enemy_type: Dictionary = ENEMY_SPAWN_PROBABILITIES[key]
+	for key in enemy_spawn_probabilities:
+		var enemy_type: Dictionary = enemy_spawn_probabilities[key]
 		current_prob += enemy_type["weight"]
 		if random < current_prob:
 			var enemy_instance: Enemy = enemy_type["scene"].instantiate()
-			enemy_instance.global_position = position
+			enemy_instance.global_position = _position
 			get_parent().add_child.call_deferred(enemy_instance)
 			return

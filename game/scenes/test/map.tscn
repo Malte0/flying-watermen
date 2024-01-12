@@ -29905,5 +29905,5 @@ position = Vector2(954, 1778)
 script = ExtResource("18_ephhu")
 
 [node name="SpawnRate" type="Timer" parent="EnemyManager"]
-wait_time = 20.0
+wait_time = 15.0
 autostart = true
