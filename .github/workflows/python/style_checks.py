@@ -45,7 +45,7 @@ def hasShortVariableName(line: str):
 
 def hasTooLongFunction(line: str):
     global functionLength, isFunction, shouldNotHaveUnscopedVariablesAnyMore
-    if 'func' in line:
+    if line.startswith('func'):
         if isFunction and functionLength > style_config["maxFunctionLength"]:
             functionLength = 0
             return True
