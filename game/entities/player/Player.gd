@@ -48,7 +48,7 @@ func _ready():
 	state_chart.set_expression_property("velocity_x", velocity.x)
 
 ## Callback for player interaction
-var on_interact = func(): print("Noting to interact")
+var on_interact = func(): print("Nothing to interact")
 
 func apply_gravity(delta: float):
 	if is_on_floor() and velocity.y == 0:
