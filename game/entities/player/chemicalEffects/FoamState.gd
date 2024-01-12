@@ -15,6 +15,9 @@ func exit_foam_state():
 	chemical_state_chart.send_event("to_default")
 
 func _on_foam_state_entered():
-	enter_foam_state()
 	print("helo")
+	enter_foam_state()
+
+
+func _on_foam_state_physics_processing(delta):
 	pass

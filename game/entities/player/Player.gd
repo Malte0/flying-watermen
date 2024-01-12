@@ -35,7 +35,6 @@ func reset_variables():
 	jump_velocity = base_jump_velocity
 	friction = base_friction
 	fall_speed_factor = base_fall_speed_factor
-	can_move = true
 
 func _ready():
 	health_component.death.connect(_on_death)
@@ -72,9 +71,8 @@ func _physics_process(delta: float):
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
 	state_chart.set_expression_property("jumps_left", jumps_left)
 	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
-
-func _on_default_state_physics_processing(_delta):
-	# handle left/right movement
+	
+	
 	direction = Input.get_axis("a", "d")
 	if abs(direction) > 0 and can_move:
 		velocity.x = lerp(velocity.x, direction * speed, 0.1)
@@ -82,8 +80,18 @@ func _on_default_state_physics_processing(_delta):
 		velocity.x = 0
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
-
+		
 	move_and_slide()
+
+#func _on_default_state_physics_processing(_delta):
+	## handle left/right movement
+	#direction = Input.get_axis("a", "d")
+	#if abs(direction) > 0 and can_move:
+		#velocity.x = lerp(velocity.x, direction * speed, 0.1)
+	#elif abs(velocity.x) < 0.1:
+		#velocity.x = 0
+	#else:
+		#velocity.x = lerp(velocity.x, 0.0, friction)
 
 	if sign(scale.y) != sign(direction) and sign(direction) != 0:
 		flip_player()
@@ -93,7 +101,7 @@ func _input(event: InputEvent):
 		state_chart.send_event("attackpressed")
 	if event.is_action_pressed("interact"):
 		on_interact.call()
-	if event.is_action_pressed("jump"):
+	if event.is_action_pressed("jump") and can_move:
 		state_chart.send_event("jump")
 
 func flip_player():
@@ -137,3 +145,8 @@ func _on_can_shoot_state_input(event: InputEvent) -> void:
 
 func _on_death():
 	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
+
+
+func _on_sliding_state_exited():
+	can_move = true
+
