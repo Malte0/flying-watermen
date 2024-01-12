@@ -1,6 +1,7 @@
 extends Enemy
 
 @export var aggro_component: AggroComponent
+@export var melee_attack_component: MeleeAttackComponent
 @export var movement_component: MovementComponent
 @export var wall_detection: RayCast2D
 @export var movement_speed_calm: int = 100
@@ -8,22 +9,23 @@ extends Enemy
 
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 
+const ATTACK_DISTANCE: int = 300
+
 func _ready():
 	aggro_component.aggro_entered.connect(on_aggro_entered)
 	aggro_component.calm_entered.connect(on_calm_entered)
 
 func _physics_process(_delta: float):
-	follow_player() if aggro_component.is_aggro else idle_movement()
+	hunt_player() if aggro_component.is_aggro else idle_movement()
 
 func idle_movement():
 	if wall_detection.is_colliding():
 		movement_component.flip_move_direction()
 
-func follow_player():
+func hunt_player():
 	if wall_detection.is_colliding():
 		movement_component.jump(1)
-	var player_distance: float = player.global_position.x - global_position.x
-	var player_direction: int = sign(player_distance)
+	var player_direction: int = sign(player.global_position.x - global_position.x)
 	if player_direction == movement_component.Movement_Direction.Right:
 		movement_component.change_move_direction(movement_component.Movement_Direction.Right)
 	else:
@@ -38,3 +40,8 @@ func on_aggro_entered():
 
 func on_calm_entered():
 	movement_component.movement_speed = movement_speed_calm
+
+func _on_attack_frequency_timeout():
+	var player_distance: float = player.global_position.distance_to(global_position)
+	if aggro_component.is_aggro and player_distance < ATTACK_DISTANCE:
+			melee_attack_component.attack()
