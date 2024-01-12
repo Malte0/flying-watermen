@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://wamnd7014nsa"]
-
-[ext_resource type="Script" path="res://entities/components/enemyComponents/itemDropper/DropItem.gd" id="1_slpnx"]
-
-[node name="ItemDropper" type="Node2D"]
-script = ExtResource("1_slpnx")
