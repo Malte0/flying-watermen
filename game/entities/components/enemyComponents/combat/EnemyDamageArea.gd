@@ -22,5 +22,5 @@ func _on_damage_tick_timeout():
 	for health_component in apply_damage_to:
 		var distance: float = global_position.distance_to(health_component.global_position)
 		var damage_weight: float = (damage_radius - distance) /  damage_radius
-		var damage_to_apply: int = roundi(lerp(min_damage, max_damage, damage_weight))
-		health_component.increase_heat(damage_to_apply)
+		var damage_to_apply: int = ceili(lerp(min_damage, max_damage, damage_weight))
+		health_component.take_damage(damage_to_apply, Element.Type.Fire)
