@@ -1,42 +1,55 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2mdlfdoukqoq"]
+[gd_scene load_steps=14 format=3 uid="uid://c2mdlfdoukqoq"]
 
 [ext_resource type="Texture2D" uid="uid://dvtm1er0mqhwv" path="res://entities/enemies/assets/meleeEnemyDirected.PNG" id="2_jkvcn"]
 [ext_resource type="Script" path="res://entities/enemies/meleeEnemy/MeleeEnemy.gd" id="2_r07kk"]
 [ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="4_7dbns"]
 [ext_resource type="Texture2D" uid="uid://32uxotk6128m" path="res://entities/enemies/assets/healthbar_under.png" id="4_ap5gi"]
 [ext_resource type="Texture2D" uid="uid://drqht0p82ryru" path="res://entities/enemies/assets/healthbar_progress.png" id="5_x4f6e"]
+[ext_resource type="PackedScene" uid="uid://u07y0x28am7y" path="res://entities/components/enemyComponents/combat/EnemyHeatArea.tscn" id="6_dqevw"]
+[ext_resource type="PackedScene" uid="uid://b22gqpw2lilbg" path="res://entities/components/enemyComponents/combat/EnemyDamageArea.tscn" id="7_llwul"]
+[ext_resource type="PackedScene" uid="uid://bkweew02mcaim" path="res://entities/components/enemyComponents/enemyAggro/EnemyAggroComponent.tscn" id="8_vgiu5"]
+[ext_resource type="PackedScene" uid="uid://61g8e7mlxwj" path="res://entities/components/enemyComponents/movement/MovementComponent.tscn" id="9_mp4oq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oi488"]
 radius = 28.0179
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ol33t"]
-radius = 362.006
+radius = 355.001
 
-[node name="MeleeEnemy" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_prey5"]
+radius = 199.01
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_abfmm"]
+radius = 59.1354
+
+[node name="MeleeEnemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_component", "movement_component", "wall_detection", "health_component")]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("2_r07kk")
+aggro_component = NodePath("EnemyAggro")
+movement_component = NodePath("MovementComponent")
+wall_detection = NodePath("WallDetection/Raycast2D")
 health_component = NodePath("HealthComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="EnemyHitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_oi488")
 debug_color = Color(0.247059, 0.635294, 0, 0.419608)
 
-[node name="DirectionalNodes" type="Node2D" parent="."]
+[node name="WallDetection" type="Node2D" parent="."]
 
-[node name="EnemyGraphics" type="Node2D" parent="DirectionalNodes"]
+[node name="Raycast2D" type="RayCast2D" parent="WallDetection"]
+position = Vector2(42, -53)
+target_position = Vector2(0, 72)
 
-[node name="FlameImage" type="Sprite2D" parent="DirectionalNodes/EnemyGraphics"]
+[node name="EnemyGraphics" type="Node2D" parent="."]
+
+[node name="FlameImage" type="Sprite2D" parent="EnemyGraphics"]
 position = Vector2(0, -12)
 scale = Vector2(0.0964117, 0.0875117)
 texture = ExtResource("2_jkvcn")
 
-[node name="WallDetection" type="RayCast2D" parent="DirectionalNodes"]
-position = Vector2(37, -32)
-
 [node name="ViewArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 3
 
@@ -56,16 +69,25 @@ value = 100.0
 texture_under = ExtResource("4_ap5gi")
 texture_progress = ExtResource("5_x4f6e")
 
-[node name="AggroCooldown" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
+[node name="EnemyHeatArea" parent="." instance=ExtResource("6_dqevw")]
+collision_mask = 3
+max_heat_applied = 4
 
-[node name="DamageTick" type="Timer" parent="."]
-wait_time = 0.05
-autostart = true
+[node name="HeatArea" type="CollisionShape2D" parent="EnemyHeatArea"]
+shape = SubResource("CircleShape2D_prey5")
+debug_color = Color(0.882353, 0.321569, 0.247059, 0.419608)
 
-[connection signal="body_entered" from="ViewArea" to="." method="_on_view_area_body_entered"]
-[connection signal="body_exited" from="ViewArea" to="." method="_on_view_area_body_exited"]
-[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
-[connection signal="timeout" from="AggroCooldown" to="." method="_on_aggro_cooldown_timeout"]
-[connection signal="timeout" from="DamageTick" to="." method="_on_damage_tick_timeout"]
+[node name="EnemyDamageArea" parent="." instance=ExtResource("7_llwul")]
+collision_mask = 3
+min_damage = 3
+
+[node name="DamageArea" type="CollisionShape2D" parent="EnemyDamageArea"]
+shape = SubResource("CircleShape2D_abfmm")
+debug_color = Color(0.682353, 0.498039, 0.196078, 0.419608)
+
+[node name="EnemyAggro" parent="." node_paths=PackedStringArray("view_area", "health_component") instance=ExtResource("8_vgiu5")]
+view_area = NodePath("../ViewArea")
+health_component = NodePath("../HealthComponent")
+
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("nodes_to_flip") instance=ExtResource("9_mp4oq")]
+nodes_to_flip = [NodePath("../EnemyGraphics"), NodePath("../WallDetection")]
