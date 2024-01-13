@@ -21,9 +21,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ockj"]
 size = Vector2(38, 29.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_srmds"]
-size = Vector2(67.9999, 45.5001)
-
 [sub_resource type="Resource" id="Resource_r58ym"]
 script = ExtResource("7_m5qsp")
 expression = "crouching == true and over_slide_threshold"
@@ -70,11 +67,14 @@ guard = SubResource("Resource_p8ca0")
 
 [sub_resource type="Resource" id="Resource_scptp"]
 script = ExtResource("8_3t36e")
-state = NodePath("../../../../Cooldowns/Dash/Useable")
+state = NodePath("../../../Cooldowns/Dash/Useable")
 
 [sub_resource type="Resource" id="Resource_cs023"]
 script = ExtResource("7_m5qsp")
 expression = "heat >= max_heat"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_srmds"]
+size = Vector2(67.9999, 45.5001)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(2, 2)
@@ -118,6 +118,215 @@ position = Vector2(0, -23)
 visible = false
 position = Vector2(28, -45)
 target_position = Vector2(0, 44)
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="HeatTick" type="Timer" parent="Timers"]
+autostart = true
+
+[node name="HeatReductionDelay" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="HealTick" type="Timer" parent="Timers"]
+autostart = true
+
+[node name="ChemicalEffectsManager" type="Node2D" parent="." node_paths=PackedStringArray("player", "player_sprite_container")]
+script = ExtResource("18_bvu0j")
+player = NodePath("..")
+player_sprite_container = NodePath("../Sprites")
+
+[node name="effects" type="Node2D" parent="ChemicalEffectsManager"]
+
+[node name="ice" type="Node2D" parent="ChemicalEffectsManager/effects" node_paths=PackedStringArray("player", "heat_component")]
+script = ExtResource("17_irds6")
+player = NodePath("../../..")
+heat_component = NodePath("../../../HeatComponent")
+
+[node name="Inventory" type="Node2D" parent="."]
+script = ExtResource("15_8nkrm")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("2_dhjab")
+
+[node name="Player" type="Node" parent="StateChart"]
+script = ExtResource("3_7lhhd")
+
+[node name="Ranged" type="Node" parent="StateChart/Player"]
+script = ExtResource("4_klwk4")
+initial_state = NodePath("CanShoot")
+
+[node name="CanShoot" type="Node" parent="StateChart/Player/Ranged"]
+script = ExtResource("5_dadqm")
+
+[node name="OnShot" type="Node" parent="StateChart/Player/Ranged/CanShoot"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../CantShoot")
+event = &"_on_shot"
+
+[node name="CantShoot" type="Node" parent="StateChart/Player/Ranged"]
+script = ExtResource("5_dadqm")
+
+[node name="Cooldown" type="Node" parent="StateChart/Player/Ranged/CantShoot"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../CanShoot")
+delay_seconds = 0.5
+
+[node name="Movement" type="Node" parent="StateChart/Player"]
+script = ExtResource("4_klwk4")
+initial_state = NodePath("Interruptible")
+
+[node name="Interruptible" type="Node" parent="StateChart/Player/Movement"]
+script = ExtResource("4_klwk4")
+initial_state = NodePath("Airborne")
+
+[node name="Grounded" type="Node" parent="StateChart/Player/Movement/Interruptible"]
+script = ExtResource("4_klwk4")
+initial_state = NodePath("Standing")
+
+[node name="Standing" type="Node" parent="StateChart/Player/Movement/Interruptible/Grounded"]
+script = ExtResource("5_dadqm")
+
+[node name="On Slide" type="Node" parent="StateChart/Player/Movement/Interruptible/Grounded/Standing"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Crouching/Sliding")
+event = &"tick"
+guard = SubResource("Resource_r58ym")
+
+[node name="On Crouch" type="Node" parent="StateChart/Player/Movement/Interruptible/Grounded/Standing"]
+process_priority = 1
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Crouching")
+event = &"tick"
+guard = SubResource("Resource_jk8u2")
+
+[node name="Crouching" type="Node" parent="StateChart/Player/Movement/Interruptible/Grounded"]
+script = ExtResource("4_klwk4")
+initial_state = NodePath("Crouch")
+
+[node name="Crouch" type="Node" parent="StateChart/Player/Movement/Interruptible/Grounded/Crouching"]
+script = ExtResource("5_dadqm")
+
+[node name="Sliding" type="Node" parent="StateChart/Player/Movement/Interruptible/Grounded/Crouching"]
+script = ExtResource("5_dadqm")
+
+[node name="On Slide End" type="Node" parent="StateChart/Player/Movement/Interruptible/Grounded/Crouching/Sliding"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Crouch")
+event = &"tick"
+guard = SubResource("Resource_8wh4l")
+
+[node name="On Crouch End" type="Node" parent="StateChart/Player/Movement/Interruptible/Grounded/Crouching"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Standing")
+event = &"tick"
+guard = SubResource("Resource_wu70w")
+
+[node name="Airborne" type="Node" parent="StateChart/Player/Movement/Interruptible"]
+script = ExtResource("4_klwk4")
+initial_state = NodePath("Falling")
+
+[node name="Jumping" type="Node" parent="StateChart/Player/Movement/Interruptible/Airborne"]
+script = ExtResource("5_dadqm")
+
+[node name="On Falling" type="Node" parent="StateChart/Player/Movement/Interruptible/Airborne/Jumping"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Falling")
+event = &"falling"
+
+[node name="FallingCoyote" type="Node" parent="StateChart/Player/Movement/Interruptible/Airborne"]
+script = ExtResource("5_dadqm")
+
+[node name="CoyoteDelay" type="Node" parent="StateChart/Player/Movement/Interruptible/Airborne/FallingCoyote"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Falling")
+delay_seconds = 0.2
+
+[node name="Falling" type="Node" parent="StateChart/Player/Movement/Interruptible/Airborne"]
+script = ExtResource("5_dadqm")
+
+[node name="WallSlide" type="Node" parent="StateChart/Player/Movement/Interruptible"]
+script = ExtResource("5_dadqm")
+
+[node name="On FallingCoyote" type="Node" parent="StateChart/Player/Movement/Interruptible"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../Airborne/FallingCoyote")
+event = &"falling"
+guard = SubResource("Resource_sktov")
+
+[node name="On Jump" type="Node" parent="StateChart/Player/Movement/Interruptible"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../Airborne/Jumping")
+event = &"jump"
+guard = SubResource("Resource_y14vn")
+
+[node name="On WallSlide" type="Node" parent="StateChart/Player/Movement/Interruptible"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../WallSlide")
+event = &"wall_slide"
+guard = SubResource("Resource_6rl8s")
+
+[node name="On Grounded" type="Node" parent="StateChart/Player/Movement/Interruptible"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../Grounded")
+event = &"grounded"
+guard = SubResource("Resource_c7udc")
+
+[node name="On Dash" type="Node" parent="StateChart/Player/Movement/Interruptible"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Dash")
+event = &"dash"
+guard = SubResource("Resource_scptp")
+
+[node name="Dash" type="Node" parent="StateChart/Player/Movement"]
+script = ExtResource("5_dadqm")
+
+[node name="On End Dash" type="Node" parent="StateChart/Player/Movement/Dash"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../..")
+delay_seconds = 0.3
+
+[node name="Ice" type="Node" parent="StateChart/Player/Movement"]
+script = ExtResource("5_dadqm")
+
+[node name="Exit Ice" type="Node" parent="StateChart/Player/Movement/Ice"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Interruptible")
+event = &"tick"
+guard = SubResource("Resource_cs023")
+
+[node name="To Ice" type="Node" parent="StateChart/Player/Movement"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../Ice")
+event = &"active_chemical"
+
+[node name="To Default" type="Node" parent="StateChart/Player/Movement"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../Interruptible")
+event = &"to_default"
+
+[node name="Cooldowns" type="Node" parent="StateChart/Player"]
+script = ExtResource("3_7lhhd")
+
+[node name="Dash" type="Node" parent="StateChart/Player/Cooldowns"]
+script = ExtResource("4_klwk4")
+initial_state = NodePath("Useable")
+
+[node name="Cooldown" type="Node" parent="StateChart/Player/Cooldowns/Dash"]
+script = ExtResource("5_dadqm")
+
+[node name="On Cooldown" type="Node" parent="StateChart/Player/Cooldowns/Dash/Cooldown"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Useable")
+delay_seconds = 1.0
+
+[node name="Useable" type="Node" parent="StateChart/Player/Cooldowns/Dash"]
+script = ExtResource("5_dadqm")
+
+[node name="On Dash" type="Node" parent="StateChart/Player/Cooldowns/Dash/Useable"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Cooldown")
+event = &"dash"
 
 [node name="MeleeAttack" type="Area2D" parent="."]
 position = Vector2(0, -23)
@@ -173,240 +382,26 @@ offset_bottom = 28.0
 value = 100.0
 show_percentage = false
 
-[node name="Timers" type="Node2D" parent="."]
-
-[node name="HeatTick" type="Timer" parent="Timers"]
-autostart = true
-
-[node name="HeatReductionDelay" type="Timer" parent="Timers"]
-wait_time = 2.0
-one_shot = true
-
-[node name="HealTick" type="Timer" parent="Timers"]
-autostart = true
-
-[node name="ChemicalEffectsManager" type="Node2D" parent="." node_paths=PackedStringArray("player", "player_sprite_container")]
-script = ExtResource("18_bvu0j")
-player = NodePath("..")
-player_sprite_container = NodePath("../Sprites")
-
-[node name="effects" type="Node2D" parent="ChemicalEffectsManager"]
-
-[node name="ice" type="Node2D" parent="ChemicalEffectsManager/effects" node_paths=PackedStringArray("player", "heat_component", "chemical_state_chart")]
-script = ExtResource("17_irds6")
-player = NodePath("../../..")
-heat_component = NodePath("../../../HeatComponent")
-chemical_state_chart = NodePath("")
-
-[node name="Inventory" type="Node2D" parent="."]
-script = ExtResource("15_8nkrm")
-
-[node name="StateChart" type="Node" parent="."]
-script = ExtResource("2_dhjab")
-
-[node name="Player" type="Node" parent="StateChart"]
-script = ExtResource("3_7lhhd")
-
-[node name="Shooting" type="Node" parent="StateChart/Player"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("CanShoot")
-
-[node name="CanShoot" type="Node" parent="StateChart/Player/Shooting"]
-script = ExtResource("5_dadqm")
-
-[node name="OnShot" type="Node" parent="StateChart/Player/Shooting/CanShoot"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../CantShoot")
-event = &"_on_shot"
-
-[node name="CantShoot" type="Node" parent="StateChart/Player/Shooting"]
-script = ExtResource("5_dadqm")
-
-[node name="Cooldown" type="Node" parent="StateChart/Player/Shooting/CantShoot"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../CanShoot")
-delay_seconds = 0.5
-
-[node name="Mechanics" type="Node" parent="StateChart/Player"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Movement")
-
-[node name="Movement" type="Node" parent="StateChart/Player/Mechanics"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Interruptible")
-
-[node name="Interruptible" type="Node" parent="StateChart/Player/Mechanics/Movement"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Airborne")
-
-[node name="Grounded" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Standing")
-
-[node name="Standing" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible/Grounded"]
-script = ExtResource("5_dadqm")
-
-[node name="On Slide" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible/Grounded/Standing"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Crouching/Sliding")
-event = &"tick"
-guard = SubResource("Resource_r58ym")
-
-[node name="On Crouch" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible/Grounded/Standing"]
-process_priority = 1
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Crouching")
-event = &"tick"
-guard = SubResource("Resource_jk8u2")
-
-[node name="Crouching" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible/Grounded"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Crouch")
-
-[node name="Crouch" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible/Grounded/Crouching"]
-script = ExtResource("5_dadqm")
-
-[node name="Sliding" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible/Grounded/Crouching"]
-script = ExtResource("5_dadqm")
-
-[node name="On Slide End" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible/Grounded/Crouching/Sliding"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Crouch")
-event = &"tick"
-guard = SubResource("Resource_8wh4l")
-
-[node name="On Crouch End" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible/Grounded/Crouching"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Standing")
-event = &"tick"
-guard = SubResource("Resource_wu70w")
-
-[node name="Airborne" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Falling")
-
-[node name="Jumping" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible/Airborne"]
-script = ExtResource("5_dadqm")
-
-[node name="On Falling" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible/Airborne/Jumping"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Falling")
-event = &"falling"
-
-[node name="FallingCoyote" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible/Airborne"]
-script = ExtResource("5_dadqm")
-
-[node name="CoyoteDelay" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible/Airborne/FallingCoyote"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Falling")
-delay_seconds = 0.2
-
-[node name="Falling" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible/Airborne"]
-script = ExtResource("5_dadqm")
-
-[node name="WallSlide" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible"]
-script = ExtResource("5_dadqm")
-
-[node name="On FallingCoyote" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../Airborne/FallingCoyote")
-event = &"falling"
-guard = SubResource("Resource_sktov")
-
-[node name="On Jump" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../Airborne/Jumping")
-event = &"jump"
-guard = SubResource("Resource_y14vn")
-
-[node name="On WallSlide" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../WallSlide")
-event = &"wall_slide"
-guard = SubResource("Resource_6rl8s")
-
-[node name="On Grounded" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../Grounded")
-event = &"grounded"
-guard = SubResource("Resource_c7udc")
-
-[node name="On Dash" type="Node" parent="StateChart/Player/Mechanics/Movement/Interruptible"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Dash")
-event = &"dash"
-guard = SubResource("Resource_scptp")
-
-[node name="Dash" type="Node" parent="StateChart/Player/Mechanics/Movement"]
-script = ExtResource("5_dadqm")
-
-[node name="On End Dash" type="Node" parent="StateChart/Player/Mechanics/Movement/Dash"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../..")
-delay_seconds = 0.3
-
-[node name="Ice" type="Node" parent="StateChart/Player/Mechanics/Movement"]
-script = ExtResource("5_dadqm")
-
-[node name="Exit Ice" type="Node" parent="StateChart/Player/Mechanics/Movement/Ice"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Interruptible")
-event = &"tick"
-guard = SubResource("Resource_cs023")
-
-[node name="To Ice" type="Node" parent="StateChart/Player/Mechanics/Movement"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../Ice")
-event = &"active_chemical"
-
-[node name="To Default" type="Node" parent="StateChart/Player/Mechanics/Movement"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../Interruptible")
-event = &"to_default"
-
-[node name="Cooldowns" type="Node" parent="StateChart/Player"]
-script = ExtResource("3_7lhhd")
-
-[node name="Dash" type="Node" parent="StateChart/Player/Cooldowns"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Useable")
-
-[node name="Cooldown" type="Node" parent="StateChart/Player/Cooldowns/Dash"]
-script = ExtResource("5_dadqm")
-
-[node name="On Cooldown" type="Node" parent="StateChart/Player/Cooldowns/Dash/Cooldown"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Useable")
-delay_seconds = 1.0
-
-[node name="Useable" type="Node" parent="StateChart/Player/Cooldowns/Dash"]
-script = ExtResource("5_dadqm")
-
-[node name="On Dash" type="Node" parent="StateChart/Player/Cooldowns/Dash/Useable"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Cooldown")
-event = &"dash"
-
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
+[connection signal="timeout" from="Timers/HeatTick" to="." method="_on_heat_tick_timeout"]
+[connection signal="timeout" from="Timers/HealTick" to="." method="_on_heal_tick_timeout"]
+[connection signal="state_input" from="StateChart/Player/Ranged/CanShoot" to="." method="_on_can_shoot_state_input"]
+[connection signal="child_state_exited" from="StateChart/Player/Movement" to="." method="reset_variables"]
+[connection signal="child_state_exited" from="StateChart/Player/Movement/Interruptible" to="." method="_on_movement_child_state_exited"]
+[connection signal="child_state_exited" from="StateChart/Player/Movement/Interruptible/Grounded" to="." method="_on_movement_child_state_exited"]
+[connection signal="child_state_exited" from="StateChart/Player/Movement/Interruptible/Grounded/Crouching" to="." method="_on_movement_child_state_exited"]
+[connection signal="state_entered" from="StateChart/Player/Movement/Interruptible/Grounded/Crouching" to="." method="_on_crouching_state_entered"]
+[connection signal="state_entered" from="StateChart/Player/Movement/Interruptible/Grounded/Crouching/Sliding" to="." method="_on_sliding_state_entered"]
+[connection signal="child_state_exited" from="StateChart/Player/Movement/Interruptible/Airborne" to="." method="_on_movement_child_state_exited"]
+[connection signal="state_entered" from="StateChart/Player/Movement/Interruptible/Airborne" to="." method="_on_airborne_state_entered"]
+[connection signal="state_entered" from="StateChart/Player/Movement/Interruptible/Airborne/Jumping" to="." method="_on_jumping_state_entered"]
+[connection signal="state_input" from="StateChart/Player/Movement/Interruptible/Airborne/Jumping" to="." method="_on_airborn_not_coyote_state_input"]
+[connection signal="state_entered" from="StateChart/Player/Movement/Interruptible/Airborne/Falling" to="." method="_on_falling_state_entered"]
+[connection signal="state_entered" from="StateChart/Player/Movement/Interruptible/WallSlide" to="." method="_on_wall_slide_state_entered"]
+[connection signal="state_entered" from="StateChart/Player/Movement/Dash" to="." method="_on_dash_state_entered"]
+[connection signal="state_entered" from="StateChart/Player/Movement/Ice" to="ChemicalEffectsManager" method="_on_ice_state_entered"]
+[connection signal="state_entered" from="StateChart/Player/Movement/Ice" to="ChemicalEffectsManager/effects/ice" method="_on_ice_state_entered"]
+[connection signal="state_exited" from="StateChart/Player/Movement/Ice" to="ChemicalEffectsManager" method="_on_ice_state_exited"]
 [connection signal="body_entered" from="MeleeAttack" to="MeleeAttack" method="_on_body_entered"]
 [connection signal="state_entered" from="MeleeAttack/AttackStateChart/Root/Attack" to="MeleeAttack" method="_on_attack_state_entered"]
 [connection signal="state_exited" from="MeleeAttack/AttackStateChart/Root/Attack" to="MeleeAttack" method="_on_attack_state_exited"]
-[connection signal="timeout" from="Timers/HeatTick" to="." method="_on_heat_tick_timeout"]
-[connection signal="timeout" from="Timers/HealTick" to="." method="_on_heal_tick_timeout"]
-[connection signal="state_input" from="StateChart/Player/Shooting/CanShoot" to="." method="_on_can_shoot_state_input"]
-[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement" to="." method="reset_variables"]
-[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement/Interruptible" to="." method="_on_movement_child_state_exited"]
-[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement/Interruptible/Grounded" to="." method="_on_movement_child_state_exited"]
-[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement/Interruptible/Grounded/Crouching" to="." method="_on_movement_child_state_exited"]
-[connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Interruptible/Grounded/Crouching" to="." method="_on_crouching_state_entered"]
-[connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Interruptible/Grounded/Crouching/Sliding" to="." method="_on_sliding_state_entered"]
-[connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement/Interruptible/Airborne" to="." method="_on_movement_child_state_exited"]
-[connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Interruptible/Airborne" to="." method="_on_airborne_state_entered"]
-[connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Interruptible/Airborne/Jumping" to="." method="_on_jumping_state_entered"]
-[connection signal="state_input" from="StateChart/Player/Mechanics/Movement/Interruptible/Airborne/Jumping" to="." method="_on_airborn_not_coyote_state_input"]
-[connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Interruptible/Airborne/Falling" to="." method="_on_falling_state_entered"]
-[connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Interruptible/WallSlide" to="." method="_on_wall_slide_state_entered"]
-[connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Dash" to="." method="_on_dash_state_entered"]
-[connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Ice" to="ChemicalEffectsManager" method="_on_ice_state_entered"]
-[connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Ice" to="ChemicalEffectsManager/effects/ice" method="_on_ice_state_entered"]
-[connection signal="state_exited" from="StateChart/Player/Mechanics/Movement/Ice" to="ChemicalEffectsManager" method="_on_ice_state_exited"]

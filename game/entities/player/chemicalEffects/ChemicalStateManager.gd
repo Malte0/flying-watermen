@@ -3,16 +3,14 @@ class_name ChemicalStateManager extends Node
 @export var player: Player
 @export var player_sprite_container: Node2D
 
-@onready var player_state_chart: StateChart = player.state_chart
-
 func _input(event: InputEvent):
 	if event.is_action_pressed("activate_item"):
 		if player.inventory.active_item:
 			var active_chemical: String = player.inventory.active_item.name
-			player_state_chart.set_expression_property("active_chemical", active_chemical)
-			player_state_chart.send_event("to_chemical")
+			player.state_chart.set_expression_property("active_chemical", active_chemical)
+			player.state_chart.send_event("to_chemical")
 	if event.is_action_pressed("exit_state"):
-		player_state_chart.send_event("to_default")
+		player.state_chart.send_event("to_default")
 		player.inventory.set_active_item(null)
 
 func update_player_graphics(effect_name: String):
