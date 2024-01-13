@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1pa7ehe5sfkb"]
+
+[ext_resource type="Script" path="res://entities/projectiles/sodium/SodiumProjectile.gd" id="1_0e1yc"]
+[ext_resource type="Texture2D" uid="uid://dvyvxar3r85sh" path="res://entities/projectiles/sodium/assets/projectile.png" id="1_uam28"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cjdrv"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5sqkx"]
+radius = 62.0081
+
+[node name="SodiumProjectile" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("1_0e1yc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cjdrv")
+debug_color = Color(0.258824, 0.635294, 0, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.580392, 0.580392, 0.580392, 1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_uam28")
+
+[node name="Explosion" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="ExplosionArea" type="Area2D" parent="."]
+
+[node name="ExplosionShape" type="CollisionShape2D" parent="ExplosionArea"]
+shape = SubResource("CircleShape2D_5sqkx")
+debug_color = Color(0.254902, 0.505882, 0.992157, 0.419608)
+
+[connection signal="timeout" from="Explosion" to="." method="_on_explosion_timeout"]
+[connection signal="body_entered" from="ExplosionArea" to="." method="_on_explosion_area_body_entered"]
