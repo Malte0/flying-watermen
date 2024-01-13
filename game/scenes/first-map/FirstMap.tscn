@@ -1827,6 +1827,7 @@ metadata/_better_terrain = {
 [node name="FirstMap" type="Node2D"]
 
 [node name="Landscape" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.854902, 0.658824, 0.658824, 0.415686)
 show_behind_parent = true
 texture_filter = 1
@@ -1836,6 +1837,7 @@ texture = ExtResource("6_8c33o")
 metadata/_edit_lock_ = true
 
 [node name="Forest" type="Node2D" parent="."]
+visible = false
 
 [node name="Tree" type="Node2D" parent="Forest"]
 

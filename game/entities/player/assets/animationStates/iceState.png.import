@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0qc6euyej0r2"
-path="res://.godot/imported/iceState.png-40a670bf1248ceb769454c36f76932f5.ctex"
+path="res://.godot/imported/iceState.png-c3c7f8ab56c0b217739c1d086b9b977f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/player/assets/iceState.png"
-dest_files=["res://.godot/imported/iceState.png-40a670bf1248ceb769454c36f76932f5.ctex"]
+source_file="res://entities/player/assets/animationStates/iceState.png"
+dest_files=["res://.godot/imported/iceState.png-c3c7f8ab56c0b217739c1d086b9b977f.ctex"]
 
 [params]
 

@@ -9,6 +9,8 @@ class_name Player extends CharacterBody2D
 @onready var projectile_scene: PackedScene = load("res://entities/projectiles/WaterProjectile.tscn")
 @onready var shoot_position: Marker2D = $ShootPosition
 
+@onready var animation_tree = $Animation/AnimationTree
+
 # Reset values
 var base_scale_speed: float = 1.5
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") * base_scale_speed
@@ -103,6 +105,10 @@ func _input(event: InputEvent):
 func flip_player():
 	scale.x *= -1
 
+func update_animation_parameters():
+	if velocity == Vector2.ZERO:
+		animation_tree["parameters/conditions/idle"]
+	
 func _on_crouching_state_entered():
 	speed = base_speed/2
 
