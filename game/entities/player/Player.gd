@@ -30,6 +30,12 @@ var jumps_left: int = jumps
 var direction: float = 0.0
 var slide_threshold: float = base_speed/2
 
+func set_expressions():
+	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
+	state_chart.set_expression_property("jumps_left", jumps_left)
+	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
+	state_chart.set_expression_property("velocity_x", velocity.x)
+
 func reset_variables():
 	speed = base_speed
 	jump_velocity = base_jump_velocity
@@ -42,10 +48,7 @@ func reset_variables():
 func _ready():
 	health_component.death.connect(_on_death)
 	#Initialize values so Guards don't complain
-	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
-	state_chart.set_expression_property("jumps_left", jumps_left)
-	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
-	state_chart.set_expression_property("velocity_x", velocity.x)
+	set_expressions()
 
 ## Callback for player interaction
 var on_interact = func(): print("Nothing to interact")
@@ -63,19 +66,9 @@ func apply_gravity(delta: float):
 		else:
 			state_chart.send_event("falling")
 
-func _physics_process(delta: float):
-	# For transitions without event condition
-	state_chart.send_event("tick")
-	apply_gravity(delta)
-
+func movement():
 	if direction == 0:
 		velocity.x = lerp(velocity.x, 0.0, friction)
-
-	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
-	state_chart.set_expression_property("jumps_left", jumps_left)
-	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
-
-func _on_default_state_physics_processing(_delta):
 	# handle left/right movement
 	direction = Input.get_axis("a", "d")
 	if abs(direction) > 0 and can_move:
@@ -85,10 +78,16 @@ func _on_default_state_physics_processing(_delta):
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
 
-	move_and_slide()
+func _physics_process(delta: float):
+	# For transitions without event condition
+	state_chart.send_event("tick")
+	apply_gravity(delta)
+	movement()
+	set_expressions()
 
-	if sign(scale.y) != sign(direction) and sign(direction) != 0:
-		flip_player()
+	if sign(scale.y) != sign(direction) and sign(direction) != 0: flip_player()
+
+	move_and_slide()
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("attack"):

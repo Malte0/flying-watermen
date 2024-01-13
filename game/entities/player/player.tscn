@@ -21,6 +21,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ockj"]
 size = Vector2(38, 29.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_srmds"]
+size = Vector2(67.9999, 45.5001)
+
 [sub_resource type="Resource" id="Resource_r58ym"]
 script = ExtResource("7_m5qsp")
 expression = "crouching == true and over_slide_threshold"
@@ -69,12 +72,9 @@ guard = SubResource("Resource_p8ca0")
 script = ExtResource("8_3t36e")
 state = NodePath("../../../../Cooldowns/Dash/Useable")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_srmds"]
-size = Vector2(67.9999, 45.5001)
-
-[sub_resource type="Resource" id="Resource_7pa6p"]
+[sub_resource type="Resource" id="Resource_cs023"]
 script = ExtResource("7_m5qsp")
-expression = "active_chemical == \"ice\""
+expression = "heat >= max_heat"
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(2, 2)
@@ -118,6 +118,88 @@ position = Vector2(0, -23)
 visible = false
 position = Vector2(28, -45)
 target_position = Vector2(0, 44)
+
+[node name="MeleeAttack" type="Area2D" parent="."]
+position = Vector2(0, -23)
+rotation = -6.28319
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("14_y8i2u")
+
+[node name="AttackStateChart" type="Node" parent="MeleeAttack"]
+script = ExtResource("2_dhjab")
+
+[node name="Root" type="Node" parent="MeleeAttack/AttackStateChart"]
+script = ExtResource("4_klwk4")
+initial_state = NodePath("CanAttack")
+
+[node name="CannotAttack" type="Node" parent="MeleeAttack/AttackStateChart/Root"]
+script = ExtResource("5_dadqm")
+
+[node name="ToCanAttack" type="Node" parent="MeleeAttack/AttackStateChart/Root/CannotAttack"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../CanAttack")
+delay_seconds = 0.1
+
+[node name="CanAttack" type="Node" parent="MeleeAttack/AttackStateChart/Root"]
+script = ExtResource("5_dadqm")
+
+[node name="ToAttack" type="Node" parent="MeleeAttack/AttackStateChart/Root/CanAttack"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Attack")
+event = &"attack"
+
+[node name="Attack" type="Node" parent="MeleeAttack/AttackStateChart/Root"]
+script = ExtResource("5_dadqm")
+
+[node name="ToCannotAttack" type="Node" parent="MeleeAttack/AttackStateChart/Root/Attack"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../CannotAttack")
+delay_seconds = 0.2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeAttack"]
+position = Vector2(43, 5.2501)
+shape = SubResource("RectangleShape2D_srmds")
+disabled = true
+debug_color = Color(0.768627, 0.313726, 0.803922, 0.419608)
+
+[node name="ProgressBar" type="ProgressBar" parent="MeleeAttack"]
+visible = false
+modulate = Color(0.380392, 0.721569, 1, 1)
+offset_left = 9.0
+offset_top = -17.0
+offset_right = 77.0
+offset_bottom = 28.0
+value = 100.0
+show_percentage = false
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="HeatTick" type="Timer" parent="Timers"]
+autostart = true
+
+[node name="HeatReductionDelay" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="HealTick" type="Timer" parent="Timers"]
+autostart = true
+
+[node name="ChemicalEffectsManager" type="Node2D" parent="." node_paths=PackedStringArray("player", "player_sprite_container")]
+script = ExtResource("18_bvu0j")
+player = NodePath("..")
+player_sprite_container = NodePath("../Sprites")
+
+[node name="effects" type="Node2D" parent="ChemicalEffectsManager"]
+
+[node name="ice" type="Node2D" parent="ChemicalEffectsManager/effects" node_paths=PackedStringArray("player", "heat_component", "chemical_state_chart")]
+script = ExtResource("17_irds6")
+player = NodePath("../../..")
+heat_component = NodePath("../../../HeatComponent")
+chemical_state_chart = NodePath("")
+
+[node name="Inventory" type="Node2D" parent="."]
+script = ExtResource("15_8nkrm")
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("2_dhjab")
@@ -263,6 +345,25 @@ script = ExtResource("6_aaxtf")
 to = NodePath("../..")
 delay_seconds = 0.3
 
+[node name="Ice" type="Node" parent="StateChart/Player/Mechanics/Movement"]
+script = ExtResource("5_dadqm")
+
+[node name="Exit Ice" type="Node" parent="StateChart/Player/Mechanics/Movement/Ice"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Interruptible")
+event = &"tick"
+guard = SubResource("Resource_cs023")
+
+[node name="To Ice" type="Node" parent="StateChart/Player/Mechanics/Movement"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../Ice")
+event = &"active_chemical"
+
+[node name="To Default" type="Node" parent="StateChart/Player/Mechanics/Movement"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../Interruptible")
+event = &"to_default"
+
 [node name="Cooldowns" type="Node" parent="StateChart/Player"]
 script = ExtResource("3_7lhhd")
 
@@ -286,114 +387,12 @@ script = ExtResource("6_aaxtf")
 to = NodePath("../../Cooldown")
 event = &"dash"
 
-[node name="MeleeAttack" type="Area2D" parent="."]
-position = Vector2(0, -23)
-rotation = -6.28319
-collision_layer = 0
-collision_mask = 5
-script = ExtResource("14_y8i2u")
-
-[node name="AttackStateChart" type="Node" parent="MeleeAttack"]
-script = ExtResource("2_dhjab")
-
-[node name="Root" type="Node" parent="MeleeAttack/AttackStateChart"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("CanAttack")
-
-[node name="CannotAttack" type="Node" parent="MeleeAttack/AttackStateChart/Root"]
-script = ExtResource("5_dadqm")
-
-[node name="ToCanAttack" type="Node" parent="MeleeAttack/AttackStateChart/Root/CannotAttack"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../CanAttack")
-delay_seconds = 0.1
-
-[node name="CanAttack" type="Node" parent="MeleeAttack/AttackStateChart/Root"]
-script = ExtResource("5_dadqm")
-
-[node name="ToAttack" type="Node" parent="MeleeAttack/AttackStateChart/Root/CanAttack"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Attack")
-event = &"attack"
-
-[node name="Attack" type="Node" parent="MeleeAttack/AttackStateChart/Root"]
-script = ExtResource("5_dadqm")
-
-[node name="ToCannotAttack" type="Node" parent="MeleeAttack/AttackStateChart/Root/Attack"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../CannotAttack")
-delay_seconds = 0.2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeAttack"]
-position = Vector2(43, 5.2501)
-shape = SubResource("RectangleShape2D_srmds")
-disabled = true
-debug_color = Color(0.768627, 0.313726, 0.803922, 0.419608)
-
-[node name="ProgressBar" type="ProgressBar" parent="MeleeAttack"]
-visible = false
-modulate = Color(0.380392, 0.721569, 1, 1)
-offset_left = 9.0
-offset_top = -17.0
-offset_right = 77.0
-offset_bottom = 28.0
-value = 100.0
-show_percentage = false
-
-[node name="Timers" type="Node2D" parent="."]
-
-[node name="HeatTick" type="Timer" parent="Timers"]
-autostart = true
-
-[node name="HeatReductionDelay" type="Timer" parent="Timers"]
-wait_time = 2.0
-one_shot = true
-
-[node name="HealTick" type="Timer" parent="Timers"]
-autostart = true
-
-[node name="ChemicalEffectsManager" type="Node2D" parent="." node_paths=PackedStringArray("chemical_state_chart", "player", "player_sprite_container")]
-script = ExtResource("18_bvu0j")
-chemical_state_chart = NodePath("ChemicalStates")
-player = NodePath("..")
-player_sprite_container = NodePath("../Sprites")
-
-[node name="effects" type="Node2D" parent="ChemicalEffectsManager"]
-
-[node name="ice" type="Node2D" parent="ChemicalEffectsManager/effects" node_paths=PackedStringArray("player", "heat_component", "chemical_state_chart")]
-script = ExtResource("17_irds6")
-player = NodePath("../../..")
-heat_component = NodePath("../../../HeatComponent")
-chemical_state_chart = NodePath("../../ChemicalStates")
-
-[node name="ChemicalStates" type="Node" parent="ChemicalEffectsManager"]
-script = ExtResource("2_dhjab")
-
-[node name="Root" type="Node" parent="ChemicalEffectsManager/ChemicalStates"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Default")
-
-[node name="Default" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root"]
-script = ExtResource("5_dadqm")
-
-[node name="ToIce" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root/Default"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Ice")
-event = &"to_chemical"
-guard = SubResource("Resource_7pa6p")
-
-[node name="Ice" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root"]
-script = ExtResource("5_dadqm")
-
-[node name="ToDefault" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root/Ice"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Default")
-event = &"to_default"
-
-[node name="Inventory" type="Node2D" parent="."]
-script = ExtResource("15_8nkrm")
-
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
+[connection signal="body_entered" from="MeleeAttack" to="MeleeAttack" method="_on_body_entered"]
+[connection signal="state_entered" from="MeleeAttack/AttackStateChart/Root/Attack" to="MeleeAttack" method="_on_attack_state_entered"]
+[connection signal="state_exited" from="MeleeAttack/AttackStateChart/Root/Attack" to="MeleeAttack" method="_on_attack_state_exited"]
+[connection signal="timeout" from="Timers/HeatTick" to="." method="_on_heat_tick_timeout"]
+[connection signal="timeout" from="Timers/HealTick" to="." method="_on_heal_tick_timeout"]
 [connection signal="state_input" from="StateChart/Player/Shooting/CanShoot" to="." method="_on_can_shoot_state_input"]
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement" to="." method="reset_variables"]
 [connection signal="child_state_exited" from="StateChart/Player/Mechanics/Movement/Interruptible" to="." method="_on_movement_child_state_exited"]
@@ -408,12 +407,6 @@ script = ExtResource("15_8nkrm")
 [connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Interruptible/Airborne/Falling" to="." method="_on_falling_state_entered"]
 [connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Interruptible/WallSlide" to="." method="_on_wall_slide_state_entered"]
 [connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Dash" to="." method="_on_dash_state_entered"]
-[connection signal="body_entered" from="MeleeAttack" to="MeleeAttack" method="_on_body_entered"]
-[connection signal="state_entered" from="MeleeAttack/AttackStateChart/Root/Attack" to="MeleeAttack" method="_on_attack_state_entered"]
-[connection signal="state_exited" from="MeleeAttack/AttackStateChart/Root/Attack" to="MeleeAttack" method="_on_attack_state_exited"]
-[connection signal="timeout" from="Timers/HeatTick" to="." method="_on_heat_tick_timeout"]
-[connection signal="timeout" from="Timers/HealTick" to="." method="_on_heal_tick_timeout"]
-[connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Default" to="ChemicalEffectsManager" method="_on_default_state_entered"]
-[connection signal="state_physics_processing" from="ChemicalEffectsManager/ChemicalStates/Root/Default" to="." method="_on_default_state_physics_processing"]
-[connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Ice" to="ChemicalEffectsManager" method="_on_ice_state_entered"]
-[connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Ice" to="ChemicalEffectsManager/effects/ice" method="_on_ice_state_entered"]
+[connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Ice" to="ChemicalEffectsManager" method="_on_ice_state_entered"]
+[connection signal="state_entered" from="StateChart/Player/Mechanics/Movement/Ice" to="ChemicalEffectsManager/effects/ice" method="_on_ice_state_entered"]
+[connection signal="state_exited" from="StateChart/Player/Mechanics/Movement/Ice" to="ChemicalEffectsManager" method="_on_ice_state_exited"]
