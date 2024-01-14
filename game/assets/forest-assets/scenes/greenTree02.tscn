@@ -6,13 +6,13 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y8leg"]
 shader = ExtResource("1_1q7b2")
 shader_parameter/speed = 1.0
-shader_parameter/minStrength = 0.05
-shader_parameter/maxStrength = 0.01
+shader_parameter/minStrength = 0.046
+shader_parameter/maxStrength = 0.517
 shader_parameter/strengthScale = 100.0
 shader_parameter/interval = 3.5
 shader_parameter/detail = 1.0
 shader_parameter/distortion = null
-shader_parameter/heightOffset = null
+shader_parameter/heightOffset = 0.644
 shader_parameter/offset = 0.0
 
 [node name="GreenTree02" type="Sprite2D"]

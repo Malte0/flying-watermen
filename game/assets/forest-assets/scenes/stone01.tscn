@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwhk2jj1iftec"]
+[gd_scene load_steps=5 format=3 uid="uid://cwhk2jj1iftec"]
 
 [ext_resource type="Texture2D" uid="uid://dmd80l5nak5xl" path="res://assets/forest-assets/stone01.png" id="1_6ulot"]
 [ext_resource type="Shader" path="res://shader/wobbleEffect.gdshader" id="1_oeapc"]
+[ext_resource type="Script" path="res://assets/forest-assets/scenes/stone01.gd" id="3_kte85"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5lein"]
 shader = ExtResource("1_oeapc")
@@ -15,7 +16,8 @@ shader_parameter/distortion = null
 shader_parameter/heightOffset = null
 shader_parameter/offset = 0.0
 
-[node name="Stone01" type="Sprite2D"]
+[node name="Stone" type="Sprite2D"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_5lein")
 texture = ExtResource("1_6ulot")
+script = ExtResource("3_kte85")

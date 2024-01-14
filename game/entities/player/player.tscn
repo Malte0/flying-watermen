@@ -389,6 +389,7 @@ parameters/jump/blend_position = 0.0
 [node name="Light" type="Node2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="Light"]
+visible = false
 shadow_enabled = true
 texture = ExtResource("16_wf275")
 
