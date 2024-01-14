@@ -32,8 +32,6 @@ float noise(float input){
 	return fract(sin(input * 132.34) * 10297.46);
 }
 
-
-
 float getWind(vec2 vertex, vec2 uv, float time){
     float diff = pow( maxStrength  - minStrength , 2.0);
     float strength = clamp(minStrength + diff + sin(time / interval) * diff, minStrength, maxStrength) * strengthScale;

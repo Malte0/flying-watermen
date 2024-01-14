@@ -24,8 +24,8 @@ Globals="*res://Global.gd"
 [display]
 
 window/size/initial_position_type=4
-window/size/window_width_override=1920
-window/size/window_height_override=1080
+window/size/window_width_override=1820
+window/size/window_height_override=980
 window/stretch/mode="canvas_items"
 
 [editor_plugins]
