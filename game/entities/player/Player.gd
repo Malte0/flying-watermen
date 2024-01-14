@@ -42,6 +42,7 @@ func reset_variables():
 	collision_layer = 0b10
 
 func _ready():
+	animation_tree.active = true
 	health_component.death.connect(_on_death)
 	#Initialize values so Guards don't complain
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
@@ -88,6 +89,7 @@ func _on_default_state_physics_processing(_delta):
 		velocity.x = lerp(velocity.x, 0.0, friction)
 
 	move_and_slide()
+	update_animation_parameters()
 
 	if sign(scale.y) != sign(direction) and sign(direction) != 0:
 		flip_player()
@@ -106,8 +108,7 @@ func flip_player():
 	scale.x *= -1
 
 func update_animation_parameters():
-	if velocity == Vector2.ZERO:
-		animation_tree["parameters/conditions/idle"]
+	animation_tree.set("parameters/basic_movement/blend_position", abs(velocity.x) > 0.8)
 	
 func _on_crouching_state_entered():
 	speed = base_speed/2

@@ -39,6 +39,7 @@ scale_curve = SubResource("CurveTexture_bda6h")
 color_ramp = SubResource("GradientTexture1D_4268h")
 
 [node name="Tree" type="Sprite2D"]
+show_behind_parent = true
 material = SubResource("ShaderMaterial_sohnw")
 texture = ExtResource("1_8lccx")
 
