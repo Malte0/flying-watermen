@@ -3,8 +3,8 @@ class_name Player extends CharacterBody2D
 @onready var inventory: Inventory = $Inventory
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var heat_component: HeatComponent = $HeatComponent
+@onready var ranged_component: RangedComponent = %RangedComponent
 @onready var state_chart: StateChart = $StateChart
-@onready var wall_check: RayCast2D = $WallCheck
 
 @onready var projectile_scene: PackedScene = load("res://entities/projectiles/WaterProjectile.tscn")
 @onready var shoot_position: Marker2D = $ShootPosition
@@ -55,14 +55,21 @@ var on_interact = func(): print("Nothing to interact")
 
 func apply_gravity(delta: float):
 	if is_on_floor() and velocity.y == 0:
-		state_chart.send_event("grounded")
 		jumps_left = jumps
 	else:
 		velocity.y += gravity * delta * fall_speed_factor
+		if is_on_wall() and (Input.is_action_pressed("a") or Input.is_action_pressed("d")):
+			jumps_left = jumps
+			
+func update_states():
+	set_expressions()
+	# For transitions without event condition
+	state_chart.send_event("tick")
+	if is_on_floor() and velocity.y == 0:
+		state_chart.send_event("grounded")
 	if velocity.y > 0:
 		if is_on_wall() and (Input.is_action_pressed("a") or Input.is_action_pressed("d")):
 			state_chart.send_event("wall_slide")
-			jumps_left = jumps
 		else:
 			state_chart.send_event("falling")
 
@@ -73,21 +80,17 @@ func movement():
 	direction = Input.get_axis("a", "d")
 	if abs(direction) > 0 and can_move:
 		velocity.x = lerp(velocity.x, direction * speed, 0.1)
+		if sign(scale.y) != sign(direction) and sign(direction) != 0: flip_player()
 	elif abs(velocity.x) < 0.1:
 		velocity.x = 0
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
 
 func _physics_process(delta: float):
-	# For transitions without event condition
-	state_chart.send_event("tick")
-	apply_gravity(delta)
 	movement()
-	set_expressions()
-
-	if sign(scale.y) != sign(direction) and sign(direction) != 0: flip_player()
-
+	apply_gravity(delta)
 	move_and_slide()
+	update_states()
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("attack"):
@@ -129,14 +132,9 @@ func _on_movement_child_state_exited():
 
 func _on_can_shoot_state_input(event: InputEvent) -> void:
 	if event.is_action_pressed("right_click"):
-		state_chart.send_event("_on_shot")
-		var projectile_instance: Projectile = projectile_scene.instantiate()
-		projectile_instance.position = shoot_position.global_position
-		projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
-		projectile_instance.player_speed = velocity
-		add_child(projectile_instance)
-
-		inventory.use_active_item(1)
+		state_chart.send_event("shoot")
+		var direction = global_position.direction_to(get_global_mouse_position())
+		ranged_component.shoot(direction, projectile_scene, velocity)
 
 func _on_death():
 	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
@@ -147,3 +145,6 @@ func _on_dash_state_entered() -> void:
 	velocity.x = signi(scale.y) * base_speed * 2
 	collision_mask = 0b1
 	collision_layer = 0b
+
+func _on_locked_state_entered() -> void:
+	can_move = false
