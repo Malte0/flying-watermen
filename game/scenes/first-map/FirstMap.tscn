@@ -268,7 +268,7 @@ shader_parameter/water_mask = ExtResource("10_ehtk1")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b7tns"]
 shader = ExtResource("12_3mrm1")
 shader_parameter/density = 0.47
-shader_parameter/speed = Vector2(0, 0.5)
+shader_parameter/speed = Vector2(0, -0.5)
 shader_parameter/noise_texture = ExtResource("13_3o441")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n85qr"]
@@ -2235,16 +2235,16 @@ metadata/_edit_lock_ = true
 modulate = Color(0.870588, 0.94902, 0.984314, 1)
 top_level = true
 material = SubResource("ShaderMaterial_b7tns")
-position = Vector2(9489, 2119)
-scale = Vector2(2.645, 0.305)
+position = Vector2(9489, 1705)
+scale = Vector2(2.645, 2.375)
 texture = ExtResource("14_wlvke")
 
 [node name="Light2" type="Sprite2D" parent="Forest/waterFallCave/Icon"]
 modulate = Color(0.870588, 0.94902, 0.984314, 1)
 top_level = true
 material = SubResource("ShaderMaterial_b7tns")
-position = Vector2(9494, 1339)
-scale = Vector2(2.345, 0.305)
+position = Vector2(9494, 1352.5)
+scale = Vector2(2.345, 0.3725)
 texture = ExtResource("14_wlvke")
 
 [node name="TileMap" type="TileMap" parent="."]

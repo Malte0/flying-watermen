@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dmd80l5nak5xl" path="res://assets/forest-assets/stone01.png" id="1_6ulot"]
 [ext_resource type="Shader" path="res://shader/wobbleEffect.gdshader" id="1_oeapc"]
-[ext_resource type="Script" path="res://assets/forest-assets/scenes/stone01.gd" id="3_kte85"]
+[ext_resource type="Script" path="res://assets/forest-assets/scenes/stone.gd" id="3_kte85"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5lein"]
 resource_local_to_scene = true
