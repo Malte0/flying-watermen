@@ -6,8 +6,7 @@ class_name Player extends CharacterBody2D
 @onready var ranged_component: RangedComponent = %RangedComponent
 @onready var state_chart: StateChart = $StateChart
 
-@onready var projectile_scene: PackedScene = load("res://entities/projectiles/WaterProjectile.tscn")
-@onready var shoot_position: Marker2D = $ShootPosition
+var projectile_scene: PackedScene = load("res://entities/projectiles/WaterProjectile.tscn")
 
 # Reset values
 var base_scale_speed: float = 1.5
@@ -113,11 +112,8 @@ func _on_sliding_state_entered():
 	can_move = false
 
 func _on_jumping_state_entered():
-	# this is a duplicate line with the on jump guard
-	# However the on jump guard did not work with this expression
-	if jumps_left > 0:
-		velocity.y = jump_velocity + velocity.y/2
-		jumps_left -= 1
+	velocity.y = jump_velocity + velocity.y/2
+	jumps_left -= 1
 
 func _on_wall_slide_state_entered():
 	velocity.y = velocity.y/10
