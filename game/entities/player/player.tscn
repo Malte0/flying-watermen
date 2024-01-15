@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=63 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dhjab"]
@@ -26,10 +26,11 @@
 [ext_resource type="Texture2D" uid="uid://d28s0u7fqmj55" path="res://entities/player/assets/runanimation/run03.png" id="15_ts3rj"]
 [ext_resource type="Texture2D" uid="uid://bclv232x30j6p" path="res://entities/player/assets/runanimation/run04.png" id="16_53equ"]
 [ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="16_vgsyb"]
-[ext_resource type="Texture2D" uid="uid://b0n33wo3w23dm" path="res://assets/light/light.png" id="16_wf275"]
+[ext_resource type="Texture2D" uid="uid://b0n33wo3w23dm" path="res://assets/light_noise/light.png" id="16_wf275"]
 [ext_resource type="Script" path="res://entities/player/chemicalEffects/IceState.gd" id="17_irds6"]
 [ext_resource type="Texture2D" uid="uid://ccinytw5v5utw" path="res://entities/player/assets/runanimation/run05.png" id="17_l5f8l"]
 [ext_resource type="Script" path="res://entities/player/chemicalEffects/ChemicalStateManager.gd" id="18_bvu0j"]
+[ext_resource type="AudioStream" uid="uid://bbxhs7f4v3t41" path="res://assets/SFX/dash.wav" id="31_e7ort"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pbewx"]
 animations = [{
@@ -691,6 +692,13 @@ event = &"to_default"
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("15_8nkrm")
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="dash" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("31_e7ort")
+volume_db = -15.0
+pitch_scale = 0.81
 
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="state_input" from="StateChart/Player/Shooting/CanShoot" to="." method="_on_can_shoot_state_input"]

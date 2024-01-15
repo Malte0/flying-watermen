@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctwhu6gvuwl61"
-path="res://.godot/imported/noise-pattern-water-surface-caustics-background-free-video.jpg-874fcf736572f1fc8a848e4f90f7fa9c.ctex"
+uid="uid://31g3vvmxcaqr"
+path="res://.godot/imported/noise.png-93ca66517d42509977cf71d30c46836b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://noise-pattern-water-surface-caustics-background-free-video.jpg"
-dest_files=["res://.godot/imported/noise-pattern-water-surface-caustics-background-free-video.jpg-874fcf736572f1fc8a848e4f90f7fa9c.ctex"]
+source_file="res://assets/light_noise/noise.png"
+dest_files=["res://.godot/imported/noise.png-93ca66517d42509977cf71d30c46836b.ctex"]
 
 [params]
 

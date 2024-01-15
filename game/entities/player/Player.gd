@@ -150,6 +150,7 @@ func _on_death():
 	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
 
 func _on_dash_state_entered() -> void:
+	$SFX/dash.play()
 	can_move = false
 	friction = 0
 	velocity.x = signi(scale.y) * base_speed * 2
