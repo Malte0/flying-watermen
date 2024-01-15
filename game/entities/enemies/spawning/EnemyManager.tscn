@@ -4,7 +4,3 @@
 
 [node name="EnemyManager" type="Node2D" groups=["EnemyManager"]]
 script = ExtResource("1_qfhye")
-
-[node name="SpawnRate" type="Timer" parent="."]
-wait_time = 20.0
-autostart = true

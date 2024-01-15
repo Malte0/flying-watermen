@@ -1,9 +1,6 @@
 class_name EnemyManager extends Node2D
 
 @onready var player: Player = get_tree().get_first_node_in_group("player")
-@onready var spawn_timer: Timer = $SpawnRate
-
-const SPAWN_OFFSET_X: int = 800
 
 @onready var enemy_spawn_probabilities: Dictionary = {
 	"rangedEnemy": {
@@ -34,13 +31,6 @@ func test_enemy_probabilities():
 
 func _ready():
 	test_enemy_probabilities()
-	spawn_timer.timeout.connect(steady_spawn)
-
-func steady_spawn():
-	print("jesj")
-	var positon_x: float = player.global_position.x + SPAWN_OFFSET_X
-	var position_y: int = 0
-	spawn_random_enemy(Vector2(positon_x, position_y))
 
 func spawn_random_enemy(_position: Vector2):
 	var random: float = randf()

@@ -15,7 +15,6 @@ func _on_spawn_cooldown_timeout():
 
 func _on_body_entered(body: Node2D):
 	if body is Player and can_spawn_enemy:
-		print("spwans")
 		attempt_enemy_spawn(body)
 		can_spawn_enemy = false
 		spawn_cooldown.start()
