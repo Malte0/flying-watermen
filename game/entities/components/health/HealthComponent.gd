@@ -9,7 +9,6 @@ var can_take_damage: bool = true
 ## Optional to display health. Automatically assigned for Player
 @export var _health_bar: TextureProgressBar
 
-
 const HEAL_OVER_TIME_STEP: int = 5
 const HEALTH_BAR_SPEED: float = 2
 const SPEED_THRESHOLD: float = 25
@@ -67,6 +66,6 @@ func die():
 
 func iframes():
 	can_take_damage = false
-	var iframe_length : float = 0.3
+	var iframe_length: float = 0.3
 	await get_tree().create_timer(iframe_length).timeout
 	can_take_damage = true
