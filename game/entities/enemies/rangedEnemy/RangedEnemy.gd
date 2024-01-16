@@ -1,6 +1,5 @@
 extends Enemy
 
-@onready var nodes_to_flip: Node2D = $DirectionalNodes
 @onready var aggro_cooldown_timer: Timer = $AggroCooldown
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 @onready var ground_distance: RayCast2D = $GroundDistance

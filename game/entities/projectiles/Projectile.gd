@@ -11,6 +11,7 @@ var player_speed: Vector2 = Vector2.ZERO
 var direction: Vector2 = Vector2.ZERO
 
 func _ready():
+	top_level = true
 	velocity = direction * speed
 	velocity += player_speed
 	await get_tree().create_timer(LIFE_TIME_SECONDS).timeout

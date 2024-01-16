@@ -96,7 +96,7 @@ heat_tick = NodePath("../Timers/HeatTick")
 
 [node name="RangedComponent" parent="." instance=ExtResource("4_2iwex")]
 unique_name_in_owner = true
-position = Vector2(0, -24.345)
+position = Vector2(0, -24)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -14.75)

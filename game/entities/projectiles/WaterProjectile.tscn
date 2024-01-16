@@ -7,7 +7,6 @@
 radius = 17.0
 
 [node name="WaterProjectile" type="CharacterBody2D" node_paths=PackedStringArray("impact_detector")]
-top_level = true
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_cmlw7")

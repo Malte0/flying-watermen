@@ -64,9 +64,7 @@ autostart = true
 [node name="GroundDistance" type="RayCast2D" parent="."]
 target_position = Vector2(0, 200)
 
-[node name="EnemyGraphics" type="Node2D" parent="."]
-
-[node name="FlameImage" type="Sprite2D" parent="EnemyGraphics"]
+[node name="FlameImage" type="Sprite2D" parent="."]
 position = Vector2(0, -12)
 scale = Vector2(0.16, 0.146)
 texture = ExtResource("2_4ume1")
