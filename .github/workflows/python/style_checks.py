@@ -11,7 +11,7 @@ consecutiveLineBreaks = 0
 def hasCamelCase(line: str):
     keyWordsToSearch = ['func', 'var', 'const']
     namesToIgnore = ['_on']
-    words = line.split(" ")
+    words = line.strip().split(" ")
     for i in range(len(words)):
         if words[i] in keyWordsToSearch:
             if words[i+1] in namesToIgnore:
@@ -45,7 +45,7 @@ def hasShortVariableName(line: str):
 
 def hasTooLongFunction(line: str):
     global functionLength, isFunction, shouldNotHaveUnscopedVariablesAnyMore
-    if 'func' in line:
+    if line.startswith('func'):
         if isFunction and functionLength > style_config["maxFunctionLength"]:
             functionLength = 0
             return True
@@ -60,7 +60,7 @@ def hasTooLongFunction(line: str):
 
 def hasScatteredVariableDeclaration(line: str):
     global shouldNotHaveUnscopedVariablesAnyMore
-    if line.startswith("func"):
+    if "func" in line:
         return False
     if shouldNotHaveUnscopedVariablesAnyMore and not line.startswith("\t"):
         return 'var' in line or 'const' in line
@@ -70,7 +70,7 @@ def hasTooLongLine(line: str):
     return len(line) > style_config["maxLineLength"] and not '@onready' in line
 
 def missnamedBoolean(line: str):
-    words = line.split(" ")
+    words = line.strip().split(" ")
     for i in range(len(words)):
         if i == 0:
             continue
