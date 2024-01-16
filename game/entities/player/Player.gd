@@ -44,6 +44,9 @@ func reset_variables():
 	collision_mask = 0b101
 	collision_layer = 0b10
 
+func reset_jumps():
+	jumps_left = jumps
+
 func _ready():
 	health_component.death.connect(_on_death)
 	#Initialize values so Guards don't complain
@@ -52,13 +55,6 @@ func _ready():
 ## Callback for player interaction
 var on_interact = func(): print("Nothing to interact")
 
-func apply_gravity(delta: float):
-	if is_on_floor() and velocity.y == 0:
-		jumps_left = jumps
-	else:
-		velocity.y += gravity * delta * fall_speed_factor
-		if is_on_wall() and (Input.is_action_pressed("a") or Input.is_action_pressed("d")):
-			jumps_left = jumps
 			
 func update_states():
 	set_expressions()
@@ -72,7 +68,7 @@ func update_states():
 		else:
 			state_chart.send_event("falling")
 
-func movement():
+func movement(delta: float):
 	if direction == 0:
 		velocity.x = lerp(velocity.x, 0.0, friction)
 	# handle left/right movement
@@ -84,12 +80,14 @@ func movement():
 		velocity.x = 0
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
+	# Gravity
+	if not (is_on_floor() and velocity.y == 0):
+		velocity.y += gravity * delta * fall_speed_factor
 
 func _physics_process(delta: float):
-	movement()
-	apply_gravity(delta)
-	move_and_slide()
 	update_states()
+	movement(delta)
+	move_and_slide()
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("attack"):
@@ -116,6 +114,7 @@ func _on_jumping_state_entered():
 	jumps_left -= 1
 
 func _on_wall_slide_state_entered():
+	reset_jumps()
 	velocity.y = velocity.y/10
 	fall_speed_factor = base_fall_speed_factor/10
 
@@ -144,3 +143,6 @@ func _on_dash_state_entered() -> void:
 
 func _on_locked_state_entered() -> void:
 	can_move = false
+
+func _on_grounded_state_entered() -> void:
+	reset_jumps()
