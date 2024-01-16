@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://mrf2lku3uiqc"]
+[gd_scene load_steps=50 format=3 uid="uid://mrf2lku3uiqc"]
 
 [ext_resource type="Shader" path="res://scenes/test/mapShader.gdshader" id="1_4wi60"]
 [ext_resource type="Texture2D" uid="uid://b6yrhnp1t37o8" path="res://assets/prototype-assets/Tiles.png" id="1_ljrfd"]

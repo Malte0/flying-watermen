@@ -39,7 +39,7 @@ func spawn_random_enemy(_position: Vector2):
 		var enemy_type: Dictionary = enemy_spawn_probabilities[key]
 		current_prob += enemy_type["weight"]
 		if random < current_prob:
-			var enemy_instance: CharacterBody2D = enemy_type["scene"].instantiate()
+			var enemy_instance: Enemy = enemy_type["scene"].instantiate()
 			enemy_instance.global_position = _position
 			get_parent().add_child.call_deferred(enemy_instance)
 			return
