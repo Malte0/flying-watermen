@@ -11,14 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://cihcop35erg48" path="res://scenes/ui/ui.tscn" id="5_vx7we"]
 [ext_resource type="PackedScene" uid="uid://dpiypck5f1v6f" path="res://entities/objects/pfuetze.tscn" id="10_oa7xq"]
 [ext_resource type="PackedScene" uid="uid://dmeutg1f6t7sl" path="res://entities/enemies/rangedEnemy/RangedEnemy.tscn" id="11_2fedg"]
-[ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/meleeEnemy/MeleeEnemy.tscn" id="12_rd14a"]
 [ext_resource type="PackedScene" uid="uid://dvv2sij5v2epd" path="res://entities/player/inventory/items/sodiumChemical/sodium.tscn" id="13_l88ic"]
 [ext_resource type="PackedScene" uid="uid://dp6qth5jvcdhd" path="res://entities/player/inventory/items/iceChemical/IceChemical.tscn" id="14_4gyg8"]
 [ext_resource type="PackedScene" uid="uid://b7py4c84rndkt" path="res://entities/enemies/spawning/EnemySpawnArea.tscn" id="14_nc86j"]
 [ext_resource type="PackedScene" uid="uid://o5qajbk6mfjn" path="res://entities/well/Well.tscn" id="15_6rq0o"]
 [ext_resource type="PackedScene" uid="uid://bree81gljy661" path="res://entities/player/inventory/items/foamChemical/FoamChemical.tscn" id="15_cbfrv"]
-[ext_resource type="Script" path="res://entities/enemies/spawning/EnemyManager.gd" id="18_ephhu"]
 [ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/meleeEnemy/MeleeEnemy.tscn" id="16_7lj2s"]
+[ext_resource type="Script" path="res://entities/enemies/spawning/EnemyManager.gd" id="18_ephhu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7de0"]
 shader = ExtResource("1_4wi60")
@@ -29887,7 +29886,7 @@ position = Vector2(172, 1698)
 position = Vector2(-36, -45)
 shape = SubResource("RectangleShape2D_i6ng4")
 
-[node name="Melee_enemy" parent="." instance=ExtResource("12_rd14a")]
+[node name="Melee_enemy" parent="." instance=ExtResource("16_7lj2s")]
 position = Vector2(2032, 1401)
 
 [node name="Sodium" parent="." instance=ExtResource("13_l88ic")]
@@ -29908,5 +29907,6 @@ script = ExtResource("18_ephhu")
 [node name="SpawnRate" type="Timer" parent="EnemyManager"]
 wait_time = 15.0
 autostart = true
+
 [node name="MeleeEnemy" parent="." instance=ExtResource("16_7lj2s")]
 position = Vector2(1760, 1664)
