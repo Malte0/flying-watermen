@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://o5qajbk6mfjn" path="res://entities/well/Well.tscn" id="15_6rq0o"]
 [ext_resource type="PackedScene" uid="uid://bree81gljy661" path="res://entities/player/inventory/items/foamChemical/FoamChemical.tscn" id="15_cbfrv"]
 [ext_resource type="Script" path="res://entities/enemies/spawning/EnemyManager.gd" id="18_ephhu"]
+[ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/meleeEnemy/MeleeEnemy.tscn" id="16_7lj2s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7de0"]
 shader = ExtResource("1_4wi60")
@@ -29907,3 +29908,5 @@ script = ExtResource("18_ephhu")
 [node name="SpawnRate" type="Timer" parent="EnemyManager"]
 wait_time = 15.0
 autostart = true
+[node name="MeleeEnemy" parent="." instance=ExtResource("16_7lj2s")]
+position = Vector2(1760, 1664)
