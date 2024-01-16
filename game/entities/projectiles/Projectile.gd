@@ -14,7 +14,6 @@ var direction: Vector2 = Vector2.ZERO
 
 func _ready():
 	get_node("Area2D").collision_mask = collisionMask
-	print(get_node("Area2D").collision_mask)
 	if collisionShape: $Area2D/CollisionShape2D.set_shape(collisionShape)
 	if sprite: $Sprite2D.texture = sprite
 	set_linear_velocity((direction * speed) + player_speed)
