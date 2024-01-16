@@ -7,6 +7,7 @@ extends Enemy
 
 var projectile_scene: PackedScene = load("res://entities/projectiles/FireProjectile.tscn")
 const SHOOTING_PRECISION: float = PI/10 # Angle in radians that gets randomly applied to shots
+const JUMP_FORCE: int = -150
 const MOVEMENT_SPEED_CALM: int = 100
 const MOVEMENT_SPEED_AGGRO: int = 250
 var is_aggro: bool = false
@@ -19,7 +20,7 @@ func _physics_process(delta):
 	if is_aggro:
 		hunt_player()
 	if ground_distance.is_colliding():
-		velocity.y = jump_force
+		velocity.y = JUMP_FORCE
 	super(delta)
 
 func hunt_player():
@@ -43,7 +44,7 @@ func _on_view_area_body_entered(body):
 		become_aggro()
 
 func _on_view_area_body_exited(body):
-	if body is Player:
+	if body is Player and aggro_cooldown_timer.is_inside_tree():
 		aggro_cooldown_timer.start()
 
 func _on_aggro_cooldown_timeout():

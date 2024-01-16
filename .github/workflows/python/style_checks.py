@@ -45,7 +45,7 @@ def hasShortVariableName(line: str):
 
 def hasTooLongFunction(line: str):
     global functionLength, isFunction, shouldNotHaveUnscopedVariablesAnyMore
-    if 'func' in line:
+    if line.startswith('func'):
         if isFunction and functionLength > style_config["maxFunctionLength"]:
             functionLength = 0
             return True
@@ -109,7 +109,8 @@ def hasTooManyArguments(line: str):
 
 def hasSignalWithoutTypeDeclaration(line: str):
     tmpLine = line.strip()
-    if 'signal' in tmpLine:
+    words = line.split(" ")
+    if 'signal' in words:
         return tmpLine[-2] != "(" and tmpLine.count(":") < tmpLine.count(",")+1
     return False
 

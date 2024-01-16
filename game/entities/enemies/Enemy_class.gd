@@ -1,7 +1,8 @@
 class_name Enemy extends CharacterBody2D
 
+# Note: This script does not generalize well on enemies and is up to changes
+@onready var health_component: HealthComponent = $HealthComponent
 @export var carried_item: PackedScene
-@export var health_component: HealthComponent
 @export var weight: float = 1
 @export var jump_force: int = -500
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -15,13 +16,13 @@ func _ready():
 
 func _physics_process(delta):
 	if not is_on_floor():
-		velocity.y += gravity * weight * delta
+		velocity.y += gravity * delta
 	velocity.x = movement_speed * movement_direction;
 	move_and_slide()
 
-func jump(force: float):
+func jump(jump_force: float):
 	if is_on_floor():
-		velocity.y = jump_force * force
+		velocity.y = jump_force
 
 func move(direction: Movement_Direction):
 	movement_direction = direction
