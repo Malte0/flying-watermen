@@ -109,7 +109,8 @@ def hasTooManyArguments(line: str):
 
 def hasSignalWithoutTypeDeclaration(line: str):
     tmpLine = line.strip()
-    if 'signal' in tmpLine:
+    words = line.split(" ")
+    if 'signal' in words:
         return tmpLine[-2] != "(" and tmpLine.count(":") < tmpLine.count(",")+1
     return False
 
