@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://mrf2lku3uiqc"]
+[gd_scene load_steps=50 format=3 uid="uid://mrf2lku3uiqc"]
 
 [ext_resource type="Shader" path="res://scenes/test/mapShader.gdshader" id="1_4wi60"]
 [ext_resource type="Texture2D" uid="uid://b6yrhnp1t37o8" path="res://assets/prototype-assets/Tiles.png" id="1_ljrfd"]
@@ -13,9 +13,11 @@
 [ext_resource type="PackedScene" uid="uid://dmeutg1f6t7sl" path="res://entities/enemies/rangedEnemy/RangedEnemy.tscn" id="11_2fedg"]
 [ext_resource type="PackedScene" uid="uid://dvv2sij5v2epd" path="res://entities/player/inventory/items/sodiumChemical/sodium.tscn" id="13_l88ic"]
 [ext_resource type="PackedScene" uid="uid://dp6qth5jvcdhd" path="res://entities/player/inventory/items/iceChemical/IceChemical.tscn" id="14_4gyg8"]
+[ext_resource type="PackedScene" uid="uid://b7py4c84rndkt" path="res://entities/enemies/spawning/EnemySpawnArea.tscn" id="14_nc86j"]
 [ext_resource type="PackedScene" uid="uid://o5qajbk6mfjn" path="res://entities/well/Well.tscn" id="15_6rq0o"]
 [ext_resource type="PackedScene" uid="uid://bree81gljy661" path="res://entities/player/inventory/items/foamChemical/FoamChemical.tscn" id="15_cbfrv"]
 [ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/meleeEnemy/MeleeEnemy.tscn" id="16_7lj2s"]
+[ext_resource type="Script" path="res://entities/enemies/spawning/EnemyManager.gd" id="18_ephhu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7de0"]
 shader = ExtResource("1_4wi60")
@@ -29767,6 +29769,9 @@ distance = -2.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mmcy6"]
 size = Vector2(128, 127)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i6ng4"]
+size = Vector2(360, 244)
+
 [node name="prototype" type="Node2D"]
 script = ExtResource("1_vcmdm")
 metadata/_edit_horizontal_guides_ = []
@@ -29874,6 +29879,16 @@ position = Vector2(5975, 1763)
 position = Vector2(1327, 1311)
 carried_item = ExtResource("13_l88ic")
 
+[node name="EnemySpawnArea" parent="." instance=ExtResource("14_nc86j")]
+position = Vector2(172, 1698)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawnArea"]
+position = Vector2(-36, -45)
+shape = SubResource("RectangleShape2D_i6ng4")
+
+[node name="Melee_enemy" parent="." instance=ExtResource("16_7lj2s")]
+position = Vector2(2032, 1401)
+
 [node name="Sodium" parent="." instance=ExtResource("13_l88ic")]
 position = Vector2(339, 1549)
 
@@ -29885,6 +29900,13 @@ position = Vector2(146, 1555)
 
 [node name="Well" parent="." instance=ExtResource("15_6rq0o")]
 position = Vector2(954, 1778)
+
+[node name="EnemyManager" type="Node2D" parent="." groups=["EnemyManager"]]
+script = ExtResource("18_ephhu")
+
+[node name="SpawnRate" type="Timer" parent="EnemyManager"]
+wait_time = 15.0
+autostart = true
 
 [node name="MeleeEnemy" parent="." instance=ExtResource("16_7lj2s")]
 position = Vector2(1760, 1664)
