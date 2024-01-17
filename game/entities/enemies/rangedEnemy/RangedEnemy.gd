@@ -2,8 +2,9 @@ extends Enemy
 
 @onready var aggro_cooldown_timer: Timer = $AggroCooldown
 @onready var player: Player = get_tree().get_first_node_in_group("player")
-@onready var ground_distance: RayCast2D = $GroundDistance
-@onready var ranged_component: RangedComponent = $RangedComponent
+@onready var ground_distance: RayCast2D = %GroundDistance
+@onready var ranged_component: RangedComponent = %RangedComponent
+@onready var directional_nodes: Node2D = $DirectionalNodes
 
 var projectile_scene: PackedScene = load("res://entities/projectiles/FireProjectile.tscn")
 const SHOOTING_PRECISION: float = PI/10 # Angle in radians that gets randomly applied to shots
@@ -37,7 +38,7 @@ func flip_move_direction():
 		move(Movement_Direction.Right)
 	else:
 		move(Movement_Direction.Left)
-	scale.x = movement_direction
+	directional_nodes.scale.x = movement_direction
 
 func _on_view_area_body_entered(body):
 	if body is Player:
