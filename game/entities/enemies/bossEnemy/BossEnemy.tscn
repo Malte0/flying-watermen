@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://bgaxka266oy83"]
+
+[ext_resource type="Script" path="res://entities/enemies/bossEnemy/BossEnemy.gd" id="1_qajqb"]
+[ext_resource type="Texture2D" uid="uid://ui1gfleyoupx" path="res://assets/prototype-assets/Boss (Prototype).png" id="2_i2mnn"]
+[ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="3_ma8q6"]
+[ext_resource type="Texture2D" uid="uid://32uxotk6128m" path="res://entities/enemies/assets/healthbar_under.png" id="4_lbjiu"]
+[ext_resource type="Texture2D" uid="uid://drqht0p82ryru" path="res://entities/enemies/assets/healthbar_progress.png" id="5_06bnl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tk2cp"]
+radius = 2.05
+height = 5.2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b6d2v"]
+radius = 119.435
+
+[node name="BossEnemy" type="CharacterBody2D"]
+scale = Vector2(7, 7)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_qajqb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 4)
+scale = Vector2(10, 10)
+shape = SubResource("CapsuleShape2D_tk2cp")
+
+[node name="DirectionalNodes" type="Node2D" parent="."]
+
+[node name="BossGraphics" type="Node2D" parent="DirectionalNodes"]
+
+[node name="Sprite2D" type="Sprite2D" parent="DirectionalNodes/BossGraphics"]
+texture = ExtResource("2_i2mnn")
+
+[node name="WallDetection" type="RayCast2D" parent="DirectionalNodes"]
+position = Vector2(23.4286, -16)
+target_position = Vector2(0, 45)
+
+[node name="ViewArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ViewArea"]
+shape = SubResource("CircleShape2D_b6d2v")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_ma8q6")]
+scale = Vector2(0.5, 0.35)
+max_health = 400
+
+[node name="HealthBar" type="TextureProgressBar" parent="HealthComponent"]
+offset_left = -52.0
+offset_top = -97.1429
+offset_right = 148.0
+offset_bottom = -57.1429
+scale = Vector2(0.5, 0.5)
+value = 100.0
+texture_under = ExtResource("4_lbjiu")
+texture_progress = ExtResource("5_06bnl")
+
+[node name="AggroCooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="DamageTick" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[connection signal="body_entered" from="ViewArea" to="." method="_on_view_area_body_entered"]
+[connection signal="body_exited" from="ViewArea" to="." method="_on_view_area_body_exited"]
+[connection signal="value_changed" from="HealthComponent/HealthBar" to="." method="_on_health_bar_value_changed"]
+[connection signal="timeout" from="AggroCooldown" to="." method="_on_aggro_cooldown_timeout"]
