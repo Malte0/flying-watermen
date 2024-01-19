@@ -40,8 +40,11 @@ def line(variableName: str, lines: list[str]):
 
 def hasUnusedVariable(lines: list[str], filePath: str):
     unusedVariables = 0
+    excludeFilesNames = ["class"]
     varAndLineNumber: list[tuple] = findVariableNamesAndLineNumbers(lines)
     if len(varAndLineNumber) == 0:
+        return unusedVariables
+    if any([e in filePath.lower() for e in excludeFilesNames]):
         return unusedVariables
     for varAndLine in varAndLineNumber:
         if isNotUsed(varAndLine, lines):
