@@ -15,6 +15,7 @@ func exit_foam_state():
 	chemical_state_chart.send_event("to_default")
 
 func _on_foam_state_entered():
+	#var projectile_instance: FoamProjectile = projectile_scene.instantiate()
 	print("helo")
 	enter_foam_state()
 

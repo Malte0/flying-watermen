@@ -6,7 +6,7 @@ class_name Player extends CharacterBody2D
 @onready var state_chart: StateChart = $StateChart
 @onready var wall_check: RayCast2D = $WallCheck
 
-@onready var projectile_scene: PackedScene = load("res://entities/projectiles/WaterProjectile.tscn")
+@onready var projectile_scene: PackedScene = load("res://entities/projectiles/FoamProjectile.tscn")
 @onready var shoot_position: Marker2D = $ShootPosition
 
 # Reset values
@@ -135,10 +135,10 @@ func _on_movement_child_state_exited():
 func _on_can_shoot_state_input(event: InputEvent) -> void:
 	if event.is_action_pressed("right_click"):
 		state_chart.send_event("_on_shot")
-		var projectile_instance: Projectile = projectile_scene.instantiate()
+		var projectile_instance: FoamProjectile = projectile_scene.instantiate()
 		projectile_instance.position = shoot_position.global_position
 		projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
-		projectile_instance.player_speed = velocity
+		#projectile_instance.player_speed = velocity
 		add_child(projectile_instance)
 
 		inventory.use_active_item(1)
