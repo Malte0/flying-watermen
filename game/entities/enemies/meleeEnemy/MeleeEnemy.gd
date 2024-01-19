@@ -10,6 +10,7 @@ const HEAT_PER_TICK: int = 2
 const DAMAGE_RADIUS: int = 150
 const DAMAGE_PER_TICK: int = 1
 
+const JUMP_FORCE: int = -500
 const MOVEMENT_SPEED_CALM: int = 100
 const MOVEMENT_SPEED_AGGRO: int = 250
 var is_aggro: bool = false
@@ -24,7 +25,7 @@ func _physics_process(delta):
 
 func hunt_player():
 	if wall_detection.is_colliding():
-		jump(1)
+		jump(JUMP_FORCE)
 
 	var player_distance: float = player.global_position.x - global_position.x
 	var player_direction: int = sign(player_distance)
@@ -62,7 +63,7 @@ func _on_view_area_body_entered(body):
 		become_aggro()
 
 func _on_view_area_body_exited(body):
-	if body is Player:
+	if body is Player and aggro_cooldown_timer.is_inside_tree():
 		aggro_cooldown_timer.start()
 
 func _on_aggro_cooldown_timeout():
@@ -74,7 +75,7 @@ func become_aggro():
 	if not is_aggro:
 		is_aggro = true
 		# Expermiment: This introduces some anticipation into the behaviour
-		jump(0.2)
+		jump(JUMP_FORCE * 0.2)
 		movement_speed = 0
 		await get_tree().create_timer(0.4).timeout
 		movement_speed = MOVEMENT_SPEED_AGGRO
