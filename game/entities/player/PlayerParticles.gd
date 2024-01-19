@@ -8,12 +8,11 @@ extends Node2D
 func walking_particles():
 	var amount = walk_particles.amount
 	
-	if abs(player.velocity.x) > 0 || abs(player.velocity.y) > 0 :
+	# y > 80 wegen den Wallslides 
+	if abs(player.velocity.x) > 20 || abs(player.velocity.y) > 80 :
 		walk_particles.set_amount_ratio(1)
-		print(amount)
 	else:
 		walk_particles.set_amount_ratio(0.2)
-		print(amount)
 		
 func dash_trail():
 	# need the if to flip the sprite
