@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=35 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dhjab"]

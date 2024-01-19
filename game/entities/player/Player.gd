@@ -6,7 +6,7 @@ class_name Player extends CharacterBody2D
 @onready var state_chart: StateChart = $StateChart
 @onready var wall_check: RayCast2D = $WallCheck
 
-@onready var projectile_scene: PackedScene = load("res://entities/projectiles/FoamProjectile.tscn")
+@onready var projectile_scene: PackedScene = load("res://entities/projectiles/FoamProjectile2.tscn")
 @onready var shoot_position: Marker2D = $ShootPosition
 
 # Reset values
