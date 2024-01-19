@@ -48,7 +48,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_fonts/font = SubResource("SystemFont_q56rt")
 theme_override_font_sizes/font_size = 60
-text = "Game Name"
+text = "Aquaflame: 
+Forest of Resilience"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -62,6 +63,9 @@ theme_override_constants/separation = 64
 alignment = 1
 
 [node name="seperator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="seperator3" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Start_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
