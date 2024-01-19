@@ -106,13 +106,13 @@ debug_color = Color(0.917647, 0.172549, 0.568627, 0.419608)
 [node name="Sprites" type="Node2D" parent="."]
 script = ExtResource("4_vvtsh")
 
-[node name="ice" type="Sprite2D" parent="Sprites"]
+[node name="Ice" type="Sprite2D" parent="Sprites"]
 visible = false
 position = Vector2(0, -13.5)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_ghnpr")
 
-[node name="default" type="Sprite2D" parent="Sprites"]
+[node name="Default" type="Sprite2D" parent="Sprites"]
 position = Vector2(0, -17)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_nfb20")
@@ -131,17 +131,52 @@ one_shot = true
 [node name="HealTick" type="Timer" parent="Timers"]
 autostart = true
 
+[node name="ShootingCooldown" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
 [node name="ChemicalEffectsManager" type="Node2D" parent="." node_paths=PackedStringArray("player", "player_sprite_container")]
 script = ExtResource("18_bvu0j")
 player = NodePath("..")
 player_sprite_container = NodePath("../Sprites")
 
-[node name="effects" type="Node2D" parent="ChemicalEffectsManager"]
+[node name="Effects" type="Node2D" parent="ChemicalEffectsManager"]
 
-[node name="ice" type="Node2D" parent="ChemicalEffectsManager/effects" node_paths=PackedStringArray("player", "heat_component")]
+[node name="Ice" type="Node2D" parent="ChemicalEffectsManager/Effects" node_paths=PackedStringArray("player", "heat_component")]
 script = ExtResource("17_irds6")
 player = NodePath("../../..")
 heat_component = NodePath("../../../HeatComponent")
+
+[node name="StateChart" type="Node" parent="ChemicalEffectsManager"]
+script = ExtResource("2_dhjab")
+
+[node name="Chemicals" type="Node" parent="ChemicalEffectsManager/StateChart"]
+script = ExtResource("4_klwk4")
+initial_state = NodePath("Water")
+
+[node name="Water" type="Node" parent="ChemicalEffectsManager/StateChart/Chemicals"]
+unique_name_in_owner = true
+script = ExtResource("5_dadqm")
+
+[node name="On Melt" type="Node" parent="ChemicalEffectsManager/StateChart/Chemicals/Water"]
+script = ExtResource("6_aaxtf")
+to = NodePath("..")
+event = &"melt"
+
+[node name="Ice" type="Node" parent="ChemicalEffectsManager/StateChart/Chemicals"]
+unique_name_in_owner = true
+script = ExtResource("5_dadqm")
+
+[node name="On Ice" type="Node" parent="ChemicalEffectsManager/StateChart/Chemicals"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../Ice")
+event = &"to_chemical"
+guard = SubResource("Resource_ir01r")
+
+[node name="On Default" type="Node" parent="ChemicalEffectsManager/StateChart/Chemicals"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../Water")
+event = &"to_default"
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("15_8nkrm")
@@ -152,55 +187,6 @@ script = ExtResource("2_dhjab")
 
 [node name="Mechanics" type="Node" parent="StateChart"]
 script = ExtResource("3_7lhhd")
-
-[node name="Chemicals" type="Node" parent="StateChart/Mechanics"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("Water")
-
-[node name="Water" type="Node" parent="StateChart/Mechanics/Chemicals"]
-unique_name_in_owner = true
-script = ExtResource("5_dadqm")
-
-[node name="On Melt" type="Node" parent="StateChart/Mechanics/Chemicals/Water"]
-script = ExtResource("6_aaxtf")
-to = NodePath("..")
-event = &"melt"
-
-[node name="Ice" type="Node" parent="StateChart/Mechanics/Chemicals"]
-unique_name_in_owner = true
-script = ExtResource("5_dadqm")
-
-[node name="On Ice" type="Node" parent="StateChart/Mechanics/Chemicals"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../Ice")
-event = &"to_chemical"
-guard = SubResource("Resource_ir01r")
-
-[node name="On Default" type="Node" parent="StateChart/Mechanics/Chemicals"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../Water")
-event = &"to_default"
-
-[node name="Ranged" type="Node" parent="StateChart/Mechanics"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("CanShoot")
-
-[node name="CanShoot" type="Node" parent="StateChart/Mechanics/Ranged"]
-unique_name_in_owner = true
-script = ExtResource("5_dadqm")
-
-[node name="On Shot" type="Node" parent="StateChart/Mechanics/Ranged/CanShoot"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../CantShoot")
-event = &"shoot"
-
-[node name="CantShoot" type="Node" parent="StateChart/Mechanics/Ranged"]
-script = ExtResource("5_dadqm")
-
-[node name="Cooldown" type="Node" parent="StateChart/Mechanics/Ranged/CantShoot"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../CanShoot")
-delay_seconds = 0.5
 
 [node name="Movement" type="Node" parent="StateChart/Mechanics"]
 script = ExtResource("4_klwk4")
@@ -409,7 +395,7 @@ show_percentage = false
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="timeout" from="Timers/HeatTick" to="." method="_on_heat_tick_timeout"]
 [connection signal="timeout" from="Timers/HealTick" to="." method="_on_heal_tick_timeout"]
-[connection signal="state_input" from="StateChart/Mechanics/Ranged/CanShoot" to="." method="_on_can_shoot_state_input"]
+[connection signal="timeout" from="Timers/ShootingCooldown" to="." method="_on_shooting_cooldown_timeout"]
 [connection signal="child_state_exited" from="StateChart/Mechanics/Movement" to="." method="reset_variables"]
 [connection signal="child_state_exited" from="StateChart/Mechanics/Movement/Interruptible" to="." method="_on_movement_child_state_exited"]
 [connection signal="child_state_exited" from="StateChart/Mechanics/Movement/Interruptible/Grounded" to="." method="_on_movement_child_state_exited"]

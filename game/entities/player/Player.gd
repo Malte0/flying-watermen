@@ -5,6 +5,7 @@ class_name Player extends CharacterBody2D
 @onready var heat_component: HeatComponent = $HeatComponent
 @onready var ranged_component: RangedComponent = %RangedComponent
 @onready var state_chart: StateChart = $StateChart
+@onready var shooting_timer: Timer = $Timers/ShootingCooldown
 
 var projectile_scene: PackedScene = load("res://entities/projectiles/WaterProjectile.tscn")
 
@@ -28,6 +29,9 @@ var jumps_left: int = jumps
 # Other information about the player
 var direction: float = 0.0
 var slide_threshold: float = base_speed/2
+var shooting_cooldown: float:
+	get: return shooting_timer.get_wait_time()
+	set(time): shooting_timer.set_wait_time(time)
 
 func set_expressions():
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
@@ -98,6 +102,19 @@ func _input(event: InputEvent):
 		state_chart.send_event("jump")
 	if event.is_action_pressed("lshift"):
 		state_chart.send_event("dash")
+	if event.is_action_pressed("right_click"):
+		shoot()
+
+#region Shooting
+func shoot() -> void:
+	var direction = global_position.direction_to(get_global_mouse_position())
+	if ranged_component.shoot(direction, projectile_scene, velocity):
+		ranged_component.disable_shooting()
+		shooting_timer.start()
+
+func _on_shooting_cooldown_timeout() -> void:
+	ranged_component.enable_shooting()
+#endregion
 
 func flip_player():
 	scale.x *= -1
@@ -124,12 +141,6 @@ func _on_airborne_state_entered():
 # Reset variables of any child states of the Movement state
 func _on_movement_child_state_exited():
 	reset_variables()
-
-func _on_can_shoot_state_input(event: InputEvent) -> void:
-	if event.is_action_pressed("right_click"):
-		state_chart.send_event("shoot")
-		var direction = global_position.direction_to(get_global_mouse_position())
-		ranged_component.shoot(direction, projectile_scene, velocity)
 
 func _on_death():
 	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
