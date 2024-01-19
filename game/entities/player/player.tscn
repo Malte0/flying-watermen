@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=34 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dhjab"]
@@ -75,6 +75,10 @@ size = Vector2(67.9999, 45.5001)
 [sub_resource type="Resource" id="Resource_7pa6p"]
 script = ExtResource("7_m5qsp")
 expression = "active_chemical == \"ice\""
+
+[sub_resource type="Resource" id="Resource_qg1j2"]
+script = ExtResource("7_m5qsp")
+expression = "active_chemical == \"sodium\""
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(2, 2)
@@ -382,10 +386,24 @@ to = NodePath("../../Ice")
 event = &"to_chemical"
 guard = SubResource("Resource_7pa6p")
 
+[node name="ToSodium" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root/Default"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Sodium")
+event = &"to_chemical"
+guard = SubResource("Resource_qg1j2")
+
 [node name="Ice" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root"]
 script = ExtResource("5_dadqm")
 
 [node name="ToDefault" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root/Ice"]
+script = ExtResource("6_aaxtf")
+to = NodePath("../../Default")
+event = &"to_default"
+
+[node name="Sodium" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root"]
+script = ExtResource("5_dadqm")
+
+[node name="ToDefault" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root/Sodium"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Default")
 event = &"to_default"
@@ -415,5 +433,8 @@ script = ExtResource("15_8nkrm")
 [connection signal="timeout" from="Timers/HealTick" to="." method="_on_heal_tick_timeout"]
 [connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Default" to="ChemicalEffectsManager" method="_on_default_state_entered"]
 [connection signal="state_physics_processing" from="ChemicalEffectsManager/ChemicalStates/Root/Default" to="." method="_on_default_state_physics_processing"]
+[connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Ice" to="." method="_on_ice_state_entered"]
 [connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Ice" to="ChemicalEffectsManager" method="_on_ice_state_entered"]
 [connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Ice" to="ChemicalEffectsManager/effects/ice" method="_on_ice_state_entered"]
+[connection signal="state_exited" from="ChemicalEffectsManager/ChemicalStates/Root/Ice" to="." method="_on_ice_state_exited"]
+[connection signal="state_input" from="ChemicalEffectsManager/ChemicalStates/Root/Sodium" to="." method="_on_sodium_state_input"]
