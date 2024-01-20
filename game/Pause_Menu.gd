@@ -1,10 +1,10 @@
 extends Control
 
-func _ready():
-	visible = false
-
 var is_paused: bool = false:
 	set = set_paused
+
+func _ready():
+	visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
