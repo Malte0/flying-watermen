@@ -8,7 +8,8 @@ var can_take_damage: bool = true
 @export var _heal_tick: Timer
 ## Optional to display health. Automatically assigned for Player
 @export var _health_bar: TextureProgressBar
-
+## Damage shader effect if target got damage
+@export var damage_effect: bool = false
 
 const HEAL_OVER_TIME_STEP: int = 5
 const HEALTH_BAR_INTERPOLATION_SPEED: float = 1
@@ -43,6 +44,9 @@ func take_damage(amount: int, damage_type: Element.Type):
 		iframes()
 		health -= amount
 		health_changed.emit(health, -amount)
+		if damage_effect:
+			damage_flash_effect()
+		
 	if health <= 0:
 		die()
 
@@ -68,3 +72,9 @@ func iframes():
 	var iframe_length : float = 0.3
 	await get_tree().create_timer(iframe_length).timeout
 	can_take_damage = true
+
+func damage_flash_effect():
+	var sprite = %AnimatedSprite2D
+	sprite.modulate = Color.INDIAN_RED
+	await get_tree().create_timer(0.1).timeout	
+	sprite.modulate = Color(1,1,1)

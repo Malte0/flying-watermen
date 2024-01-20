@@ -11,6 +11,8 @@ class_name Player extends CharacterBody2D
 
 @onready var animation_tree = $Animation/AnimationTree
 
+@onready var particle = $Particles
+
 # Reset values
 var base_scale_speed: float = 1.5
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") * base_scale_speed
@@ -90,7 +92,8 @@ func _on_default_state_physics_processing(_delta):
 
 	move_and_slide()
 	update_animation_parameters()
-
+	particle.walking_particles()
+	
 	if sign(scale.y) != sign(direction) and sign(direction) != 0:
 		flip_player()
 
@@ -109,7 +112,8 @@ func flip_player():
 
 func update_animation_parameters():
 	animation_tree.set("parameters/basic_movement/blend_position", abs(velocity.x) > 0.8)
-	
+
+
 func _on_crouching_state_entered():
 	speed = base_speed/2
 
@@ -150,6 +154,7 @@ func _on_death():
 	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
 
 func _on_dash_state_entered() -> void:
+	particle.dash_trail()
 	$SFX/dash.play()
 	can_move = false
 	friction = 0

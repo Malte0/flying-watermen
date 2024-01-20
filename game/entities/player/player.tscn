@@ -41,7 +41,15 @@
 [ext_resource type="Texture2D" uid="uid://bmdj5hq4wtspu" path="res://entities/player/assets/jumpanimation/jump05.png" id="19_daquo"]
 [ext_resource type="Texture2D" uid="uid://crr3ie3vth84m" path="res://entities/player/assets/jumpanimation/jump06.png" id="20_wfuat"]
 [ext_resource type="Texture2D" uid="uid://b4setwdaw2rbn" path="res://entities/player/assets/jumpanimation/jump07.png" id="21_elgpx"]
+[ext_resource type="Texture2D" uid="uid://cyyuge8ad2eo0" path="res://assets/light_noise/light2.png" id="17_h1pkd"]
+[ext_resource type="Script" path="res://entities/player/chemicalEffects/IceState.gd" id="17_irds6"]
+[ext_resource type="Texture2D" uid="uid://ccinytw5v5utw" path="res://entities/player/assets/runanimation/run05.png" id="17_l5f8l"]
+[ext_resource type="Texture2D" uid="uid://dmyx2mk6fjoud" path="res://assets/light_noise/waterParticle.png" id="18_l2hsd"]
+[ext_resource type="Script" path="res://entities/player/PlayerParticles.gd" id="19_kqys4"]
+[ext_resource type="Texture2D" uid="uid://0n04oh1rheg8" path="res://entities/player/assets/fliped_walk_test.png" id="20_l5uo2"]
 [ext_resource type="AudioStream" uid="uid://bbxhs7f4v3t41" path="res://assets/SFX/dash.wav" id="31_e7ort"]
+[ext_resource type="Texture2D" uid="uid://fv775xqmgpmo" path="res://assets/light_noise/white.jpg" id="32_b04or"]
+[ext_resource type="PackedScene" uid="uid://ch6xnk5tnb5k8" path="res://visualEffects/monitorEffects.tscn" id="36_hryvp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pbewx"]
 animations = [{
@@ -65,10 +73,7 @@ animations = [{
 "name": &"death",
 "speed": 10.0
 }, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_o1vlj")
-}],
+"frames": [],
 "loop": true,
 "name": &"ice",
 "speed": 5.0
@@ -343,6 +348,85 @@ states/jump/node = SubResource("AnimationNodeAnimation_k2haj")
 states/jump/position = Vector2(535, 122)
 transitions = ["Start", "basic_movement", SubResource("AnimationNodeStateMachineTransition_b1nr5"), "basic_movement", "jump", SubResource("AnimationNodeStateMachineTransition_qemd3"), "jump", "basic_movement", SubResource("AnimationNodeStateMachineTransition_opn5k")]
 graph_offset = Vector2(-44, 40)
+states/basic_movement/position = Vector2(298, 152)
+transitions = ["Start", "basic_movement", SubResource("AnimationNodeStateMachineTransition_b1nr5")]
+graph_offset = Vector2(-79, -1)
+
+[sub_resource type="Gradient" id="Gradient_5hdqj"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_re58v"]
+gradient = SubResource("Gradient_5hdqj")
+
+[sub_resource type="Curve" id="Curve_cxabh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.143979, 0.503661), 0.0, 0.0, 0, 0, Vector2(1, 0.227229), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_62g15"]
+curve = SubResource("Curve_cxabh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sivy7"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector3(-1, -0.8, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.05
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_62g15")
+color = Color(0.384314, 0.792157, 1, 0.364706)
+color_ramp = SubResource("GradientTexture1D_re58v")
+turbulence_noise_strength = 10.72
+turbulence_noise_speed_random = 2.45
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tf7cu"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_wlt04"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 1, Vector2(1, 0), 0.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1otxm"]
+curve = SubResource("Curve_wlt04")
+
+[sub_resource type="Curve" id="Curve_5xcv8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_iiniv"]
+curve = SubResource("Curve_5xcv8")
+
+[sub_resource type="Gradient" id="Gradient_6upf0"]
+offsets = PackedFloat32Array(0, 0.942177)
+colors = PackedColorArray(1, 1, 1, 0.486275, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bci05"]
+gradient = SubResource("Gradient_6upf0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nqcf6"]
+lifetime_randomness = 0.7
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 40.0
+initial_velocity_max = 60.0
+angular_velocity_curve = SubResource("CurveTexture_1otxm")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+color = Color(0.717647, 0.717647, 0.717647, 0.752941)
+color_ramp = SubResource("GradientTexture1D_bci05")
+anim_speed_curve = SubResource("CurveTexture_iiniv")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ockj"]
 size = Vector2(49, 29.5)
@@ -411,9 +495,10 @@ floor_snap_length = 23.0
 script = ExtResource("1_n7144")
 
 [node name="Animation" type="Node2D" parent="."]
-position = Vector2(-1, -14.75)
+position = Vector2(0, -14.5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Animation"]
+unique_name_in_owner = true
 position = Vector2(1, -0.25)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_pbewx")
@@ -429,7 +514,7 @@ libraries = {
 
 [node name="AnimationTree" type="AnimationTree" parent="Animation"]
 active = false
-root_node = NodePath("../AnimatedSprite2D")
+root_node = NodePath("%AnimatedSprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_u65v8")
 }
@@ -437,17 +522,54 @@ tree_root = SubResource("AnimationNodeStateMachine_arr00")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/jumped = false
 parameters/basic_movement/blend_position = 0
+parameters/basic_movement/blend_position = -0.810732
+
+[node name="White" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.109804, 0.109804, 0.109804, 1)
+show_behind_parent = true
+position = Vector2(60.5, -12.5)
+texture = ExtResource("32_b04or")
 
 [node name="Light" type="Node2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="Light"]
-visible = false
+color = Color(0.666667, 1, 1, 1)
+energy = 0.4
 shadow_enabled = true
-texture = ExtResource("16_wf275")
+shadow_filter = 2
+shadow_filter_smooth = 8.0
+texture = ExtResource("17_h1pkd")
+texture_scale = 1.2
+
+[node name="Particles" type="Node2D" parent="."]
+show_behind_parent = true
+script = ExtResource("19_kqys4")
+
+[node name="WalkingParticles" type="GPUParticles2D" parent="Particles"]
+visible = false
+show_behind_parent = true
+position = Vector2(-14, -14.5)
+amount = 500
+process_material = SubResource("ParticleProcessMaterial_sivy7")
+texture = ExtResource("18_l2hsd")
+lifetime = 0.6
+
+[node name="DashTrail" type="GPUParticles2D" parent="Particles"]
+material = SubResource("CanvasItemMaterial_tf7cu")
+position = Vector2(0, -14.5)
+emitting = false
+amount = 10
+sub_emitter = NodePath(".")
+process_material = SubResource("ParticleProcessMaterial_nqcf6")
+texture = ExtResource("20_l5uo2")
+lifetime = 0.4
+one_shot = true
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_heal_tick") instance=ExtResource("16_vgsyb")]
 element = 0
 _heal_tick = NodePath("../Timers/HealTick")
+damage_effect = true
 
 [node name="HeatComponent" parent="." node_paths=PackedStringArray("health_component", "heat_reduction_delay", "heat_tick") instance=ExtResource("3_kjfn2")]
 health_component = NodePath("../HealthComponent")
@@ -466,7 +588,6 @@ debug_color = Color(0.917647, 0.172549, 0.568627, 0.419608)
 position = Vector2(0, -23)
 
 [node name="WallCheck" type="RayCast2D" parent="."]
-visible = false
 position = Vector2(28, -45)
 target_position = Vector2(0, 44)
 
@@ -744,6 +865,8 @@ event = &"to_default"
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("15_8nkrm")
 
+[node name="MonitorEffects" parent="." instance=ExtResource("36_hryvp")]
+
 [node name="SFX" type="Node" parent="."]
 
 [node name="dash" type="AudioStreamPlayer" parent="SFX"]
@@ -775,3 +898,4 @@ pitch_scale = 0.81
 [connection signal="state_physics_processing" from="ChemicalEffectsManager/ChemicalStates/Root/Default" to="." method="_on_default_state_physics_processing"]
 [connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Ice" to="ChemicalEffectsManager" method="_on_ice_state_entered"]
 [connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Ice" to="ChemicalEffectsManager/effects/ice" method="_on_ice_state_entered"]
+[connection signal="state_exited" from="ChemicalEffectsManager/ChemicalStates/Root/Ice" to="ChemicalEffectsManager/effects/ice" method="_on_ice_state_exited"]
