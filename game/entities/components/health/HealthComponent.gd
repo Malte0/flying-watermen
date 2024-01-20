@@ -16,6 +16,7 @@ const SPEED_THRESHOLD: float = 25
 var heal_over_time_left: int = 0
 var health: int = 100
 var is_invincible: bool = false
+var iframe_length: float = 0.3
 
 signal health_changed(new_health: int, delta_health: int)
 signal death()
@@ -66,6 +67,5 @@ func die():
 
 func iframes():
 	can_take_damage = false
-	var iframe_length: float = 0.3
 	await get_tree().create_timer(iframe_length).timeout
 	can_take_damage = true

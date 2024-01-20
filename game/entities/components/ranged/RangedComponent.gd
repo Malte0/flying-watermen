@@ -1,10 +1,15 @@
 class_name RangedComponent extends Node2D
 
-@onready var shoot_position: Marker2D = $ShootPosition
+@export var use_cooldown: bool = false
+@export var cooldown: float = 0.5:
+	set(value): timer.wait_time = value
+	get: return timer.wait_time
 
+@onready var timer: Timer = $ShootCooldown
+@onready var shoot_position: Marker2D = $ShootPosition
 var is_enabled: bool = true
 
-func shoot(direction: Vector2, projectile: PackedScene, velocity_offset: Vector2) -> bool:
+func shoot(direction: Vector2, projectile: PackedScene, velocity_offset: Vector2) -> void:
 	if is_enabled:
 		var projectile_node: Node2D = projectile.instantiate()
 		var projectile_instance: Projectile = projectile_node.get_node("Projectile")
@@ -12,8 +17,9 @@ func shoot(direction: Vector2, projectile: PackedScene, velocity_offset: Vector2
 		projectile_instance.direction = direction
 		projectile_instance.player_speed = velocity_offset
 		add_child(projectile_node)
-		return true
-	return false
+		if use_cooldown:
+			disable_shooting()
+			timer.start()
 
 func disable_shooting():
 	is_enabled = false

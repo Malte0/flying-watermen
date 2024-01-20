@@ -94,6 +94,7 @@ heat_tick = NodePath("../Timers/HeatTick")
 [node name="RangedComponent" parent="." instance=ExtResource("4_2iwex")]
 unique_name_in_owner = true
 position = Vector2(0, -24)
+use_cooldown = true
 
 [node name="ChemicalEffectsManager" parent="." instance=ExtResource("5_cbv3l")]
 
@@ -112,6 +113,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_ghnpr")
 
 [node name="Default" type="Sprite2D" parent="Sprites"]
+modulate = Color(1, 0.980392, 0.976471, 1)
 position = Vector2(0, -17)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_nfb20")
@@ -129,10 +131,6 @@ one_shot = true
 
 [node name="HealTick" type="Timer" parent="Timers"]
 autostart = true
-
-[node name="ShootingCooldown" type="Timer" parent="Timers"]
-wait_time = 0.5
-one_shot = true
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("15_8nkrm")
@@ -350,7 +348,6 @@ value = 100.0
 show_percentage = false
 
 [connection signal="death" from="HealthComponent" to="." method="_on_death"]
-[connection signal="timeout" from="Timers/ShootingCooldown" to="." method="enable_shooting"]
 [connection signal="child_state_exited" from="StateChart/Mechanics/Movement" to="." method="reset_variables"]
 [connection signal="child_state_exited" from="StateChart/Mechanics/Movement/Interruptible" to="." method="_on_movement_child_state_exited"]
 [connection signal="child_state_exited" from="StateChart/Mechanics/Movement/Interruptible/Grounded" to="." method="_on_movement_child_state_exited"]

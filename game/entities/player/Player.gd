@@ -6,7 +6,6 @@ class_name Player extends CharacterBody2D
 @onready var melee_attack: MeleeAttack = $MeleeAttack
 @onready var inventory: Inventory = $Inventory
 @onready var state_chart: StateChart = %StateChart
-@onready var shooting_timer: Timer = $Timers/ShootingCooldown
 
 # Reset values
 var base_scale_speed: float = 1.5
@@ -29,9 +28,6 @@ var jumps_left: int = jumps
 var projectile_scene: PackedScene = load("res://entities/projectiles/WaterProjectile.tscn")
 var direction: float = 0.0
 var slide_threshold: float = base_speed/2
-var shooting_cooldown: float:
-	get: return shooting_timer.get_wait_time()
-	set(time): shooting_timer.set_wait_time(time)
 
 ## Callback for player interaction
 var on_interact = func(): print("Nothing to interact")
@@ -40,11 +36,29 @@ func _ready():
 	#Initialize values so Guards don't complain
 	set_expressions()
 
+func _input(event: InputEvent):
+	if event.is_action_pressed("interact"):
+		on_interact.call()
+	if event.is_action_pressed("jump"):
+		state_chart.send_event("jump")
+	if event.is_action_pressed("lshift"):
+		state_chart.send_event("dash")
+	if event.is_action_pressed("attack"):
+		melee()
+	if event.is_action_pressed("right_click"):
+		shoot()
+
 func set_expressions():
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
 	state_chart.set_expression_property("jumps_left", jumps_left)
 	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
 	state_chart.set_expression_property("velocity_x", velocity.x)
+
+func flip_player():
+	scale.x *= -1
+
+func _on_death():
+	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
 
 #region PhysicsProcess
 func _physics_process(delta: float):
@@ -81,27 +95,6 @@ func movement(delta: float):
 		velocity.y += gravity * delta * fall_speed_factor
 #endregion
 
-func _input(event: InputEvent):
-	if event.is_action_pressed("interact"):
-		on_interact.call()
-	if event.is_action_pressed("jump"):
-		state_chart.send_event("jump")
-	if event.is_action_pressed("lshift"):
-		state_chart.send_event("dash")
-	if event.is_action_pressed("attack"):
-		melee()
-	if event.is_action_pressed("right_click"):
-		shoot()
-
-func reset_jumps():
-	jumps_left = jumps
-
-func flip_player():
-	scale.x *= -1
-
-func _on_death():
-	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
-
 #region Melee
 func melee():
 	melee_attack.attack()
@@ -116,9 +109,7 @@ func enable_shooting():
 
 func shoot() -> void:
 	var shoot_direction = global_position.direction_to(get_global_mouse_position())
-	if ranged_component.shoot(shoot_direction, projectile_scene, velocity):
-		ranged_component.disable_shooting()
-		shooting_timer.start()
+	ranged_component.shoot(shoot_direction, projectile_scene, velocity)
 #endregion
 
 #region Movement
@@ -130,6 +121,9 @@ func reset_variables():
 	can_move = true
 	collision_mask = 0b101
 	collision_layer = 0b10
+
+func reset_jumps():
+	jumps_left = jumps
 
 func disable_movement():
 	state_chart.send_event("disable")
