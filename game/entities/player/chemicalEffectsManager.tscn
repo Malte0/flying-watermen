@@ -20,37 +20,37 @@ script = ExtResource("1_2rtau")
 [node name="Ice" type="Node2D" parent="Effects"]
 script = ExtResource("2_06vjv")
 
-[node name="ChemicalStateChart" type="Node" parent="."]
+[node name="StateChart" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_aywlr")
 
-[node name="Chemicals" type="Node" parent="ChemicalStateChart"]
+[node name="Chemicals" type="Node" parent="StateChart"]
 script = ExtResource("4_qh1hq")
 initial_state = NodePath("Water")
 
-[node name="Water" type="Node" parent="ChemicalStateChart/Chemicals"]
+[node name="Water" type="Node" parent="StateChart/Chemicals"]
 unique_name_in_owner = true
 script = ExtResource("5_wf780")
 
-[node name="On Melt" type="Node" parent="ChemicalStateChart/Chemicals/Water"]
+[node name="Ice" type="Node" parent="StateChart/Chemicals"]
+unique_name_in_owner = true
+script = ExtResource("5_wf780")
+
+[node name="On Melt" type="Node" parent="StateChart/Chemicals/Ice"]
 script = ExtResource("6_llpey")
-to = NodePath("..")
+to = NodePath("../../Water")
 event = &"melt"
 
-[node name="Ice" type="Node" parent="ChemicalStateChart/Chemicals"]
-unique_name_in_owner = true
-script = ExtResource("5_wf780")
-
-[node name="On Ice" type="Node" parent="ChemicalStateChart/Chemicals"]
+[node name="On Ice" type="Node" parent="StateChart/Chemicals"]
 script = ExtResource("6_llpey")
 to = NodePath("../Ice")
 event = &"to_chemical"
 guard = SubResource("Resource_ir01r")
 
-[node name="On Default" type="Node" parent="ChemicalStateChart/Chemicals"]
+[node name="On Default" type="Node" parent="StateChart/Chemicals"]
 script = ExtResource("6_llpey")
 to = NodePath("../Water")
 event = &"to_default"
 
-[connection signal="state_entered" from="ChemicalStateChart/Chemicals/Ice" to="Effects/Ice" method="_on_ice_state_entered"]
-[connection signal="state_exited" from="ChemicalStateChart/Chemicals/Ice" to="Effects/Ice" method="_on_ice_state_exited"]
+[connection signal="state_entered" from="StateChart/Chemicals/Ice" to="Effects/Ice" method="_on_ice_state_entered"]
+[connection signal="state_exited" from="StateChart/Chemicals/Ice" to="Effects/Ice" method="_on_ice_state_exited"]

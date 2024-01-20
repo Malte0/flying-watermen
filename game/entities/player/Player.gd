@@ -58,7 +58,7 @@ func flip_player():
 	scale.x *= -1
 
 func _on_death():
-	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
+	get_tree().change_scene_to_file.call_deferred(Globals.game_over)
 
 #region PhysicsProcess
 func _physics_process(delta: float):
@@ -93,23 +93,6 @@ func movement(delta: float):
 	# Gravity
 	if not (is_on_floor() and velocity.y == 0):
 		velocity.y += gravity * delta * fall_speed_factor
-#endregion
-
-#region Melee
-func melee():
-	melee_attack.attack()
-#endregion
-
-#region Shooting
-func disable_shooting():
-	ranged_component.disable_shooting()
-
-func enable_shooting():
-	ranged_component.enable_shooting()
-
-func shoot() -> void:
-	var shoot_direction = global_position.direction_to(get_global_mouse_position())
-	ranged_component.shoot(shoot_direction, projectile_scene, velocity)
 #endregion
 
 #region Movement
@@ -168,6 +151,17 @@ func _on_dash_state_entered() -> void:
 
 func _on_grounded_state_entered() -> void:
 	reset_jumps()
+#endregion
+
+#region Melee
+func melee():
+	melee_attack.attack()
+#endregion
+
+#region Shooting
+func shoot() -> void:
+	var shoot_direction = global_position.direction_to(get_global_mouse_position())
+	ranged_component.shoot(shoot_direction, projectile_scene, velocity)
 #endregion
 
 #region Animation

@@ -18,11 +18,12 @@ func shoot(direction: Vector2, projectile: PackedScene, velocity_offset: Vector2
 		projectile_instance.player_speed = velocity_offset
 		add_child(projectile_node)
 		if use_cooldown:
-			disable_shooting()
+			disable()
 			timer.start()
 
-func disable_shooting():
+func disable():
 	is_enabled = false
+	timer.stop()
 
-func enable_shooting():
+func enable():
 	is_enabled = true

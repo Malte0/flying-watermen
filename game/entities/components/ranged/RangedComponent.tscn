@@ -9,4 +9,4 @@ script = ExtResource("1_km8ms")
 
 [node name="ShootCooldown" type="Timer" parent="."]
 
-[connection signal="timeout" from="ShootCooldown" to="." method="enable_shooting"]
+[connection signal="timeout" from="ShootCooldown" to="." method="enable"]

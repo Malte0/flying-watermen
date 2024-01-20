@@ -6,13 +6,20 @@ class_name MeleeAttack extends Area2D
 
 const MELEE_DAMAGE: int = 50
 const TWEEN_DURATION: float = 0.1
+var is_enabled: bool = true
+
+func attack():
+	if is_enabled: state_chart.send_event("attack")
+
+func disable():
+	is_enabled = false
+
+func enable():
+	is_enabled = true
 
 func _on_body_entered(body):
 	if body is Enemy:
 		body.health_component.take_damage(MELEE_DAMAGE, Element.Type.Water)
-
-func attack():
-	state_chart.send_event("attack")
 
 func _on_attack_state_entered():
 	tmp_animation_bar.visible = true
