@@ -30,12 +30,10 @@ func on_health_changed(_new_health, delta_health):
 		state_chart.send_event("enter_aggro")
 
 func _on_aggro_state_entered():
-	print("enter aggro")
 	is_aggro = true
 	aggro_entered.emit()
 
 func _on_calm_state_entered():
-	print("exit aggro")
 	is_aggro = false
 	calm_entered.emit()
 

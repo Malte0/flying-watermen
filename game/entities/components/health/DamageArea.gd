@@ -2,6 +2,7 @@ extends Area2D
 
 @export var min_damage: int = 1
 @export var max_damage: int = 3
+@export var element: Element.Type
 
 @onready var collision_shape: CircleShape2D = get_children().filter(func(n): return n is CollisionShape2D)[0].shape
 @onready var damage_radius: float = collision_shape.radius
@@ -23,4 +24,4 @@ func _on_damage_tick_timeout():
 		var distance: float = global_position.distance_to(health_component.global_position)
 		var damage_weight: float = (damage_radius - distance) /  damage_radius
 		var damage_to_apply: int = ceili(lerp(min_damage, max_damage, damage_weight))
-		health_component.take_damage(damage_to_apply, Element.Type.Fire)
+		health_component.take_damage(damage_to_apply, element)
