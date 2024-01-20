@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 
 func _ready():
-	debugger.debug_node(player)
+	debugger.debug_node(player.state_chart)
 	debugger.visible = false
 
 func _input(event: InputEvent) -> void:

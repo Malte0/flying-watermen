@@ -2,10 +2,10 @@ class_name RangedComponent extends Node2D
 
 @onready var shoot_position: Marker2D = $ShootPosition
 
-var enabled: bool = true
+var is_enabled: bool = true
 
 func shoot(direction: Vector2, projectile: PackedScene, velocity_offset: Vector2) -> bool:
-	if enabled:
+	if is_enabled:
 		var projectile_node: Node2D = projectile.instantiate()
 		var projectile_instance: Projectile = projectile_node.get_node("Projectile")
 		projectile_instance.position = shoot_position.global_position
@@ -16,7 +16,7 @@ func shoot(direction: Vector2, projectile: PackedScene, velocity_offset: Vector2
 	return false
 
 func disable_shooting():
-	enabled = false
+	is_enabled = false
 
 func enable_shooting():
-	enabled = true
+	is_enabled = true

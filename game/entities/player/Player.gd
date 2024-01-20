@@ -1,13 +1,12 @@
 class_name Player extends CharacterBody2D
 
-@onready var inventory: Inventory = $Inventory
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var heat_component: HeatComponent = $HeatComponent
 @onready var ranged_component: RangedComponent = %RangedComponent
-@onready var state_chart: StateChart = $StateChart
+@onready var melee_attack: MeleeAttack = $MeleeAttack
+@onready var inventory: Inventory = $Inventory
+@onready var state_chart: StateChart = %StateChart
 @onready var shooting_timer: Timer = $Timers/ShootingCooldown
-
-var projectile_scene: PackedScene = load("res://entities/projectiles/WaterProjectile.tscn")
 
 # Reset values
 var base_scale_speed: float = 1.5
@@ -27,11 +26,19 @@ var can_move: bool = true
 var jumps_left: int = jumps
 
 # Other information about the player
+var projectile_scene: PackedScene = load("res://entities/projectiles/WaterProjectile.tscn")
 var direction: float = 0.0
 var slide_threshold: float = base_speed/2
 var shooting_cooldown: float:
 	get: return shooting_timer.get_wait_time()
 	set(time): shooting_timer.set_wait_time(time)
+
+## Callback for player interaction
+var on_interact = func(): print("Nothing to interact")
+
+func _ready():
+	#Initialize values so Guards don't complain
+	set_expressions()
 
 func set_expressions():
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
@@ -39,27 +46,12 @@ func set_expressions():
 	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
 	state_chart.set_expression_property("velocity_x", velocity.x)
 
-func reset_variables():
-	speed = base_speed
-	jump_velocity = base_jump_velocity
-	friction = base_friction
-	fall_speed_factor = base_fall_speed_factor
-	can_move = true
-	collision_mask = 0b101
-	collision_layer = 0b10
+#region PhysicsProcess
+func _physics_process(delta: float):
+	update_states()
+	movement(delta)
+	move_and_slide()
 
-func reset_jumps():
-	jumps_left = jumps
-
-func _ready():
-	health_component.death.connect(_on_death)
-	#Initialize values so Guards don't complain
-	set_expressions()
-
-## Callback for player interaction
-var on_interact = func(): print("Nothing to interact")
-
-			
 func update_states():
 	set_expressions()
 	# For transitions without event condition
@@ -87,37 +79,66 @@ func movement(delta: float):
 	# Gravity
 	if not (is_on_floor() and velocity.y == 0):
 		velocity.y += gravity * delta * fall_speed_factor
-
-func _physics_process(delta: float):
-	update_states()
-	movement(delta)
-	move_and_slide()
+#endregion
 
 func _input(event: InputEvent):
-	if event.is_action_pressed("attack"):
-		state_chart.send_event("attackpressed")
 	if event.is_action_pressed("interact"):
 		on_interact.call()
 	if event.is_action_pressed("jump"):
 		state_chart.send_event("jump")
 	if event.is_action_pressed("lshift"):
 		state_chart.send_event("dash")
+	if event.is_action_pressed("attack"):
+		melee()
 	if event.is_action_pressed("right_click"):
 		shoot()
 
-#region Shooting
-func shoot() -> void:
-	var direction = global_position.direction_to(get_global_mouse_position())
-	if ranged_component.shoot(direction, projectile_scene, velocity):
-		ranged_component.disable_shooting()
-		shooting_timer.start()
-
-func _on_shooting_cooldown_timeout() -> void:
-	ranged_component.enable_shooting()
-#endregion
+func reset_jumps():
+	jumps_left = jumps
 
 func flip_player():
 	scale.x *= -1
+
+func _on_death():
+	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
+
+#region Melee
+func melee():
+	melee_attack.attack()
+#endregion
+
+#region Shooting
+func disable_shooting():
+	ranged_component.disable_shooting()
+
+func enable_shooting():
+	ranged_component.enable_shooting()
+
+func shoot() -> void:
+	var shoot_direction = global_position.direction_to(get_global_mouse_position())
+	if ranged_component.shoot(shoot_direction, projectile_scene, velocity):
+		ranged_component.disable_shooting()
+		shooting_timer.start()
+#endregion
+
+#region Movement
+func reset_variables():
+	speed = base_speed
+	jump_velocity = base_jump_velocity
+	friction = base_friction
+	fall_speed_factor = base_fall_speed_factor
+	can_move = true
+	collision_mask = 0b101
+	collision_layer = 0b10
+
+func disable_movement():
+	state_chart.send_event("disable")
+
+func enable_movement():
+	state_chart.send_event("enable")
+
+func _on_locked_state_entered() -> void:
+	can_move = false
 
 func _on_crouching_state_entered():
 	speed = base_speed/2
@@ -127,7 +148,8 @@ func _on_sliding_state_entered():
 	can_move = false
 
 func _on_jumping_state_entered():
-	velocity.y = jump_velocity + velocity.y/2
+	#velocity.y = jump_velocity + velocity.y/2
+	velocity.y = jump_velocity
 	jumps_left -= 1
 
 func _on_wall_slide_state_entered():
@@ -142,18 +164,20 @@ func _on_airborne_state_entered():
 func _on_movement_child_state_exited():
 	reset_variables()
 
-func _on_death():
-	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
-
 func _on_dash_state_entered() -> void:
 	can_move = false
 	friction = 0
+	@warning_ignore("narrowing_conversion")
 	velocity.x = signi(scale.y) * base_speed * 2
 	collision_mask = 0b1
 	collision_layer = 0b
 
-func _on_locked_state_entered() -> void:
-	can_move = false
-
 func _on_grounded_state_entered() -> void:
 	reset_jumps()
+#endregion
+
+#region Animation
+func animate_state(state: String):
+	if state == "ice": $Sprites.ice()
+	if state == "water": $Sprites.water()
+#endregion

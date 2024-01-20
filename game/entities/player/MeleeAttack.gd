@@ -1,4 +1,4 @@
-extends Area2D
+class_name MeleeAttack extends Area2D
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var state_chart: StateChart = $AttackStateChart
@@ -11,9 +11,8 @@ func _on_body_entered(body):
 	if body is Enemy:
 		body.health_component.take_damage(MELEE_DAMAGE, Element.Type.Water)
 
-func _input(event: InputEvent):
-	if event.is_action_pressed("attack"):
-		state_chart.send_event("attack")
+func attack():
+	state_chart.send_event("attack")
 
 func _on_attack_state_entered():
 	tmp_animation_bar.visible = true

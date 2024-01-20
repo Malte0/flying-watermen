@@ -10,4 +10,3 @@ func _input(event: InputEvent) -> void:
 		get_tree().change_scene_to_file.call_deferred(test_scene)
 	if event.is_action_pressed("str+r"):
 		get_tree().reload_current_scene()
-
