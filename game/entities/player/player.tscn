@@ -417,7 +417,8 @@ position = Vector2(-1, -14.75)
 position = Vector2(1, -0.25)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_pbewx")
-animation = &"death"
+animation = &"run"
+frame = 1
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animation"]
