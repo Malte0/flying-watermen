@@ -7,6 +7,7 @@ extends Enemy
 const PROJECTILE_SCENE: PackedScene = preload("res://entities/projectiles/FireProjectile.tscn")
 const SHOOTING_PRECISION: float = PI/10 # Angle in radians that gets randomly applied to shots
 
+const JUMP_FORCE: int = -150
 const MOVEMENT_SPEED_CALM: int = 100
 const MOVEMENT_SPEED_AGGRO: int = 250
 var is_aggro: bool = false
@@ -19,7 +20,7 @@ func _physics_process(delta):
 	if is_aggro:
 		hunt_player()
 	if ground_distance.is_colliding():
-		velocity.y = jump_force
+		velocity.y = JUMP_FORCE
 	super(delta)
 
 func hunt_player():
@@ -43,7 +44,7 @@ func _on_view_area_body_entered(body):
 		become_aggro()
 
 func _on_view_area_body_exited(body):
-	if body is Player:
+	if body is Player and aggro_cooldown_timer.is_inside_tree():
 		aggro_cooldown_timer.start()
 
 func _on_aggro_cooldown_timeout():
@@ -65,10 +66,11 @@ func _on_direction_change_timeout() -> void:
 
 func _on_fire_rate_timeout() -> void:
 	if is_aggro:
-		var projectile_instance: Projectile = PROJECTILE_SCENE.instantiate()
+		var projectile_node: Node2D = PROJECTILE_SCENE.instantiate()
+		var projectile_instance: Projectile = projectile_node.get_node("Projectile")
 		var random_angle: float = randf()*SHOOTING_PRECISION - (SHOOTING_PRECISION/2)
 		projectile_instance.position = position
 		var new_direction = position.direction_to(player.position).rotated(random_angle)
 		projectile_instance.direction = new_direction
 		projectile_instance.player_speed = velocity
-		get_parent().add_child(projectile_instance)
+		get_parent().add_child(projectile_node)
