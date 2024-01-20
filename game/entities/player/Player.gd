@@ -41,7 +41,6 @@ func reset_variables():
 	collision_layer = 0b10
 
 func _ready():
-	inventory.on_item_used.connect(func(item_left: int, max_amount: int): if item_left == 0: state_chart.send_event("to_defalt"))
 	health_component.death.connect(_on_death)
 	#Initialize values so Guards don't complain
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
@@ -69,14 +68,11 @@ func _physics_process(delta: float):
 	# For transitions without event condition
 	state_chart.send_event("tick")
 	apply_gravity(delta)
-
 	if direction == 0:
 		velocity.x = lerp(velocity.x, 0.0, friction)
-
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
 	state_chart.set_expression_property("jumps_left", jumps_left)
 	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
-
 	if not can_move:
 		return
 	direction = Input.get_axis("a", "d")
@@ -84,13 +80,9 @@ func _physics_process(delta: float):
 		velocity.x = lerp(velocity.x, direction * speed, 0.1)
 	elif abs(velocity.x) < 0.1:
 		velocity.x = 0
-	else:
-		velocity.x = lerp(velocity.x, 0.0, friction)
-
-	move_and_slide()
-
 	if sign(scale.y) != sign(direction) and sign(direction) != 0:
 		flip_player()
+	move_and_slide()
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("attack"):
@@ -133,7 +125,7 @@ func _on_movement_child_state_exited():
 func _on_can_shoot_state_input(event: InputEvent) -> void:
 	if event.is_action_pressed("right_click"):
 		state_chart.send_event("_on_shot")
-		if inventory.active_item and inventory.active_item.name == "sodium" and inventory.active_item_left > 0:
+		if inventory.active_item and inventory.active_item.name == "sodium":
 			shoot_sodium()
 			return
 		var projectile_instance: Node2D = projectile_scene.instantiate()
