@@ -30,3 +30,8 @@ func _on_heat_changed(new_heat: int, _delta_heat: int):
 
 func _on_ice_state_entered():
 	enter_ice_state()
+	$"../../../MonitorEffects".get_node("Freeze").visible = true
+	
+
+func _on_ice_state_exited():
+	$"../../../MonitorEffects".get_node("Freeze").visible = false

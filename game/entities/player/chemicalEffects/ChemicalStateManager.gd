@@ -13,6 +13,7 @@ func _input(event: InputEvent):
 	if event.is_action_pressed("exit_state"):
 		chemical_state_chart.send_event("to_default")
 		player.inventory.set_active_item(null)
+		
 
 func update_player_graphics(effect_name: String):
 	var sprites: Array = player_sprite_container.get_children()
@@ -25,3 +26,6 @@ func _on_default_state_entered():
 func _on_ice_state_entered():
 	update_player_graphics("ice")
 	player.inventory.use_active_item(1)
+	
+	
+	
