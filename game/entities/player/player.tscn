@@ -138,7 +138,6 @@ script = ExtResource("15_8nkrm")
 [node name="StateChart" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_dhjab")
-track_in_editor = true
 
 [node name="Mechanics" type="Node" parent="StateChart"]
 script = ExtResource("3_7lhhd")
