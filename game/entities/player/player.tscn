@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=77 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dhjab"]
@@ -273,14 +273,6 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_denoe")
 blend_point_2/pos = -0.8
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wlofg"]
-animation = &"death"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7fmv2"]
-animation = &"ice"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_43nol"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b1nr5"]
 advance_mode = 2
 
@@ -289,14 +281,8 @@ states/End/position = Vector2(926, 152)
 states/Start/position = Vector2(96, 152)
 states/basic_movement/node = SubResource("AnimationNodeBlendSpace1D_rocsi")
 states/basic_movement/position = Vector2(298, 152)
-states/death/node = SubResource("AnimationNodeAnimation_wlofg")
-states/death/position = Vector2(286, 247)
-states/ice/node = SubResource("AnimationNodeAnimation_7fmv2")
-states/ice/position = Vector2(518, 82)
-states/jump/node = SubResource("AnimationNodeBlendSpace1D_43nol")
-states/jump/position = Vector2(572, 247)
 transitions = ["Start", "basic_movement", SubResource("AnimationNodeStateMachineTransition_b1nr5")]
-graph_offset = Vector2(31, 22)
+graph_offset = Vector2(-79, -1)
 
 [sub_resource type="Gradient" id="Gradient_5hdqj"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
@@ -444,11 +430,11 @@ script = ExtResource("1_n7144")
 position = Vector2(-1, -14.75)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Animation"]
+unique_name_in_owner = true
 position = Vector2(1, -0.25)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_pbewx")
-animation = &"idle"
-frame = 5
+animation = &"death"
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animation"]
@@ -459,14 +445,13 @@ libraries = {
 
 [node name="AnimationTree" type="AnimationTree" parent="Animation"]
 active = false
-root_node = NodePath("../AnimatedSprite2D")
+root_node = NodePath("%AnimatedSprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_u65v8")
 }
 tree_root = SubResource("AnimationNodeStateMachine_arr00")
 anim_player = NodePath("../AnimationPlayer")
 parameters/basic_movement/blend_position = -0.810732
-parameters/jump/blend_position = 0.0
 
 [node name="White" type="Sprite2D" parent="."]
 visible = false
@@ -512,6 +497,7 @@ one_shot = true
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_heal_tick") instance=ExtResource("16_vgsyb")]
 element = 0
 _heal_tick = NodePath("../Timers/HealTick")
+damage_effect = true
 
 [node name="HeatComponent" parent="." node_paths=PackedStringArray("health_component", "heat_reduction_delay", "heat_tick") instance=ExtResource("3_kjfn2")]
 health_component = NodePath("../HealthComponent")

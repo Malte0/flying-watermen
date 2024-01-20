@@ -28,7 +28,8 @@ debug_color = Color(0.67451, 0.505882, 0.0235294, 0.419608)
 
 [node name="EnemyGraphics" type="Node2D" parent="DirectionalNodes"]
 
-[node name="FlameImage" type="Sprite2D" parent="DirectionalNodes/EnemyGraphics"]
+[node name="AnimatedSprite2D" type="Sprite2D" parent="DirectionalNodes/EnemyGraphics"]
+unique_name_in_owner = true
 position = Vector2(0, -12)
 scale = Vector2(0.16, 0.146)
 texture = ExtResource("2_4ume1")
@@ -43,6 +44,7 @@ shape = SubResource("CircleShape2D_5bvq1")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_health_bar") instance=ExtResource("1_otr82")]
 _health_bar = NodePath("HealthBar")
+damage_effect = true
 
 [node name="HealthBar" type="TextureProgressBar" parent="HealthComponent"]
 offset_left = -51.0
