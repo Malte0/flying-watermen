@@ -17,8 +17,12 @@ func _ready():
 	await get_tree().create_timer(EXPLOSION_DELAY).timeout
 	spawn_explosion("")
 
+func add_to_parent(explosion_instance: Explosion):
+	get_parent().add_child(explosion_instance)
+
 func spawn_explosion(_placeholder):
 	var explosion_instance: Explosion = explosion_scene.instantiate()
 	explosion_instance.global_position = global_position
-	get_parent().add_child(explosion_instance)
+	# This call deferred is needed to prevent a weird godot error being thrown
+	call_deferred("add_to_parent", explosion_instance)
 	call_deferred("queue_free")

@@ -6,7 +6,7 @@ var active_item_left: int = 0
 
 signal on_item_in_inventory_updated(new_item: Item, old_item: Item)
 signal on_item_activated(item: Item)
-signal on_item_used(amount: int, max_amount: int)
+signal on_item_used(amount_left: int, max_amount: int)
 
 func set_item_in_inventory(item: Item):
 	on_item_in_inventory_updated.emit(item, item_in_inventory)

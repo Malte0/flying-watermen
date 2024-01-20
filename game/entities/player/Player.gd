@@ -41,6 +41,7 @@ func reset_variables():
 	collision_layer = 0b10
 
 func _ready():
+	inventory.on_item_used.connect(func(item_left: int, max_amount: int): if item_left == 0: state_chart.send_event("to_defalt"))
 	health_component.death.connect(_on_death)
 	#Initialize values so Guards don't complain
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
@@ -75,7 +76,7 @@ func _physics_process(delta: float):
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
 	state_chart.set_expression_property("jumps_left", jumps_left)
 	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
-	# handle left/right movement
+
 	if not can_move:
 		return
 	direction = Input.get_axis("a", "d")
@@ -135,10 +136,11 @@ func _on_can_shoot_state_input(event: InputEvent) -> void:
 		if inventory.active_item and inventory.active_item.name == "sodium" and inventory.active_item_left > 0:
 			shoot_sodium()
 			return
-		var projectile_instance: Projectile = projectile_scene.instantiate()
-		projectile_instance.position = shoot_position.global_position
-		projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
-		projectile_instance.player_speed = velocity
+		var projectile_instance: Node2D = projectile_scene.instantiate()
+		var projectile: Projectile = projectile_instance.get_node("Projectile")
+		projectile.position = shoot_position.global_position
+		projectile.direction = global_position.direction_to(get_global_mouse_position())
+		projectile.player_speed = velocity
 		add_child(projectile_instance)
 
 func _on_death():
@@ -160,9 +162,3 @@ func shoot_sodium():
 	projectile_instance.additional_speed = velocity
 	get_parent().add_child(projectile_instance)
 	inventory.use_active_item(1)
-
-func _on_ice_state_exited():
-	can_move = true
-
-func _on_ice_state_entered():
-	can_move = false

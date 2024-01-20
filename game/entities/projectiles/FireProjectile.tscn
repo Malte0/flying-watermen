@@ -6,4 +6,3 @@
 
 [node name="Projectile" parent="." instance=ExtResource("2_uorqn")]
 element = 1
-collisionMask = 3
