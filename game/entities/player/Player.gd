@@ -57,6 +57,12 @@ func set_expressions():
 func flip_player():
 	scale.x *= -1
 
+func disenable_components(ranged: bool, melee: bool, movement: bool):
+	ranged_component.is_enabled = ranged
+	melee_attack.is_enabled = melee
+	if movement: enable_movement()
+	else: disable_movement()
+
 func _on_death():
 	get_tree().change_scene_to_file.call_deferred(Globals.game_over)
 

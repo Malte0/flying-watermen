@@ -3,6 +3,7 @@ class_name MeleeAttack extends Area2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var state_chart: StateChart = $AttackStateChart
 @onready var tmp_animation_bar: ProgressBar = $ProgressBar
+@onready var player: Player = get_tree().get_first_node_in_group("player")
 
 const MELEE_DAMAGE: int = 50
 const TWEEN_DURATION: float = 0.1
@@ -22,6 +23,7 @@ func _on_body_entered(body):
 		body.health_component.take_damage(MELEE_DAMAGE, Element.Type.Water)
 
 func _on_attack_state_entered():
+	player.ranged_component.disable()
 	tmp_animation_bar.visible = true
 	tmp_animation_bar.value = 0
 	var tween = get_tree().create_tween()
@@ -29,5 +31,6 @@ func _on_attack_state_entered():
 	collision_shape.disabled = false
 
 func _on_attack_state_exited():
+	player.ranged_component.enable()
 	tmp_animation_bar.visible = false
 	collision_shape.disabled = true
