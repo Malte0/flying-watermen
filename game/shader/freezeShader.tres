@@ -36,6 +36,7 @@ default_value = 1.0
 source = 1
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_8deiq"]
+output_port_for_preview = 0
 default_input_values = [0, null, 1, 10.0]
 initialized = true
 script = ExtResource("1_8etcv")
@@ -187,7 +188,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(171.853, -81.709)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(1840, 60)
