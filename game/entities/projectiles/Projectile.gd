@@ -30,7 +30,7 @@ func _on_area_2d_body_entered(body):
 	if stop_on_impact:
 		linear_velocity = Vector2(0, 0)
 		gravity = 0
-		#gravity_scale = 0
+		gravity_scale = 0
 		#mass = 0
 		#reparent.call_deferred(body)
 		#print(get_parent())

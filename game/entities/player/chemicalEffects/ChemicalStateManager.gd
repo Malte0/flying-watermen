@@ -25,9 +25,3 @@ func _on_default_state_entered():
 func _on_ice_state_entered():
 	update_player_graphics("ice")
 	player.inventory.use_active_item(1)
-
-
-func _on_foam_state_entered():
-	#update_player_graphics("foam")
-	pass
-	
