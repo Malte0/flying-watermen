@@ -1,5 +1,8 @@
 extends Control
 
+func _ready():
+	visible = false
+
 var is_paused: bool = false:
 	set = set_paused
 
