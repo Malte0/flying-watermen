@@ -47,9 +47,6 @@ func flip_move_direction():
 
 func scale_by_distance(max_distance: int, player_distance: float, value_to_scale: int):
 	return ceili(((max_distance - abs(player_distance)) / max_distance) * value_to_scale)
-
-func flash_damage_effect():
-	$DirectionalNodes/EnemyGraphics/FlameImage.set("shader_parameter/flash_modifier", 1)
 	
 func _on_damage_tick_timeout():
 	var player_distance: float = player.global_position.x - global_position.x
