@@ -23,18 +23,19 @@ func _ready():
 
 func _on_area_2d_body_entered(body):
 	var health_component: HealthComponent = body.get_node_or_null("HealthComponent")
-	if health_component:
-		health_component.take_damage(damage, element)
-	if body is Player and element != Element.Type.Water:
-		body.heat_component.increase_heat(damage)
-	if stop_on_impact:
+	if !stop_on_impact:
+		if health_component:
+			health_component.take_damage(damage, element)
+		if body is Player and element != Element.Type.Water:
+			body.heat_component.increase_heat(damage)
+		get_parent().queue_free()
+	else:
+		if health_component:
+			health_component.take_damage_overtime(damage, element, 30)
 		linear_velocity = Vector2(0, 0)
-		gravity = 0
 		gravity_scale = 0
-		#mass = 0
 		#reparent.call_deferred(body)
 		#print(get_parent())
 		#position = -position.distance_to(body.position)
 		#position = get_tree().get_first_node_in_group("player").position
 		#top_level = false
-	else: get_parent().queue_free()
