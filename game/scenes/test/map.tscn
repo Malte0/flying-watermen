@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=51 format=3 uid="uid://mrf2lku3uiqc"]
+=======
+[gd_scene load_steps=52 format=3 uid="uid://mrf2lku3uiqc"]
+>>>>>>> feat/add-stone-tablet
 
 [ext_resource type="Shader" path="res://shader/mapShader.gdshader" id="1_4wi60"]
 [ext_resource type="Texture2D" uid="uid://dhvk873s0063d" path="res://assets/tileMap/Tiles.png" id="1_ljrfd"]
@@ -19,6 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://bree81gljy661" path="res://entities/player/inventory/items/foamChemical/FoamChemical.tscn" id="15_cbfrv"]
 [ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/meleeEnemy/MeleeEnemy.tscn" id="16_7lj2s"]
 [ext_resource type="Script" path="res://entities/enemies/spawning/EnemyManager.gd" id="18_ephhu"]
+[ext_resource type="PackedScene" uid="uid://c640sr08cvsmo" path="res://entities/stone-tablet/StoneTablet.tscn" id="19_5322q"]
+[ext_resource type="PackedScene" uid="uid://4lea60a43ia6" path="res://scenes/ui/ReadStoneTablet.tscn" id="20_rwv2s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7de0"]
 shader = ExtResource("1_4wi60")
@@ -29913,3 +29919,9 @@ autostart = true
 
 [node name="MeleeEnemy" parent="." instance=ExtResource("16_7lj2s")]
 position = Vector2(1760, 1664)
+
+[node name="StoneTablet" parent="." instance=ExtResource("19_5322q")]
+position = Vector2(1381, 1709)
+
+[node name="ReadStoneTablet" parent="." instance=ExtResource("20_rwv2s")]
+visible = false
