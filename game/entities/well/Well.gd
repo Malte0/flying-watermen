@@ -13,6 +13,7 @@ signal well_filled()
 func fill_well():
 	if not is_full:
 		sprite.texture = FULL_TEXTURE
+		$GPUParticles2D.visible  = true
 		well_filled.emit()
 		is_full = true
 		fill_label.visible = false
