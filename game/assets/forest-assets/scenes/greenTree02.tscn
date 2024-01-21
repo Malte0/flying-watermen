@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" path="res://shader/windShader.gdshader" id="1_1q7b2"]
 [ext_resource type="Texture2D" uid="uid://cwsfbgi4c8bf1" path="res://assets/forest-assets/Baum_02.png" id="2_8fm1o"]
-[ext_resource type="Script" path="res://assets/forest-assets/scenes/greenTree.gd" id="3_c1dkj"]
+[ext_resource type="Script" path="res://assets/forest-assets/scenes/tree.gd" id="3_c1dkj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y8leg"]
 resource_local_to_scene = true
