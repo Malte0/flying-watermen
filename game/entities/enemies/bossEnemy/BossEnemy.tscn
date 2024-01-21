@@ -42,9 +42,11 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ViewArea"]
 shape = SubResource("CircleShape2D_b6d2v")
 
-[node name="HealthComponent" parent="." instance=ExtResource("3_ma8q6")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar", "_health_bar") instance=ExtResource("3_ma8q6")]
 scale = Vector2(0.5, 0.35)
 max_health = 400
+health_bar = NodePath("HealthBar")
+_health_bar = NodePath("HealthBar")
 
 [node name="HealthBar" type="TextureProgressBar" parent="HealthComponent"]
 offset_left = -52.0
@@ -66,5 +68,7 @@ autostart = true
 
 [connection signal="body_entered" from="ViewArea" to="." method="_on_view_area_body_entered"]
 [connection signal="body_exited" from="ViewArea" to="." method="_on_view_area_body_exited"]
+[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
 [connection signal="value_changed" from="HealthComponent/HealthBar" to="." method="_on_health_bar_value_changed"]
 [connection signal="timeout" from="AggroCooldown" to="." method="_on_aggro_cooldown_timeout"]

@@ -23,7 +23,7 @@ func hunt_player():
 		jump(JUMP_FORCE)
 	var player_distance: float = player.global_position.x - global_position.x
 	var player_direction: int = sign(player_distance)
-	if abs(player_distance) < 80: # this is just some random small value
+	if abs(player_distance) < 200: # this is just some random small value
 		movement_direction = Movement_Direction.No
 		return
 	if player_direction != movement_direction:
@@ -69,7 +69,3 @@ func become_aggro():
 func _on_health_component_health_changed(_new_health, delta_health):
 	if delta_health < 0:
 		become_aggro()
-
-
-func _on_health_bar_value_changed(value):
-	pass # Replace with function body.
