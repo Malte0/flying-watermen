@@ -18,11 +18,11 @@ func _ready():
 
 func _on_fire_rate_timeout():
 	if can_shoot:
-		var projectile: Node2D = projectile_scene.instantiate()
-		var projectile_instance: Projectile = projectile.get_node("Projectile")
+		var projectile_node: Node2D = projectile_scene.instantiate()
+		var projectile_instance: Projectile = projectile_node.get_node("Projectile")
 		var random_angle: float = randf()*SHOOTING_PRECISION - (SHOOTING_PRECISION/2)
 		projectile_instance.global_position = global_position
 		var direction: Vector2 = global_position.direction_to(player.global_position)
 		var corrected_direction: Vector2 = direction.rotated(ANGLE_CORRECTION * -sign(direction.x))
 		projectile_instance.direction = corrected_direction.rotated(random_angle)
-		get_parent().get_parent().add_child(projectile)
+		get_parent().get_parent().add_child(projectile_node)

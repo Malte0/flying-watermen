@@ -1,71 +1,79 @@
 extends Enemy
 
-@onready var nodes_to_flip: Node2D = $DirectionalNodes
-@onready var wall_detection: RayCast2D = $DirectionalNodes/WallDetection
-@onready var aggro_cooldown_timer: Timer = $AggroCooldown
+@export var aggro_component: AggroComponent
+@export var melee_attack_component: MeleeAttackComponent
+@export var movement_component: MovementComponent
+@export var wall_detection: RayCast2D
+@export var fire_wave_cooldown: Timer
+@export var movement_speed_calm: int = 100
+@export var movement_speed_aggro: int = 250
+@export var fire_wave_scene: PackedScene
+
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 
-const JUMP_FORCE: int = -500
-const MOVEMENT_SPEED_CALM: int = 100
-const MOVEMENT_SPEED_AGGRO: int = 250
-var is_aggro: bool = false
+enum Attacks {FireWave = 600, Meele = 300}
+const ATTACK_DISTANCE: int = 300
+var next_attack
+var fire_wave_cd: bool = false
 
-func _init():
-	movement_speed = MOVEMENT_SPEED_CALM
-	move(Movement_Direction.Right)
-	
-func _physics_process(delta):
-	hunt_player() if is_aggro else idle()
-	super(delta)
+func _ready():
+	aggro_component.aggro_entered.connect(on_aggro_entered)
+	aggro_component.calm_entered.connect(on_calm_entered)
+
+func _physics_process(_delta: float):
+	var player_distance = abs(player.global_position.x - global_position.x)
+	if next_attack == null:
+		next_attack = high_level_KI(player_distance)
+		print("next is")
+		print(next_attack)
+	else:
+		try_attack(player_distance)
+	hunt_player() if aggro_component.is_aggro else idle_movement()
+
+func idle_movement():
+	if wall_detection.is_colliding():
+		movement_component.flip_move_direction()
 
 func hunt_player():
 	if wall_detection.is_colliding():
-		jump(JUMP_FORCE)
-	var player_distance: float = player.global_position.x - global_position.x
-	var player_direction: int = sign(player_distance)
-	if abs(player_distance) < 200: # this is just some random small value
-		movement_direction = Movement_Direction.No
-		return
-	if player_direction != movement_direction:
-		flip_move_direction()
-		
-func idle():
-	if wall_detection.is_colliding():
-		flip_move_direction()
-	
-func flip_move_direction():
-	if movement_direction == Movement_Direction.Left:
-		move(Movement_Direction.Right)
+		movement_component.jump(1)
+	var player_direction: int = sign(player.global_position.x - global_position.x)
+	if player_direction == movement_component.Movement_Direction.Right:
+		movement_component.change_move_direction(movement_component.Movement_Direction.Right)
 	else:
-		move(Movement_Direction.Left)
-	nodes_to_flip.scale.x = movement_direction
+		movement_component.change_move_direction(movement_component.Movement_Direction.Left)
+
+func on_aggro_entered():
+	# This introduces the little jump
+	movement_component.jump(0.2)
+	movement_component.movement_speed = 0
+	await get_tree().create_timer(0.4).timeout
+	movement_component.movement_speed = movement_speed_aggro
+
+func on_calm_entered():
+	movement_component.movement_speed = movement_speed_calm
+
+func high_level_KI(player_distance):
+	#decide shit based on distance
+	return Attacks.FireWave
 	
-func scale_by_distance(max_distance: int, player_distance: float, value_to_scale: int):
-	return ceili(((max_distance - abs(player_distance)) / max_distance) * value_to_scale)
+func try_attack(player_distance):
+	if player_distance < next_attack:
+		print("leggo die vieh")
+		attack(next_attack)
+		next_attack = null
+func attack(attack_type):
+	match attack_type:
+		Attacks.FireWave:
+			if not fire_wave_cd:
+				var fire_wave_instance = fire_wave_scene.instantiate()
+				fire_wave_instance.global_position = global_position
+				get_parent().get_parent().add_child(fire_wave_instance)
+				fire_wave_cd = true
+				fire_wave_cooldown.start()
+		Attacks.Meele:
+			print("do something")
 
-func _on_view_area_body_entered(body):
-	if body is Player:
-		print("player entered")
-		become_aggro()
 
-func _on_view_area_body_exited(body):
-	if body is Player and aggro_cooldown_timer.is_inside_tree():
-		aggro_cooldown_timer.start()
-		
-func _on_aggro_cooldown_timeout():
-	is_aggro = false
-	movement_speed = MOVEMENT_SPEED_CALM
-
-func become_aggro():
-	aggro_cooldown_timer.stop()
-	if not is_aggro:
-		is_aggro = true
-		# Expermiment: This introduces some anticipation into the behaviour
-		jump(JUMP_FORCE * 0.2)
-		movement_speed = 0
-		await get_tree().create_timer(0.4).timeout
-		movement_speed = MOVEMENT_SPEED_AGGRO
-		
-func _on_health_component_health_changed(_new_health, delta_health):
-	if delta_health < 0:
-		become_aggro()
+func _on_fire_wave_cooldown_timeout():
+	fire_wave_cd = false
