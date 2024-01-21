@@ -30,6 +30,7 @@ offset_right = 25.0
 offset_bottom = -116.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="FillLabel"]
+layout_mode = 0
 offset_left = 2.0
 offset_right = 48.0
 offset_bottom = 24.0
