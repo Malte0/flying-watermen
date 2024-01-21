@@ -14,14 +14,14 @@ blend_mode = 1
 offsets = PackedFloat32Array(0.0430464, 0.337748, 1)
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_mxgcb"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e7xoi"]
 gradient = SubResource("Gradient_puv8v")
 
 [sub_resource type="Curve" id="Curve_3c8ug"]
 _data = [Vector2(0, 0.502392), 0.0, 0.0, 0, 0, Vector2(0.515152, 0.782297), 0.0, 0.0, 0, 0, Vector2(1, 0.455742), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_4cgvj"]
+[sub_resource type="CurveTexture" id="CurveTexture_xmhfi"]
 curve = SubResource("Curve_3c8ug")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j1tol"]
@@ -37,8 +37,8 @@ angular_velocity_max = 250.0
 gravity = Vector3(0, -150, 0)
 scale_min = 0.4
 scale_max = 0.8
-scale_curve = SubResource("CurveTexture_4cgvj")
-color_ramp = SubResource("GradientTexture1D_mxgcb")
+scale_curve = SubResource("CurveTexture_xmhfi")
+color_ramp = SubResource("GradientTexture1D_e7xoi")
 
 [node name="Well" type="Node2D"]
 script = ExtResource("1_okf0k")

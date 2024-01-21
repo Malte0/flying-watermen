@@ -352,8 +352,8 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 gradient = SubResource("Gradient_5hdqj")
 
 [sub_resource type="Curve" id="Curve_cxabh"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.143979, 0.503661), 0.0, 0.0, 0, 0, Vector2(1, 0.227229), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.33134), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_62g15"]
 curve = SubResource("Curve_cxabh")
@@ -362,15 +362,16 @@ curve = SubResource("Curve_cxabh")
 particle_flag_disable_z = true
 particle_flag_damping_as_friction = true
 emission_shape = 1
-emission_sphere_radius = 10.0
+emission_sphere_radius = 14.5
 direction = Vector3(-1, -0.8, 0)
-initial_velocity_min = 30.0
-initial_velocity_max = 30.0
+spread = 25.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
 angular_velocity_min = -180.0
 angular_velocity_max = 180.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.05
-scale_max = 0.1
+scale_min = 0.1
+scale_max = 0.2
 scale_curve = SubResource("CurveTexture_62g15")
 color = Color(0.384314, 0.792157, 1, 0.364706)
 color_ramp = SubResource("GradientTexture1D_re58v")
@@ -540,15 +541,16 @@ show_behind_parent = true
 script = ExtResource("19_kqys4")
 
 [node name="WalkingParticles" type="GPUParticles2D" parent="Particles"]
-visible = false
+modulate = Color(0.1, 0.9, 100, 1)
 show_behind_parent = true
-position = Vector2(-14, -14.5)
-amount = 500
+position = Vector2(0, -14.5)
+amount = 15
 process_material = SubResource("ParticleProcessMaterial_sivy7")
 texture = ExtResource("18_l2hsd")
-lifetime = 0.6
+lifetime = 0.35
 
 [node name="DashTrail" type="GPUParticles2D" parent="Particles"]
+visible = false
 material = SubResource("CanvasItemMaterial_tf7cu")
 position = Vector2(0, -14.5)
 emitting = false
@@ -560,27 +562,34 @@ lifetime = 0.4
 one_shot = true
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_heal_tick") instance=ExtResource("16_vgsyb")]
+visible = false
 element = 0
 _heal_tick = NodePath("../Timers/HealTick")
 damage_effect = true
 
 [node name="HeatComponent" parent="." node_paths=PackedStringArray("health_component", "heat_reduction_delay", "heat_tick") instance=ExtResource("3_kjfn2")]
+visible = false
 health_component = NodePath("../HealthComponent")
 heat_reduction_delay = NodePath("../Timers/HeatReductionDelay")
 heat_tick = NodePath("../Timers/HeatTick")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 show_behind_parent = true
 position = Vector2(-1, -14.75)
 shape = SubResource("RectangleShape2D_8ockj")
 debug_color = Color(0.917647, 0.172549, 0.568627, 0.419608)
+metadata/_edit_lock_ = true
 
 [node name="Sprites" type="Node2D" parent="."]
+visible = false
 
 [node name="ShootPosition" type="Marker2D" parent="."]
+visible = false
 position = Vector2(0, -23)
 
 [node name="WallCheck" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(28, -45)
 target_position = Vector2(0, 44)
 
@@ -752,6 +761,7 @@ to = NodePath("../../Cooldown")
 event = &"dash"
 
 [node name="MeleeAttack" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -23)
 rotation = -6.28319
 collision_layer = 0
@@ -806,6 +816,7 @@ value = 100.0
 show_percentage = false
 
 [node name="Timers" type="Node2D" parent="."]
+visible = false
 
 [node name="HeatTick" type="Timer" parent="Timers"]
 autostart = true
@@ -818,6 +829,7 @@ one_shot = true
 autostart = true
 
 [node name="ChemicalEffectsManager" type="Node2D" parent="." node_paths=PackedStringArray("chemical_state_chart", "player", "player_sprite_container")]
+visible = false
 script = ExtResource("18_bvu0j")
 chemical_state_chart = NodePath("ChemicalStates")
 player = NodePath("..")
@@ -856,6 +868,7 @@ to = NodePath("../../Default")
 event = &"to_default"
 
 [node name="Inventory" type="Node2D" parent="."]
+visible = false
 script = ExtResource("15_8nkrm")
 
 [node name="MonitorEffects" parent="." instance=ExtResource("36_hryvp")]
