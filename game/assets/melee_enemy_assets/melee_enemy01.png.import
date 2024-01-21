@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv0m0y77k6q2p"
-path="res://.godot/imported/stone_tablet_pickup.png-ea9258ccfdcbe18819fbab266b601b46.ctex"
+uid="uid://dfu4qtgkvfarv"
+path="res://.godot/imported/melee_enemy01.png-41cbf7c22720f0124aa46307fc34d9e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/stone_tablet/stone_tablet_pickup.png"
-dest_files=["res://.godot/imported/stone_tablet_pickup.png-ea9258ccfdcbe18819fbab266b601b46.ctex"]
+source_file="res://assets/melee_enemy_assets/melee_enemy01.png"
+dest_files=["res://.godot/imported/melee_enemy01.png-41cbf7c22720f0124aa46307fc34d9e4.ctex"]
 
 [params]
 

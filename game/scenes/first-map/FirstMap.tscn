@@ -1,5 +1,6 @@
-[gd_scene load_steps=75 format=3 uid="uid://cu55a1ijhr436"]
+[gd_scene load_steps=78 format=3 uid="uid://cu55a1ijhr436"]
 
+[ext_resource type="Script" path="res://scenes/first-map/FirstMap.gd" id="1_0g272"]
 [ext_resource type="Texture2D" uid="uid://dhvk873s0063d" path="res://assets/tileMap/Tiles.png" id="1_b4xfn"]
 [ext_resource type="PackedScene" uid="uid://djmlmtr41m2ce" path="res://entities/player/player.tscn" id="2_6f3hr"]
 [ext_resource type="PackedScene" uid="uid://cwhk2jj1iftec" path="res://assets/forest-assets/scenes/stone01.tscn" id="2_iscm2"]
@@ -28,6 +29,8 @@
 [ext_resource type="PackedScene" uid="uid://dpiypck5f1v6f" path="res://entities/objects/pfuetze.tscn" id="23_43erc"]
 [ext_resource type="Texture2D" uid="uid://4qlm6ho7173m" path="res://assets/light_noise/offset_glow.png" id="23_lme2q"]
 [ext_resource type="Texture2D" uid="uid://080avp8oteh3" path="res://assets/forest-assets/bush01.png" id="28_unqp1"]
+[ext_resource type="PackedScene" uid="uid://c640sr08cvsmo" path="res://entities/stone-tablet/StoneTablet.tscn" id="29_2okah"]
+[ext_resource type="PackedScene" uid="uid://4lea60a43ia6" path="res://scenes/ui/ReadStoneTablet.tscn" id="31_ya0g7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_23ck1"]
 resource_local_to_scene = true
@@ -2260,6 +2263,7 @@ metadata/_better_terrain = {
 }
 
 [node name="FirstMap" type="Node2D"]
+script = ExtResource("1_0g272")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 rotation = 0.340339
@@ -2790,3 +2794,9 @@ position = Vector2(7986, 2277)
 [node name="Bush01" type="Sprite2D" parent="."]
 position = Vector2(7594, -436)
 texture = ExtResource("28_unqp1")
+
+[node name="StoneTablet" parent="." instance=ExtResource("29_2okah")]
+position = Vector2(1153, 929)
+
+[node name="ReadStoneTablet" parent="." instance=ExtResource("31_ya0g7")]
+visible = false

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-[gd_scene load_steps=51 format=3 uid="uid://mrf2lku3uiqc"]
-=======
-[gd_scene load_steps=52 format=3 uid="uid://mrf2lku3uiqc"]
->>>>>>> feat/add-stone-tablet
+[gd_scene load_steps=53 format=3 uid="uid://mrf2lku3uiqc"]
 
 [ext_resource type="Shader" path="res://shader/mapShader.gdshader" id="1_4wi60"]
 [ext_resource type="Texture2D" uid="uid://dhvk873s0063d" path="res://assets/tileMap/Tiles.png" id="1_ljrfd"]

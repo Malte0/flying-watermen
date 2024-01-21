@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://c640sr08cvsmo"]
+[gd_scene load_steps=15 format=3 uid="uid://c640sr08cvsmo"]
 
 [ext_resource type="Texture2D" uid="uid://c51h5t2yq11bo" path="res://entities/stone-tablet/stonetablet_pickup.png" id="1_7oeu1"]
 [ext_resource type="Script" path="res://entities/stone-tablet/StoneTablet.gd" id="1_g5pfe"]
 [ext_resource type="Texture2D" uid="uid://ciey4ubnpykd2" path="res://entities/stone-tablet/random_selection.png" id="3_y2ufk"]
+[ext_resource type="Texture2D" uid="uid://dnmhggoppejaj" path="res://entities/stone-tablet/podium.png" id="4_6ug6r"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gvhev"]
 blend_mode = 1
@@ -38,7 +39,7 @@ anim_offset_min = 0.1453
 anim_offset_max = 0.41
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fe6uw"]
-radius = 72.0625
+radius = 99.0202
 
 [sub_resource type="Animation" id="Animation_lefeg"]
 length = 0.001
@@ -373,7 +374,6 @@ script = ExtResource("1_g5pfe")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_gvhev")
 position = Vector2(3.55271e-15, 10)
-scale = Vector2(1, 1)
 amount = 4
 process_material = SubResource("ParticleProcessMaterial_kgpmb")
 texture = ExtResource("3_y2ufk")
@@ -387,7 +387,7 @@ shape = SubResource("CircleShape2D_fe6uw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1, 2)
-scale = Vector2(0.0521392, 0.0580911)
+scale = Vector2(0.06, 0.067)
 texture = ExtResource("1_7oeu1")
 
 [node name="FillLabel" type="Panel" parent="."]
@@ -413,6 +413,11 @@ text = "Read 'E'
 libraries = {
 "": SubResource("AnimationLibrary_njm6v")
 }
+
+[node name="Podium" type="Sprite2D" parent="."]
+position = Vector2(1, 96)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_6ug6r")
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
