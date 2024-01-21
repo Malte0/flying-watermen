@@ -1,9 +1,8 @@
-[gd_scene load_steps=76 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=93 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="Texture2D" uid="uid://b2o02fvn5tkcp" path="res://entities/player/assets/deathanimation/death01.png" id="2_288p0"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dhjab"]
-[ext_resource type="Texture2D" uid="uid://dpppwdhohq2yn" path="res://entities/player/assets/animationStates/wideIceState.png" id="2_o1vlj"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="3_7lhhd"]
 [ext_resource type="Texture2D" uid="uid://dn55maekx6gbb" path="res://entities/player/assets/deathanimation/death02.png" id="3_gotyv"]
 [ext_resource type="PackedScene" uid="uid://bvq77pvlf1qxo" path="res://entities/components/heat/HeatComponent.tscn" id="3_kjfn2"]
@@ -32,21 +31,18 @@
 [ext_resource type="Texture2D" uid="uid://bclv232x30j6p" path="res://entities/player/assets/runanimation/run04.png" id="16_53equ"]
 [ext_resource type="Texture2D" uid="uid://bapbxbns4gx0s" path="res://entities/player/assets/jumpanimation/jump02.png" id="16_ib6b8"]
 [ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="16_vgsyb"]
-[ext_resource type="Texture2D" uid="uid://b0n33wo3w23dm" path="res://assets/light_noise/light.png" id="16_wf275"]
 [ext_resource type="Texture2D" uid="uid://c063w7tkbbsga" path="res://entities/player/assets/jumpanimation/jump03.png" id="17_emnmv"]
+[ext_resource type="Texture2D" uid="uid://cyyuge8ad2eo0" path="res://assets/light_noise/light2.png" id="17_h1pkd"]
 [ext_resource type="Script" path="res://entities/player/chemicalEffects/IceState.gd" id="17_irds6"]
 [ext_resource type="Texture2D" uid="uid://ccinytw5v5utw" path="res://entities/player/assets/runanimation/run05.png" id="17_l5f8l"]
 [ext_resource type="Script" path="res://entities/player/chemicalEffects/ChemicalStateManager.gd" id="18_bvu0j"]
 [ext_resource type="Texture2D" uid="uid://dlqflbkf2pg2c" path="res://entities/player/assets/jumpanimation/jump4.png" id="18_dqgwl"]
-[ext_resource type="Texture2D" uid="uid://bmdj5hq4wtspu" path="res://entities/player/assets/jumpanimation/jump05.png" id="19_daquo"]
-[ext_resource type="Texture2D" uid="uid://crr3ie3vth84m" path="res://entities/player/assets/jumpanimation/jump06.png" id="20_wfuat"]
-[ext_resource type="Texture2D" uid="uid://b4setwdaw2rbn" path="res://entities/player/assets/jumpanimation/jump07.png" id="21_elgpx"]
-[ext_resource type="Texture2D" uid="uid://cyyuge8ad2eo0" path="res://assets/light_noise/light2.png" id="17_h1pkd"]
-[ext_resource type="Script" path="res://entities/player/chemicalEffects/IceState.gd" id="17_irds6"]
-[ext_resource type="Texture2D" uid="uid://ccinytw5v5utw" path="res://entities/player/assets/runanimation/run05.png" id="17_l5f8l"]
 [ext_resource type="Texture2D" uid="uid://dmyx2mk6fjoud" path="res://assets/light_noise/waterParticle.png" id="18_l2hsd"]
+[ext_resource type="Texture2D" uid="uid://bmdj5hq4wtspu" path="res://entities/player/assets/jumpanimation/jump05.png" id="19_daquo"]
 [ext_resource type="Script" path="res://entities/player/PlayerParticles.gd" id="19_kqys4"]
 [ext_resource type="Texture2D" uid="uid://0n04oh1rheg8" path="res://entities/player/assets/fliped_walk_test.png" id="20_l5uo2"]
+[ext_resource type="Texture2D" uid="uid://crr3ie3vth84m" path="res://entities/player/assets/jumpanimation/jump06.png" id="20_wfuat"]
+[ext_resource type="Texture2D" uid="uid://b4setwdaw2rbn" path="res://entities/player/assets/jumpanimation/jump07.png" id="21_elgpx"]
 [ext_resource type="AudioStream" uid="uid://bbxhs7f4v3t41" path="res://assets/SFX/dash.wav" id="31_e7ort"]
 [ext_resource type="Texture2D" uid="uid://fv775xqmgpmo" path="res://assets/light_noise/white.jpg" id="32_b04or"]
 [ext_resource type="PackedScene" uid="uid://ch6xnk5tnb5k8" path="res://visualEffects/monitorEffects.tscn" id="36_hryvp"]
@@ -339,7 +335,7 @@ advance_mode = 2
 states/End/position = Vector2(926, 152)
 states/Start/position = Vector2(96, 152)
 states/basic_movement/node = SubResource("AnimationNodeBlendSpace1D_rocsi")
-states/basic_movement/position = Vector2(303, 152)
+states/basic_movement/position = Vector2(298, 152)
 states/death/node = SubResource("AnimationNodeAnimation_wlofg")
 states/death/position = Vector2(733, 122)
 states/ice/node = SubResource("AnimationNodeAnimation_7fmv2")
@@ -347,9 +343,6 @@ states/ice/position = Vector2(503, 25)
 states/jump/node = SubResource("AnimationNodeAnimation_k2haj")
 states/jump/position = Vector2(535, 122)
 transitions = ["Start", "basic_movement", SubResource("AnimationNodeStateMachineTransition_b1nr5"), "basic_movement", "jump", SubResource("AnimationNodeStateMachineTransition_qemd3"), "jump", "basic_movement", SubResource("AnimationNodeStateMachineTransition_opn5k")]
-graph_offset = Vector2(-44, 40)
-states/basic_movement/position = Vector2(298, 152)
-transitions = ["Start", "basic_movement", SubResource("AnimationNodeStateMachineTransition_b1nr5")]
 graph_offset = Vector2(-79, -1)
 
 [sub_resource type="Gradient" id="Gradient_5hdqj"]
@@ -521,7 +514,6 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_arr00")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/jumped = false
-parameters/basic_movement/blend_position = 0
 parameters/basic_movement/blend_position = -0.810732
 
 [node name="White" type="Sprite2D" parent="."]
@@ -532,6 +524,7 @@ position = Vector2(60.5, -12.5)
 texture = ExtResource("32_b04or")
 
 [node name="Light" type="Node2D" parent="."]
+visible = false
 
 [node name="PointLight2D" type="PointLight2D" parent="Light"]
 color = Color(0.666667, 1, 1, 1)

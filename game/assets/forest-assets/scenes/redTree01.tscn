@@ -17,6 +17,7 @@ shader_parameter/heightOffset = null
 shader_parameter/offset = 0.0
 
 [node name="redTree01" type="Sprite2D"]
+show_behind_parent = true
 material = SubResource("ShaderMaterial_8fbmx")
 texture = ExtResource("1_8w3nu")
 region_enabled = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdd1tf68cvllb"]
+[gd_scene load_steps=5 format=3 uid="uid://cdd1tf68cvllb"]
 
 [ext_resource type="Shader" path="res://shader/windShader.gdshader" id="1_jgyrd"]
 [ext_resource type="Texture2D" uid="uid://ca5sokld4u2id" path="res://assets/forest-assets/Baum_1.png" id="2_ajg77"]
@@ -17,9 +17,6 @@ shader_parameter/distortion = 1.0
 shader_parameter/heightOffset = 0.667
 shader_parameter/offset = 0.0
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wc6rk"]
-polygon = PackedVector2Array(-467, 17, -416, -17, -323, -30, -212, 7, -202, 32, -187, 27, -160, 51, -125, 51, -140, 2, -77, -57, 44, -109, 187, -84, 250, -43, 270, -56, 253, -107, 225, -149, 170, -183, 85, -199, 28, -195, -1, -225, -32, -237, -64, -235, -137, -223, -186, -178, -217, -130, -286, -119, -260, -102, -303, -104, -354, -102, -404, -88, -449, -60, -477, -29, -485, 2)
-
 [node name="GreenTree01" type="Sprite2D"]
 show_behind_parent = true
 material = SubResource("ShaderMaterial_vsd5k")
@@ -27,18 +24,3 @@ texture = ExtResource("2_ajg77")
 region_enabled = true
 region_rect = Rect2(131.533, 232.261, 555.19, 473.733)
 script = ExtResource("3_n71us")
-
-[node name="Baum1" type="Sprite2D" parent="."]
-modulate = Color(0.756863, 0.756863, 0.756863, 1)
-show_behind_parent = true
-use_parent_material = true
-position = Vector2(-277, 44)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_ajg77")
-flip_h = true
-region_enabled = true
-region_rect = Rect2(131.705, 220.413, 550.902, 484.451)
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-visible = false
-occluder = SubResource("OccluderPolygon2D_wc6rk")
