@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ihorffrdym4j" path="res://icon.svg" id="4_23juu"]
 [ext_resource type="Texture2D" uid="uid://cjv4di3su4jvf" path="res://assets/prototype-assets/background/Green-Tree.png" id="5_1qnrw"]
 [ext_resource type="PackedScene" uid="uid://cihcop35erg48" path="res://scenes/ui/ui.tscn" id="5_vx7we"]
-[ext_resource type="PackedScene" uid="uid://besblswfge6aw" path="res://scenes/ui/pause_menu.tscn" id="10_dmsia"]
+[ext_resource type="PackedScene" uid="uid://besblswfge6aw" path="res://scenes/ui/menus/pauseMenu/pause_menu.tscn" id="10_dmsia"]
 [ext_resource type="PackedScene" uid="uid://dpiypck5f1v6f" path="res://entities/objects/pfuetze.tscn" id="10_oa7xq"]
 [ext_resource type="PackedScene" uid="uid://dmeutg1f6t7sl" path="res://entities/enemies/rangedEnemy/RangedEnemy.tscn" id="11_2fedg"]
 [ext_resource type="PackedScene" uid="uid://dvv2sij5v2epd" path="res://entities/player/inventory/items/sodiumChemical/sodium.tscn" id="13_l88ic"]
