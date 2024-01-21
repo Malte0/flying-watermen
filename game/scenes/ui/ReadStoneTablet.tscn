@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://4lea60a43ia6"]
 
 [ext_resource type="Script" path="res://scenes/ui/ReadStoneTablet.gd" id="1_m5k42"]
-[ext_resource type="Texture2D" uid="uid://dcw2xybxiknk0" path="res://entities/stone-tablet/stone_tablet_open.png" id="1_pu7pc"]
+[ext_resource type="Texture2D" uid="uid://dcw2xybxiknk0" path="res://entities/objects/stone-tablet/stone_tablet_open.png" id="1_pu7pc"]
 
 [node name="ReadStoneTablet" type="CanvasLayer"]
 script = ExtResource("1_m5k42")

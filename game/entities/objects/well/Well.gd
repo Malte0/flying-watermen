@@ -3,8 +3,8 @@ extends Node2D
 @onready var sprite: Sprite2D = $Texture
 @onready var fill_label: Panel = $FillLabel
 
-const FULL_TEXTURE = preload("res://entities/well/assets/wellFull.png")
-const EMPTY_TEXTURE = preload("res://entities/well/assets/wellEmpty.png")
+const FULL_TEXTURE = preload("res://entities/objects/well/assets/wellFull.png")
+const EMPTY_TEXTURE = preload("res://entities/objects/well/assets/wellEmpty.png")
 
 var is_full: bool = false
 signal well_filled()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d014bs0do08xg"
-path="res://.godot/imported/dash.png-7561d0136010439f70601e6d22429c77.ctex"
+uid="uid://cxe6hu7quuq4d"
+path="res://.godot/imported/wellEmpty.png-af411a484037e21e59a6bc0112d935c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/stone-tablet/dash.png"
-dest_files=["res://.godot/imported/dash.png-7561d0136010439f70601e6d22429c77.ctex"]
+source_file="res://entities/objects/well/assets/wellEmpty.png"
+dest_files=["res://.godot/imported/wellEmpty.png-af411a484037e21e59a6bc0112d935c4.ctex"]
 
 [params]
 

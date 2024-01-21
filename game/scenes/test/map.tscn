@@ -15,11 +15,11 @@
 [ext_resource type="PackedScene" uid="uid://dvv2sij5v2epd" path="res://entities/player/inventory/items/sodiumChemical/sodium.tscn" id="13_l88ic"]
 [ext_resource type="PackedScene" uid="uid://dp6qth5jvcdhd" path="res://entities/player/inventory/items/iceChemical/IceChemical.tscn" id="14_4gyg8"]
 [ext_resource type="PackedScene" uid="uid://b7py4c84rndkt" path="res://entities/enemies/spawning/EnemySpawnArea.tscn" id="14_nc86j"]
-[ext_resource type="PackedScene" uid="uid://o5qajbk6mfjn" path="res://entities/well/Well.tscn" id="15_6rq0o"]
 [ext_resource type="PackedScene" uid="uid://bree81gljy661" path="res://entities/player/inventory/items/foamChemical/FoamChemical.tscn" id="15_cbfrv"]
 [ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/meleeEnemy/MeleeEnemy.tscn" id="16_7lj2s"]
+[ext_resource type="PackedScene" uid="uid://o5qajbk6mfjn" path="res://entities/objects/well/Well.tscn" id="18_3fgvg"]
 [ext_resource type="Script" path="res://entities/enemies/spawning/EnemyManager.gd" id="18_ephhu"]
-[ext_resource type="PackedScene" uid="uid://c640sr08cvsmo" path="res://entities/stone-tablet/StoneTablet.tscn" id="19_5322q"]
+[ext_resource type="PackedScene" uid="uid://c640sr08cvsmo" path="res://entities/objects/stone-tablet/StoneTablet.tscn" id="20_mrvp5"]
 [ext_resource type="PackedScene" uid="uid://4lea60a43ia6" path="res://scenes/ui/ReadStoneTablet.tscn" id="20_rwv2s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7de0"]
@@ -29903,7 +29903,7 @@ position = Vector2(248, 1548)
 [node name="FoamChemical" parent="." instance=ExtResource("15_cbfrv")]
 position = Vector2(146, 1555)
 
-[node name="Well" parent="." instance=ExtResource("15_6rq0o")]
+[node name="Well" parent="." instance=ExtResource("18_3fgvg")]
 position = Vector2(954, 1778)
 
 [node name="EnemyManager" type="Node2D" parent="." groups=["EnemyManager"]]
@@ -29916,7 +29916,7 @@ autostart = true
 [node name="MeleeEnemy" parent="." instance=ExtResource("16_7lj2s")]
 position = Vector2(1760, 1664)
 
-[node name="StoneTablet" parent="." instance=ExtResource("19_5322q")]
+[node name="StoneTablet" parent="." instance=ExtResource("20_mrvp5")]
 position = Vector2(1381, 1709)
 
 [node name="ReadStoneTablet" parent="." instance=ExtResource("20_rwv2s")]

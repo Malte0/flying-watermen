@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbw2nubcpms7y"
-path="res://.godot/imported/wellFull.png-b9ecb0e34c665b47945c5681217ae299.ctex"
+uid="uid://c51h5t2yq11bo"
+path="res://.godot/imported/stonetablet_pickup.png-b400f4c3a7957d9df0ca3ffb3836d1ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/well/assets/wellFull.png"
-dest_files=["res://.godot/imported/wellFull.png-b9ecb0e34c665b47945c5681217ae299.ctex"]
+source_file="res://entities/objects/stone-tablet/stonetablet_pickup.png"
+dest_files=["res://.godot/imported/stonetablet_pickup.png-b400f4c3a7957d9df0ca3ffb3836d1ba.ctex"]
 
 [params]
 

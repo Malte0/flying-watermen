@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://o5qajbk6mfjn"]
 
-[ext_resource type="Script" path="res://entities/well/Well.gd" id="1_okf0k"]
-[ext_resource type="Texture2D" uid="uid://dlwnu122hdf1d" path="res://entities/well/assets/wellEmpty.png" id="2_3bfi4"]
-[ext_resource type="Texture2D" uid="uid://4qlm6ho7173m" path="res://assets/light_noise/offset_glow.png" id="3_22liw"]
+[ext_resource type="Script" path="res://entities/objects/well/Well.gd" id="1_ryms2"]
+[ext_resource type="Texture2D" uid="uid://cxe6hu7quuq4d" path="res://entities/objects/well/assets/wellEmpty.png" id="2_gdx0v"]
+[ext_resource type="Texture2D" uid="uid://4qlm6ho7173m" path="res://assets/light_noise/offset_glow.png" id="3_lodbv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_amob8"]
 radius = 95.0
@@ -41,7 +41,7 @@ scale_curve = SubResource("CurveTexture_xmhfi")
 color_ramp = SubResource("GradientTexture1D_e7xoi")
 
 [node name="Well" type="Node2D"]
-script = ExtResource("1_okf0k")
+script = ExtResource("1_ryms2")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(3, -20)
@@ -52,10 +52,20 @@ visible = false
 position = Vector2(1, -22)
 shape = SubResource("CircleShape2D_amob8")
 
+[node name="Collision" type="Area2D" parent="."]
+visible = false
+collision_mask = 6
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collision"]
+visible = false
+position = Vector2(0, -32)
+
 [node name="Texture" type="Sprite2D" parent="."]
-position = Vector2(13, -41)
-scale = Vector2(2, 2)
-texture = ExtResource("2_3bfi4")
+position = Vector2(0, -33)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_gdx0v")
+region_enabled = true
+region_rect = Rect2(234.355, 263.688, 918.995, 736.313)
 
 [node name="FillLabel" type="Panel" parent="."]
 visible = false
@@ -75,10 +85,10 @@ text = "Fill 'E'"
 visible = false
 modulate = Color(0.3, 1.5, 4, 1)
 material = SubResource("CanvasItemMaterial_2wsyv")
-position = Vector2(4, -42)
+position = Vector2(0, -70)
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_j1tol")
-texture = ExtResource("3_22liw")
+texture = ExtResource("3_lodbv")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

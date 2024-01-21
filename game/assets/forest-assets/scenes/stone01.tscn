@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwhk2jj1iftec"]
+[gd_scene load_steps=5 format=3 uid="uid://cwhk2jj1iftec"]
 
 [ext_resource type="Texture2D" uid="uid://dmd80l5nak5xl" path="res://assets/forest-assets/stone01.png" id="1_6ulot"]
 [ext_resource type="Shader" path="res://shader/wobbleEffect.gdshader" id="1_oeapc"]
@@ -17,19 +17,6 @@ shader_parameter/distortion = null
 shader_parameter/heightOffset = 0.686
 shader_parameter/offset = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ijy63"]
-resource_local_to_scene = true
-shader = ExtResource("1_oeapc")
-shader_parameter/speed = 1.0
-shader_parameter/minStrength = 0.05
-shader_parameter/maxStrength = 0.01
-shader_parameter/strengthScale = 100.0
-shader_parameter/interval = 3.5
-shader_parameter/detail = 1.0
-shader_parameter/distortion = null
-shader_parameter/heightOffset = null
-shader_parameter/offset = 0.0
-
 [node name="Stone" type="Sprite2D"]
 show_behind_parent = true
 texture_filter = 1
@@ -38,14 +25,3 @@ texture = ExtResource("1_6ulot")
 region_enabled = true
 region_rect = Rect2(3.87511, 35.1448, 194.179, 121.766)
 script = ExtResource("3_kte85")
-
-[node name="Stone01" type="Sprite2D" parent="."]
-modulate = Color(0.8, 0.8, 0.8, 1)
-show_behind_parent = true
-material = SubResource("ShaderMaterial_ijy63")
-use_parent_material = true
-position = Vector2(-115, 15)
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("1_6ulot")
-region_enabled = true
-region_rect = Rect2(0, 33.392, 200, 127.007)

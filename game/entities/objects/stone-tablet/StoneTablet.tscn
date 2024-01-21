@@ -1,9 +1,9 @@
 [gd_scene load_steps=15 format=3 uid="uid://c640sr08cvsmo"]
 
-[ext_resource type="Texture2D" uid="uid://c51h5t2yq11bo" path="res://entities/stone-tablet/stonetablet_pickup.png" id="1_7oeu1"]
-[ext_resource type="Script" path="res://entities/stone-tablet/StoneTablet.gd" id="1_g5pfe"]
-[ext_resource type="Texture2D" uid="uid://ciey4ubnpykd2" path="res://entities/stone-tablet/random_selection.png" id="3_y2ufk"]
-[ext_resource type="Texture2D" uid="uid://dnmhggoppejaj" path="res://entities/stone-tablet/podium.png" id="4_6ug6r"]
+[ext_resource type="Script" path="res://entities/objects/stone-tablet/StoneTablet.gd" id="1_lg1td"]
+[ext_resource type="Texture2D" uid="uid://ciey4ubnpykd2" path="res://entities/objects/stone-tablet/random_selection.png" id="2_k6xtg"]
+[ext_resource type="Texture2D" uid="uid://c51h5t2yq11bo" path="res://entities/objects/stone-tablet/stonetablet_pickup.png" id="3_soac1"]
+[ext_resource type="Texture2D" uid="uid://dnmhggoppejaj" path="res://entities/objects/stone-tablet/podium.png" id="4_ek00u"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gvhev"]
 blend_mode = 1
@@ -369,14 +369,14 @@ _data = {
 }
 
 [node name="StoneTablet" type="Node2D"]
-script = ExtResource("1_g5pfe")
+script = ExtResource("1_lg1td")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_gvhev")
 position = Vector2(3.55271e-15, 10)
 amount = 4
 process_material = SubResource("ParticleProcessMaterial_kgpmb")
-texture = ExtResource("3_y2ufk")
+texture = ExtResource("2_k6xtg")
 lifetime = 1.5
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -388,7 +388,7 @@ shape = SubResource("CircleShape2D_fe6uw")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1, 2)
 scale = Vector2(0.06, 0.067)
-texture = ExtResource("1_7oeu1")
+texture = ExtResource("3_soac1")
 
 [node name="FillLabel" type="Panel" parent="."]
 visible = false
@@ -417,7 +417,7 @@ libraries = {
 [node name="Podium" type="Sprite2D" parent="."]
 position = Vector2(1, 96)
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_6ug6r")
+texture = ExtResource("4_ek00u")
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c51h5t2yq11bo"
-path="res://.godot/imported/stonetablet_pickup.png-fc2f2a9d900afda6bcb95518cf9ca68d.ctex"
+uid="uid://ciey4ubnpykd2"
+path="res://.godot/imported/random_selection.png-11bcd1ff2f267a6e05e0931fa1d2731a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/stone-tablet/stonetablet_pickup.png"
-dest_files=["res://.godot/imported/stonetablet_pickup.png-fc2f2a9d900afda6bcb95518cf9ca68d.ctex"]
+source_file="res://entities/objects/stone-tablet/random_selection.png"
+dest_files=["res://.godot/imported/random_selection.png-11bcd1ff2f267a6e05e0931fa1d2731a.ctex"]
 
 [params]
 

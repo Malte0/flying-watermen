@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcw2xybxiknk0"
-path="res://.godot/imported/stone_tablet_open.png-90acb4aa38b5cdb4c47b9dc636e06eb4.ctex"
+uid="uid://d014bs0do08xg"
+path="res://.godot/imported/dash.png-1f776565eb223e29640c90e47cb2fcda.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/stone-tablet/stone_tablet_open.png"
-dest_files=["res://.godot/imported/stone_tablet_open.png-90acb4aa38b5cdb4c47b9dc636e06eb4.ctex"]
+source_file="res://entities/objects/stone-tablet/dash.png"
+dest_files=["res://.godot/imported/dash.png-1f776565eb223e29640c90e47cb2fcda.ctex"]
 
 [params]
 
