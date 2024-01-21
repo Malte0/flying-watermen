@@ -30,7 +30,6 @@ func _on_heat_changed(new_heat: int, _delta_heat: int):
 
 func _on_ice_state_entered():
 	player.can_move = false
-	print("hi")
 	enter_ice_state()
 
 
