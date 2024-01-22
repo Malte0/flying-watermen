@@ -34,8 +34,8 @@ func _on_area_2d_body_entered(body):
 			health_component.take_damage_overtime(damage, element, 30)
 		linear_velocity = Vector2(0, 0)
 		gravity_scale = 0
-		#reparent.call_deferred(body)
-		#print(get_parent())
-		#position = -position.distance_to(body.position)
-		#position = get_tree().get_first_node_in_group("player").position
-		#top_level = false
+		var curr_pos = global_position
+		top_level = false
+		reparent.call_deferred(body)
+		await get_tree().process_frame
+		global_position = position
