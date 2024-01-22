@@ -61,7 +61,6 @@ func high_level_KI(player_distance):
 	return Attacks.FireWave
 	
 func try_attack(player_distance):
-	print(player_distance)
 	if player_distance < next_attack:
 		attack(next_attack)
 		next_attack = null

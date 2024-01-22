@@ -9,7 +9,7 @@ class_name FireWave extends Node
 @onready var OUTER_RADIUS: int = $Sprite2D.texture.get_width() / 2
 @onready var INNER_RADIUS: int = OUTER_RADIUS - circle_width
 
-const START_SIZE: int = 1
+const START_SIZE: float = 0.5
 const SIZE_GROWTH: float = 0.04
 var current_scale
 var tics_per_life_time: int
@@ -32,9 +32,9 @@ func change_scale():
 func _on_timer_timeout():		
 	current_scale += SIZE_GROWTH
 	change_scale()
-	tic_down()
 	if not did_dmg:
 		deal_dmg()
+	tic_down()
 	
 func tic_down():
 	tics_per_life_time -= 1
