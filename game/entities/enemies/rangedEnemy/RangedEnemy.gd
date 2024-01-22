@@ -38,3 +38,7 @@ func on_aggro_entered():
 
 func on_calm_entered():
 	movement_component.movement_speed = movement_speed_calm
+
+func _on_movement_oscillation_timeout():
+	if not aggro_component.is_aggro:
+		movement_component.flip_move_direction()

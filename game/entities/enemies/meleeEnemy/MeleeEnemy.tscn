@@ -114,8 +114,7 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 wait_time = 1.5
 autostart = true
 
-[node name="ItemDropperComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("11_ieocg")]
+[node name="ItemDropperComponent" parent="." instance=ExtResource("11_ieocg")]
 carried_item = ExtResource("12_70ypm")
-health_component = NodePath("../HealthComponent")
 
 [connection signal="timeout" from="AttackFrequency" to="." method="_on_attack_frequency_timeout"]
