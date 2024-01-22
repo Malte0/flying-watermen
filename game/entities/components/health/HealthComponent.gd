@@ -50,7 +50,7 @@ func take_damage(amount: int, damage_type: Element.Type):
 		die()
 
 # there is no need to use to check for iframes, cuz the func deals no primary dmg
-func take_damage_overtime(amount: int, damage_type: Element.Type, time:int):
+func take_damage_overtime(amount: int, damage_type: Element.Type, time: int):
 	if can_take_damage_over_time <= 5:
 		can_take_damage_over_time += 1
 		while time >= 0:
