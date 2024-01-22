@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=3 uid="uid://cu55a1ijhr436"]
+[gd_scene load_steps=92 format=3 uid="uid://cu55a1ijhr436"]
 
 [ext_resource type="Script" path="res://scenes/first-map/FirstMap.gd" id="1_0g272"]
 [ext_resource type="Texture2D" uid="uid://dhvk873s0063d" path="res://assets/tileMap/Tiles.png" id="1_b4xfn"]
@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://obwra0usmk3a" path="res://assets/forest-assets/spiderweb01.png" id="27_rtonn"]
 [ext_resource type="Texture2D" uid="uid://080avp8oteh3" path="res://assets/forest-assets/bush01.png" id="28_unqp1"]
 [ext_resource type="PackedScene" uid="uid://c640sr08cvsmo" path="res://entities/objects/stone-tablet/StoneTablet.tscn" id="29_2okah"]
+[ext_resource type="PackedScene" uid="uid://qno5f50626uf" path="res://scenes/ui/ReadStoneTablet02.tscn" id="29_20yqp"]
 [ext_resource type="PackedScene" uid="uid://4lea60a43ia6" path="res://scenes/ui/ReadStoneTablet.tscn" id="31_ya0g7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_23ck1"]
@@ -2943,6 +2944,9 @@ metadata/_edit_lock_ = true
 
 [node name="StoneTablet2" parent="Forest/waterFallCave" instance=ExtResource("29_2okah")]
 position = Vector2(10515, 2040)
+
+[node name="ReadStoneTablet" parent="Forest/waterFallCave" instance=ExtResource("29_20yqp")]
+visible = false
 
 [node name="longStraight" type="Node2D" parent="Forest"]
 
