@@ -54,7 +54,7 @@ func take_damage_overtime(amount: int, damage_type: Element.Type, time: int):
 	if can_take_damage_over_time <= 5:
 		can_take_damage_over_time += 1
 		while time >= 0:
-			take_damage(amount, damage_type)
+			take_damage_no_iframes(amount, damage_type)
 			time -= 1
 			await get_tree().create_timer(0.3).timeout
 		can_take_damage_over_time -= 1
