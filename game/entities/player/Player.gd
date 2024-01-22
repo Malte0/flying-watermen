@@ -140,7 +140,7 @@ func _on_can_shoot_state_input(event: InputEvent) -> void:
 		projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
 		projectile_instance.player_speed = velocity
 		add_child(projectile_node)
-		
+
 		inventory.use_active_item(1)
 
 func _on_death():
