@@ -111,7 +111,8 @@ func flip_player():
 	scale.x *= -1
 
 func update_animation_parameters():
-	animation_tree.set("parameters/basic_movement/blend_position", abs(velocity.x) > 0.8)
+	animation_tree.set("parameters/Default/blend_position", abs(velocity.x) > 0.8)
+	state_chart.send_event("tick")
 
 
 func _on_crouching_state_entered():
@@ -124,9 +125,6 @@ func _on_sliding_state_entered():
 func _on_jumping_state_entered():
 	# this is a duplicate line with the on jump guard
 	# However the on jump guard did not work with this expression
-	# jump animation
-	%AnimatedSprite2D.play("jump")
-	
 	if jumps_left > 0:
 		velocity.y = jump_velocity + velocity.y/2
 		jumps_left -= 1
