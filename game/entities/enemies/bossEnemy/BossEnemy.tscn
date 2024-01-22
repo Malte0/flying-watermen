@@ -36,14 +36,12 @@ scale = Vector2(10, 10)
 shape = SubResource("CapsuleShape2D_tk2cp")
 
 [node name="WallDetection" type="Node2D" parent="."]
-scale = Vector2(1, 1)
 
 [node name="RayCast2d" type="RayCast2D" parent="WallDetection"]
 position = Vector2(23.4286, -16)
 target_position = Vector2(0, 45)
 
 [node name="BossGraphics" type="Node2D" parent="."]
-scale = Vector2(1, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="BossGraphics"]
 texture = ExtResource("2_i2mnn")
@@ -71,19 +69,16 @@ texture_under = ExtResource("4_lbjiu")
 texture_progress = ExtResource("5_06bnl")
 
 [node name="HeatArea" type="Area2D" parent="."]
-scale = Vector2(1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeatArea"]
 shape = SubResource("CircleShape2D_xq2h4")
 debug_color = Color(0.909804, 0.270588, 0.333333, 0.419608)
 
 [node name="EnemyAggro" parent="." node_paths=PackedStringArray("view_area", "health_component") instance=ExtResource("6_2uwjm")]
-scale = Vector2(1, 1)
 view_area = NodePath("../ViewArea")
 health_component = NodePath("../HealthComponent")
 
 [node name="MovementComponent" parent="." node_paths=PackedStringArray("nodes_to_flip") instance=ExtResource("7_lt55y")]
-scale = Vector2(1, 1)
 weight = 100.0
 nodes_to_flip = [NodePath("../BossGraphics"), NodePath("../WallDetection")]
 

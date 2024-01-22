@@ -24,8 +24,6 @@ func _physics_process(_delta: float):
 	var player_distance = abs(player.global_position.x - global_position.x)
 	if next_attack == null:
 		next_attack = high_level_KI(player_distance)
-		print("next is")
-		print(next_attack)
 	else:
 		try_attack(player_distance)
 	hunt_player() if aggro_component.is_aggro else idle_movement()
@@ -59,7 +57,6 @@ func high_level_KI(player_distance):
 	
 func try_attack(player_distance):
 	if player_distance < next_attack:
-		print("leggo die vieh")
 		attack(next_attack)
 		next_attack = null
 func attack(attack_type):
@@ -72,8 +69,7 @@ func attack(attack_type):
 				fire_wave_cd = true
 				fire_wave_cooldown.start()
 		Attacks.Meele:
-			print("do something")
-
+			pass
 
 func _on_fire_wave_cooldown_timeout():
 	fire_wave_cd = false
