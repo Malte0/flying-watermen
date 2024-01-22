@@ -90,7 +90,7 @@ func _input(event: InputEvent):
 		state_chart.send_event("attackpressed")
 	if event.is_action_pressed("interact"):
 		on_interact.call()
-	if event.is_action_pressed("jump"):
+	if event.is_action_pressed("jump") and can_move:
 		state_chart.send_event("jump")
 	if event.is_action_pressed("attack"):
 		attack_component.attack()
@@ -131,12 +131,12 @@ func _on_can_shoot_state_input(event: InputEvent) -> void:
 		if inventory.active_item and inventory.active_item.name == "sodium":
 			shoot_sodium()
 			return
-		var projectile_instance: Node2D = projectile_scene.instantiate()
-		var projectile: Projectile = projectile_instance.get_node("Projectile")
-		projectile.position = shoot_position.global_position
-		projectile.direction = global_position.direction_to(get_global_mouse_position())
-		projectile.player_speed = velocity
-		add_child(projectile_instance)
+		var projectile_node: Node2D = projectile_scene.instantiate()
+		var projectile_instance: Projectile = projectile_node.get_node("Projectile")
+		projectile_instance.position = shoot_position.global_position
+		projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
+		projectile_instance.player_speed = velocity
+		add_child(projectile_node)
 
 func _on_death():
 	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")
