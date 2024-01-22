@@ -1,8 +1,9 @@
 class_name AggroComponent extends Node2D
 
 @onready var state_chart: StateChart = $StateChart
-@onready var aggro_cooldown_timer: Timer = $AggroCooldown
+@onready var aggro_cooldown: Timer = $AggroCooldown
 
+@export var aggro_duration: int = 3
 @export var view_area: Area2D
 @export var health_component: HealthComponent
 
@@ -12,18 +13,19 @@ signal aggro_entered()
 signal calm_entered()
 
 func _ready():
+	aggro_cooldown.wait_time = aggro_duration
 	view_area.body_entered.connect(on_body_detected)
 	view_area.body_exited.connect(on_body_exited)
 	health_component.health_changed.connect(on_health_changed)
 
 func on_body_detected(body):
-	if body is Player and aggro_cooldown_timer.is_inside_tree():
-		aggro_cooldown_timer.stop()
+	if body is Player and aggro_cooldown.is_inside_tree():
+		aggro_cooldown.stop()
 		state_chart.send_event("enter_aggro")
 
 func on_body_exited(body):
-	if body is Player and aggro_cooldown_timer.is_inside_tree():
-		aggro_cooldown_timer.start()
+	if body is Player and aggro_cooldown.is_inside_tree():
+		aggro_cooldown.start()
 
 func on_health_changed(_new_health, delta_health):
 	if delta_health < 0:

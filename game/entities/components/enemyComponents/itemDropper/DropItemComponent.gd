@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var carried_item: Item
+@export var carried_item: PackedScene
 @export var health_component: HealthComponent
 
 func _ready():
@@ -11,6 +11,7 @@ func drop_item():
 		call_deferred("spawn_item")
 
 func spawn_item():
-	var item_instance: Collectable = carried_item.collectable.instantiate()
-	item_instance.position = position
-	get_parent().add_child(item_instance)
+	print("spawn")
+	var collectable_instance: Node2D = carried_item.instantiate()
+	collectable_instance.global_position = global_position
+	get_parent().add_child(collectable_instance)

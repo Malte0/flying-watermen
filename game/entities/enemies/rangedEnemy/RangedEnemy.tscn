@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://32uxotk6128m" path="res://entities/enemies/assets/healthbar_under.png" id="2_n8t0v"]
 [ext_resource type="Texture2D" uid="uid://drqht0p82ryru" path="res://entities/enemies/assets/healthbar_progress.png" id="3_wwf3b"]
 [ext_resource type="PackedScene" uid="uid://u07y0x28am7y" path="res://entities/components/heat/HeatArea.tscn" id="6_5vado"]
-[ext_resource type="PackedScene" uid="uid://bkweew02mcaim" path="res://entities/components/enemyComponents/enemyAggro/EnemyAggroComponent.tscn" id="8_axj65"]
+[ext_resource type="PackedScene" uid="uid://bkweew02mcaim" path="res://entities/components/enemyComponents/enemyAggro/AggroComponent.tscn" id="8_axj65"]
 [ext_resource type="PackedScene" uid="uid://b0x70uo3ar3yc" path="res://entities/components/enemyComponents/combat/EnemyRangedCombat.tscn" id="9_g276e"]
 [ext_resource type="PackedScene" uid="uid://61g8e7mlxwj" path="res://entities/components/enemyComponents/movement/MovementComponent.tscn" id="9_of3xe"]
 [ext_resource type="PackedScene" uid="uid://1kqni5b4lpm" path="res://entities/projectiles/FireProjectile.tscn" id="9_yoaf2"]
@@ -20,12 +20,10 @@ radius = 414.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_gkbmv"]
 radius = 75.0267
 
-[node name="RangedEnemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_component", "movement_component", "health_component")]
+[node name="RangedEnemy" type="CharacterBody2D" node_paths=PackedStringArray("movement_component")]
 collision_layer = 4
 script = ExtResource("1_itytb")
-aggro_component = NodePath("EnemyAggroComponent")
 movement_component = NodePath("MovementComponent")
-health_component = NodePath("HealthComponent")
 
 [node name="EnemyShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, -11.5)
@@ -70,13 +68,13 @@ position = Vector2(0, -13)
 shape = SubResource("CircleShape2D_gkbmv")
 debug_color = Color(0.878431, 0.333333, 0.2, 0.419608)
 
-[node name="EnemyAggroComponent" parent="." node_paths=PackedStringArray("view_area", "health_component") instance=ExtResource("8_axj65")]
+[node name="AggroComponent" parent="." node_paths=PackedStringArray("view_area", "health_component") instance=ExtResource("8_axj65")]
 view_area = NodePath("../ViewArea")
 health_component = NodePath("../HealthComponent")
 
 [node name="EnemyRangedCombat" parent="." node_paths=PackedStringArray("aggro_component") instance=ExtResource("9_g276e")]
 projectile_scene = ExtResource("9_yoaf2")
-aggro_component = NodePath("../EnemyAggroComponent")
+aggro_component = NodePath("../AggroComponent")
 
 [node name="MovementComponent" parent="." node_paths=PackedStringArray("nodes_to_flip") instance=ExtResource("9_of3xe")]
 jump_force = -120

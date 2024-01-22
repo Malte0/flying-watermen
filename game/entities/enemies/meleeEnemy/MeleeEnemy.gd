@@ -1,4 +1,4 @@
-extends Enemy
+extends CharacterBody2D
 
 @export var aggro_component: AggroComponent
 @export var melee_attack_component: MeleeAttackComponent
@@ -10,6 +10,7 @@ extends Enemy
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 
 const ATTACK_DISTANCE: int = 300
+const MOVEMENT_EPSILON_PIXELS: int = 50
 
 func _ready():
 	aggro_component.aggro_entered.connect(on_aggro_entered)
@@ -26,6 +27,10 @@ func hunt_player():
 	if wall_detection.is_colliding():
 		movement_component.jump(1)
 	var player_direction: int = sign(player.global_position.x - global_position.x)
+	var player_distance: float = abs(player.global_position.x - global_position.x)
+	if abs(player_distance) < MOVEMENT_EPSILON_PIXELS:
+		movement_component.movement_direction = movement_component.Movement_Direction.No
+		return
 	if player_direction == movement_component.Movement_Direction.Right:
 		movement_component.change_move_direction(movement_component.Movement_Direction.Right)
 	else:

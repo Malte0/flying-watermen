@@ -8,7 +8,9 @@ class_name MeleeAttackComponent extends Area2D
 @onready var state_chart: StateChart = $AttackStateChart
 @onready var tmp_animation_bar: ProgressBar = $ProgressBar
 
-const TWEEN_DURATION: float = 0.1
+const ATTACK_DURATION: float = 0.1
+## To makes sure no body is hit twice
+var bodies_hit: Array[CharacterBody2D] = []
 
 func _ready():
 	if attack_shape.shape is RectangleShape2D:
@@ -24,8 +26,13 @@ func _ready():
 	tmp_animation_bar.modulate = attack_color
 
 func _on_body_entered(body):
-	if body is Player or body is Enemy:
-		body.health_component.take_damage(damage, element)
+	var health_component: HealthComponent = body.get_node_or_null("HealthComponent")
+	if health_component and body not in bodies_hit:
+		health_component.take_damage(damage, element)
+		bodies_hit.append(body)
+		await get_tree().create_timer(ATTACK_DURATION).timeout
+		if weakref(body).get_ref() and body in bodies_hit:
+			bodies_hit.erase(body)
 
 func attack():
 	state_chart.send_event("attack")
@@ -34,7 +41,7 @@ func _on_attack_state_entered():
 	tmp_animation_bar.visible = true
 	tmp_animation_bar.value = 0
 	var tween = get_tree().create_tween()
-	tween.tween_property(tmp_animation_bar, "value", 100, TWEEN_DURATION)
+	tween.tween_property(tmp_animation_bar, "value", 100, ATTACK_DURATION)
 	attack_shape.disabled = false
 
 func _on_attack_state_exited():
