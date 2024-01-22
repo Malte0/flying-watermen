@@ -6,7 +6,7 @@ class_name Projectile extends RigidBody2D
 @export var sprite: Texture2D
 @export var collision_shape: CollisionShape2D
 @export var new_collision_mask: int = 5
-@export var stop_on_impact: bool = false
+@export var sticky: bool = false
 
 const LIFE_TIME_SECONDS: int = 4
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -23,7 +23,7 @@ func _ready():
 
 func _on_area_2d_body_entered(body):
 	var health_component: HealthComponent = body.get_node_or_null("HealthComponent")
-	if !stop_on_impact:
+	if !sticky:
 		if health_component:
 			health_component.take_damage(damage, element)
 		if body is Player and element != Element.Type.Water:
@@ -38,4 +38,4 @@ func _on_area_2d_body_entered(body):
 		top_level = false
 		reparent.call_deferred(body)
 		await get_tree().process_frame
-		global_position = position
+		global_position = curr_pos
