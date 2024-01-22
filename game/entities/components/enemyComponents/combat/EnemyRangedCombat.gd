@@ -8,7 +8,7 @@ extends Node2D
 # Random angle applied to shooting direction is at most SHOOTING_PRECISION
 const SHOOTING_PRECISION: float = PI/12
 # Angle in radians that gets applied to equalize for gravity
-const ANGLE_CORRECTION: float = PI/8
+const ANGLE_CORRECTION: float = PI/10
 
 var can_shoot: bool = true
 
