@@ -8,7 +8,7 @@ extends Enemy
 const HEAT_RADIUS: int = 350
 const HEAT_PER_TICK: int = 2
 const DAMAGE_RADIUS: int = 150
-const DAMAGE_PER_TICK: int = 1
+const DAMAGE_PER_TICK: int = 30
 
 const JUMP_FORCE: int = -500
 const MOVEMENT_SPEED_CALM: int = 100

@@ -3,6 +3,7 @@ extends Node2D
 @export var player: Player
 @export var heat_component: HeatComponent
 @export var chemical_state_chart: StateChart
+@onready var animation_tree = $"../../../Animation/AnimationTree"
 
 const ICE_FRICTION: float = 0.02
 var is_in_ice_state: bool = false
@@ -31,7 +32,11 @@ func _on_heat_changed(new_heat: int, _delta_heat: int):
 func _on_ice_state_entered():
 	enter_ice_state()
 	$"../../../MonitorEffects".get_node("Freeze").visible = true
+	animation_tree["parameters/conditions/entered_ice"] = true
+	animation_tree["parameters/conditions/exited_ice"] = false
 	
-
 func _on_ice_state_exited():
 	$"../../../MonitorEffects".get_node("Freeze").visible = false
+	animation_tree["parameters/conditions/entered_ice"] = false
+	animation_tree["parameters/conditions/exited_ice"] = true
+	

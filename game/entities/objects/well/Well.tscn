@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://o5qajbk6mfjn"]
+[gd_scene load_steps=12 format=3 uid="uid://o5qajbk6mfjn"]
 
 [ext_resource type="Script" path="res://entities/objects/well/Well.gd" id="1_ryms2"]
 [ext_resource type="Texture2D" uid="uid://cxe6hu7quuq4d" path="res://entities/objects/well/assets/wellEmpty.png" id="2_gdx0v"]
@@ -6,6 +6,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_amob8"]
 radius = 95.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_msmji"]
+radius = 65.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2wsyv"]
 blend_mode = 1
@@ -52,13 +55,12 @@ visible = false
 position = Vector2(1, -22)
 shape = SubResource("CircleShape2D_amob8")
 
-[node name="Collision" type="Area2D" parent="."]
-visible = false
-collision_mask = 6
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 0
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collision"]
-visible = false
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, -32)
+shape = SubResource("CircleShape2D_msmji")
 
 [node name="Texture" type="Sprite2D" parent="."]
 position = Vector2(0, -33)

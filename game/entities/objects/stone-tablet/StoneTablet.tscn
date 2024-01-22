@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c640sr08cvsmo"]
+[gd_scene load_steps=16 format=3 uid="uid://c640sr08cvsmo"]
 
 [ext_resource type="Script" path="res://entities/objects/stone-tablet/StoneTablet.gd" id="1_lg1td"]
 [ext_resource type="Texture2D" uid="uid://ciey4ubnpykd2" path="res://entities/objects/stone-tablet/random_selection.png" id="2_k6xtg"]
@@ -368,6 +368,9 @@ _data = {
 "hover": SubResource("Animation_1mjby")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thpy7"]
+size = Vector2(83, 72)
+
 [node name="StoneTablet" type="Node2D"]
 script = ExtResource("1_lg1td")
 
@@ -418,6 +421,13 @@ libraries = {
 position = Vector2(1, 96)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_ek00u")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(2.5, 96)
+shape = SubResource("RectangleShape2D_thpy7")
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

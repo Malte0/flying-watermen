@@ -85,7 +85,7 @@ scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_tmu6t")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.505926
+frame_progress = 0.343299
 flip_h = true
 
 [node name="WallDetection" type="RayCast2D" parent="DirectionalNodes"]

@@ -124,6 +124,9 @@ func _on_sliding_state_entered():
 func _on_jumping_state_entered():
 	# this is a duplicate line with the on jump guard
 	# However the on jump guard did not work with this expression
+	# jump animation
+	%AnimatedSprite2D.play("jump")
+	
 	if jumps_left > 0:
 		velocity.y = jump_velocity + velocity.y/2
 		jumps_left -= 1
