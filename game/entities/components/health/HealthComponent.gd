@@ -40,7 +40,7 @@ func take_damage(amount: int, damage_type: Element.Type):
 	if damage_type != Element.Type.Neutral and damage_type == element:
 		return
 	if can_take_damage or not(get_parent() is Player):
-		iframes()
+		iframes(0.1)
 		health -= amount
 		health_changed.emit(health, -amount)
 	if health <= 0:
@@ -73,8 +73,10 @@ func die():
 	death.emit()
 	get_parent().queue_free()
 
-func iframes():
+func iframes(time: float):
 	can_take_damage = false
-	var iframe_length: float = 0.1
-	await get_tree().create_timer(iframe_length).timeout
+	await get_tree().create_timer(time).timeout
 	can_take_damage = true
+
+func change_invincibility():
+	can_take_damage = !can_take_damage
