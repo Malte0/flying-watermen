@@ -45,9 +45,8 @@ func deal_dmg():
 	var player_distance: int = (player.global_position - self.global_position).length()
 	if inner_radius <= player_distance && player_distance <= outer_radius:
 		var HealthComponent = player.get_node("HealthComponent")
-		var temp_health = HealthComponent.health
-		HealthComponent.take_damage(damage, Element.Type.Fire)
-		if temp_health > HealthComponent.health:
+		if HealthComponent.can_take_damage:
+			HealthComponent.take_damage(damage, Element.Type.Fire)
 			player.get_node("HeatComponent").increase_heat(75)
 			did_dmg = true
 		

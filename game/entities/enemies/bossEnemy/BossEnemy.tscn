@@ -95,7 +95,7 @@ nodes_to_flip = [NodePath("../BossGraphics"), NodePath("../WallDetection"), Node
 wait_time = 5.0
 
 [node name="MeleeCooldown" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 1.5
 
 [node name="HeatAreaFar" parent="." instance=ExtResource("9_oyriq")]
 collision_mask = 3

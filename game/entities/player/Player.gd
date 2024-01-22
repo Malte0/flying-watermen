@@ -149,6 +149,6 @@ func _on_dash_state_entered() -> void:
 	can_move = false
 	friction = 0
 	velocity.x = signi(scale.y) * base_speed * 2
-	health_component.iframes(0.5)
+	health_component.iframes(0.3)
 	collision_mask = 0b1
 	collision_layer = 0b

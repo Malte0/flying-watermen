@@ -7,8 +7,8 @@ extends Enemy
 @export var wall_detection: RayCast2D
 @export var fire_wave_cooldown: Timer
 @export var melee_cooldown: Timer
-@export var movement_speed_calm: int = 100
-@export var movement_speed_aggro: int = 250
+@export var movement_speed_calm: int = 0
+@export var movement_speed_aggro: int = 150
 @export var fire_wave_scene: PackedScene
 
 @onready var player: Player = get_tree().get_first_node_in_group("player")
@@ -64,12 +64,12 @@ func high_level_KI(player_distance):
 	if randi() % 2:
 		return Attacks.Melee
 	return Attacks.FireWave
-	
+
 func try_attack(player_distance):
 	if player_distance < next_attack:
 		attack(next_attack)
 		next_attack = null
-		
+
 func attack(attack_type):
 	match attack_type:
 		Attacks.FireWave:
@@ -93,7 +93,7 @@ func _on_fire_wave_cooldown_timeout():
 	
 func _on_melee_cooldown_timeout():
 	melee_cd = false
-	
+
 func attack_decision():
 	if randi() % 2:
 		return true
