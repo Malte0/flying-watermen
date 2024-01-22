@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://mrf2lku3uiqc"]
+[gd_scene load_steps=51 format=3 uid="uid://mrf2lku3uiqc"]
 
 [ext_resource type="Shader" path="res://scenes/test/mapShader.gdshader" id="1_4wi60"]
 [ext_resource type="Texture2D" uid="uid://b6yrhnp1t37o8" path="res://assets/prototype-assets/Tiles.png" id="1_ljrfd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ihorffrdym4j" path="res://icon.svg" id="4_23juu"]
 [ext_resource type="Texture2D" uid="uid://cjv4di3su4jvf" path="res://assets/prototype-assets/background/Green-Tree.png" id="5_1qnrw"]
 [ext_resource type="PackedScene" uid="uid://cihcop35erg48" path="res://scenes/ui/ui.tscn" id="5_vx7we"]
+[ext_resource type="PackedScene" uid="uid://besblswfge6aw" path="res://scenes/ui/pause_menu.tscn" id="10_dmsia"]
 [ext_resource type="PackedScene" uid="uid://dpiypck5f1v6f" path="res://entities/objects/pfuetze.tscn" id="10_oa7xq"]
 [ext_resource type="PackedScene" uid="uid://dmeutg1f6t7sl" path="res://entities/enemies/rangedEnemy/RangedEnemy.tscn" id="11_2fedg"]
 [ext_resource type="PackedScene" uid="uid://dvv2sij5v2epd" path="res://entities/player/inventory/items/sodiumChemical/sodium.tscn" id="13_l88ic"]
@@ -29848,7 +29849,7 @@ process_callback = 0
 metadata/_edit_lock_ = true
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(4746, 1712.8)
+position = Vector2(5144, 1713)
 collision_layer = 0
 collision_mask = 3
 sleeping = true
@@ -29866,6 +29867,8 @@ metadata/_edit_lock_ = true
 
 [node name="UI" parent="." instance=ExtResource("5_vx7we")]
 
+[node name="Pause_Menu" parent="UI" instance=ExtResource("10_dmsia")]
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.92549, 0.92549, 0.92549, 1)
 
@@ -29877,7 +29880,6 @@ position = Vector2(5975, 1763)
 
 [node name="RangedEnemy" parent="." instance=ExtResource("11_2fedg")]
 position = Vector2(1327, 1311)
-carried_item = ExtResource("13_l88ic")
 
 [node name="EnemySpawnArea" parent="." instance=ExtResource("14_nc86j")]
 position = Vector2(172, 1698)

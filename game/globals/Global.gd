@@ -2,6 +2,7 @@ extends Node
 
 var main_scene = "res://scenes/test/map.tscn"
 var test_scene = "res://scenes/test/test.tscn"
+var main_menu = "res://scenes/ui/main_menu.tscn"
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("str+1"):
