@@ -75,7 +75,7 @@ def missnamedBoolean(line: str):
         if i == 0:
             continue
         if 'bool' in words[i]:
-            return not any([w in words[i-1] for w in ["is", "has", "can"]])
+            return not any([w in words[i-1] for w in ["is", "has", "can", "use"]])
     return False
 
 def hasTooManyLineBreaks(line: str):
@@ -88,9 +88,10 @@ def hasTooManyLineBreaks(line: str):
 
 def hasOddColonFormat(line: str):
     spaceBeforeConon = re.search(r" :", line) is not None
-    linesToIgnore = ["func", "if", "else", "elif", "while", "for"]
+    linesToIgnore = ["func", "if", "else", "elif", "while", "for", "match"]
     noSpaceAfeterColon = not any([x in line for x in linesToIgnore]) and line.count(":") > 0 and line[line.index(":")+1] != " " and line[line.index(":")+1] != "/"
-    return spaceBeforeConon or noSpaceAfeterColon
+    isDeclaration = "var" in line or "const" in line
+    return isDeclaration and (spaceBeforeConon or noSpaceAfeterColon)
 
 def hasUninitializedVariable(line: str):
     if 'var' in line:

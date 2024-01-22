@@ -29848,7 +29848,7 @@ process_callback = 0
 metadata/_edit_lock_ = true
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(4746, 1712.8)
+position = Vector2(5144, 1713)
 collision_layer = 0
 collision_mask = 3
 sleeping = true
@@ -29879,7 +29879,6 @@ position = Vector2(5975, 1763)
 
 [node name="RangedEnemy" parent="." instance=ExtResource("11_2fedg")]
 position = Vector2(1327, 1311)
-carried_item = ExtResource("13_l88ic")
 
 [node name="EnemySpawnArea" parent="." instance=ExtResource("14_nc86j")]
 position = Vector2(172, 1698)

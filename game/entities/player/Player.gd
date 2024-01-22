@@ -5,6 +5,7 @@ class_name Player extends CharacterBody2D
 @onready var heat_component: HeatComponent = $HeatComponent
 @onready var state_chart: StateChart = $StateChart
 @onready var wall_check: RayCast2D = $WallCheck
+@onready var attack_component: MeleeAttackComponent = $MeleeAttack
 
 @onready var projectile_scene: PackedScene = load("res://entities/projectiles/WaterProjectile.tscn")
 @onready var shoot_position: Marker2D = $ShootPosition
@@ -96,6 +97,8 @@ func _input(event: InputEvent):
 		on_interact.call()
 	if event.is_action_pressed("jump") and can_move:
 		state_chart.send_event("jump")
+	if event.is_action_pressed("attack"):
+		attack_component.attack()
 	if event.is_action_pressed("lshift"):
 		state_chart.send_event("dash")
 
