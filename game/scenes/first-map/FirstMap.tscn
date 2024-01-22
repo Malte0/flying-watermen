@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://cu55a1ijhr436"]
+[gd_scene load_steps=95 format=3 uid="uid://cu55a1ijhr436"]
 
 [ext_resource type="Script" path="res://scenes/first-map/FirstMap.gd" id="1_0g272"]
 [ext_resource type="Texture2D" uid="uid://dhvk873s0063d" path="res://assets/tileMap/Tiles.png" id="1_b4xfn"]
@@ -2420,6 +2420,14 @@ metadata/_better_terrain = {
 "version": "0.2"
 }
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v6m7c"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_a03mb"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pxu6x"]
+normal = Vector2(-1, 0)
+
 [node name="FirstMap" type="Node2D"]
 script = ExtResource("1_0g272")
 
@@ -3379,3 +3387,27 @@ metadata/_edit_lock_ = true
 
 [node name="Puddle2" parent="." instance=ExtResource("23_43erc")]
 position = Vector2(7986, 2277)
+
+[node name="worldborder" type="Node2D" parent="."]
+
+[node name="Left" type="StaticBody2D" parent="worldborder"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="worldborder/Left"]
+position = Vector2(0, 589)
+rotation = 1.55868
+shape = SubResource("WorldBoundaryShape2D_v6m7c")
+metadata/_edit_lock_ = true
+
+[node name="Top" type="StaticBody2D" parent="worldborder"]
+position = Vector2(1, -289)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="worldborder/Top"]
+shape = SubResource("WorldBoundaryShape2D_a03mb")
+metadata/_edit_lock_ = true
+
+[node name="Right" type="StaticBody2D" parent="worldborder"]
+position = Vector2(15633, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="worldborder/Right"]
+shape = SubResource("WorldBoundaryShape2D_pxu6x")
+metadata/_edit_lock_ = true

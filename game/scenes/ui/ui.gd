@@ -12,6 +12,5 @@ func _input(event: InputEvent) -> void:
 		debugger.visible = !debugger.visible
 
 func _physics_process(_delta):
-	if player:
-		player.state_chart.set_expression_property("velocity_x", player.velocity.x)
-		player.state_chart.set_expression_property("is_on_wall", player.is_on_wall())
+	player.state_chart.set_expression_property("velocity_x", player.velocity.x)
+	player.state_chart.set_expression_property("is_on_wall", player.is_on_wall())
