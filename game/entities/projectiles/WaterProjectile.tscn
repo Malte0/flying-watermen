@@ -6,7 +6,6 @@
 top_level = true
 light_mask = 0
 visibility_layer = 5
-damage = 50
 
 [node name="Projectile" parent="." instance=ExtResource("1_aypoh")]
 collision_layer = 0
