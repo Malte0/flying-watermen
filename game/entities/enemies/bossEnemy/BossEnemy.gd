@@ -1,20 +1,24 @@
 extends Enemy
 
 @export var aggro_component: AggroComponent
-@export var melee_attack_component: MeleeAttackComponent
+@export var melee_attack_low_component: MeleeAttackComponent
+@export var melee_attack_high_component: MeleeAttackComponent
 @export var movement_component: MovementComponent
 @export var wall_detection: RayCast2D
 @export var fire_wave_cooldown: Timer
+@export var melee_cooldown: Timer
 @export var movement_speed_calm: int = 100
 @export var movement_speed_aggro: int = 250
 @export var fire_wave_scene: PackedScene
 
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 
-enum Attacks {FireWave = 600, Meele = 300}
+enum Attacks {FireWave = 600, Melee = 300}
 const ATTACK_DISTANCE: int = 300
 var next_attack
 var fire_wave_cd: bool = false
+var melee_cd: bool = false
+
 
 func _ready():
 	aggro_component.aggro_entered.connect(on_aggro_entered)
@@ -52,13 +56,15 @@ func on_calm_entered():
 	movement_component.movement_speed = movement_speed_calm
 
 func high_level_KI(player_distance):
-	#decide shit based on distance
+	if randi() % 2:
+		return Attacks.Melee
 	return Attacks.FireWave
 	
 func try_attack(player_distance):
 	if player_distance < next_attack:
 		attack(next_attack)
 		next_attack = null
+		
 func attack(attack_type):
 	match attack_type:
 		Attacks.FireWave:
@@ -68,8 +74,22 @@ func attack(attack_type):
 				get_parent().get_parent().add_child(fire_wave_instance)
 				fire_wave_cd = true
 				fire_wave_cooldown.start()
-		Attacks.Meele:
-			pass
+		Attacks.Melee:
+			if not melee_cd:
+				if attack_decision():
+					melee_attack_low_component.attack()
+				else:
+					melee_attack_high_component.attack()
+				melee_cd = true
+				melee_cooldown.start() 
 
 func _on_fire_wave_cooldown_timeout():
 	fire_wave_cd = false
+	
+func _on_melee_cooldown_timeout():
+	melee_cd = false
+	
+func attack_decision():
+	if randi() % 2:
+		return true
+	return false
