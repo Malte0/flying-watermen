@@ -15,6 +15,7 @@ extends Enemy
 
 enum Attacks {FireWave = 600, Melee = 300}
 const ATTACK_DISTANCE: int = 300
+const MOVEMENT_EPSILON_PIXELS: int = 230
 var next_attack
 var fire_wave_cd: bool = false
 var melee_cd: bool = false
@@ -40,6 +41,10 @@ func hunt_player():
 	if wall_detection.is_colliding():
 		movement_component.jump(1)
 	var player_direction: int = sign(player.global_position.x - global_position.x)
+	var player_distance: float = abs(player.global_position.x - global_position.x)
+	if abs(player_distance) < MOVEMENT_EPSILON_PIXELS:
+		movement_component.movement_direction = movement_component.Movement_Direction.No
+		return
 	if player_direction == movement_component.Movement_Direction.Right:
 		movement_component.change_move_direction(movement_component.Movement_Direction.Right)
 	else:
