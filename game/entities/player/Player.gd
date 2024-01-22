@@ -76,7 +76,6 @@ func _physics_process(delta: float):
 	state_chart.set_expression_property("jumps_left", jumps_left)
 	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
 
-
 	direction = Input.get_axis("a", "d")
 	if abs(direction) > 0 and can_move:
 		velocity.x = lerp(velocity.x, direction * speed, 0.1)
@@ -84,9 +83,7 @@ func _physics_process(delta: float):
 		velocity.x = 0
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
-
 	move_and_slide()
-
 	if sign(scale.y) != sign(direction) and sign(direction) != 0:
 		flip_player()
 
