@@ -12,5 +12,6 @@ func _ready():
 	queue_free()
 
 func _on_body_entered(body):
-	if body is Enemy:
-		body.health_component.take_damage(DAMAGE, ELEMENT)
+	var health_component: HealthComponent = body.get_node_or_null("HealthComponent")
+	if health_component:
+		health_component.take_damage(DAMAGE, ELEMENT)
