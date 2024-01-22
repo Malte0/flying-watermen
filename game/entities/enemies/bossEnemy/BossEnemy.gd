@@ -16,7 +16,7 @@ extends Enemy
 enum Attacks {FireWave = 600, Melee = 300}
 const ATTACK_DISTANCE: int = 300
 const MOVEMENT_EPSILON_PIXELS: int = 230
-var next_attack = Attacks.FireWave
+var next_attack: any = Attacks.FireWave
 var is_fire_wave_cd: bool = false
 var is_melee_cd: bool = false
 
