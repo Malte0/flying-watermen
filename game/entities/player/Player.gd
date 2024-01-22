@@ -8,6 +8,7 @@ class_name Player extends CharacterBody2D
 @onready var attack_component: MeleeAttackComponent = $MeleeAttack
 
 @onready var projectile_scene: PackedScene = load("res://entities/projectiles/WaterProjectile.tscn")
+@onready var sodium_scene: PackedScene = load("res://entities/projectiles/sodium/SodiumProjectile.tscn")
 @onready var shoot_position: Marker2D = $ShootPosition
 
 # Reset values
@@ -73,16 +74,16 @@ func _physics_process(delta: float):
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
 	state_chart.set_expression_property("jumps_left", jumps_left)
 	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
+	if not can_move:
+		return
 	direction = Input.get_axis("a", "d")
-	if abs(direction) > 0 and can_move:
+	if abs(direction) > 0:
 		velocity.x = lerp(velocity.x, direction * speed, 0.1)
 	elif abs(velocity.x) < 0.1:
 		velocity.x = 0
-	else:
-		velocity.x = lerp(velocity.x, 0.0, friction)
-	move_and_slide()
 	if sign(scale.y) != sign(direction) and sign(direction) != 0:
 		flip_player()
+	move_and_slide()
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("attack"):
@@ -127,6 +128,9 @@ func _on_movement_child_state_exited():
 func _on_can_shoot_state_input(event: InputEvent) -> void:
 	if event.is_action_pressed("right_click"):
 		state_chart.send_event("_on_shot")
+		if inventory.active_item and inventory.active_item.name == "sodium":
+			shoot_sodium()
+			return
 		var projectile_node: Node2D = projectile_scene.instantiate()
 		var projectile_instance: Projectile = projectile_node.get_node("Projectile")
 		projectile_instance.position = shoot_position.global_position
@@ -143,3 +147,13 @@ func _on_dash_state_entered() -> void:
 	velocity.x = signi(scale.y) * base_speed * 2
 	collision_mask = 0b1
 	collision_layer = 0b
+
+func shoot_sodium():
+	const sodium_damage: int = 5
+	health_component.take_damage(sodium_damage, Element.Type.Neutral)
+	var projectile_instance: SodiumProjectile = sodium_scene.instantiate()
+	projectile_instance.global_position = shoot_position.global_position
+	projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
+	projectile_instance.additional_speed = velocity
+	get_parent().add_child(projectile_instance)
+	inventory.use_active_item(1)
