@@ -68,16 +68,11 @@ func _physics_process(delta: float):
 	# For transitions without event condition
 	state_chart.send_event("tick")
 	apply_gravity(delta)
-
 	if direction == 0:
 		velocity.x = lerp(velocity.x, 0.0, friction)
-
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
 	state_chart.set_expression_property("jumps_left", jumps_left)
 	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
-
-func _on_default_state_physics_processing(_delta):
-	# handle left/right movement
 	direction = Input.get_axis("a", "d")
 	if abs(direction) > 0 and can_move:
 		velocity.x = lerp(velocity.x, direction * speed, 0.1)
@@ -85,9 +80,7 @@ func _on_default_state_physics_processing(_delta):
 		velocity.x = 0
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
-
 	move_and_slide()
-
 	if sign(scale.y) != sign(direction) and sign(direction) != 0:
 		flip_player()
 
@@ -96,7 +89,7 @@ func _input(event: InputEvent):
 		state_chart.send_event("attackpressed")
 	if event.is_action_pressed("interact"):
 		on_interact.call()
-	if event.is_action_pressed("jump"):
+	if event.is_action_pressed("jump") and can_move:
 		state_chart.send_event("jump")
 	if event.is_action_pressed("attack"):
 		attack_component.attack()
@@ -140,8 +133,6 @@ func _on_can_shoot_state_input(event: InputEvent) -> void:
 		projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
 		projectile_instance.player_speed = velocity
 		add_child(projectile_node)
-
-		inventory.use_active_item(1)
 
 func _on_death():
 	get_tree().change_scene_to_file.call_deferred("res://menus/game_over/GameOver.tscn")

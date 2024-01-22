@@ -29780,7 +29780,6 @@ metadata/_edit_horizontal_guides_ = []
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 position = Vector2(-4, -5.96046e-08)
 rotation = -0.382227
-scale = Vector2(14.011, 14.011)
 energy = 0.3
 shadow_enabled = true
 shadow_filter = 2
@@ -29898,7 +29897,7 @@ position = Vector2(339, 1549)
 position = Vector2(248, 1548)
 
 [node name="FoamChemical" parent="." instance=ExtResource("15_cbfrv")]
-position = Vector2(146, 1555)
+position = Vector2(602, 1729)
 
 [node name="Well" parent="." instance=ExtResource("15_6rq0o")]
 position = Vector2(954, 1778)
