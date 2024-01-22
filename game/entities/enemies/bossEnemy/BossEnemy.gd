@@ -16,10 +16,9 @@ extends Enemy
 enum Attacks {FireWave = 600, Melee = 300}
 const ATTACK_DISTANCE: int = 300
 const MOVEMENT_EPSILON_PIXELS: int = 230
-var next_attack
-var fire_wave_cd: bool = false
-var melee_cd: bool = false
-
+var next_attack = Attacks.FireWave
+var is_fire_wave_cd: bool = false
+var is_melee_cd: bool = false
 
 func _ready():
 	aggro_component.aggro_entered.connect(on_aggro_entered)
@@ -73,26 +72,32 @@ func try_attack(player_distance):
 func attack(attack_type):
 	match attack_type:
 		Attacks.FireWave:
-			if not fire_wave_cd:
-				var fire_wave_instance = fire_wave_scene.instantiate()
-				fire_wave_instance.global_position = global_position
-				get_parent().get_parent().add_child(fire_wave_instance)
-				fire_wave_cd = true
-				fire_wave_cooldown.start()
+			do_fire_wave()
 		Attacks.Melee:
-			if not melee_cd:
-				if attack_decision():
-					melee_attack_low_component.attack()
-				else:
-					melee_attack_high_component.attack()
-				melee_cd = true
-				melee_cooldown.start() 
+			do_melee_attack()
+
+func do_fire_wave():
+	if not is_fire_wave_cd:
+		var fire_wave_instance = fire_wave_scene.instantiate()
+		fire_wave_instance.global_position = global_position
+		get_parent().get_parent().add_child(fire_wave_instance)
+		is_fire_wave_cd = true
+		fire_wave_cooldown.start()
+		
+func do_melee_attack():
+	if not is_melee_cd:
+		if attack_decision():
+			melee_attack_low_component.attack()
+		else:
+			melee_attack_high_component.attack()
+		is_melee_cd = true
+		melee_cooldown.start() 
 
 func _on_fire_wave_cooldown_timeout():
-	fire_wave_cd = false
+	is_fire_wave_cd = false
 	
 func _on_melee_cooldown_timeout():
-	melee_cd = false
+	is_melee_cd = false
 
 func attack_decision():
 	if randi() % 2:

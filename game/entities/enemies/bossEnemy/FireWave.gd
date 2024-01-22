@@ -4,24 +4,20 @@ class_name FireWave extends Node
 @export var life_time: float = 2
 @export var circle_width: int
 
-@onready var timer = $Timer
+@onready var timer: Timer = $Timer
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 @onready var OUTER_RADIUS: int = $Sprite2D.texture.get_width() / 2
 @onready var INNER_RADIUS: int = OUTER_RADIUS - circle_width
 
-const START_SIZE: float = 0.5
 const SIZE_GROWTH: float = 0.04
-var current_scale
-var tics_per_life_time: int
-var outer_radius: int
-var inner_radius: int
-var did_dmg: bool = false
-
+var current_scale: float = 0.5
+var tics_per_life_time: int = life_time / timer.wait_time
+var outer_radius: int = OUTER_RADIUS * current_scale
+var inner_radius: int = INNER_RADIUS * current_scale
+var can_damage: bool = true
 
 func _ready():
-	current_scale = START_SIZE
 	change_scale()
-	tics_per_life_time = life_time / timer.wait_time
 	
 func change_scale():
 	self.scale.x = current_scale
@@ -32,7 +28,7 @@ func change_scale():
 func _on_timer_timeout():		
 	current_scale += SIZE_GROWTH
 	change_scale()
-	if not did_dmg:
+	if can_damage:
 		deal_dmg()
 	tic_down()
 	
@@ -44,9 +40,8 @@ func tic_down():
 func deal_dmg():
 	var player_distance: int = (player.global_position - self.global_position).length()
 	if inner_radius <= player_distance && player_distance <= outer_radius:
-		var HealthComponent = player.get_node("HealthComponent")
-		if HealthComponent.can_take_damage:
-			HealthComponent.take_damage(damage, Element.Type.Fire)
+		var health_component = player.get_node("HealthComponent")
+		if health_component.can_take_damage:
+			health_component.take_damage(damage, Element.Type.Fire)
 			player.get_node("HeatComponent").increase_heat(75)
-			did_dmg = true
-		
+			can_damage = false
