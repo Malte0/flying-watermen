@@ -32,6 +32,5 @@ func _on_ice_state_entered():
 	player.can_move = false
 	enter_ice_state()
 
-
 func _on_ice_state_exited():
 	player.can_move = true

@@ -7,15 +7,15 @@ var automatic_fire: bool = false
 var automatic_cooldown: float = 0.0
 
 var can_foam_attack: bool = false
-var meele_shot_count: int = 10
+var is_meele_shot_count: int = 10
 
-@onready var projectile_node: Node2D 
+@onready var projectile_node: Node2D
 @onready var projectile_instance: Projectile
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack") and can_foam_attack:
 		can_foam_attack = false
-		for i in range(meele_shot_count):
+		for i in range(is_meele_shot_count):
 			var vec: Vector2 = Vector2(100.0, -i*10)
 			projectile_instance.position = player.shoot_position.global_position
 			vec.x += projectile_instance.position.x
