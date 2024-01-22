@@ -10,7 +10,8 @@ var can_take_damage: bool = true
 @export var _health_bar: TextureProgressBar
 
 const HEAL_OVER_TIME_STEP: int = 5
-const HEALTH_BAR_INTERPOLATION_SPEED: float = 1
+const HEALTH_BAR_SPEED: float = 2
+const SPEED_THRESHOLD: float = 25
 
 var heal_over_time_left: int = 0
 var health: int = 100
@@ -31,7 +32,8 @@ func _ready():
 
 func _process(_delta):
 	if _health_bar and health != _health_bar.value:
-		_health_bar.value = move_toward(_health_bar.value, health, HEALTH_BAR_INTERPOLATION_SPEED)
+		var multiplier: float = max(abs((_health_bar.value - health) / SPEED_THRESHOLD), 1)
+		_health_bar.value = move_toward(_health_bar.value, health, HEALTH_BAR_SPEED * multiplier)
 
 func take_damage(amount: int, damage_type: Element.Type):
 	if is_invincible:
@@ -42,6 +44,16 @@ func take_damage(amount: int, damage_type: Element.Type):
 		iframes()
 		health -= amount
 		health_changed.emit(health, -amount)
+	if health <= 0:
+		die()
+
+func take_damage_no_iframes(amount: int, damage_type: Element.Type):
+	if is_invincible:
+		return
+	if damage_type != Element.Type.Neutral and damage_type == element:
+		return
+	health -= amount
+	health_changed.emit(health, -amount)
 	if health <= 0:
 		die()
 
@@ -64,6 +76,6 @@ func die():
 
 func iframes():
 	can_take_damage = false
-	var iframe_length: float = 0.3
+	var iframe_length: float = 0.1
 	await get_tree().create_timer(iframe_length).timeout
 	can_take_damage = true
