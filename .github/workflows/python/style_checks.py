@@ -90,7 +90,8 @@ def hasOddColonFormat(line: str):
     spaceBeforeConon = re.search(r" :", line) is not None
     linesToIgnore = ["func", "if", "else", "elif", "while", "for", "match"]
     noSpaceAfeterColon = not any([x in line for x in linesToIgnore]) and line.count(":") > 0 and line[line.index(":")+1] != " " and line[line.index(":")+1] != "/"
-    return spaceBeforeConon or noSpaceAfeterColon
+    isDeclaration = "var" in line or "const" in line
+    return isDeclaration and (spaceBeforeConon or noSpaceAfeterColon)
 
 def hasUninitializedVariable(line: str):
     if 'var' in line:
