@@ -3022,6 +3022,10 @@ flip_h = true
 modulate = Color(0.721569, 0.721569, 0.721569, 1)
 position = Vector2(10915, 654)
 
+[node name="Puddle2" parent="Forest/longStraight" instance=ExtResource("23_43erc")]
+top_level = true
+position = Vector2(10548, 691)
+
 [node name="thirdCave" type="Node2D" parent="Forest"]
 
 [node name="redTree02" parent="Forest/thirdCave" instance=ExtResource("13_8qu4p")]
@@ -3264,9 +3268,6 @@ texture = ExtResource("28_unqp1")
 
 [node name="Puddle" parent="Forest/ending" instance=ExtResource("23_43erc")]
 position = Vector2(1751, 320)
-
-[node name="Puddle2" parent="Forest/ending" instance=ExtResource("23_43erc")]
-position = Vector2(2343, 777)
 
 [node name="redTree03" parent="Forest/ending" instance=ExtResource("16_qodfp")]
 modulate = Color(0.709804, 0.709804, 0.709804, 1)
