@@ -81,3 +81,9 @@ jump_force = -120
 can_fly = true
 weight = 0.2
 nodes_to_flip = [NodePath("../EnemyGraphics")]
+
+[node name="MovementOscillation" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="MovementOscillation" to="." method="_on_movement_oscillation_timeout"]
