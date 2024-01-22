@@ -68,14 +68,11 @@ func _physics_process(delta: float):
 	# For transitions without event condition
 	state_chart.send_event("tick")
 	apply_gravity(delta)
-
 	if direction == 0:
 		velocity.x = lerp(velocity.x, 0.0, friction)
-
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
 	state_chart.set_expression_property("jumps_left", jumps_left)
 	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
-
 	direction = Input.get_axis("a", "d")
 	if abs(direction) > 0 and can_move:
 		velocity.x = lerp(velocity.x, direction * speed, 0.1)
