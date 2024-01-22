@@ -16,13 +16,13 @@
 [ext_resource type="Texture2D" uid="uid://b40f5avor3q0p" path="res://entities/player/assets/deathanimation/death05.png" id="6_5ni3t"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_aaxtf"]
 [ext_resource type="Texture2D" uid="uid://bio4rf0meadhh" path="res://entities/player/assets/idleanimation/01Idle.png" id="6_oqgpa"]
-[ext_resource type="Texture2D" uid="uid://dpppwdhohq2yn" path="res://entities/player/assets/animationStates/wideIceState.png" id="7_18imo"]
 [ext_resource type="Texture2D" uid="uid://bgd8x87u7urvs" path="res://entities/player/assets/idleanimation/02Idle.png" id="7_56lpd"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="7_m5qsp"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_is_active_guard.gd" id="8_3t36e"]
 [ext_resource type="Texture2D" uid="uid://chvamghhunu33" path="res://entities/player/assets/idleanimation/03Idle.png" id="8_f6dh4"]
 [ext_resource type="Texture2D" uid="uid://c3ud4e5o0vqo6" path="res://entities/player/assets/idleanimation/04Idle.png" id="9_osul0"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="9_qrtxb"]
+[ext_resource type="Texture2D" uid="uid://d3hryufhplx0j" path="res://entities/player/assets/ice_state.png" id="10_e65dn"]
 [ext_resource type="Texture2D" uid="uid://b30cxaxbgma1c" path="res://entities/player/assets/idleanimation/05Idle.png" id="10_hxh2n"]
 [ext_resource type="Texture2D" uid="uid://ly7ncnf6nm55" path="res://entities/player/assets/idleanimation/06Idle.png" id="11_q30fb"]
 [ext_resource type="Texture2D" uid="uid://cvvp4gjgefq83" path="res://entities/player/assets/idleanimation/07Idle.png" id="12_dkws2"]
@@ -59,10 +59,10 @@ animations = [{
 "duration": 1.5,
 "texture": ExtResource("2_o30bq")
 }, {
-"duration": 1.4,
+"duration": 1.5,
 "texture": ExtResource("3_nvxda")
 }, {
-"duration": 1.4,
+"duration": 1.5,
 "texture": ExtResource("4_cvtf2")
 }],
 "loop": false,
@@ -91,7 +91,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_18imo")
+"texture": ExtResource("10_e65dn")
 }],
 "loop": true,
 "name": &"ice",
@@ -484,8 +484,9 @@ color = Color(0.717647, 0.717647, 0.717647, 0.752941)
 color_ramp = SubResource("GradientTexture1D_bci05")
 anim_speed_curve = SubResource("CurveTexture_iiniv")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ockj"]
-size = Vector2(49, 29.5)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fuycp"]
+radius = 15.25
+height = 49.0
 
 [sub_resource type="Resource" id="Resource_r58ym"]
 script = ExtResource("7_m5qsp")
@@ -606,8 +607,9 @@ unique_name_in_owner = true
 position = Vector2(1, -0.125001)
 scale = Vector2(0.3, 0.303125)
 sprite_frames = SubResource("SpriteFrames_pbewx")
-animation = &"dash"
+animation = &"run"
 autoplay = "idle"
+frame_progress = 0.203149
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animation"]
@@ -683,10 +685,10 @@ heat_tick = NodePath("../Timers/HeatTick")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 show_behind_parent = true
-position = Vector2(-1, -14.75)
-shape = SubResource("RectangleShape2D_8ockj")
+position = Vector2(0, -15.5)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_fuycp")
 debug_color = Color(0.917647, 0.172549, 0.568627, 0.419608)
-metadata/_edit_lock_ = true
 
 [node name="Sprites" type="Node2D" parent="."]
 
