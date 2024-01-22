@@ -1,5 +1,4 @@
-
-[gd_scene load_steps=35 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=36 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dhjab"]
@@ -81,6 +80,7 @@ expression = "active_chemical == \"ice\""
 [sub_resource type="Resource" id="Resource_qg1j2"]
 script = ExtResource("7_m5qsp")
 expression = "active_chemical == \"sodium\""
+
 [sub_resource type="Resource" id="Resource_7761j"]
 script = ExtResource("7_m5qsp")
 expression = "active_chemical == \"foam\""
@@ -356,6 +356,7 @@ script = ExtResource("6_aaxtf")
 to = NodePath("../../Sodium")
 event = &"to_chemical"
 guard = SubResource("Resource_qg1j2")
+
 [node name="ToFoam" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root/Default"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Foam")
@@ -376,6 +377,7 @@ script = ExtResource("5_dadqm")
 [node name="ToDefault" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root/Sodium"]
 script = ExtResource("6_aaxtf")
 to = NodePath("../../Default")
+
 [node name="Foam" type="Node" parent="ChemicalEffectsManager/ChemicalStates/Root"]
 script = ExtResource("5_dadqm")
 
@@ -408,8 +410,8 @@ script = ExtResource("15_8nkrm")
 [connection signal="state_physics_processing" from="ChemicalEffectsManager/ChemicalStates/Root/Default" to="." method="_on_default_state_physics_processing"]
 [connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Ice" to="ChemicalEffectsManager" method="_on_ice_state_entered"]
 [connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Ice" to="ChemicalEffectsManager/effects/ice" method="_on_ice_state_entered"]
-[connection signal="state_input" from="ChemicalEffectsManager/ChemicalStates/Root/Sodium" to="." method="_on_sodium_state_input"]
 [connection signal="state_exited" from="ChemicalEffectsManager/ChemicalStates/Root/Ice" to="ChemicalEffectsManager/effects/ice" method="_on_ice_state_exited"]
+[connection signal="state_input" from="ChemicalEffectsManager/ChemicalStates/Root/Sodium" to="." method="_on_sodium_state_input"]
 [connection signal="state_entered" from="ChemicalEffectsManager/ChemicalStates/Root/Foam" to="ChemicalEffectsManager/effects/foam" method="_on_foam_state_entered"]
 [connection signal="state_exited" from="ChemicalEffectsManager/ChemicalStates/Root/Foam" to="." method="_on_foam_state_exited"]
 [connection signal="state_exited" from="ChemicalEffectsManager/ChemicalStates/Root/Foam" to="ChemicalEffectsManager/effects/foam" method="_on_foam_state_exited"]
