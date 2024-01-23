@@ -49,7 +49,9 @@ position = Vector2(0, -11.5)
 shape = SubResource("RectangleShape2D_rm63b")
 debug_color = Color(0.109804, 0.564706, 0.847059, 0.419608)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="EnemyGraphics" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="EnemyGraphics"]
 unique_name_in_owner = true
 position = Vector2(0, -24)
 scale = Vector2(0.1, 0.1)
@@ -102,7 +104,7 @@ aggro_component = NodePath("../AggroComponent")
 jump_force = -120
 can_fly = true
 weight = 0.2
-nodes_to_flip = [NodePath("../AnimatedSprite2D")]
+nodes_to_flip = [NodePath("../EnemyGraphics")]
 
 [node name="MovementOscillation" type="Timer" parent="."]
 wait_time = 5.0
