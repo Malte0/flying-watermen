@@ -29881,7 +29881,6 @@ position = Vector2(5975, 1763)
 
 [node name="RangedEnemy" parent="." instance=ExtResource("11_2fedg")]
 position = Vector2(1327, 1311)
-carried_item = ExtResource("13_l88ic")
 
 [node name="EnemySpawnArea" parent="." instance=ExtResource("14_nc86j")]
 position = Vector2(172, 1698)
