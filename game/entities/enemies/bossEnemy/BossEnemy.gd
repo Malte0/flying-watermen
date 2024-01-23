@@ -1,4 +1,4 @@
-extends Enemy
+extends CharacterBody2D
 
 @export var aggro_component: AggroComponent
 @export var melee_attack_low_component: MeleeAttackComponent
@@ -16,7 +16,7 @@ extends Enemy
 enum Attacks {FireWave = 600, Melee = 300}
 const ATTACK_DISTANCE: int = 300
 const MOVEMENT_EPSILON_PIXELS: int = 230
-var next_attack: any = Attacks.FireWave
+var next_attack = Attacks.FireWave
 var is_fire_wave_cd: bool = false
 var is_melee_cd: bool = false
 
