@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 @export var aggro_component: AggroComponent
-@export var melee_attack_low_component: MeleeAttackComponent
-@export var melee_attack_high_component: MeleeAttackComponent
+@export var melee_attack_low_component: MeleeComponent
+@export var melee_attack_high_component: MeleeComponent
 @export var movement_component: MovementComponent
 @export var wall_detection: RayCast2D
 @export var fire_wave_cooldown: Timer
@@ -59,7 +59,8 @@ func on_aggro_entered():
 func on_calm_entered():
 	movement_component.movement_speed = movement_speed_calm
 
-func high_level_KI(player_distance):
+# retard naming :/
+func high_level_KI(_player_distance):
 	if randi() % 2:
 		return Attacks.Melee
 	return Attacks.FireWave

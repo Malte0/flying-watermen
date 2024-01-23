@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b7lolmn4dqxpj" path="res://assets/ranged_enemy_assets/flyingEnemy01.png" id="3_yusil"]
 [ext_resource type="Texture2D" uid="uid://btb7dof6qg0tl" path="res://assets/ranged_enemy_assets/flyingEnemy02.png" id="4_v2pk0"]
 [ext_resource type="Texture2D" uid="uid://cq3nc2hweblcp" path="res://assets/ranged_enemy_assets/flyingEnemy03.png" id="5_2h1aa"]
-[ext_resource type="PackedScene" uid="uid://u07y0x28am7y" path="res://entities/components/heat/HeatArea.tscn" id="6_5vado"]
+[ext_resource type="PackedScene" path="res://entities/components/heat/HeatArea.tscn" id="6_5vado"]
 [ext_resource type="PackedScene" uid="uid://bkweew02mcaim" path="res://entities/components/enemyComponents/enemyAggro/AggroComponent.tscn" id="8_axj65"]
 [ext_resource type="PackedScene" uid="uid://b0x70uo3ar3yc" path="res://entities/components/enemyComponents/combat/EnemyRangedCombat.tscn" id="9_g276e"]
 [ext_resource type="PackedScene" uid="uid://61g8e7mlxwj" path="res://entities/components/enemyComponents/movement/MovementComponent.tscn" id="9_of3xe"]
@@ -83,6 +83,7 @@ texture_under = ExtResource("2_n8t0v")
 texture_progress = ExtResource("3_wwf3b")
 
 [node name="GroundDistance" type="RayCast2D" parent="."]
+unique_name_in_owner = true
 target_position = Vector2(0, 200)
 
 [node name="EnemyHeatArea" parent="." instance=ExtResource("6_5vado")]

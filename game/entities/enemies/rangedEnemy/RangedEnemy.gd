@@ -16,7 +16,7 @@ func _ready():
 	aggro_component.aggro_entered.connect(on_aggro_entered)
 	aggro_component.calm_entered.connect(on_calm_entered)
 
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	if ground_distance.is_colliding():
 		movement_component.jump(1)
 

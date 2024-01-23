@@ -7,12 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://bgeyik6y657at" path="res://assets/melee_enemy_assets/melee_enemy02.png" id="4_wm3h2"]
 [ext_resource type="Texture2D" uid="uid://cq14ebdyh01l2" path="res://assets/melee_enemy_assets/melee_enemy03.png" id="5_wx33d"]
 [ext_resource type="Texture2D" uid="uid://drqht0p82ryru" path="res://entities/enemies/assets/healthbar_progress.png" id="5_x4f6e"]
-[ext_resource type="PackedScene" uid="uid://u07y0x28am7y" path="res://entities/components/heat/HeatArea.tscn" id="6_dqevw"]
+[ext_resource type="PackedScene" path="res://entities/components/heat/HeatArea.tscn" id="6_dqevw"]
 [ext_resource type="Texture2D" uid="uid://dmyx2mk6fjoud" path="res://assets/light_noise/waterParticle.png" id="6_tmsvp"]
-[ext_resource type="PackedScene" uid="uid://b22gqpw2lilbg" path="res://entities/components/health/DamageArea.tscn" id="7_llwul"]
+[ext_resource type="PackedScene" path="res://entities/components/health/DamageArea.tscn" id="7_llwul"]
 [ext_resource type="PackedScene" uid="uid://bkweew02mcaim" path="res://entities/components/enemyComponents/enemyAggro/AggroComponent.tscn" id="8_vgiu5"]
 [ext_resource type="PackedScene" uid="uid://61g8e7mlxwj" path="res://entities/components/enemyComponents/movement/MovementComponent.tscn" id="9_mp4oq"]
-[ext_resource type="PackedScene" uid="uid://tdd5ci5su0wo" path="res://entities/components/meleeCombat/MeleeAttackComponent.tscn" id="10_v8nb8"]
+[ext_resource type="PackedScene" uid="uid://tdd5ci5su0wo" path="res://entities/components/meleeCombat/MeleeComponent.tscn" id="10_v8nb8"]
 [ext_resource type="PackedScene" uid="uid://wamnd7014nsa" path="res://entities/components/enemyComponents/itemDropper/DropItemComponent.tscn" id="11_ieocg"]
 [ext_resource type="PackedScene" uid="uid://bree81gljy661" path="res://entities/player/inventory/items/foamChemical/FoamChemical.tscn" id="12_70ypm"]
 
@@ -80,12 +80,12 @@ color_ramp = SubResource("GradientTexture1D_0j4ex")
 hue_variation_min = -0.67
 hue_variation_max = -0.55
 
-[node name="MeleeEnemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_component", "melee_attack_component", "movement_component", "wall_detection")]
+[node name="MeleeEnemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_component", "melee_component", "movement_component", "wall_detection")]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("2_r07kk")
 aggro_component = NodePath("AggroComponent")
-melee_attack_component = NodePath("MeleeAttack")
+melee_component = NodePath("MeleeComponent")
 movement_component = NodePath("MovementComponent")
 wall_detection = NodePath("WallDetection/Raycast2D")
 
@@ -154,16 +154,16 @@ view_area = NodePath("../ViewArea")
 health_component = NodePath("../HealthComponent")
 
 [node name="MovementComponent" parent="." node_paths=PackedStringArray("nodes_to_flip") instance=ExtResource("9_mp4oq")]
-nodes_to_flip = [NodePath("../EnemyGraphics"), NodePath("../WallDetection"), NodePath("../MeleeAttack")]
+nodes_to_flip = [NodePath("../EnemyGraphics"), NodePath("../WallDetection"), NodePath("../MeleeComponent")]
 
-[node name="MeleeAttack" parent="." node_paths=PackedStringArray("attack_shape") instance=ExtResource("10_v8nb8")]
+[node name="MeleeComponent" parent="." node_paths=PackedStringArray("attack_shape") instance=ExtResource("10_v8nb8")]
 collision_mask = 3
 damage = 20
 element = 1
 attack_shape = NodePath("AttackShape")
 attack_color = Color(0.764706, 0.262745, 0.25098, 1)
 
-[node name="AttackShape" type="CollisionShape2D" parent="MeleeAttack"]
+[node name="AttackShape" type="CollisionShape2D" parent="MeleeComponent"]
 position = Vector2(70.7502, -24.7496)
 shape = SubResource("RectangleShape2D_pnwyi")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)

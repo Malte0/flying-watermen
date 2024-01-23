@@ -1,6 +1,5 @@
-[gd_scene load_steps=114 format=3 uid="uid://cu55a1ijhr436"]
+[gd_scene load_steps=113 format=3 uid="uid://cu55a1ijhr436"]
 
-[ext_resource type="Script" path="res://scenes/first-map/FirstMap.gd" id="1_0g272"]
 [ext_resource type="Texture2D" uid="uid://dhvk873s0063d" path="res://assets/tileMap/Tiles.png" id="1_b4xfn"]
 [ext_resource type="PackedScene" uid="uid://djmlmtr41m2ce" path="res://entities/player/player.tscn" id="2_6f3hr"]
 [ext_resource type="PackedScene" uid="uid://cwhk2jj1iftec" path="res://assets/forest-assets/scenes/stone01.tscn" id="2_iscm2"]
@@ -2472,7 +2471,6 @@ stream_9/stream = ExtResource("43_8b0jp")
 stream_9/weight = 0.0
 
 [node name="FirstMap" type="Node2D"]
-script = ExtResource("1_0g272")
 
 [node name="Areas" type="Node2D" parent="."]
 
@@ -3070,7 +3068,6 @@ scale = Vector2(0.159089, 0.164847)
 [node name="redTree03" parent="Areas/LongStraight/Assets" instance=ExtResource("14_m6vy2")]
 position = Vector2(8543, 411)
 rotation = 0.0197252
-scale = Vector2(1.3, 1.3)
 
 [node name="redTree05" parent="Areas/LongStraight/Assets" instance=ExtResource("13_8qu4p")]
 modulate = Color(0.682353, 0.682353, 0.682353, 1)
@@ -3266,7 +3263,6 @@ position = Vector2(12436, 1759)
 [node name="Stone03" parent="Areas/ThirdCave/Assets" instance=ExtResource("15_p18ua")]
 position = Vector2(11973, 1804)
 rotation = 0.478189
-scale = Vector2(0.2, 0.2)
 
 [node name="Spiderweb" type="Sprite2D" parent="Areas/ThirdCave/Assets"]
 position = Vector2(11716, 2063)
@@ -3529,7 +3525,7 @@ position = Vector2(5872, 1289)
 scale = Vector2(1.5, 1.5)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(-0.000651042, -117.333)
+position = Vector2(0, -19.575)
 zoom = Vector2(0.8, 0.8)
 process_callback = 0
 

@@ -1,4 +1,4 @@
-class_name MeleeAttackComponent extends Area2D
+class_name MeleeComponent extends Area2D
 
 @export var damage: int = 50
 @export var element: Element.Type
@@ -7,10 +7,13 @@ class_name MeleeAttackComponent extends Area2D
 
 @onready var state_chart: StateChart = $AttackStateChart
 @onready var tmp_animation_bar: ProgressBar = $ProgressBar
+@onready var parent: CharacterBody2D = get_parent()
+@onready var ranged_component: RangedComponent = parent.get_node_or_null("RangedComponent")
 
 const ATTACK_DURATION: float = 0.1
 ## To makes sure no body is hit twice
 var bodies_hit: Array[CharacterBody2D] = []
+var is_enabled: bool = true
 
 func _ready():
 	if attack_shape.shape is RectangleShape2D:
@@ -25,6 +28,15 @@ func _ready():
 	tmp_animation_bar.visible = false
 	tmp_animation_bar.modulate = attack_color
 
+func attack():
+	if is_enabled: state_chart.send_event("attack")
+
+func disable():
+	is_enabled = false
+
+func enable():
+	is_enabled = true
+
 func _on_body_entered(body):
 	var health_component: HealthComponent = body.get_node_or_null("HealthComponent")
 	if health_component and body not in bodies_hit:
@@ -34,10 +46,8 @@ func _on_body_entered(body):
 		if weakref(body).get_ref() and body in bodies_hit:
 			bodies_hit.erase(body)
 
-func attack():
-	state_chart.send_event("attack")
-
 func _on_attack_state_entered():
+	if ranged_component: ranged_component.disable()
 	tmp_animation_bar.visible = true
 	tmp_animation_bar.value = 0
 	var tween = get_tree().create_tween()
@@ -45,5 +55,6 @@ func _on_attack_state_entered():
 	attack_shape.disabled = false
 
 func _on_attack_state_exited():
+	if ranged_component: ranged_component.enable()
 	tmp_animation_bar.visible = false
 	attack_shape.disabled = true

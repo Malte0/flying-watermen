@@ -5,7 +5,6 @@ extends Node2D
 @onready var dash_particles: GPUParticles2D = $DashTrail
 
 func walking_particles():
-	var amount = walk_particles.amount
 	# y > 80 wegen den Wallslides 
 	if abs(player.velocity.x) > 20 || abs(player.velocity.y) > 80 :
 		walk_particles.set_amount_ratio(1)

@@ -17,6 +17,9 @@ const SPEED_THRESHOLD: float = 25
 var heal_over_time_left: int = 0
 var health: int = 100
 var is_invincible: bool = false
+var iframe_length: float = 0.3
+
+var can_take_damage_over_time: int = 0
 
 signal health_changed(new_health: int, delta_health: int)
 signal death()
@@ -51,6 +54,16 @@ func take_damage(amount: int, damage_type: Element.Type):
 	if health <= 0:
 		die()
 
+# there is no need to use to check for iframes, cuz the func deals no primary dmg
+func take_damage_overtime(amount: int, damage_type: Element.Type, time: int):
+	if can_take_damage_over_time <= 5:
+		can_take_damage_over_time += 1
+		while time >= 0:
+			take_damage_no_iframes(amount, damage_type)
+			time -= 1
+			await get_tree().create_timer(0.3).timeout
+		can_take_damage_over_time -= 1
+
 func take_damage_no_iframes(amount: int, damage_type: Element.Type):
 	if is_invincible:
 		return
@@ -78,9 +91,8 @@ func die():
 	death.emit()
 	get_parent().queue_free()
 
-func iframes(time: float):
+func iframes(_time: float):
 	can_take_damage = false
-	var iframe_length: float = 0.1
 	await get_tree().create_timer(iframe_length).timeout
 	can_take_damage = true
 
