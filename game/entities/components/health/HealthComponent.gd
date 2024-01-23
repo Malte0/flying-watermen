@@ -61,16 +61,6 @@ func take_damage_no_iframes(amount: int, damage_type: Element.Type):
 	if health <= 0:
 		die()
 
-func take_damage_no_iframes(amount: int, damage_type: Element.Type):
-	if is_invincible:
-		return
-	if damage_type != Element.Type.Neutral and damage_type == element:
-		return
-	health -= amount
-	health_changed.emit(health, -amount)
-	if health <= 0:
-		die()
-
 func heal(amount: int):
 	health = mini(health + amount, max_health)
 	health_changed.emit(health, amount)
