@@ -3,7 +3,7 @@ class_name Player extends CharacterBody2D
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var heat_component: HeatComponent = $HeatComponent
 @onready var ranged_component: RangedComponent = %RangedComponent
-@onready var melee_attack: MeleeAttack = $MeleeAttack
+@onready var melee_attack: MeleeComponent = $MeleeComponent
 @onready var inventory: Inventory = $Inventory
 @onready var state_chart: StateChart = %StateChart
 
@@ -85,8 +85,6 @@ func update_states():
 			state_chart.send_event("falling")
 
 func movement(delta: float):
-	if direction == 0:
-		velocity.x = lerp(velocity.x, 0.0, friction)
 	# handle left/right movement
 	direction = Input.get_axis("a", "d")
 	if abs(direction) > 0 and can_move:
@@ -165,9 +163,10 @@ func melee():
 #endregion
 
 #region Shooting
-func shoot() -> void:
+func shoot() -> bool:
 	var shoot_direction = global_position.direction_to(get_global_mouse_position())
-	ranged_component.shoot(shoot_direction, projectile_scene, velocity)
+	if ranged_component.shoot(shoot_direction, projectile_scene, velocity): return true
+	return false
 #endregion
 
 #region Animation

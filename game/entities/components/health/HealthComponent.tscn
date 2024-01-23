@@ -5,3 +5,8 @@
 [node name="HealthComponent" type="Node2D"]
 script = ExtResource("1_x7cro")
 element = 1
+
+[node name="IFrames" type="Timer" parent="."]
+wait_time = 0.3
+
+[connection signal="timeout" from="IFrames" to="." method="_on_i_frames_timeout"]

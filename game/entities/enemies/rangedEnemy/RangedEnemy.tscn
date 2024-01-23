@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmeutg1f6t7sl"]
+[gd_scene load_steps=14 format=3 uid="uid://dmeutg1f6t7sl"]
 
 [ext_resource type="Script" path="res://entities/enemies/rangedEnemy/RangedEnemy.gd" id="1_itytb"]
 [ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="1_otr82"]
@@ -6,6 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://cd1p17mer6550" path="res://entities/enemies/assets/rangedEnemyDirected.png" id="2_4ume1"]
 [ext_resource type="Texture2D" uid="uid://32uxotk6128m" path="res://entities/enemies/assets/healthbar_under.png" id="2_n8t0v"]
 [ext_resource type="Texture2D" uid="uid://drqht0p82ryru" path="res://entities/enemies/assets/healthbar_progress.png" id="3_wwf3b"]
+[ext_resource type="PackedScene" uid="uid://u07y0x28am7y" path="res://entities/components/heat/HeatArea.tscn" id="6_5vado"]
+[ext_resource type="PackedScene" uid="uid://bkweew02mcaim" path="res://entities/components/enemyComponents/enemyAggro/AggroComponent.tscn" id="8_axj65"]
+[ext_resource type="PackedScene" uid="uid://b0x70uo3ar3yc" path="res://entities/components/enemyComponents/combat/EnemyRangedCombat.tscn" id="9_g276e"]
+[ext_resource type="PackedScene" uid="uid://61g8e7mlxwj" path="res://entities/components/enemyComponents/movement/MovementComponent.tscn" id="9_of3xe"]
+[ext_resource type="PackedScene" uid="uid://1kqni5b4lpm" path="res://entities/projectiles/FireProjectile.tscn" id="9_yoaf2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rm63b"]
 size = Vector2(74, 47)
@@ -13,20 +18,33 @@ size = Vector2(74, 47)
 [sub_resource type="CircleShape2D" id="CircleShape2D_5bvq1"]
 radius = 414.0
 
-[node name="RangedEnemy" type="CharacterBody2D" groups=["Enemy"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_gkbmv"]
+radius = 75.0267
+
+[node name="RangedEnemy" type="CharacterBody2D" node_paths=PackedStringArray("movement_component")]
 collision_layer = 4
 script = ExtResource("1_itytb")
+movement_component = NodePath("MovementComponent")
 
-[node name="DirectionalNodes" type="Node2D" parent="."]
+[node name="EnemyShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -11.5)
+shape = SubResource("RectangleShape2D_rm63b")
+debug_color = Color(0.109804, 0.564706, 0.847059, 0.419608)
 
-[node name="RangedComponent" parent="DirectionalNodes" instance=ExtResource("2_2oj5c")]
-unique_name_in_owner = true
-position = Vector2(34, -7)
+[node name="EnemyGraphics" type="Node2D" parent="."]
 
-[node name="FlameImage" type="Sprite2D" parent="DirectionalNodes"]
+[node name="FlameImage" type="Sprite2D" parent="EnemyGraphics"]
 position = Vector2(0, -12)
 scale = Vector2(0.16, 0.146)
 texture = ExtResource("2_4ume1")
+
+[node name="ViewArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ViewArea"]
+shape = SubResource("CircleShape2D_5bvq1")
+debug_color = Color(0.0196078, 0.639216, 0.360784, 0.419608)
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_health_bar") instance=ExtResource("1_otr82")]
 _health_bar = NodePath("HealthBar")
@@ -41,39 +59,33 @@ value = 100.0
 texture_under = ExtResource("2_n8t0v")
 texture_progress = ExtResource("3_wwf3b")
 
-[node name="AggroCooldown" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
-[node name="FireRate" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
-
-[node name="DirectionChange" type="Timer" parent="."]
-wait_time = 4.0
-autostart = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -11.5)
-shape = SubResource("RectangleShape2D_rm63b")
-debug_color = Color(0.67451, 0.505882, 0.0235294, 0.419608)
-
-[node name="ViewArea" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ViewArea"]
-shape = SubResource("CircleShape2D_5bvq1")
-
 [node name="GroundDistance" type="RayCast2D" parent="."]
 unique_name_in_owner = true
 target_position = Vector2(0, 200)
 
-[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
-[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
-[connection signal="timeout" from="AggroCooldown" to="." method="_on_aggro_cooldown_timeout"]
-[connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
-[connection signal="timeout" from="DirectionChange" to="." method="_on_direction_change_timeout"]
-[connection signal="body_entered" from="ViewArea" to="." method="_on_view_area_body_entered"]
-[connection signal="body_exited" from="ViewArea" to="." method="_on_view_area_body_exited"]
+[node name="EnemyHeatArea" parent="." instance=ExtResource("6_5vado")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHeatArea"]
+position = Vector2(0, -13)
+shape = SubResource("CircleShape2D_gkbmv")
+debug_color = Color(0.878431, 0.333333, 0.2, 0.419608)
+
+[node name="AggroComponent" parent="." node_paths=PackedStringArray("view_area", "health_component") instance=ExtResource("8_axj65")]
+view_area = NodePath("../ViewArea")
+health_component = NodePath("../HealthComponent")
+
+[node name="EnemyRangedCombat" parent="." node_paths=PackedStringArray("aggro_component") instance=ExtResource("9_g276e")]
+projectile_scene = ExtResource("9_yoaf2")
+aggro_component = NodePath("../AggroComponent")
+
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("nodes_to_flip") instance=ExtResource("9_of3xe")]
+jump_force = -120
+can_fly = true
+weight = 0.2
+nodes_to_flip = [NodePath("../EnemyGraphics")]
+
+[node name="MovementOscillation" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="MovementOscillation" to="." method="_on_movement_oscillation_timeout"]

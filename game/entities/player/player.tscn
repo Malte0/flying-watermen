@@ -15,9 +15,12 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="7_m5qsp"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_is_active_guard.gd" id="8_3t36e"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="9_qrtxb"]
-[ext_resource type="Script" path="res://entities/player/MeleeAttack.gd" id="14_y8i2u"]
+[ext_resource type="PackedScene" uid="uid://tdd5ci5su0wo" path="res://entities/components/meleeCombat/MeleeComponent.tscn" id="14_pebxf"]
 [ext_resource type="Script" path="res://entities/player/inventory/Inventory.gd" id="15_8nkrm"]
 [ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="16_vgsyb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_obf3n"]
+size = Vector2(67.9998, 44.5003)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ockj"]
 size = Vector2(38, 29.5)
@@ -70,9 +73,6 @@ guard = SubResource("Resource_p8ca0")
 script = ExtResource("8_3t36e")
 state = NodePath("../../../Cooldowns/Dash/Useable")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_srmds"]
-size = Vector2(67.9999, 45.5001)
-
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 5
@@ -80,10 +80,9 @@ floor_constant_speed = true
 floor_snap_length = 23.0
 script = ExtResource("1_n7144")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("_heal_tick") instance=ExtResource("16_vgsyb")]
+[node name="HealthComponent" parent="." instance=ExtResource("16_vgsyb")]
 unique_name_in_owner = true
 element = 0
-_heal_tick = NodePath("../Timers/HealTick")
 
 [node name="HeatComponent" parent="." node_paths=PackedStringArray("health_component", "heat_reduction_delay", "heat_tick") instance=ExtResource("3_kjfn2")]
 unique_name_in_owner = true
@@ -97,6 +96,17 @@ position = Vector2(0, -24)
 use_cooldown = true
 
 [node name="ChemicalEffectsManager" parent="." instance=ExtResource("5_cbv3l")]
+
+[node name="MeleeComponent" parent="." node_paths=PackedStringArray("attack_shape") instance=ExtResource("14_pebxf")]
+rotation = -4.46638e-06
+collision_mask = 4
+attack_shape = NodePath("AttackShape")
+attack_color = Color(0.188235, 0.560784, 0.709804, 1)
+
+[node name="AttackShape" type="CollisionShape2D" parent="MeleeComponent"]
+position = Vector2(45.5001, -16.9998)
+shape = SubResource("RectangleShape2D_obf3n")
+debug_color = Color(1, 1, 1, 0.419608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -14.75)
@@ -292,60 +302,6 @@ script = ExtResource("6_aaxtf")
 to = NodePath("../../Cooldown")
 event = &"dash"
 
-[node name="MeleeAttack" type="Area2D" parent="."]
-position = Vector2(0, -23)
-rotation = -6.28319
-collision_layer = 0
-collision_mask = 5
-script = ExtResource("14_y8i2u")
-
-[node name="AttackStateChart" type="Node" parent="MeleeAttack"]
-script = ExtResource("2_dhjab")
-
-[node name="Root" type="Node" parent="MeleeAttack/AttackStateChart"]
-script = ExtResource("4_klwk4")
-initial_state = NodePath("CanAttack")
-
-[node name="CannotAttack" type="Node" parent="MeleeAttack/AttackStateChart/Root"]
-script = ExtResource("5_dadqm")
-
-[node name="ToCanAttack" type="Node" parent="MeleeAttack/AttackStateChart/Root/CannotAttack"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../CanAttack")
-delay_seconds = 0.1
-
-[node name="CanAttack" type="Node" parent="MeleeAttack/AttackStateChart/Root"]
-script = ExtResource("5_dadqm")
-
-[node name="ToAttack" type="Node" parent="MeleeAttack/AttackStateChart/Root/CanAttack"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../Attack")
-event = &"attack"
-
-[node name="Attack" type="Node" parent="MeleeAttack/AttackStateChart/Root"]
-script = ExtResource("5_dadqm")
-
-[node name="ToCannotAttack" type="Node" parent="MeleeAttack/AttackStateChart/Root/Attack"]
-script = ExtResource("6_aaxtf")
-to = NodePath("../../CannotAttack")
-delay_seconds = 0.2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeAttack"]
-position = Vector2(43, 5.2501)
-shape = SubResource("RectangleShape2D_srmds")
-disabled = true
-debug_color = Color(0.768627, 0.313726, 0.803922, 0.419608)
-
-[node name="ProgressBar" type="ProgressBar" parent="MeleeAttack"]
-visible = false
-modulate = Color(0.380392, 0.721569, 1, 1)
-offset_left = 9.0
-offset_top = -17.0
-offset_right = 77.0
-offset_bottom = 28.0
-value = 100.0
-show_percentage = false
-
 [connection signal="death" from="HealthComponent" to="." method="_on_death"]
 [connection signal="child_state_exited" from="StateChart/Mechanics/Movement" to="." method="reset_variables"]
 [connection signal="child_state_exited" from="StateChart/Mechanics/Movement/Interruptible" to="." method="_on_movement_child_state_exited"]
@@ -360,6 +316,3 @@ show_percentage = false
 [connection signal="state_entered" from="StateChart/Mechanics/Movement/Interruptible/WallSlide" to="." method="_on_wall_slide_state_entered"]
 [connection signal="state_entered" from="StateChart/Mechanics/Movement/Dash" to="." method="_on_dash_state_entered"]
 [connection signal="state_entered" from="StateChart/Mechanics/Movement/Disabled" to="." method="_on_locked_state_entered"]
-[connection signal="body_entered" from="MeleeAttack" to="MeleeAttack" method="_on_body_entered"]
-[connection signal="state_entered" from="MeleeAttack/AttackStateChart/Root/Attack" to="MeleeAttack" method="_on_attack_state_entered"]
-[connection signal="state_exited" from="MeleeAttack/AttackStateChart/Root/Attack" to="MeleeAttack" method="_on_attack_state_exited"]
