@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dmeutg1f6t7sl"]
+[gd_scene load_steps=16 format=3 uid="uid://dmeutg1f6t7sl"]
 
 [ext_resource type="Script" path="res://entities/enemies/rangedEnemy/RangedEnemy.gd" id="1_itytb"]
 [ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="1_otr82"]
@@ -9,9 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://cq3nc2hweblcp" path="res://assets/ranged_enemy_assets/flyingEnemy03.png" id="5_2h1aa"]
 [ext_resource type="PackedScene" path="res://entities/components/heat/HeatArea.tscn" id="6_5vado"]
 [ext_resource type="PackedScene" uid="uid://bkweew02mcaim" path="res://entities/components/enemyComponents/enemyAggro/AggroComponent.tscn" id="8_axj65"]
-[ext_resource type="PackedScene" uid="uid://b0x70uo3ar3yc" path="res://entities/components/enemyComponents/combat/EnemyRangedCombat.tscn" id="9_g276e"]
 [ext_resource type="PackedScene" uid="uid://61g8e7mlxwj" path="res://entities/components/enemyComponents/movement/MovementComponent.tscn" id="9_of3xe"]
-[ext_resource type="PackedScene" uid="uid://1kqni5b4lpm" path="res://entities/projectiles/FireProjectile.tscn" id="9_yoaf2"]
+[ext_resource type="PackedScene" uid="uid://d71bkm5ic0tt" path="res://entities/components/ranged/RangedComponent.tscn" id="11_uinxd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rm63b"]
 size = Vector2(74, 47)
@@ -97,9 +96,9 @@ debug_color = Color(0.878431, 0.333333, 0.2, 0.419608)
 view_area = NodePath("../ViewArea")
 health_component = NodePath("../HealthComponent")
 
-[node name="EnemyRangedCombat" parent="." node_paths=PackedStringArray("aggro_component") instance=ExtResource("9_g276e")]
-projectile_scene = ExtResource("9_yoaf2")
-aggro_component = NodePath("../AggroComponent")
+[node name="RangedComponent" parent="." instance=ExtResource("11_uinxd")]
+use_cooldown = true
+cooldown = 1.0
 
 [node name="MovementComponent" parent="." node_paths=PackedStringArray("nodes_to_flip") instance=ExtResource("9_of3xe")]
 jump_force = -120

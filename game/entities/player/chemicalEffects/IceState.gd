@@ -20,7 +20,6 @@ func _on_heat_component_heat_changed(new_heat: int, _delta_heat: int) -> void:
 
 func _on_ice_state_entered():
 	heat_component.heat = 0
-	player.animate_state("ice")
 	player.friction = ICE_FRICTION
 	player.health_component.is_invincible = true
 	player.disenable_components(false, false, false)
@@ -33,7 +32,6 @@ func _on_ice_state_entered():
 
 func _on_ice_state_exited() -> void:
 	heat_component.heat = 0
-	player.animate_state("water")
 	player.friction = player.base_friction
 	player.health_component.is_invincible = false
 	player.disenable_components(true, true, true)

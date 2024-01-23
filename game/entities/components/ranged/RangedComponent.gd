@@ -2,8 +2,10 @@ class_name RangedComponent extends Node2D
 
 @export var use_cooldown: bool = false
 @export var cooldown: float = 0.5:
-	set(value): timer.wait_time = value
-	get: return timer.wait_time
+	set(value): if timer: timer.wait_time = value
+	get: 
+		if timer: return timer.wait_time
+		else: return cooldown
 
 @onready var timer: Timer = $ShootCooldown
 @onready var shoot_position: Marker2D = $ShootPosition

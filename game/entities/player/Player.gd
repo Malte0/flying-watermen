@@ -10,7 +10,7 @@ class_name Player extends CharacterBody2D
 @onready var particle = $Particles
 
 # Reset values
-var base_scale_speed: float = 1.5
+var base_scale_speed: float = 2
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") * base_scale_speed
 var base_speed: float = 300.0 * base_scale_speed
 var base_jump_velocity: float = -400.0 * base_scale_speed
@@ -56,7 +56,6 @@ func set_expressions():
 	state_chart.set_expression_property("jumps_left", jumps_left)
 	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
 	state_chart.set_expression_property("velocity_x", velocity.x)
-	state_chart.send_event("tick")
 
 func flip_player():
 	scale.x *= -1
@@ -75,6 +74,7 @@ func _physics_process(delta: float):
 	update_states()
 	movement(delta)
 	move_and_slide()
+	update_animation_parameters()
 
 func update_states():
 	set_expressions()
@@ -101,6 +101,10 @@ func movement(delta: float):
 	# Gravity
 	if not (is_on_floor() and velocity.y == 0):
 		velocity.y += gravity * delta * fall_speed_factor
+
+func update_animation_parameters():
+	animation_tree.set("parameters/Default/blend_position", abs(velocity.x) > 0.8)
+	state_chart.send_event("tick")
 #endregion
 
 #region Movement
@@ -124,10 +128,6 @@ func enable_movement():
 
 func _on_disabled_state_entered() -> void:
 	can_move = false
-
-func update_animation_parameters():
-	animation_tree.set("parameters/Default/blend_position", abs(velocity.x) > 0.8)
-	state_chart.send_event("tick")
 
 func _on_crouching_state_entered():
 	speed = base_speed/2
@@ -178,10 +178,4 @@ func shoot() -> bool:
 	var shoot_direction = global_position.direction_to(get_global_mouse_position())
 	if ranged_component.shoot(shoot_direction, projectile_scene, velocity): return true
 	return false
-#endregion
-
-#region Animation
-func animate_state(state: String):
-	if state == "ice": $Sprites.ice()
-	if state == "water": $Sprites.water()
 #endregion
