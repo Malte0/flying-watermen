@@ -4,7 +4,7 @@ extends Sprite2D
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 
 const damage: int = 10
-var has_body_inside : bool = false
+var has_body_inside: bool = false
 var can_deal_damage: bool = false
 
 #func _ready():
