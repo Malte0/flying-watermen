@@ -3,7 +3,6 @@ extends Node2D
 @onready var fill_label: Panel = $FillLabel
 @onready var read_stone_tablet_scene = get_parent().get_node("ReadStoneTablet")
 
-
 func _ready():
 	$AnimationPlayer.play("hover")
 	

@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 @onready var state_chart: StateChart = %StateChart
-@onready var animation_tree = $"../../../Animation/AnimationTree"
+@onready var animation_tree: AnimationTree = $"../../../Animation/AnimationTree"
 @onready var heat_component: HeatComponent:
 	get: return player.heat_component
 

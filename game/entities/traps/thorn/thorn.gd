@@ -4,31 +4,26 @@ extends Sprite2D
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 
 const damage: int = 10
-var body_inside : bool = false
-var take_damage: bool = false
+var has_body_inside : bool = false
+var can_deal_damage: bool = false
 
 #func _ready():
 	#$Area2D/Timer.start()
-	
+
 func _process(delta):
-	if body_inside && take_damage:
+	if has_body_inside && can_deal_damage:
 		player.health_component.take_damage(damage,Element.Type.Neutral)
-		take_damage = false
-		
+		can_deal_damage = false
 
 func _on_area_2d_body_entered(body):
 	if body == player:
-		body_inside = true
+		has_body_inside = true
 		$Area2D/Timer.start()
-		
-
 
 func _on_area_2d_body_exited(body):
 	if body == player:
-		body_inside = false
+		has_body_inside = false
 		$Area2D/Timer.stop()
-	
 
 func _on_timer_timeout():
-	take_damage = true
-	
+	can_deal_damage = true

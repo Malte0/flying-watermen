@@ -8,7 +8,7 @@ var can_take_damage: bool = true
 ## Optional to display health. Automatically assigned for Player
 @export var _health_bar: TextureProgressBar
 ## Damage shader effect if target got damage
-@export var damage_effect: bool = false
+@export var use_damage_effect: bool = false
 
 const HEAL_OVER_TIME_STEP: int = 5
 const HEALTH_BAR_SPEED: float = 2
@@ -48,11 +48,9 @@ func take_damage(amount: int, damage_type: Element.Type):
 		iframes(0.1)
 		health -= amount
 		health_changed.emit(health, -amount)
-		if damage_effect:
-			damage_flash_effect()
+		if use_damage_effect: damage_flash_effect()
 		
-	if health <= 0:
-		die()
+	if health <= 0: die()
 
 # there is no need to use to check for iframes, cuz the func deals no primary dmg
 func take_damage_overtime(amount: int, damage_type: Element.Type, time: int):
@@ -97,7 +95,7 @@ func iframes(_time: float):
 	can_take_damage = true
 
 func damage_flash_effect():
-	var sprite = %AnimatedSprite2D
+	var sprite: AnimatedSprite2D = %AnimatedSprite2D
 	sprite.modulate = Color.INDIAN_RED
 	await get_tree().create_timer(0.1).timeout	
 	sprite.modulate = Color(1,1,1)

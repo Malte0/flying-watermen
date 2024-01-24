@@ -69,7 +69,6 @@ debug_color = Color(0.0196078, 0.639216, 0.360784, 0.419608)
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_health_bar") instance=ExtResource("1_otr82")]
 _health_bar = NodePath("HealthBar")
-damage_effect = true
 
 [node name="HealthBar" type="TextureProgressBar" parent="HealthComponent"]
 offset_left = -51.0

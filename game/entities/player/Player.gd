@@ -6,12 +6,12 @@ class_name Player extends CharacterBody2D
 @onready var melee_attack: MeleeComponent = $MeleeComponent
 @onready var inventory: Inventory = $Inventory
 @onready var state_chart: StateChart = %StateChart
-@onready var animation_tree = $Animation/AnimationTree
-@onready var particle = $Particles
+@onready var animation_tree: AnimationTree = $Animation/AnimationTree
+@onready var particle: Node2D = $Particles
 
 # Reset values
 var base_scale_speed: float = 2
-var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") * base_scale_speed
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") * base_scale_speed 
 var base_speed: float = 300.0 * base_scale_speed
 var base_jump_velocity: float = -400.0 * base_scale_speed
 var base_friction: float = 0.5
@@ -176,6 +176,5 @@ func melee():
 #region Shooting
 func shoot() -> bool:
 	var shoot_direction = global_position.direction_to(get_global_mouse_position())
-	if ranged_component.shoot(shoot_direction, projectile_scene, velocity): return true
-	return false
+	return ranged_component.shoot(shoot_direction, projectile_scene, velocity)
 #endregion

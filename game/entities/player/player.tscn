@@ -614,7 +614,7 @@ heat_tick = NodePath("../Timers/HeatTick")
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_heal_tick") instance=ExtResource("16_vgsyb")]
 element = 0
 _heal_tick = NodePath("../Timers/HealTick")
-damage_effect = true
+use_damage_effect = true
 
 [node name="MeleeComponent" parent="." node_paths=PackedStringArray("attack_shape") instance=ExtResource("14_pebxf")]
 collision_mask = 4

@@ -28,11 +28,8 @@ func _physics_process(_delta: float):
 
 	if not aggro_component.is_aggro:
 		return
-
-	var random_angle: float = randf()*SHOOTING_PRECISION - (SHOOTING_PRECISION/2)
-	var direction: Vector2 = global_position.direction_to(player.global_position)
-	var corrected_direction: Vector2 = direction.rotated(ANGLE_CORRECTION * -sign(direction.x))
-	ranged_component.shoot(corrected_direction.rotated(random_angle), projectile, Vector2(0,0))
+	
+	shoot()
 	var player_distance: float = abs(player.global_position.x - global_position.x)
 	var player_direction: int = sign(player.global_position.x - global_position.x)
 	if player_distance < MOVEMENT_EPSILON_PIXELS:
@@ -52,3 +49,9 @@ func on_calm_entered():
 func _on_movement_oscillation_timeout():
 	if not aggro_component.is_aggro:
 		movement_component.flip_move_direction()
+
+func shoot():
+	var random_angle: float = randf()*SHOOTING_PRECISION - (SHOOTING_PRECISION/2)
+	var direction: Vector2 = global_position.direction_to(player.global_position)
+	var corrected_direction: Vector2 = direction.rotated(ANGLE_CORRECTION * -sign(direction.x))
+	ranged_component.shoot(corrected_direction.rotated(random_angle), projectile, Vector2(0,0))
