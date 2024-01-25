@@ -13,10 +13,10 @@ extends CharacterBody2D
 
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 
-enum Attacks {FireWave = 600, Melee = 300}
+enum Attacks {FireWave = 600, Melee = 300, None = 0}
 const ATTACK_DISTANCE: int = 300
 const MOVEMENT_EPSILON_PIXELS: int = 230
-var next_attack = Attacks.FireWave
+var next_attack: Attacks = Attacks.FireWave
 var is_fire_wave_cd: bool = false
 var is_melee_cd: bool = false
 
@@ -68,7 +68,7 @@ func high_level_KI(_player_distance):
 func try_attack(player_distance):
 	if player_distance < next_attack:
 		attack(next_attack)
-		next_attack = null
+		next_attack = Attacks.None
 
 func attack(attack_type):
 	match attack_type:
@@ -76,6 +76,8 @@ func attack(attack_type):
 			do_fire_wave()
 		Attacks.Melee:
 			do_melee_attack()
+		Attacks.None:
+			pass
 
 func do_fire_wave():
 	if not is_fire_wave_cd:
