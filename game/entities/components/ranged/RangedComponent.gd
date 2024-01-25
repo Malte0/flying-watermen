@@ -1,6 +1,6 @@
 class_name RangedComponent extends Node2D
 
-signal shot
+signal shot()
 
 @export var use_cooldown: bool = false
 @export var base_cooldown: float = 0.5
