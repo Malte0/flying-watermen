@@ -16,7 +16,7 @@ func _on_player_ready():
 
 # Replace this by depleting the inventory item bar
 func _on_heat_component_heat_changed(new_heat: int, _delta_heat: int) -> void:
-	if new_heat >= heat_component.MAX_HEAT: state_chart.send_event("melt")
+	if new_heat >= heat_component.MAX_HEAT: player.inventory.use_active_item(1)
 
 func _on_ice_state_entered():
 	heat_component.heat = 0
@@ -27,7 +27,6 @@ func _on_ice_state_entered():
 	animation_tree["parameters/conditions/entered_ice"] = true
 	animation_tree["parameters/conditions/exited_ice"] = false
 	
-	player.inventory.set_active_item(null)
 	player.direction = 0
 
 func _on_ice_state_exited() -> void:

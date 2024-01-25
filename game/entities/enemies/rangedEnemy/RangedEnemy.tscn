@@ -97,7 +97,7 @@ health_component = NodePath("../HealthComponent")
 
 [node name="RangedComponent" parent="." instance=ExtResource("11_uinxd")]
 use_cooldown = true
-cooldown = 1.0
+base_cooldown = 1.0
 
 [node name="MovementComponent" parent="." node_paths=PackedStringArray("nodes_to_flip") instance=ExtResource("9_of3xe")]
 jump_force = -120

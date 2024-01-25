@@ -174,7 +174,7 @@ func melee():
 #endregion
 
 #region Shooting
-func shoot() -> bool:
+func shoot():
 	var shoot_direction = global_position.direction_to(get_global_mouse_position())
 	return ranged_component.shoot(shoot_direction, projectile_scene, velocity)
 #endregion
