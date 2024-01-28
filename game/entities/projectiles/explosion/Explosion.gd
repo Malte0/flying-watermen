@@ -7,6 +7,7 @@ const ELEMENT: Element.Type = Element.Type.Water
 const DECAY_TIME: float = 0.4
 
 func _ready():
+	top_level = true
 	animation_player.play("SodiumExplosion")
 	await get_tree().create_timer(DECAY_TIME).timeout
 	queue_free()

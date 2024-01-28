@@ -11,14 +11,15 @@ config_version=5
 [application]
 
 config/name="flying-watermen"
-run/main_scene="res://scenes/ui/main_menu.tscn"
+run/main_scene="res://scenes/ui/menus/mainMenu/mainMenu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Element="*res://globals/Element.gd"
-Globals="*res://globals/Global.gd"
+BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
+Globals="*res://globals/Globals.gd"
 
 [display]
 
@@ -29,7 +30,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AS2P/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
+enabled=PackedStringArray("res://addons/AS2P/plugin.cfg", "res://addons/better-terrain/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
 
 [input]
 

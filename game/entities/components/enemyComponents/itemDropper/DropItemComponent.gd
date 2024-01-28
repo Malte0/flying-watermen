@@ -17,3 +17,4 @@ func spawn_item():
 	var collectable_instance: Node2D = carried_item.instantiate()
 	collectable_instance.global_position = global_position
 	get_parent().get_parent().add_child(collectable_instance)
+

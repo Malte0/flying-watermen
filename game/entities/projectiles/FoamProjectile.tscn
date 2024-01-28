@@ -1,12 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6fka4awae0ff"]
+[gd_scene load_steps=2 format=3 uid="uid://ers3yir1tr14"]
 
-[ext_resource type="PackedScene" uid="uid://bchthkskvre5u" path="res://entities/projectiles/Projectile.tscn" id="1_gnmct"]
+[ext_resource type="PackedScene" uid="uid://ckxjw27a061ub" path="res://entities/projectiles/Projectile.tscn" id="1_gnmct"]
 
 [node name="FoamProjectile" type="Node2D"]
 
 [node name="Projectile" parent="." instance=ExtResource("1_gnmct")]
 top_level = true
-collision_layer = 0
 collision_mask = 5
 speed = 800
 damage = 1

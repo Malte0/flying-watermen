@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var aggro_component: AggroComponent
-@export var melee_attack_component: MeleeAttackComponent
+@export var melee_component: MeleeComponent
 @export var movement_component: MovementComponent
 @export var wall_detection: RayCast2D
 @export var movement_speed_calm: int = 100
@@ -46,7 +46,10 @@ func on_aggro_entered():
 func on_calm_entered():
 	movement_component.movement_speed = movement_speed_calm
 
+func flash_damage_effect():
+	$DirectionalNodes/EnemyGraphics/FlameImage.set("shader_parameter/flash_modifier", 1)
+	
 func _on_attack_frequency_timeout():
 	var player_distance: float = player.global_position.distance_to(global_position)
 	if aggro_component.is_aggro and player_distance < ATTACK_DISTANCE:
-			melee_attack_component.attack()
+			melee_component.attack()

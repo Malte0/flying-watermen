@@ -2,12 +2,13 @@ class_name HealthComponent extends Node2D
 
 @export var element: Element.Type = Element.Type.Neutral
 @export var max_health: int = 100
-@export var health_bar: TextureProgressBar
 var can_take_damage: bool = true
 ## Optional for heal_over_time
 @export var _heal_tick: Timer
 ## Optional to display health. Automatically assigned for Player
 @export var _health_bar: TextureProgressBar
+## Damage shader effect if target got damage
+@export var use_damage_effect: bool = false
 
 const HEAL_OVER_TIME_STEP: int = 5
 const HEALTH_BAR_SPEED: float = 2
@@ -16,6 +17,7 @@ const SPEED_THRESHOLD: float = 25
 var heal_over_time_left: int = 0
 var health: int = 100
 var is_invincible: bool = false
+var iframe_length: float = 0.3
 
 var can_take_damage_over_time: int = 0
 
@@ -43,11 +45,12 @@ func take_damage(amount: int, damage_type: Element.Type):
 	if damage_type != Element.Type.Neutral and damage_type == element:
 		return
 	if can_take_damage or not(get_parent() is Player):
-		iframes()
+		iframes(0.1)
 		health -= amount
 		health_changed.emit(health, -amount)
-	if health <= 0:
-		die()
+		if use_damage_effect: damage_flash_effect()
+		
+	if health <= 0: die()
 
 # there is no need to use to check for iframes, cuz the func deals no primary dmg
 func take_damage_overtime(amount: int, damage_type: Element.Type, time: int):
@@ -86,8 +89,17 @@ func die():
 	death.emit()
 	get_parent().queue_free()
 
-func iframes():
+func iframes(_time: float):
 	can_take_damage = false
-	var iframe_length: float = 0.1
 	await get_tree().create_timer(iframe_length).timeout
 	can_take_damage = true
+
+func damage_flash_effect():
+	var sprite: AnimatedSprite2D = %AnimatedSprite2D
+	sprite.modulate = Color.INDIAN_RED
+	await get_tree().create_timer(0.1).timeout	
+	sprite.modulate = Color(1,1,1)
+
+func change_invincibility():
+	can_take_damage = !can_take_damage
+

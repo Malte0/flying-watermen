@@ -1,28 +1,15 @@
-class_name SodiumProjectile extends RigidBody2D
+class_name SodiumProjectile extends Node2D
 
-var explosion_scene: PackedScene = preload("res://entities/projectiles/explosion/Explosion.tscn")
-@onready var explosion_delay: Timer = $ExplosionDelay
-@onready var impact_detector: Area2D = $ImpactDetector
-
-const SPEED: int = 1400
-const EXPLOSION_DELAY: float = 0.4
-
-var direction: Vector2 = Vector2.ZERO
-var additional_speed: Vector2 = Vector2.ZERO
-
-func _ready():
-	linear_velocity = direction * SPEED + additional_speed
-	explosion_delay.timeout.connect(spawn_explosion)
-	impact_detector.body_entered.connect(spawn_explosion)
-	await get_tree().create_timer(EXPLOSION_DELAY).timeout
-	spawn_explosion("")
-
-func add_to_parent(explosion_instance: Explosion):
-	get_parent().add_child(explosion_instance)
+const EXPLOSION_SCENE: PackedScene = preload("res://entities/projectiles/explosion/Explosion.tscn")
 
 func spawn_explosion(_placeholder):
-	var explosion_instance: Explosion = explosion_scene.instantiate()
-	explosion_instance.global_position = global_position
+	pass
+
+func _on_projectile_tree_exiting() -> void:
+	var explosion_instance: Explosion = EXPLOSION_SCENE.instantiate()
+	var current_pos: Vector2 = $Projectile.global_position
+	explosion_instance.position = current_pos
 	# This call deferred is needed to prevent a weird godot error being thrown
-	call_deferred("add_to_parent", explosion_instance)
-	call_deferred("queue_free")
+	get_parent().call_deferred("add_child", explosion_instance)
+	await get_tree().process_frame
+	queue_free()

@@ -18,5 +18,6 @@ func _on_player_health_changed(new_health: int, _delta_health: int):
 	health_label.text = str(new_health) + " / " + str(player.health_component.max_health)
 
 func _process(_delta):
-	var heat_component: HeatComponent = player.heat_component
-	tint_progress = COLD.lerp(HOT, heat_component.heat / float(heat_component.MAX_HEAT))
+	if player:
+		var heat_component: HeatComponent = player.heat_component
+		tint_progress = COLD.lerp(HOT, heat_component.heat / float(heat_component.MAX_HEAT))
