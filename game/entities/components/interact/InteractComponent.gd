@@ -1,4 +1,4 @@
-extends Area2D
+class_name InteractComponent extends Area2D
 
 var interactables_in_range: Array = []
 var has_interactable: bool = false
@@ -8,9 +8,8 @@ var current_closest_node: Interactable = null:
 		current_closest_node = value
 		if current_closest_node: current_closest_node.enable_pick_up_hint()
 
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("interact") and current_closest_node != null:
+func interact() -> void:
+	if current_closest_node != null:
 		if current_closest_node is Collectable:
 			current_closest_node.collect(get_parent())
 
@@ -21,7 +20,7 @@ func _process(delta: float) -> void:
 
 func get_closest_node():
 	var closest_node: Interactable = null
-	var closest_distance: float
+	var closest_distance: float = -1
 	for node: Interactable in interactables_in_range:
 		var distance: float = global_position.distance_to(node.global_position)
 		if not closest_node or distance < closest_distance:
