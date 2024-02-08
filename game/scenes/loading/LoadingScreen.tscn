@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://cebhc880vb8h0"]
+
+[ext_resource type="Script" path="res://scenes/loading/LoadingScreen.gd" id="1_723gv"]
+[ext_resource type="Texture2D" uid="uid://ddnlbstdk01ks" path="res://scenes/loading/WaterLoadingTexture.tres" id="2_osjan"]
+
+[node name="LoadingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_723gv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.321569, 0.419608, 0.603922, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.511
+offset_left = 47.0
+offset_top = -34.0
+offset_right = -40.0
+offset_bottom = 40.872
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_top = -30.0
+offset_right = -39.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+rounded = true
+texture_progress = ExtResource("2_osjan")
