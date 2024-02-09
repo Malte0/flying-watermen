@@ -2,7 +2,6 @@ class_name HealthComponent extends Node2D
 
 @export var element: Element.Type = Element.Type.Neutral
 @export var max_health: int = 100
-var can_take_damage: bool = true
 ## Optional for heal_over_time
 @export var _heal_tick: Timer
 ## Optional to display health. Automatically assigned for Player
@@ -10,14 +9,18 @@ var can_take_damage: bool = true
 ## Damage shader effect if target got damage
 @export var use_damage_effect: bool = false
 
+@onready var iframe_duration: Timer = $IFrames
+
 const HEAL_OVER_TIME_STEP: int = 5
 const HEALTH_BAR_SPEED: float = 2
 const SPEED_THRESHOLD: float = 25
 
 var heal_over_time_left: int = 0
 var health: int = 100
-var is_invincible: bool = false
-var iframe_length: float = 0.3
+var is_invincible: bool = false:
+	set(value):
+		if value == true: iframe_duration.stop()
+		is_invincible = value
 
 var can_take_damage_over_time: int = 0
 
@@ -40,11 +43,9 @@ func _process(_delta):
 		_health_bar.value = move_toward(_health_bar.value, health, HEALTH_BAR_SPEED * multiplier)
 
 func take_damage(amount: int, damage_type: Element.Type):
-	if is_invincible:
-		return
 	if damage_type != Element.Type.Neutral and damage_type == element:
 		return
-	if can_take_damage or not(get_parent() is Player):
+	if not is_invincible or not(get_parent() is Player):
 		iframes(0.1)
 		health -= amount
 		health_changed.emit(health, -amount)
@@ -63,14 +64,10 @@ func take_damage_overtime(amount: int, damage_type: Element.Type, time: int):
 		can_take_damage_over_time -= 1
 
 func take_damage_no_iframes(amount: int, damage_type: Element.Type):
-	if is_invincible:
-		return
 	if damage_type != Element.Type.Neutral and damage_type == element:
 		return
 	health -= amount
 	health_changed.emit(health, -amount)
-	if health <= 0:
-		die()
 
 func heal(amount: int):
 	health = mini(health + amount, max_health)
@@ -90,9 +87,14 @@ func die():
 	get_parent().queue_free()
 
 func iframes(_time: float):
-	can_take_damage = false
-	await get_tree().create_timer(iframe_length).timeout
-	can_take_damage = true
+	is_invincible = true
+	iframe_duration.start()
+
+func disable_invincibility():
+	is_invincible = false
+
+func enable_invicibility():
+	is_invincible = true
 
 func damage_flash_effect():
 	var sprite: AnimatedSprite2D = %AnimatedSprite2D
@@ -100,6 +102,6 @@ func damage_flash_effect():
 	await get_tree().create_timer(0.1).timeout
 	sprite.modulate = Color(1,1,1)
 
-func change_invincibility():
-	can_take_damage = !can_take_damage
-
+func _on_health_changed(new_health: int, _delta_health: int) -> void:
+	if new_health <= 0:
+		die()
