@@ -4,14 +4,13 @@ var interactables_in_range: Array = []
 var has_interactable: bool = false
 var current_closest_node: Interactable = null:
 	set(value):
-		if current_closest_node != null: current_closest_node.disable_pick_up_hint()
+		if current_closest_node != null: current_closest_node.disable_interact_hint()
 		current_closest_node = value
-		if current_closest_node: current_closest_node.enable_pick_up_hint()
+		if current_closest_node: current_closest_node.enable_interact_hint()
 
 func interact() -> void:
 	if current_closest_node != null:
-		if current_closest_node is Collectable:
-			current_closest_node.collect(get_parent())
+		current_closest_node.interact(get_parent())
 
 func _process(delta: float) -> void:
 	var closest_node = get_closest_node()
