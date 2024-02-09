@@ -51,8 +51,6 @@ func take_damage(amount: int, damage_type: Element.Type):
 		health_changed.emit(health, -amount)
 		if use_damage_effect: damage_flash_effect()
 
-	if health <= 0: die()
-
 # there is no need to use to check for iframes, cuz the func deals no primary dmg
 func take_damage_overtime(amount: int, damage_type: Element.Type, time: int):
 	if can_take_damage_over_time <= 5:
