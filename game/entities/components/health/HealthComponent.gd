@@ -40,17 +40,17 @@ func _process(_delta):
 		var multiplier: float = max(abs((_health_bar.value - health) / SPEED_THRESHOLD), 1)
 		_health_bar.value = move_toward(_health_bar.value, health, HEALTH_BAR_SPEED * multiplier)
 
-func take_damage(amount: int, damage_type: Element.Type, trigger_iframes: bool = true):
-	if not can_take_damage(damage_type): return
+func take_damage(amount: int, damage_type: Element.Type, use_iframes: bool = true):
+	if not can_damage(damage_type): return
 	if amount <= 0: return
-	if trigger_iframes:
+	if use_iframes:
 		if has_iframes: return
 		enable_iframes(0.1)
 		if use_damage_effect: damage_flash_effect()
 	health -= amount
 	health_changed.emit(health, -amount)
 
-func can_take_damage(damage_type: Element.Type) -> bool:
+func can_damage(damage_type: Element.Type) -> bool:
 	if is_invincible: return false
 	else: return damage_type == Element.Type.Neutral or not damage_type == element
 
