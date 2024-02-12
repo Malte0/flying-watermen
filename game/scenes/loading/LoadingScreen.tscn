@@ -1,7 +1,39 @@
-[gd_scene load_steps=3 format=3 uid="uid://cebhc880vb8h0"]
+[gd_scene load_steps=10 format=3 uid="uid://cebhc880vb8h0"]
 
 [ext_resource type="Script" path="res://scenes/loading/LoadingScreen.gd" id="1_723gv"]
 [ext_resource type="Texture2D" uid="uid://ddnlbstdk01ks" path="res://scenes/loading/WaterLoadingTexture.tres" id="2_osjan"]
+[ext_resource type="Texture2D" uid="uid://bio4rf0meadhh" path="res://entities/player/assets/idleanimation/01Idle.png" id="3_bh0g0"]
+[ext_resource type="Texture2D" uid="uid://bgd8x87u7urvs" path="res://entities/player/assets/idleanimation/02Idle.png" id="4_4v7sr"]
+[ext_resource type="Texture2D" uid="uid://chvamghhunu33" path="res://entities/player/assets/idleanimation/03Idle.png" id="5_bxgg7"]
+[ext_resource type="Texture2D" uid="uid://b30cxaxbgma1c" path="res://entities/player/assets/idleanimation/05Idle.png" id="6_2lunj"]
+[ext_resource type="Texture2D" uid="uid://ly7ncnf6nm55" path="res://entities/player/assets/idleanimation/06Idle.png" id="7_ascrm"]
+[ext_resource type="Texture2D" uid="uid://cvvp4gjgefq83" path="res://entities/player/assets/idleanimation/07Idle.png" id="8_rjdct"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r33ef"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bh0g0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4v7sr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bxgg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2lunj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ascrm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rjdct")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="LoadingScreen" type="Control"]
 layout_mode = 3
@@ -48,3 +80,11 @@ grow_horizontal = 2
 grow_vertical = 2
 rounded = true
 texture_progress = ExtResource("2_osjan")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(563, 170)
+scale = Vector2(0.685, 0.685)
+sprite_frames = SubResource("SpriteFrames_r33ef")
+frame_progress = 0.615714
+speed_scale = -1.0
+flip_h = true
