@@ -1,0 +1,82 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq78jirbp6w10"]
+
+[ext_resource type="Script" path="res://scenes/ui/debugger.gd" id="1_n1tnl"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="2_de6up"]
+
+[node name="Debugger" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_n1tnl")
+metadata/_edit_lock_ = true
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 0
+offset_left = 893.0
+offset_top = 11.0
+offset_right = 1381.0
+offset_bottom = 563.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 0
+
+[node name="CheckBoxes" type="Control" parent="TabContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/CheckBoxes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/CheckBoxes/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Invicibility" type="CheckBox" parent="TabContainer/CheckBoxes/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Invicibility"
+
+[node name="Flying" type="CheckBox" parent="TabContainer/CheckBoxes/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Flying"
+
+[node name="Player Collision" type="CheckBox" parent="TabContainer/CheckBoxes/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Player Collision"
+
+[node name="SplitContainer" type="SplitContainer" parent="TabContainer/CheckBoxes/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/CheckBoxes/MarginContainer/VBoxContainer/SplitContainer"]
+layout_mode = 2
+text = "Zoom"
+
+[node name="Zoom" type="HSlider" parent="TabContainer/CheckBoxes/MarginContainer/VBoxContainer/SplitContainer"]
+layout_mode = 2
+min_value = -10.0
+max_value = 10.0
+value = 1.0
+tick_count = 21
+ticks_on_borders = true
+
+[node name="StateChartDebugger" parent="TabContainer" instance=ExtResource("2_de6up")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+ignore_events = true
+ignore_state_changes = true
+ignore_transitions = true
+
+[connection signal="toggled" from="TabContainer/CheckBoxes/MarginContainer/VBoxContainer/Invicibility" to="." method="_on_invicibility_toggled"]
+[connection signal="toggled" from="TabContainer/CheckBoxes/MarginContainer/VBoxContainer/Flying" to="." method="_on_flying_toggled"]

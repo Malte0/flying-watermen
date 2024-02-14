@@ -16,7 +16,11 @@ const SPEED_THRESHOLD: float = 25
 
 var heal_over_time_left: int = 0
 var health: int = 100
-var is_invincible: bool = false
+var invincible_count: int = 0
+var is_invincible: bool = false:
+	set(value):
+		invincible_count += 1 if value else -1
+		is_invincible = invincible_count > 0
 var iframe_length: float = 0.3
 
 var can_take_damage_over_time: int = 0
@@ -49,7 +53,7 @@ func take_damage(amount: int, damage_type: Element.Type):
 		health -= amount
 		health_changed.emit(health, -amount)
 		if use_damage_effect: damage_flash_effect()
-		
+
 	if health <= 0: die()
 
 # there is no need to use to check for iframes, cuz the func deals no primary dmg
@@ -97,7 +101,7 @@ func iframes(_time: float):
 func damage_flash_effect():
 	var sprite: AnimatedSprite2D = %AnimatedSprite2D
 	sprite.modulate = Color.INDIAN_RED
-	await get_tree().create_timer(0.1).timeout	
+	await get_tree().create_timer(0.1).timeout
 	sprite.modulate = Color(1,1,1)
 
 func change_invincibility():
