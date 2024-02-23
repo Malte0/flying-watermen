@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://4lea60a43ia6"]
 
-[ext_resource type="PackedScene" uid="uid://c640sr08cvsmo" path="res://entities/objects/stone-tablet/StoneTablet.tscn" id="1_x7con"]
+[ext_resource type="PackedScene" uid="uid://c640sr08cvsmo" path="res://entities/objects/stone-tablet/StoneTabletObject.tscn" id="1_x7con"]
 [ext_resource type="PackedScene" uid="uid://cxpuyaf3piwxm" path="res://scenes/ui/menus/tablets/StoneTabletBase.tscn" id="2_cca32"]
 
 [node name="Lore1" type="Node2D"]
