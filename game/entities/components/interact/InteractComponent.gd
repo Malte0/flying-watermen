@@ -1,7 +1,6 @@
 class_name InteractComponent extends Area2D
 
 var interactables_in_range: Array = []
-var has_interactable: bool = false
 var current_closest_node: Interactable = null:
 	set(value):
 		if current_closest_node != null: current_closest_node.disable_interact_hint()

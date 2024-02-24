@@ -37,9 +37,6 @@ var abilities: Dictionary = {
 	"dash": false
 }
 
-## Callback for player interaction
-var on_interact = func(): print("Nothing to interact")
-
 func _ready():
 	animation_tree.active = true
 	#Initialize values so Guards don't complain
@@ -47,7 +44,6 @@ func _ready():
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("interact"):
-		on_interact.call()
 		interact_component.interact()
 	if event.is_action_pressed("jump"):
 		state_chart.send_event("jump")

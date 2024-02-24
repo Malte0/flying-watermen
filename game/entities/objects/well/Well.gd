@@ -12,12 +12,9 @@ func _ready() -> void:
 	interact_hint = $FillLabel
 
 ## Fills the well, but only once
-func fill_well():
+func fill_well(_body: Node):
 	if not is_full:
 		sprite.texture = FULL_TEXTURE
 		$GPUParticles2D.visible  = true
 		well_filled.emit()
 		is_full = true
-
-func interact(_body):
-	fill_well()

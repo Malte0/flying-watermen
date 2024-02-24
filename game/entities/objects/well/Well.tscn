@@ -56,7 +56,7 @@ offset_top = -140.0
 offset_right = 25.0
 offset_bottom = -116.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="FillLabel"]
+[node name="RichTextLabel" type="Label" parent="FillLabel"]
 layout_mode = 0
 offset_left = 2.0
 offset_right = 48.0
@@ -89,3 +89,5 @@ position = Vector2(0, -70)
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_j1tol")
 texture = ExtResource("3_lodbv")
+
+[connection signal="interacted" from="." to="." method="fill_well"]
