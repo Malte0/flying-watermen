@@ -6,6 +6,7 @@ class_name Player extends CharacterBody2D
 var shoot_position: Marker2D:
 	get: return ranged_component.shoot_position
 @onready var melee_attack: MeleeComponent = $MeleeComponent
+@onready var interact_component: InteractComponent = $InteractComponent
 @onready var inventory: Inventory = $Inventory
 @onready var state_chart: StateChart = %StateChart
 @onready var animation_tree: AnimationTree = $Animation/AnimationTree
@@ -32,9 +33,9 @@ var jumps_left: int = jumps
 var projectile_scene: PackedScene = load("res://entities/projectiles/WaterProjectile.tscn")
 var direction: float = 0.0
 var slide_threshold: float = base_speed/2
-
-## Callback for player interaction
-var on_interact = func(): print("Nothing to interact")
+var abilities: Dictionary = {
+	"dash": false
+}
 
 func _ready():
 	animation_tree.active = true
@@ -43,11 +44,11 @@ func _ready():
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("interact"):
-		on_interact.call()
+		interact_component.interact()
 	if event.is_action_pressed("jump"):
 		state_chart.send_event("jump")
 	if event.is_action_pressed("lshift"):
-		state_chart.send_event("dash")
+		dash()
 	if event.is_action_pressed("attack"):
 		melee()
 	if event.is_action_pressed("right_click"):
@@ -119,6 +120,10 @@ func reset_variables():
 	collision_mask = 0b101
 	collision_layer = 0b10
 
+func dash():
+	if abilities.dash:
+		state_chart.send_event("dash")
+
 func reset_jumps():
 	jumps_left = jumps
 
@@ -162,9 +167,12 @@ func _on_dash_state_entered() -> void:
 	friction = 0
 	@warning_ignore("narrowing_conversion")
 	velocity.x = signi(scale.y) * base_speed * 2
-	health_component.iframes(0.3)
+	health_component.is_invincible = true
 	collision_mask = 0b1
 	collision_layer = 0b
+
+func _on_dash_state_exited() -> void:
+	health_component.is_invincible = false
 
 func _on_grounded_state_entered() -> void:
 	reset_jumps()

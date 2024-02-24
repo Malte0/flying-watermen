@@ -1,9 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://c640sr08cvsmo"]
 
-[ext_resource type="Script" path="res://entities/objects/stone-tablet/StoneTablet.gd" id="1_lg1td"]
-[ext_resource type="Texture2D" uid="uid://ciey4ubnpykd2" path="res://entities/objects/stone-tablet/random_selection.png" id="2_k6xtg"]
-[ext_resource type="Texture2D" uid="uid://c51h5t2yq11bo" path="res://entities/objects/stone-tablet/stonetablet_pickup.png" id="3_soac1"]
-[ext_resource type="Texture2D" uid="uid://dnmhggoppejaj" path="res://entities/objects/stone-tablet/podium.png" id="4_ek00u"]
+[ext_resource type="Script" path="res://entities/objects/stone-tablet/StoneTabletObject.gd" id="1_rrcxt"]
+[ext_resource type="Texture2D" uid="uid://ciey4ubnpykd2" path="res://entities/objects/stone-tablet/random_selection.png" id="2_shfwb"]
+[ext_resource type="Texture2D" uid="uid://c51h5t2yq11bo" path="res://entities/objects/stone-tablet/stonetablet_pickup.png" id="3_gpjlj"]
+[ext_resource type="Texture2D" uid="uid://dnmhggoppejaj" path="res://entities/objects/stone-tablet/podium.png" id="4_6sq6x"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gvhev"]
 blend_mode = 1
@@ -38,15 +38,12 @@ hue_variation_max = 0.91
 anim_offset_min = 0.1453
 anim_offset_max = 0.41
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fe6uw"]
-radius = 99.0202
-
 [sub_resource type="Animation" id="Animation_lefeg"]
 length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Area2D/CollisionShape2D:position:x")
+tracks/0/path = NodePath("CollisionShape2D:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -57,7 +54,7 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D/CollisionShape2D:position:y")
+tracks/1/path = NodePath("CollisionShape2D:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -68,7 +65,7 @@ tracks/1/keys = {
 tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Area2D/CollisionShape2D:rotation")
+tracks/2/path = NodePath("CollisionShape2D:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -208,7 +205,7 @@ step = 1.0
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Area2D/CollisionShape2D:position:x")
+tracks/0/path = NodePath("CollisionShape2D:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -219,7 +216,7 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D/CollisionShape2D:position:y")
+tracks/1/path = NodePath("CollisionShape2D:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -230,7 +227,7 @@ tracks/1/keys = {
 tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Area2D/CollisionShape2D:rotation")
+tracks/2/path = NodePath("CollisionShape2D:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -371,27 +368,24 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thpy7"]
 size = Vector2(83, 72)
 
-[node name="StoneTablet" type="Node2D"]
-script = ExtResource("1_lg1td")
+[sub_resource type="CircleShape2D" id="CircleShape2D_fe6uw"]
+radius = 99.0202
+
+[node name="StoneTablet" type="Area2D"]
+script = ExtResource("1_rrcxt")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_gvhev")
 position = Vector2(3.55271e-15, 10)
 amount = 4
 process_material = SubResource("ParticleProcessMaterial_kgpmb")
-texture = ExtResource("2_k6xtg")
+texture = ExtResource("2_shfwb")
 lifetime = 1.5
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_fe6uw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1, 2)
 scale = Vector2(0.06, 0.067)
-texture = ExtResource("3_soac1")
+texture = ExtResource("3_gpjlj")
 
 [node name="FillLabel" type="Panel" parent="."]
 visible = false
@@ -400,7 +394,7 @@ offset_top = -89.0
 offset_right = 53.0
 offset_bottom = -56.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="FillLabel"]
+[node name="RichTextLabel" type="Label" parent="FillLabel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.034
@@ -420,7 +414,7 @@ libraries = {
 [node name="Podium" type="Sprite2D" parent="."]
 position = Vector2(1, 96)
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_ek00u")
+texture = ExtResource("4_6sq6x")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_mask = 0
@@ -429,7 +423,9 @@ collision_mask = 0
 position = Vector2(2.5, 96)
 shape = SubResource("RectangleShape2D_thpy7")
 
-[connection signal="ready" from="." to="." method="_on_ready"]
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fe6uw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="interacted" from="." to="." method="read_stone_tablet"]
