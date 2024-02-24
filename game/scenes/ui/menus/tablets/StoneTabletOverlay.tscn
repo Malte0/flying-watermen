@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxpuyaf3piwxm"]
 
-[ext_resource type="Script" path="res://scenes/ui/menus/tablets/StoneTabletBase.gd" id="1_3ru2b"]
+[ext_resource type="Script" path="res://scenes/ui/menus/tablets/StoneTabletOverlay.gd" id="1_3ru2b"]
 [ext_resource type="Texture2D" uid="uid://dcw2xybxiknk0" path="res://entities/objects/stone-tablet/stone_tablet_open.png" id="2_3m06m"]
 
 [node name="StoneTabletRead" type="CanvasLayer"]
