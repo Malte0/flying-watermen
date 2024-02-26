@@ -1,4 +1,4 @@
-class_name DestroyableWall extends StaticBody2D
+class_name DestroyableWall extends RigidBody2D
 
 
 @export var sprite: Texture
@@ -9,6 +9,7 @@ func _ready():
 	$Sprite2D.texture = sprite
 	$CollisionShape2D.shape = collision_shape.shape
 	$Area2D/CollisionShape2D.shape = collision_shape.shape
+	set_deferred("freeze", true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -17,4 +18,5 @@ func _process(delta):
 
 func _on_area_2d_area_entered(area):
 	if area is Explosion:
-		collision_layer = 0
+		set_deferred("freeze", false)
+		collision_mask = 0
