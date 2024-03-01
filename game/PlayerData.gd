@@ -17,5 +17,5 @@ func set_storedheat(value: int):
 func set_storedabilities(value: Dictionary):
 	stored_abilities = value
 
-func updatePos(value: Vector2):
+func update_pos(value: Vector2):
 	stored_pos = value

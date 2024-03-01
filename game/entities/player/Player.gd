@@ -15,7 +15,7 @@ var shoot_position: Marker2D:
 # save location
 var save_file_path: String = "user://save/"
 var save_file_name: String = "PlayerSave.tres"
-var playerData: PlayerData = PlayerData.new()
+var player_data: PlayerData = PlayerData.new()
 
 # Reset values
 var base_scale_speed: float = 2
@@ -78,27 +78,27 @@ func verify_save_directory(path: String):
 	DirAccess.make_dir_absolute(path)
 
 func save_Player():
-	update_playerData()
-	ResourceSaver.save(playerData, save_file_path + save_file_name)
+	update_player_data()
+	ResourceSaver.save(player_data, save_file_path + save_file_name)
 	print("save")
 
-func update_playerData():
-	playerData.updatePos(self.position)
-	playerData.set_storedheat(heat_component.get_heat())
-	playerData.set_storedhealth(health_component.get_health())
-	playerData.set_storedabilities(abilities)
+func update_player_data():
+	player_data.update_pos(self.position)
+	player_data.set_storedheat(heat_component.get_heat())
+	player_data.set_storedhealth(health_component.get_health())
+	player_data.set_storedabilities(abilities)
 
 func load_player():
-	playerData = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
-	update_PlayerOnLoad()
+	player_data = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
+	update_Player_on_load()
 	print("loaded")
 
-func update_PlayerOnLoad():
-	self.position = playerData.stored_pos
-	heat_component.set_heat(playerData.stored_heat)
-	health_component.set_health(playerData.stored_health)
+func update_Player_on_load():
+	self.position = player_data.stored_pos
+	heat_component.set_heat(player_data.stored_heat)
+	health_component.set_health(player_data.stored_health)
 	health_component.update_healthbar()
-	abilities = playerData.stored_abilities
+	abilities = player_data.stored_abilities
 
 func disenable_components(ranged: bool, melee: bool, movement: bool):
 	ranged_component.is_enabled = ranged
