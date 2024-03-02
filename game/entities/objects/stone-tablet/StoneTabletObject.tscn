@@ -196,6 +196,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_6sq6x")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
@@ -204,6 +205,7 @@ shape = SubResource("RectangleShape2D_thpy7")
 one_way_collision = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_fe6uw")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
