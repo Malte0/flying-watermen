@@ -8,6 +8,8 @@ const EMPTY_TEXTURE = preload("res://entities/objects/well/assets/wellEmpty.png"
 var is_full: bool = false
 signal well_filled()
 
+var enemies_in_range: int = 0
+
 func _ready() -> void:
 	interact_hint = $FillLabel
 
@@ -18,3 +20,9 @@ func fill_well(_body: Node):
 		$GPUParticles2D.visible  = true
 		well_filled.emit()
 		is_full = true
+
+func _process(delta):
+	pass
+
+func _on_enemyzone_ready():
+	pass # Replace with function body.
