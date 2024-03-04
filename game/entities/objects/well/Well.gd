@@ -23,6 +23,3 @@ func fill_well(_body: Node):
 
 func _process(delta):
 	pass
-
-func _on_enemyzone_ready():
-	pass # Replace with function body.
