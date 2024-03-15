@@ -205,7 +205,6 @@ shape = SubResource("RectangleShape2D_thpy7")
 one_way_collision = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_fe6uw")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
