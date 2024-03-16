@@ -10,6 +10,8 @@ signal well_filled()
 
 var enemies_in_range: int = 0
 
+var enemies_inside: Array[Object] = []
+
 func _ready() -> void:
 	interact_hint = $FillLabel
 
@@ -21,5 +23,11 @@ func fill_well(_body: Node):
 		well_filled.emit()
 		is_full = true
 
+func _on_enemyzone_body_entered(body):
+	enemies_inside.append(body)
+
 func _process(delta):
-	pass
+	print(enemies_inside)
+	for enemies in enemies_inside:
+		if str(enemies) == "<Freed Object>":
+			enemies_inside.erase(enemies)

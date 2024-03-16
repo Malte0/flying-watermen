@@ -40,8 +40,8 @@ scale_max = 0.8
 scale_curve = SubResource("CurveTexture_xmhfi")
 color_ramp = SubResource("GradientTexture1D_e7xoi")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3750f"]
-radius = 766.76
+[sub_resource type="CircleShape2D" id="CircleShape2D_sk6d8"]
+radius = 887.009
 
 [node name="Well" type="Area2D"]
 collision_mask = 2
@@ -93,8 +93,14 @@ amount = 10
 process_material = SubResource("ParticleProcessMaterial_j1tol")
 texture = ExtResource("3_lodbv")
 
-[node name="Enemyzone" type="CollisionShape2D" parent="."]
+[node name="Enemyzone" type="Area2D" parent="."]
 position = Vector2(0, -37)
-shape = SubResource("CircleShape2D_3750f")
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemyzone"]
+shape = SubResource("CircleShape2D_sk6d8")
+one_way_collision_margin = 0.0
 
 [connection signal="interacted" from="." to="." method="fill_well"]
+[connection signal="area_entered" from="Enemyzone" to="." method="_on_enemyzone_area_entered"]
+[connection signal="body_entered" from="Enemyzone" to="." method="_on_enemyzone_body_entered"]
