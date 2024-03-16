@@ -145,6 +145,7 @@ func _on_sliding_state_entered():
 
 func _on_jumping_state_entered():
 	#velocity.y = jump_velocity + velocity.y/2
+	player_sound("res://assets/SFX/player/jump2.wav")
 	velocity.y = jump_velocity
 	jumps_left -= 1
 
@@ -162,7 +163,7 @@ func _on_movement_child_state_exited():
 
 func _on_dash_state_entered() -> void:
 	particle.dash_trail()
-	$SFX/dash.play()
+	player_sound("res://assets/SFX/player/dash.wav")
 	can_move = false
 	friction = 0
 	@warning_ignore("narrowing_conversion")
@@ -171,6 +172,11 @@ func _on_dash_state_entered() -> void:
 	collision_mask = 0b1
 	collision_layer = 0b
 
+func player_sound(sound : String):
+	$SFX/AudioStreamPlayer.stream = load(sound)
+	$SFX/AudioStreamPlayer.volume_db = -15
+	$SFX/AudioStreamPlayer.play()
+	
 func _on_dash_state_exited() -> void:
 	health_component.is_invincible = false
 
