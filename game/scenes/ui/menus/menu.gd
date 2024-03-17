@@ -1,7 +1,7 @@
 class_name Menu extends Control
 
 @onready var main: MainMenu = $Main
-@onready var option: Control = $Options
+@onready var option: OptionsMenu = $Options
 
 func _ready():
 	MenuMusic.play_music_menu()

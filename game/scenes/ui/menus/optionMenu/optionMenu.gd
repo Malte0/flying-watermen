@@ -1,4 +1,4 @@
-extends Control
+class_name OptionsMenu extends Control
 
 @onready var music_bus_id = AudioServer.get_bus_index("Music")
 @onready var sfx_bus_id = AudioServer.get_bus_index("SFX")
