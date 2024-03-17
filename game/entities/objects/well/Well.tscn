@@ -11,8 +11,8 @@ radius = 95.0
 blend_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_puv8v"]
-offsets = PackedFloat32Array(0.0430464, 0.337748, 1)
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0.0430464, 0.327869, 0.631148, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_e7xoi"]
 gradient = SubResource("Gradient_puv8v")
@@ -66,6 +66,19 @@ offset_right = 48.0
 offset_bottom = 24.0
 text = "Fill 'E'"
 
+[node name="FillLabel2" type="Panel" parent="."]
+visible = false
+offset_left = -79.0
+offset_top = -138.0
+offset_right = 80.0
+offset_bottom = -114.0
+
+[node name="Burning" type="Label" parent="FillLabel2"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "kill all close enemies"
+metadata/_edit_lock_ = true
+
 [node name="Texture" type="Sprite2D" parent="."]
 position = Vector2(0, -37)
 scale = Vector2(0.15, 0.15)
@@ -93,11 +106,20 @@ amount = 10
 process_material = SubResource("ParticleProcessMaterial_j1tol")
 texture = ExtResource("3_lodbv")
 
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+modulate = Color(0.772549, 0, 0, 1)
+material = SubResource("CanvasItemMaterial_2wsyv")
+position = Vector2(0, -70)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_j1tol")
+texture = ExtResource("3_lodbv")
+
 [node name="Enemyzone" type="Area2D" parent="."]
 position = Vector2(0, -37)
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemyzone"]
+visible = false
 shape = SubResource("CircleShape2D_sk6d8")
 one_way_collision_margin = 0.0
 

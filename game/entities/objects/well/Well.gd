@@ -8,16 +8,17 @@ const EMPTY_TEXTURE = preload("res://entities/objects/well/assets/wellEmpty.png"
 var is_full: bool = false
 signal well_filled()
 
-var enemies_in_range: int = 0
-
+var can_be_filled: bool = false
 var enemies_inside: Array[Object] = []
 
 func _ready() -> void:
-	interact_hint = $FillLabel
+	interact_hint = $FillLabel2
+	$GPUParticles2D.visible  = false
+	$GPUParticles2D2.visible = true
 
 ## Fills the well, but only once
 func fill_well(_body: Node):
-	if not is_full:
+	if not is_full and can_be_filled:
 		sprite.texture = FULL_TEXTURE
 		$GPUParticles2D.visible  = true
 		well_filled.emit()
@@ -27,7 +28,15 @@ func _on_enemyzone_body_entered(body):
 	enemies_inside.append(body)
 
 func _process(delta):
-	print(enemies_inside)
+	if enemies_inside == []:
+		$GPUParticles2D2.visible = false
+		can_be_filled = true
+		var was_visible: bool = interact_hint.visible
+		interact_hint.visible = false
+		interact_hint = $FillLabel
+		if was_visible: interact_hint.visible = true
+	var index: int = 0
 	for enemies in enemies_inside:
-		if str(enemies) == "<Freed Object>":
-			enemies_inside.erase(enemies)
+		if str(enemies) == "<Freed Object>": enemies_inside.remove_at(index)
+		index += 1
+	index = 0
