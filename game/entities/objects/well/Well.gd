@@ -12,7 +12,7 @@ var can_be_filled: bool = false
 var enemies_inside: Array[Object] = []
 
 func _ready() -> void:
-	interact_hint = $FillLabel2
+	interact_hint = $FillLabel
 	$GPUParticles2D.visible  = false
 	$GPUParticles2D2.visible = true
 
@@ -33,7 +33,7 @@ func _process(delta):
 		can_be_filled = true
 		var was_visible: bool = interact_hint.visible
 		interact_hint.visible = false
-		interact_hint = $FillLabel
+		interact_hint = $RichTextLabel
 		if was_visible: interact_hint.visible = true
 	var index: int = 0
 	for enemies in enemies_inside:
