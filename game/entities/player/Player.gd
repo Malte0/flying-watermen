@@ -110,6 +110,12 @@ func update_animation_parameters():
 	state_chart.send_event("tick")
 #endregion
 
+# sound function for the player
+func player_sound(sound : String):
+	$SFX/AudioStreamPlayer.stream = load(sound)
+	$SFX/AudioStreamPlayer.volume_db = -15
+	$SFX/AudioStreamPlayer.play()
+
 #region Movement
 func reset_variables():
 	speed = base_speed
@@ -172,11 +178,6 @@ func _on_dash_state_entered() -> void:
 	collision_mask = 0b1
 	collision_layer = 0b
 
-func player_sound(sound : String):
-	$SFX/AudioStreamPlayer.stream = load(sound)
-	$SFX/AudioStreamPlayer.volume_db = -15
-	$SFX/AudioStreamPlayer.play()
-	
 func _on_dash_state_exited() -> void:
 	health_component.is_invincible = false
 
