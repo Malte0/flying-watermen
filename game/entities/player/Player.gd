@@ -151,7 +151,7 @@ func _on_sliding_state_entered():
 
 func _on_jumping_state_entered():
 	#velocity.y = jump_velocity + velocity.y/2
-	player_sound("res://assets/SFX/player/jump2.wav")
+	player_sound("res://assets/SFX/player/jump.wav")
 	velocity.y = jump_velocity
 	jumps_left -= 1
 
@@ -195,3 +195,8 @@ func shoot():
 	var shoot_direction = shoot_position.global_position.direction_to(get_global_mouse_position())
 	return ranged_component.shoot(shoot_direction, projectile_scene, velocity)
 #endregion
+
+
+func _on_inventory_on_item_in_inventory_updated(new_item, old_item):
+	if !new_item == null:
+		player_sound("res://assets/SFX/player/item.wav")

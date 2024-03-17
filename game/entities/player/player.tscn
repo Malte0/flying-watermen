@@ -921,8 +921,10 @@ layer = 5
 [node name="SFX" type="Node" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SFX"]
+bus = &"SFX"
 
 [connection signal="death" from="HealthComponent" to="." method="_on_death"]
+[connection signal="on_item_in_inventory_updated" from="Inventory" to="." method="_on_inventory_on_item_in_inventory_updated"]
 [connection signal="timeout" from="Timers/HeatTick" to="." method="_on_heat_tick_timeout"]
 [connection signal="timeout" from="Timers/HealTick" to="." method="_on_heal_tick_timeout"]
 [connection signal="child_state_exited" from="StateChart/Mechanics/Movement" to="." method="reset_variables"]
