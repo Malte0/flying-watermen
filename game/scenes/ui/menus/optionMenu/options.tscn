@@ -1,28 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://g0beuk5crhre"]
+[gd_scene load_steps=4 format=3 uid="uid://cdkicasp65o4b"]
 
-[ext_resource type="Script" path="res://scenes/ui/menus/optionMenu/optionMenu.gd" id="1_crwym"]
-[ext_resource type="Texture2D" uid="uid://bhohuwngei70j" path="res://assets/background/Background.png" id="2_u4klg"]
-[ext_resource type="Script" path="res://scenes/ui/menus/button.gd" id="3_dkls4"]
+[ext_resource type="Script" path="res://scenes/ui/menus/optionMenu/optionMenu.gd" id="1_o5c20"]
+[ext_resource type="Script" path="res://scenes/ui/menus/button.gd" id="2_ncck2"]
 
 [sub_resource type="SystemFont" id="SystemFont_q56rt"]
+subpixel_positioning = 0
 
-[node name="Option_Menu" type="Control"]
+[node name="Options" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_crwym")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_u4klg")
+anchors_preset = 0
+offset_right = 1153.0
+offset_bottom = 649.0
+script = ExtResource("1_o5c20")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -117,13 +106,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 24
 text = "Back"
-script = ExtResource("3_dkls4")
+script = ExtResource("2_ncck2")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 bus = &"Menu"
-
-[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/GridContainer/MenuSlider" to="." method="_on_menu_slider_value_changed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Back_Button" to="." method="_on_back_button_pressed"]

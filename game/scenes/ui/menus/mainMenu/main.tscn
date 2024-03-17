@@ -1,28 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyjvugqw3bid5"]
+[gd_scene load_steps=4 format=3 uid="uid://3jbem0nduruc"]
 
-[ext_resource type="Texture2D" uid="uid://bhohuwngei70j" path="res://assets/background/Background.png" id="1_0cc2b"]
-[ext_resource type="Script" path="res://scenes/ui/menus/mainMenu/mainMenu.gd" id="1_8v261"]
-[ext_resource type="Script" path="res://scenes/ui/menus/button.gd" id="3_cm608"]
+[ext_resource type="Script" path="res://scenes/ui/menus/mainMenu/mainMenu.gd" id="1_make3"]
+[ext_resource type="Script" path="res://scenes/ui/menus/button.gd" id="2_8nryi"]
 
 [sub_resource type="SystemFont" id="SystemFont_q56rt"]
+subpixel_positioning = 0
 
-[node name="Main_Menu" type="Control"]
+[node name="Main" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_8v261")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_0cc2b")
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 647.0
+script = ExtResource("1_make3")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -31,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
@@ -38,10 +28,12 @@ theme_override_constants/margin_bottom = 12
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 60
 
 [node name="seperator" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -54,42 +46,50 @@ Forest of Resilience"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 1140.0
+offset_bottom = 636.0
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 1
 
-[node name="seperator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="seperator2" type="Control" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="seperator3" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="seperator3" type="Control" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Start_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Start_Button" type="Button" parent="HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(120, 32)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Start Game"
-script = ExtResource("3_cm608")
+script = ExtResource("2_8nryi")
 
-[node name="Option_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Option_Button" type="Button" parent="HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Option"
-script = ExtResource("3_cm608")
+script = ExtResource("2_8nryi")
 
-[node name="Exit_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Exit_Button" type="Button" parent="HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(120, 32)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Quit Game"
-script = ExtResource("3_cm608")
+script = ExtResource("2_8nryi")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 bus = &"Menu"
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Start_Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Option_Button" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Exit_Button" to="." method="_on_exit_button_pressed"]

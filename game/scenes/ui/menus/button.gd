@@ -7,4 +7,4 @@ func _ready():
 
 func play_sound():
 	%AudioStreamPlayer.stream = load("res://assets/SFX/player/ui-hover.wav")
-	%AudioStreamPlayer.play() 
+	%AudioStreamPlayer.play()
