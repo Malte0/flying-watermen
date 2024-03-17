@@ -19,12 +19,12 @@ func _on_back_button_pressed():
 
 func _on_music_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(music_bus_id, linear_to_db(value))
-	AudioServer.set_bus_mute(music_bus_id, value < 0.05)
+	AudioServer.set_bus_mute(music_bus_id, value < 0.001)
 
 func _on_sfx_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(sfx_bus_id, linear_to_db(value))
-	AudioServer.set_bus_mute(sfx_bus_id, value < 0.05)
+	AudioServer.set_bus_mute(sfx_bus_id, value < 0.001)
 
 func _on_menu_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(menu_bus_id, linear_to_db(value))
-	AudioServer.set_bus_mute(menu_bus_id, value < 0.05)
+	AudioServer.set_bus_mute(menu_bus_id, value < 0.001)

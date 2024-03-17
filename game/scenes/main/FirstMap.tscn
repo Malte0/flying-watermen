@@ -3584,7 +3584,6 @@ metadata/_edit_lock_ = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Environment"]
 stream = SubResource("AudioStreamRandomizer_tdk81")
-volume_db = -55.0
 autoplay = true
 bus = &"Music"
 

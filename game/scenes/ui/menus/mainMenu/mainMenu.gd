@@ -5,11 +5,13 @@ class_name MainMenu extends Control
 @onready var exit_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/Exit_Button
 
 func _ready():
+	MenuMusic.play_music_menu()
 	start_button.button_down.connect(on_start_pressed)
 	option_button.button_down.connect(on_option_pressed)
 	exit_button.button_down.connect(on_exit_pressed)
 
 func on_start_pressed() -> void:
+	MenuMusic.stop_music_menu()
 	Globals.load_with_loading_screen(Globals.main_scene)
 
 func on_option_pressed() -> void:
