@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cyjvugqw3bid5"]
+[gd_scene load_steps=5 format=3 uid="uid://cyjvugqw3bid5"]
 
 [ext_resource type="Texture2D" uid="uid://bhohuwngei70j" path="res://assets/background/Background.png" id="1_0cc2b"]
 [ext_resource type="Script" path="res://scenes/ui/menus/mainMenu/mainMenu.gd" id="1_8v261"]
+[ext_resource type="PackedScene" uid="uid://ga63x4i2ugw4" path="res://scenes/ui/menus/button.tscn" id="3_tc1ot"]
 
 [sub_resource type="SystemFont" id="SystemFont_q56rt"]
 
@@ -31,16 +32,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
+theme_override_constants/margin_top = 52
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 60
-
-[node name="seperator" type="Control" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
+theme_override_constants/separation = 65
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -53,29 +51,19 @@ Forest of Resilience"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 34
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="Start" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("3_tc1ot")]
 layout_mode = 2
-theme_override_constants/separation = 64
-alignment = 1
+text = "Start"
 
-[node name="seperator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Quit" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("3_tc1ot")]
 layout_mode = 2
+text = "Quit
+"
 
-[node name="seperator3" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Start_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(120, 32)
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Start Game"
-
-[node name="Exit_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(120, 32)
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Quit Game"
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

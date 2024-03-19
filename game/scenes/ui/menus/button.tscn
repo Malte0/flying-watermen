@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ga63x4i2ugw4"]
+
+[ext_resource type="Theme" uid="uid://bniwcx6k6wrx7" path="res://themes/button.tres" id="1_k1xex"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(200, 32)
+size_flags_horizontal = 4
+theme = ExtResource("1_k1xex")
+text = "Text"
