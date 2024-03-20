@@ -199,4 +199,4 @@ func shoot():
 
 func _on_inventory_on_item_in_inventory_updated(new_item, old_item):
 	if !new_item == null:
-		player_sound("res://assets/SFX/player/item.wav")
+		player_sound("res://assets/SFX/player/pickup_item.wav")
