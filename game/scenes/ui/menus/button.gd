@@ -1,4 +1,5 @@
 extends Button
+@onready var audioPlayer : AudioStreamPlayer = %AudioStreamPlayer
 
 func _ready():
 	var button = $"."
@@ -6,5 +7,8 @@ func _ready():
 	button.connect("mouse_entered", play_sound.bind())
 
 func play_sound():
-	%AudioStreamPlayer.stream = load("res://assets/SFX/player/ui-hover.wav")
-	%AudioStreamPlayer.play()
+	audioPlayer.stream = load("res://assets/SFX/player/ui-hover.wav")
+	audioPlayer.volume_db = 0
+	audioPlayer.play()
+	
+	
