@@ -27,3 +27,9 @@ func _on_menu_slider_value_changed(value):
 
 func _on_back_button_pressed():
 	get_parent().switch_window("menu")
+
+func _on_fullscreen_check_button_toggled(toggled_on):
+	if toggled_on:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
