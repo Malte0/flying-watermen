@@ -110,6 +110,7 @@ layout_mode = 2
 
 [node name="Reset_Settings_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Reset Settings"
 
 [node name="Back_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
