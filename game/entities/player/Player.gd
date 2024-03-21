@@ -139,7 +139,7 @@ func movement(delta: float):
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
 	# Gravity
-	if not (is_on_floor() and velocity.y == 0):
+	if not (is_on_floor() and velocity.y == 0 and gravity > 0):
 		velocity.y += gravity * delta * fall_speed_factor
 
 func update_animation_parameters():
