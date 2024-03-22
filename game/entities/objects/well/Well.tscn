@@ -61,6 +61,7 @@ offset_right = 80.0
 offset_bottom = -114.0
 
 [node name="Burning" type="Label" parent="FillLabel"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "kill all close enemies"
