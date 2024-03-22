@@ -15,7 +15,6 @@ var save_file_name: String = "OptionSave.tres"
 var optionData: OptionData = OptionData.new()
 
 func _ready():
-	verify_save_dirctory(save_file_path)
 	load_saved_options()
 	music_slider.value = db_to_linear(AudioServer.get_bus_volume_db(music_bus_id))
 	sfx_slider.value = db_to_linear(AudioServer.get_bus_volume_db(sfx_bus_id))
