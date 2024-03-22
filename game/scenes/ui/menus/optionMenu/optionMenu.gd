@@ -15,11 +15,15 @@ var save_file_name: String = "OptionSave.tres"
 var optionData: OptionData = OptionData.new()
 
 func _ready():
+	verify_save_dirctory(save_file_path)
 	load_saved_options()
 	music_slider.value = db_to_linear(AudioServer.get_bus_volume_db(music_bus_id))
 	sfx_slider.value = db_to_linear(AudioServer.get_bus_volume_db(sfx_bus_id))
 	menu_slider.value = db_to_linear(AudioServer.get_bus_volume_db(menu_bus_id))
 	fullscreen_check_button.button_pressed = (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)
+
+func verify_save_dirctory(path: String):
+	DirAccess.make_dir_absolute(path)
 
 func _on_music_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(music_bus_id, linear_to_db(value))
@@ -63,8 +67,6 @@ func load_saved_options():
 		updare_music_slider(optionData.save_music)
 		update_sfx_slider(optionData.save_sfx)
 		update_menu_slider(optionData.save_menu_sound)
-	else:
-		ResourceSaver.save(optionData, save_file_path + save_file_name)
 
 func update_menu_slider(value: float):
 	_on_menu_slider_value_changed(value)

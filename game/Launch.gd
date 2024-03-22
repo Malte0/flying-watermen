@@ -2,7 +2,6 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Globals.verify_save_dirctory(Globals.save_file_path)
 	var window_size_percentage: float = 0.6
 	var screen_size: Vector2i = DisplayServer.screen_get_size()
 	var screen: int = DisplayServer.window_get_current_screen()
