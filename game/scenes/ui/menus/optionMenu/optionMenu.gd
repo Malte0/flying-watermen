@@ -56,7 +56,7 @@ func update_save_options_data():
 func _on_reset_settings_button_pressed():
 	optionData.reset_values()
 	update_fullscreen(optionData.deafault_fullscreen)
-	updare_music_slider(optionData.deafault_music)
+	update_music_slider(optionData.deafault_music)
 	update_sfx_slider(optionData.deafault_sfx)
 	update_menu_slider(optionData.deafault_menu_sound)
 
@@ -64,7 +64,7 @@ func load_saved_options():
 	if FileAccess.file_exists(save_file_path + save_file_name):
 		optionData = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
 		update_fullscreen(optionData.save_fullscreen)
-		updare_music_slider(optionData.save_music)
+		update_music_slider(optionData.save_music)
 		update_sfx_slider(optionData.save_sfx)
 		update_menu_slider(optionData.save_menu_sound)
 
@@ -76,7 +76,7 @@ func update_sfx_slider(value: float):
 	_on_sfx_slider_value_changed(value)
 	sfx_slider.value = db_to_linear(AudioServer.get_bus_volume_db(sfx_bus_id))
 
-func updare_music_slider(value: float):
+func update_music_slider(value: float):
 	_on_music_slider_value_changed(value)
 	music_slider.value = db_to_linear(AudioServer.get_bus_volume_db(music_bus_id))
 
