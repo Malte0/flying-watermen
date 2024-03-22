@@ -21,9 +21,6 @@ func _ready():
 	menu_slider.value = db_to_linear(AudioServer.get_bus_volume_db(menu_bus_id))
 	fullscreen_check_button.button_pressed = (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)
 
-func verify_save_dirctory(path: String):
-	DirAccess.make_dir_absolute(path)
-
 func _on_music_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(music_bus_id, linear_to_db(value))
 	AudioServer.set_bus_mute(music_bus_id, value < 0.001)
@@ -60,11 +57,14 @@ func _on_reset_settings_button_pressed():
 	update_menu_slider(optionData.deafault_menu_sound)
 
 func load_saved_options():
-	optionData = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
-	update_fullscreen(optionData.save_fullscreen)
-	updare_music_slider(optionData.save_music)
-	update_sfx_slider(optionData.save_sfx)
-	update_menu_slider(optionData.save_menu_sound)
+	if FileAccess.file_exists(save_file_path + save_file_name):
+		optionData = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
+		update_fullscreen(optionData.save_fullscreen)
+		updare_music_slider(optionData.save_music)
+		update_sfx_slider(optionData.save_sfx)
+		update_menu_slider(optionData.save_menu_sound)
+	else:
+		ResourceSaver.save(optionData, save_file_path + save_file_name)
 
 func update_menu_slider(value: float):
 	_on_menu_slider_value_changed(value)
