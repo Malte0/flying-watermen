@@ -19,7 +19,7 @@ var player_data: PlayerData = PlayerData.new()
 
 # Reset values
 var base_scale_speed: float = 2
-var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") * base_scale_speed
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var base_speed: float = 300.0 * base_scale_speed
 var base_jump_velocity: float = -400.0 * base_scale_speed
 var base_friction: float = 0.5
@@ -41,6 +41,7 @@ var slide_threshold: float = base_speed/2
 var abilities: Dictionary = {
 	"dash": false
 }
+var prev_y_velocity: float = 0
 
 func _ready():
 	animation_tree.active = true
@@ -140,7 +141,11 @@ func movement(delta: float):
 		velocity.x = lerp(velocity.x, 0.0, friction)
 	# Gravity
 	if not (is_on_floor() and velocity.y == 0 and gravity > 0):
-		velocity.y += gravity * delta * fall_speed_factor
+		#if (velocity.y - prev_y_velocity) < 0:
+		#	velocity.y += gravity * delta * 4
+		#else:
+		velocity.y += gravity * delta
+	#prev_y_velocity = velocity.y
 
 func update_animation_parameters():
 	animation_tree.set("parameters/Default/blend_position", abs(velocity.x) > 0.8)
