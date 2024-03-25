@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://o5qajbk6mfjn"]
+[gd_scene load_steps=14 format=3 uid="uid://o5qajbk6mfjn"]
 
 [ext_resource type="Script" path="res://entities/objects/well/Well.gd" id="1_ryms2"]
 [ext_resource type="Texture2D" uid="uid://cxe6hu7quuq4d" path="res://entities/objects/well/assets/wellEmpty.png" id="2_gdx0v"]
 [ext_resource type="Texture2D" uid="uid://4qlm6ho7173m" path="res://assets/light_noise/offset_glow.png" id="3_lodbv"]
 [ext_resource type="Texture2D" uid="uid://bfv2i6fh1wtaa" path="res://assets/buttons/Dark/E_Key_Dark.png" id="4_o6eiu"]
+[ext_resource type="Texture2D" uid="uid://dgn2ljfyurcci" path="res://entities/objects/well/assets/fire.png" id="5_vfcfu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_amob8"]
 radius = 95.0
@@ -54,11 +55,10 @@ position = Vector2(1, -22)
 shape = SubResource("CircleShape2D_amob8")
 
 [node name="FillLabel" type="Panel" parent="."]
-visible = false
 offset_left = -79.0
-offset_top = -138.0
+offset_top = -208.0
 offset_right = 80.0
-offset_bottom = -114.0
+offset_bottom = -184.0
 
 [node name="Burning" type="Label" parent="FillLabel"]
 layout_mode = 0
@@ -112,9 +112,14 @@ shape = SubResource("CircleShape2D_sk6d8")
 one_way_collision_margin = 0.0
 
 [node name="RichTextLabel" type="Sprite2D" parent="."]
-position = Vector2(0, -140)
+position = Vector2(0, -168)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_o6eiu")
+
+[node name="Flamme" type="Sprite2D" parent="."]
+position = Vector2(3, -101)
+scale = Vector2(0.151957, 0.158588)
+texture = ExtResource("5_vfcfu")
 
 [connection signal="interacted" from="." to="." method="fill_well"]
 [connection signal="area_entered" from="Enemyzone" to="." method="_on_enemyzone_area_entered"]

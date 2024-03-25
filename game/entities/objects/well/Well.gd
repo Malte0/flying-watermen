@@ -30,6 +30,7 @@ func _on_enemyzone_body_entered(body):
 func _process(delta):
 	if enemies_inside == []:
 		$GPUParticles2D2.visible = false
+		$Flamme.visible = false
 		can_be_filled = true
 		var was_visible: bool = interact_hint.visible
 		interact_hint.visible = false
