@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bhohuwngei70j" path="res://assets/background/Background.png" id="1_0cc2b"]
 [ext_resource type="Script" path="res://scenes/ui/menus/mainMenu/mainMenu.gd" id="1_8v261"]
-[ext_resource type="PackedScene" path="res://scenes/ui/menus/button.tscn" id="3_tc1ot"]
+[ext_resource type="PackedScene" uid="uid://ga63x4i2ugw4" path="res://scenes/ui/menus/button.tscn" id="3_tc1ot"]
 
 [sub_resource type="SystemFont" id="SystemFont_q56rt"]
 
