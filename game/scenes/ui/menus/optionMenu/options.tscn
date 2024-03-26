@@ -116,10 +116,6 @@ text = "Reset Settings"
 layout_mode = 2
 text = "Save and Return"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-bus = &"Menu"
-
 [connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/GridContainer/MenuSlider" to="." method="_on_menu_slider_value_changed"]

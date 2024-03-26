@@ -23,14 +23,13 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_v1kfw")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-bus = &"Menu"
-
 [node name="Main" parent="." instance=ExtResource("3_ncxo0")]
 layout_mode = 1
 
 [node name="Options" parent="." instance=ExtResource("4_vtlls")]
 visible = false
+
+[node name="MenuAudioPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
 
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
