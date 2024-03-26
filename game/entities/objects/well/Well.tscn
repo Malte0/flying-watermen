@@ -55,6 +55,7 @@ position = Vector2(1, -22)
 shape = SubResource("CircleShape2D_amob8")
 
 [node name="FillLabel" type="Panel" parent="."]
+visible = false
 offset_left = -79.0
 offset_top = -208.0
 offset_right = 80.0
@@ -112,6 +113,7 @@ shape = SubResource("CircleShape2D_sk6d8")
 one_way_collision_margin = 0.0
 
 [node name="RichTextLabel" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, -168)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_o6eiu")
