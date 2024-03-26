@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/ui/menus/menu.gd" id="1_xd4qb"]
 [ext_resource type="Texture2D" uid="uid://bhohuwngei70j" path="res://assets/background/Background.png" id="2_v1kfw"]
-[ext_resource type="PackedScene" uid="uid://3jbem0nduruc" path="res://scenes/ui/menus/mainMenu/main.tscn" id="3_88v10"]
+[ext_resource type="PackedScene" uid="uid://cyjvugqw3bid5" path="res://scenes/ui/menus/mainMenu/mainMenu.tscn" id="3_ncxo0"]
 [ext_resource type="PackedScene" uid="uid://cdkicasp65o4b" path="res://scenes/ui/menus/optionMenu/options.tscn" id="4_vtlls"]
 
 [node name="Menu" type="Control"]
@@ -27,7 +27,8 @@ texture = ExtResource("2_v1kfw")
 unique_name_in_owner = true
 bus = &"Menu"
 
-[node name="Main" parent="." instance=ExtResource("3_88v10")]
+[node name="Main" parent="." instance=ExtResource("3_ncxo0")]
+layout_mode = 1
 
 [node name="Options" parent="." instance=ExtResource("4_vtlls")]
 visible = false

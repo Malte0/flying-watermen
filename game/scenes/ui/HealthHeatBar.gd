@@ -1,7 +1,7 @@
 extends TextureProgressBar
 
 @onready var player: Player = get_tree().get_first_node_in_group("player")
-@onready var health_label: Label = $"../Label"
+@onready var health_label: Label = %HP
 
 const COLD: Color = Color("blue")
 const HOT: Color = Color("red")

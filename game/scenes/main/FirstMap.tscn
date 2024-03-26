@@ -25,7 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://o5qajbk6mfjn" path="res://entities/objects/well/Well.tscn" id="21_j8e2w"]
 [ext_resource type="PackedScene" uid="uid://bhca1rm6tlmid" path="res://assets/forest-assets/scenes/stone04.tscn" id="21_qdr22"]
 [ext_resource type="Texture2D" uid="uid://1oxxq4gdiq2l" path="res://assets/forest-assets/stone04.png" id="22_j705s"]
-[ext_resource type="PackedScene" uid="uid://dpiypck5f1v6f" path="res://entities/objects/pfuetze.tscn" id="23_43erc"]
+[ext_resource type="PackedScene" uid="uid://dpiypck5f1v6f" path="res://entities/objects/puddle.tscn" id="23_43erc"]
 [ext_resource type="Texture2D" uid="uid://4qlm6ho7173m" path="res://assets/light_noise/offset_glow.png" id="23_lme2q"]
 [ext_resource type="Texture2D" uid="uid://obwra0usmk3a" path="res://assets/forest-assets/spiderweb01.png" id="27_rtonn"]
 [ext_resource type="Texture2D" uid="uid://080avp8oteh3" path="res://assets/forest-assets/bush01.png" id="28_unqp1"]
