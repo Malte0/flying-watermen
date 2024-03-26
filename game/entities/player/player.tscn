@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=123 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="PackedScene" uid="uid://d71bkm5ic0tt" path="res://entities/components/ranged/RangedComponent.tscn" id="2_32y2k"]
@@ -52,6 +52,12 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/animation_tree_state.gd" id="42_m0dwi"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="43_c4ing"]
 [ext_resource type="PackedScene" uid="uid://c5yieglatmln5" path="res://entities/player/chemicalEffects/chemicalEffectsManager.tscn" id="51_52a8d"]
+[ext_resource type="PackedScene" uid="uid://bbm5yfysxt45l" path="res://scenes/soundSystem/polyphonic_audio_player.tscn" id="53_mee86"]
+[ext_resource type="Script" path="res://scenes/soundSystem/AudioLibrary.gd" id="54_dh141"]
+[ext_resource type="Script" path="res://scenes/soundSystem/soundEffects.gd" id="55_fjhbo"]
+[ext_resource type="AudioStream" uid="uid://bwcr1or466rwa" path="res://assets/SFX/player/jump.wav" id="56_27xol"]
+[ext_resource type="AudioStream" uid="uid://bbxhs7f4v3t41" path="res://assets/SFX/player/dash.wav" id="57_wgclf"]
+[ext_resource type="AudioStream" uid="uid://dyjar8353lehf" path="res://assets/SFX/player/pickup_item.wav" id="58_2hr3x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fuycp"]
 radius = 15.25
@@ -587,6 +593,25 @@ guard = SubResource("Resource_djar4")
 script = ExtResource("43_c4ing")
 guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_8q6k4"), SubResource("Resource_xgmgk")])
 
+[sub_resource type="Resource" id="Resource_o38gm"]
+script = ExtResource("55_fjhbo")
+tag = "jump"
+stream = ExtResource("56_27xol")
+
+[sub_resource type="Resource" id="Resource_5rl7u"]
+script = ExtResource("55_fjhbo")
+tag = "dash"
+stream = ExtResource("57_wgclf")
+
+[sub_resource type="Resource" id="Resource_10jm0"]
+script = ExtResource("55_fjhbo")
+tag = "pickup_item"
+stream = ExtResource("58_2hr3x")
+
+[sub_resource type="Resource" id="Resource_jkm28"]
+script = ExtResource("54_dh141")
+sound_effects = Array[ExtResource("55_fjhbo")]([SubResource("Resource_o38gm"), SubResource("Resource_5rl7u"), SubResource("Resource_10jm0")])
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(2, 2)
 collision_layer = 2
@@ -921,7 +946,9 @@ layer = 5
 [node name="SFX" type="Node" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SFX"]
-bus = &"SFX"
+
+[node name="PolyphonicAudioPlayer" parent="SFX" instance=ExtResource("53_mee86")]
+audio_library = SubResource("Resource_jkm28")
 
 [connection signal="death" from="HealthComponent" to="." method="_on_death"]
 [connection signal="on_item_in_inventory_updated" from="Inventory" to="." method="_on_inventory_on_item_in_inventory_updated"]

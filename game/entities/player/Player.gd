@@ -11,6 +11,7 @@ var shoot_position: Marker2D:
 @onready var state_chart: StateChart = %StateChart
 @onready var animation_tree: AnimationTree = $Animation/AnimationTree
 @onready var particle: Node2D = $Particles
+@onready var polyphonic_audio_player = $SFX/PolyphonicAudioPlayer
 
 # Reset values
 var base_scale_speed: float = 2
@@ -151,7 +152,9 @@ func _on_sliding_state_entered():
 
 func _on_jumping_state_entered():
 	#velocity.y = jump_velocity + velocity.y/2
-	player_sound("res://assets/SFX/player/jump.wav")
+	print("jump pressed")
+	polyphonic_audio_player.play_sound_effect_from_library("jump")
+	#player_sound("res://assets/SFX/player/jump.wav")
 	velocity.y = jump_velocity
 	jumps_left -= 1
 
@@ -169,7 +172,8 @@ func _on_movement_child_state_exited():
 
 func _on_dash_state_entered() -> void:
 	particle.dash_trail()
-	player_sound("res://assets/SFX/player/dash.wav")
+	polyphonic_audio_player.play_sound_effect_from_library("dash")
+	#player_sound("res://assets/SFX/player/dash.wav")
 	can_move = false
 	friction = 0
 	@warning_ignore("narrowing_conversion")
@@ -199,4 +203,5 @@ func shoot():
 
 func _on_inventory_on_item_in_inventory_updated(new_item, old_item):
 	if !new_item == null:
-		player_sound("res://assets/SFX/player/pickup_item.wav")
+		polyphonic_audio_player.play_sound_effect_from_library("pickup_item")
+		#player_sound("res://assets/SFX/player/pickup_item.wav")
