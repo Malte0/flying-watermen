@@ -1,6 +1,6 @@
 class_name MeleeComponent extends Area2D
 
-signal finished
+signal finished()
 
 @export var damage: int = 50
 @export var element: Element.Type
