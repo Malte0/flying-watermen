@@ -1,7 +1,7 @@
 [gd_resource type="VisualShader" load_steps=20 format=3 uid="uid://bed3tdjo00y51"]
 
 [ext_resource type="Texture2D" uid="uid://ckas7a44ovihg" path="res://shader/fire/fire_1-modified.jpg" id="1_7nl4w"]
-[ext_resource type="Texture2D" uid="uid://ca6mxx0o8vhjw" path="res://shader/fire/distortion01.png" id="2_j34pn"]
+[ext_resource type="Texture2D" uid="uid://ca6mxx0o8vhjw" path="res://shader/fire/distortion01.png" id="2_j2nbs"]
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_v6msn"]
 output_port_for_preview = 0
@@ -51,7 +51,7 @@ constant = Color(4, 0.8, 0, 1)
 [sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_lqpuj"]
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_f2okq"]
-texture = ExtResource("2_j34pn")
+texture = ExtResource("2_j2nbs")
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_8enb3"]
 input_name = "uv"
