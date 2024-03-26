@@ -19,7 +19,9 @@ func _ready() -> void:
 ## Fills the well, but only once
 func fill_well(_body: Node):
 	if not is_full and can_be_filled:
-		interact_hint = null
+		#interact_hint = null
+		#Node.PROCESS_MODE_DISABLED
+		$CollisionShape2D.disabled = true
 		sprite.texture = FULL_TEXTURE
 		$GPUParticles2D.visible  = true
 		well_filled.emit()
