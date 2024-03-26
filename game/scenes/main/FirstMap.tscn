@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=3 uid="uid://cu55a1ijhr436"]
+[gd_scene load_steps=116 format=3 uid="uid://cu55a1ijhr436"]
 
 [ext_resource type="Texture2D" uid="uid://dhvk873s0063d" path="res://assets/tileMap/Tiles.png" id="1_b4xfn"]
 [ext_resource type="PackedScene" uid="uid://djmlmtr41m2ce" path="res://entities/player/player.tscn" id="2_6f3hr"]
@@ -53,6 +53,7 @@
 [ext_resource type="Texture2D" uid="uid://c8bs0o4h5busu" path="res://assets/abandoneded_houses/ababdoned_house.png" id="52_pnb1n"]
 [ext_resource type="PackedScene" uid="uid://dvv2sij5v2epd" path="res://entities/player/inventory/items/sodiumChemical/sodium.tscn" id="52_qqbdr"]
 [ext_resource type="PackedScene" uid="uid://i1cmowsc0ynu" path="res://entities/traps/destroyableWall/destroyable_wall.tscn" id="53_ibww7"]
+[ext_resource type="PackedScene" uid="uid://dy5fw7mb5nddc" path="res://shader/fire/cpu_particles_3d.tscn" id="54_e533h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_23ck1"]
 resource_local_to_scene = true
@@ -3480,7 +3481,7 @@ position = Vector2(11840, 1560)
 position = Vector2(11906, 2140)
 
 [node name="Enemies6" type="Node2D" parent="Areas"]
-position = Vector2(11716, 251)
+position = Vector2(10553, 1436)
 
 [node name="EnemySpawnArea" parent="Areas/Enemies6" instance=ExtResource("47_ow2md")]
 position = Vector2(2716, -30)
@@ -3614,6 +3615,12 @@ position = Vector2(12556, 7932)
 [node name="Well2" parent="secondMap" instance=ExtResource("21_j8e2w")]
 position = Vector2(32552, 9207)
 
+[node name="Well3" parent="secondMap" instance=ExtResource("21_j8e2w")]
+position = Vector2(50533, 9375)
+
+[node name="Well4" parent="secondMap" instance=ExtResource("21_j8e2w")]
+position = Vector2(38957, 6997)
+
 [node name="label" type="Node" parent="secondMap"]
 
 [node name="Label" type="Label" parent="secondMap/label"]
@@ -3719,8 +3726,18 @@ offset_bottom = 6123.0
 theme_override_font_sizes/font_size = 50
 text = "max sprung doppelt"
 
-[node name="Well3" parent="secondMap" instance=ExtResource("21_j8e2w")]
-position = Vector2(38957, 6997)
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(22852, 9696)
 
-[node name="Well" parent="." instance=ExtResource("21_j8e2w")]
-position = Vector2(50533, 9375)
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Node2D"]
+offset_left = 1789.0
+offset_top = 3.0
+offset_right = 2304.0
+offset_bottom = 515.0
+
+[node name="SubViewport" type="SubViewport" parent="Node2D/SubViewportContainer"]
+own_world_3d = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="CPUParticles3D" parent="Node2D/SubViewportContainer/SubViewport" instance=ExtResource("54_e533h")]
