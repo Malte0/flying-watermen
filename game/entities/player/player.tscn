@@ -945,9 +945,8 @@ layer = 5
 
 [node name="SFX" type="Node" parent="."]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SFX"]
-
 [node name="PolyphonicAudioPlayer" parent="SFX" instance=ExtResource("53_mee86")]
+bus = &"SFX"
 audio_library = SubResource("Resource_jkm28")
 
 [connection signal="death" from="HealthComponent" to="." method="_on_death"]

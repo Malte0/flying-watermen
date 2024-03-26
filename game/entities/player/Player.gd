@@ -111,12 +111,6 @@ func update_animation_parameters():
 	state_chart.send_event("tick")
 #endregion
 
-# sound function for the player
-func player_sound(sound : String):
-	$SFX/AudioStreamPlayer.stream = load(sound)
-	$SFX/AudioStreamPlayer.volume_db = -15
-	$SFX/AudioStreamPlayer.play()
-
 #region Movement
 func reset_variables():
 	speed = base_speed
@@ -152,9 +146,7 @@ func _on_sliding_state_entered():
 
 func _on_jumping_state_entered():
 	#velocity.y = jump_velocity + velocity.y/2
-	print("jump pressed")
 	polyphonic_audio_player.play_sound_effect_from_library("jump")
-	#player_sound("res://assets/SFX/player/jump.wav")
 	velocity.y = jump_velocity
 	jumps_left -= 1
 
@@ -173,7 +165,6 @@ func _on_movement_child_state_exited():
 func _on_dash_state_entered() -> void:
 	particle.dash_trail()
 	polyphonic_audio_player.play_sound_effect_from_library("dash")
-	#player_sound("res://assets/SFX/player/dash.wav")
 	can_move = false
 	friction = 0
 	@warning_ignore("narrowing_conversion")
@@ -200,8 +191,6 @@ func shoot():
 	return ranged_component.shoot(shoot_direction, projectile_scene, velocity)
 #endregion
 
-
 func _on_inventory_on_item_in_inventory_updated(new_item, old_item):
 	if !new_item == null:
 		polyphonic_audio_player.play_sound_effect_from_library("pickup_item")
-		#player_sound("res://assets/SFX/player/pickup_item.wav")

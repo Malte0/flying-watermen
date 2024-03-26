@@ -1,4 +1,4 @@
-extends AudioStreamPlayer2D
+extends AudioStreamPlayer
 
 @export var audio_library: AudioLibrary
 @export var custom_max_polyphony: int = 32
@@ -13,10 +13,7 @@ func play_sound_effect_from_library(_tag: String) -> void:
 		var audio_stream = audio_library.get_audio_stream(_tag)
 		
 		if !playing: self.play()
-		
-		print("play Stream")
-		print(get_stream_playback())
-		print(get("stream"))
+
 		volume_db = 10
 		var polyphonic_stream_playback := self.get_stream_playback()
 		polyphonic_stream_playback.play_stream(audio_stream)	

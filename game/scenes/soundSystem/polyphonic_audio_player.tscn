@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://scenes/soundSystem/polyphonic_audio_player.gd" id="1_hanfh"]
 
-[node name="PolyphonicAudioPlayer" type="AudioStreamPlayer2D"]
+[node name="PolyphonicAudioPlayer" type="AudioStreamPlayer"]
 script = ExtResource("1_hanfh")
