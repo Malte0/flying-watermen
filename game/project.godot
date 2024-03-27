@@ -20,7 +20,7 @@ config/icon="res://icon.svg"
 Element="*res://globals/Element.gd"
 BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
 Globals="*res://globals/Globals.gd"
-MenuMusic="*res://scenes/ui/menus/menuMusic/menuMusic.tscn"
+GlobalMusic="*res://scenes/ui/menus/globalMusic/globalMusic.tscn"
 
 [display]
 
