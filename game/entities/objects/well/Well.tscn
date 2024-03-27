@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://o5qajbk6mfjn"]
+[gd_scene load_steps=12 format=3 uid="uid://o5qajbk6mfjn"]
 
 [ext_resource type="Script" path="res://entities/objects/well/Well.gd" id="1_ryms2"]
 [ext_resource type="Texture2D" uid="uid://cxe6hu7quuq4d" path="res://entities/objects/well/assets/wellEmpty.png" id="2_gdx0v"]
 [ext_resource type="Texture2D" uid="uid://4qlm6ho7173m" path="res://assets/light_noise/offset_glow.png" id="3_lodbv"]
+[ext_resource type="AudioStream" uid="uid://cx2yx35kkfnho" path="res://assets/SFX/well/glow.wav" id="4_j1csk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_amob8"]
 radius = 95.0
@@ -45,7 +46,6 @@ collision_mask = 2
 script = ExtResource("1_ryms2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(1, -22)
 shape = SubResource("CircleShape2D_amob8")
 
@@ -80,6 +80,7 @@ metadata/_edit_lock_ = true
 position = Vector2(10.8713, -6)
 scale = Vector2(10.5794, 5.49783)
 polygon = PackedVector2Array(-6.98257, -4.91103, -6.98257, 7.82126, 4.73834, 7.82126, 4.73834, -5.09292, 3.60405, -6.91181, 1.52454, -8.00315, -1.02759, -8.36693, -3.8633, -8.00315, -5.94281, -6.91181)
+one_way_collision = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 visible = false
@@ -89,5 +90,13 @@ position = Vector2(0, -70)
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_j1tol")
 texture = ExtResource("3_lodbv")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, -70)
+stream = ExtResource("4_j1csk")
+autoplay = true
+max_distance = 1000.0
+attenuation = 2.07052
+bus = &"SFX"
 
 [connection signal="interacted" from="." to="." method="fill_well"]

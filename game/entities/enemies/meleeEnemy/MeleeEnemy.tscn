@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c2mdlfdoukqoq"]
+[gd_scene load_steps=37 format=3 uid="uid://c2mdlfdoukqoq"]
 
 [ext_resource type="Script" path="res://entities/enemies/meleeEnemy/MeleeEnemy.gd" id="2_r07kk"]
 [ext_resource type="Texture2D" uid="uid://dfu4qtgkvfarv" path="res://assets/melee_enemy_assets/melee_enemy01.png" id="3_dl6au"]
@@ -7,14 +7,21 @@
 [ext_resource type="Texture2D" uid="uid://bgeyik6y657at" path="res://assets/melee_enemy_assets/melee_enemy02.png" id="4_wm3h2"]
 [ext_resource type="Texture2D" uid="uid://cq14ebdyh01l2" path="res://assets/melee_enemy_assets/melee_enemy03.png" id="5_wx33d"]
 [ext_resource type="Texture2D" uid="uid://drqht0p82ryru" path="res://entities/enemies/assets/healthbar_progress.png" id="5_x4f6e"]
-[ext_resource type="PackedScene" path="res://entities/components/heat/HeatArea.tscn" id="6_dqevw"]
+[ext_resource type="PackedScene" uid="uid://u07y0x28am7y" path="res://entities/components/heat/HeatArea.tscn" id="6_dqevw"]
 [ext_resource type="Texture2D" uid="uid://dmyx2mk6fjoud" path="res://assets/light_noise/waterParticle.png" id="6_tmsvp"]
-[ext_resource type="PackedScene" path="res://entities/components/health/DamageArea.tscn" id="7_llwul"]
+[ext_resource type="PackedScene" uid="uid://b22gqpw2lilbg" path="res://entities/components/health/DamageArea.tscn" id="7_llwul"]
 [ext_resource type="PackedScene" uid="uid://bkweew02mcaim" path="res://entities/components/enemyComponents/enemyAggro/AggroComponent.tscn" id="8_vgiu5"]
 [ext_resource type="PackedScene" uid="uid://61g8e7mlxwj" path="res://entities/components/enemyComponents/movement/MovementComponent.tscn" id="9_mp4oq"]
 [ext_resource type="PackedScene" uid="uid://tdd5ci5su0wo" path="res://entities/components/meleeCombat/MeleeComponent.tscn" id="10_v8nb8"]
 [ext_resource type="PackedScene" uid="uid://wamnd7014nsa" path="res://entities/components/enemyComponents/itemDropper/DropItemComponent.tscn" id="11_ieocg"]
 [ext_resource type="PackedScene" uid="uid://bree81gljy661" path="res://entities/player/inventory/items/foamChemical/FoamChemical.tscn" id="12_70ypm"]
+[ext_resource type="PackedScene" uid="uid://bbm5yfysxt45l" path="res://scenes/soundSystem/polyphonic_audio_player.tscn" id="16_maeih"]
+[ext_resource type="Script" path="res://entities/enemies/meleeEnemy/MeleeEnemySFX.gd" id="16_t5524"]
+[ext_resource type="Script" path="res://scenes/soundSystem/AudioLibrary.gd" id="17_dx525"]
+[ext_resource type="Script" path="res://scenes/soundSystem/soundEffects.gd" id="18_qhogg"]
+[ext_resource type="AudioStream" uid="uid://b8o50pvv7u37j" path="res://assets/SFX/player/spit.wav" id="19_nr1b1"]
+[ext_resource type="AudioStream" uid="uid://cfc4na1tj8lqb" path="res://assets/SFX/enemy/fire_burning_loop.mp3" id="22_xply0"]
+[ext_resource type="AudioStream" uid="uid://bnjog1n32i3wc" path="res://assets/SFX/placeHolder02.wav" id="22_ybuqq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oi488"]
 radius = 28.0179
@@ -80,6 +87,20 @@ color_ramp = SubResource("GradientTexture1D_0j4ex")
 hue_variation_min = -0.67
 hue_variation_max = -0.55
 
+[sub_resource type="Resource" id="Resource_l2407"]
+script = ExtResource("18_qhogg")
+tag = "melee"
+stream = ExtResource("19_nr1b1")
+
+[sub_resource type="Resource" id="Resource_kcwdm"]
+script = ExtResource("18_qhogg")
+tag = "tookDamage"
+stream = ExtResource("22_ybuqq")
+
+[sub_resource type="Resource" id="Resource_4skjh"]
+script = ExtResource("17_dx525")
+sound_effects = Array[ExtResource("18_qhogg")]([SubResource("Resource_l2407"), SubResource("Resource_kcwdm")])
+
 [node name="MeleeEnemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_component", "melee_component", "movement_component", "wall_detection")]
 collision_layer = 4
 collision_mask = 3
@@ -121,7 +142,7 @@ shape = SubResource("CircleShape2D_ol33t")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_health_bar") instance=ExtResource("4_7dbns")]
 _health_bar = NodePath("HealthBar")
-damage_effect = true
+use_damage_effect = true
 
 [node name="HealthBar" type="TextureProgressBar" parent="HealthComponent"]
 offset_left = -50.0
@@ -183,7 +204,23 @@ process_material = SubResource("ParticleProcessMaterial_dmaj2")
 texture = ExtResource("6_tmsvp")
 lifetime = 0.6
 
+[node name="SFX" type="Node2D" parent="."]
+script = ExtResource("16_t5524")
+
+[node name="PolyphonicAudioPlayer" parent="SFX" instance=ExtResource("16_maeih")]
+bus = &"SFX"
+audio_library = SubResource("Resource_4skjh")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("22_xply0")
+autoplay = true
+max_distance = 1000.0
+attenuation = 6.06286
+bus = &"SFX"
+
 [connection signal="body_entered" from="ViewArea" to="." method="_on_view_area_body_entered"]
 [connection signal="body_exited" from="ViewArea" to="." method="_on_view_area_body_exited"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="health_changed" from="HealthComponent" to="SFX" method="_on_health_component_health_changed"]
+[connection signal="melee_attack_started" from="MeleeComponent" to="SFX" method="_on_melee_component_melee_attack_started"]
 [connection signal="timeout" from="AttackFrequency" to="." method="_on_attack_frequency_timeout"]

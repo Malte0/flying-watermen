@@ -10,6 +10,8 @@ class_name MeleeComponent extends Area2D
 @onready var parent: CharacterBody2D = get_parent()
 @onready var ranged_component: RangedComponent = parent.get_node_or_null("RangedComponent")
 
+signal melee_attack_started 
+
 const ATTACK_DURATION: float = 0.1
 ## To makes sure no body is hit twice
 var bodies_hit: Array[CharacterBody2D] = []
@@ -47,6 +49,7 @@ func _on_body_entered(body):
 			bodies_hit.erase(body)
 
 func _on_attack_state_entered():
+	melee_attack_started.emit()
 	if ranged_component: ranged_component.disable()
 	tmp_animation_bar.visible = true
 	tmp_animation_bar.value = 0

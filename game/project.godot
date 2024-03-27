@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Element="*res://globals/Element.gd"
 BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
 Globals="*res://globals/Globals.gd"
+GlobalMusic="*res://scenes/ui/menus/globalMusic/globalMusic.tscn"
 
 [display]
 
@@ -27,6 +28,7 @@ window/size/initial_position_type=4
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 
