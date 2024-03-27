@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dx3nby7obhlgn" path="res://assets/tileMap/tileset.png" id="1_hwc3f"]
 [ext_resource type="Texture2D" uid="uid://ihorffrdym4j" path="res://icon.svg" id="3_n53fm"]
 [ext_resource type="PackedScene" uid="uid://djmlmtr41m2ce" path="res://entities/player/player.tscn" id="5_wejlo"]
-[ext_resource type="PackedScene" uid="uid://dpiypck5f1v6f" path="res://entities/objects/puddle.tscn" id="6_e2e7g"]
+[ext_resource type="PackedScene" path="res://entities/objects/puddle.tscn" id="6_e2e7g"]
 [ext_resource type="PackedScene" uid="uid://cihcop35erg48" path="res://scenes/ui/ui.tscn" id="6_rwr2e"]
 [ext_resource type="PackedScene" uid="uid://dp6qth5jvcdhd" path="res://entities/player/inventory/items/iceChemical/IceChemical.tscn" id="7_m0gl1"]
 [ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/meleeEnemy/MeleeEnemy.tscn" id="7_qvsmb"]

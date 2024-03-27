@@ -1,124 +1,80 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdkicasp65o4b"]
+[gd_scene load_steps=5 format=3 uid="uid://cdkicasp65o4b"]
 
 [ext_resource type="Script" path="res://scenes/ui/menus/optionMenu/optionMenu.gd" id="1_o5c20"]
-[ext_resource type="PackedScene" uid="uid://ga63x4i2ugw4" path="res://scenes/ui/menus/button.tscn" id="2_fyjd1"]
-
-[sub_resource type="SystemFont" id="SystemFont_q56rt"]
-subpixel_positioning = 0
+[ext_resource type="PackedScene" uid="uid://bnl4aymwagsqa" path="res://scenes/ui/menus/menuTemplate.tscn" id="2_5rd8f"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menus/button.tscn" id="2_fyjd1"]
+[ext_resource type="PackedScene" uid="uid://cw2su11exv8go" path="res://scenes/ui/menus/slider.tscn" id="3_l5udh"]
 
 [node name="Options" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1153.0
-offset_bottom = 649.0
-script = ExtResource("1_o5c20")
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
+script = ExtResource("1_o5c20")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 60
+[node name="MenuTemplate" parent="." instance=ExtResource("2_5rd8f")]
+layout_mode = 1
 
-[node name="seperator" type="Control" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_fonts/font = SubResource("SystemFont_q56rt")
-theme_override_font_sizes/font_size = 60
+[node name="Label" parent="MenuTemplate/VBoxContainer" index="0"]
 text = "Options"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 32
-alignment = 1
-
-[node name="seperator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="seperator3" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="MenuTemplate/VBoxContainer/VBoxContainer" index="0"]
 custom_minimum_size = Vector2(267.92, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/h_separation = 16
 columns = 2
 
-[node name="MusicLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+[node name="MusicLabel" type="Label" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Music"
 
-[node name="MusicSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+[node name="MusicSlider" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer" instance=ExtResource("3_l5udh")]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-max_value = 1.0
-step = 0.001
-value = 1.0
 
-[node name="SFXLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+[node name="SFXLabel" type="Label" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "SFX
 "
 
-[node name="SFXSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+[node name="SFXSlider" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer" instance=ExtResource("3_l5udh")]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-max_value = 1.0
-step = 0.001
-value = 1.0
 
-[node name="MenuLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+[node name="MenuLabel" type="Label" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Menu
 "
 
-[node name="MenuSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+[node name="MenuSlider" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer" instance=ExtResource("3_l5udh")]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-max_value = 1.0
-step = 0.001
-value = 1.0
 
-[node name="FullscreenLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+[node name="FullscreenLabel" type="Label" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Fullscreen"
 
-[node name="FullscreenCheckButton" type="CheckButton" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+[node name="FullscreenCheckButton" type="CheckButton" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 
-[node name="Reset_Settings_Button" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_fyjd1")]
+[node name="Reset_Settings_Button" parent="MenuTemplate/VBoxContainer/VBoxContainer" index="1" instance=ExtResource("2_fyjd1")]
 layout_mode = 2
 text = "Reset Settings"
 
-[node name="Back_Button" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_fyjd1")]
+[node name="Back_Button" parent="MenuTemplate/VBoxContainer/VBoxContainer" index="2" instance=ExtResource("2_fyjd1")]
 layout_mode = 2
 text = "Save and Return"
 
-[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/GridContainer/MenuSlider" to="." method="_on_menu_slider_value_changed"]
-[connection signal="toggled" from="MarginContainer/HBoxContainer/VBoxContainer/GridContainer/FullscreenCheckButton" to="." method="_on_fullscreen_check_button_toggled"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Reset_Settings_Button" to="." method="_on_reset_settings_button_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Back_Button" to="." method="_on_back_button_pressed"]
+[connection signal="value_changed" from="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer/MenuSlider" to="." method="_on_menu_slider_value_changed"]
+[connection signal="toggled" from="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer/FullscreenCheckButton" to="." method="_on_fullscreen_check_button_toggled"]
+[connection signal="pressed" from="MenuTemplate/VBoxContainer/VBoxContainer/Reset_Settings_Button" to="." method="_on_reset_settings_button_pressed"]
+[connection signal="pressed" from="MenuTemplate/VBoxContainer/VBoxContainer/Back_Button" to="." method="_on_back_button_pressed"]
+
+[editable path="MenuTemplate"]

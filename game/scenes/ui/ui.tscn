@@ -141,4 +141,5 @@ theme_override_constants/outline_size = 5
 text = "AAAAAA"
 
 [node name="PauseMenu" parent="." instance=ExtResource("7_hnkim")]
+visible = false
 size_flags_horizontal = 4

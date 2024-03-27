@@ -16,7 +16,7 @@ domain_warp_enabled = true
 domain_warp_type = 2
 
 [resource]
-width = 1000
+width = 1065
 height = 60
 color_ramp = SubResource("Gradient_k7ssn")
 noise = SubResource("FastNoiseLite_8q1x2")

@@ -25,7 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://o5qajbk6mfjn" path="res://entities/objects/well/Well.tscn" id="21_j8e2w"]
 [ext_resource type="PackedScene" uid="uid://bhca1rm6tlmid" path="res://assets/forest-assets/scenes/stone04.tscn" id="21_qdr22"]
 [ext_resource type="Texture2D" uid="uid://1oxxq4gdiq2l" path="res://assets/forest-assets/stone04.png" id="22_j705s"]
-[ext_resource type="PackedScene" uid="uid://dpiypck5f1v6f" path="res://entities/objects/puddle.tscn" id="23_43erc"]
+[ext_resource type="PackedScene" path="res://entities/objects/puddle.tscn" id="23_43erc"]
 [ext_resource type="Texture2D" uid="uid://4qlm6ho7173m" path="res://assets/light_noise/offset_glow.png" id="23_lme2q"]
 [ext_resource type="Texture2D" uid="uid://obwra0usmk3a" path="res://assets/forest-assets/spiderweb01.png" id="27_rtonn"]
 [ext_resource type="Texture2D" uid="uid://080avp8oteh3" path="res://assets/forest-assets/bush01.png" id="28_unqp1"]
@@ -2690,7 +2690,7 @@ flip_h = true
 
 [node name="Puddle" parent="Areas/Begining/Objects" instance=ExtResource("23_43erc")]
 top_level = true
-position = Vector2(4224, 652)
+position = Vector2(4214, 672)
 
 [node name="FirstCave" type="Node2D" parent="Areas"]
 position = Vector2(4425, 918)
@@ -2926,7 +2926,7 @@ scale = Vector2(1, 1.07193)
 [node name="Objects" type="Node2D" parent="Areas/FloatingGround"]
 
 [node name="Puddle2" parent="Areas/FloatingGround/Objects" instance=ExtResource("23_43erc")]
-position = Vector2(2240, 1594)
+position = Vector2(2242, 1610)
 
 [node name="WaterFallCave" type="Node2D" parent="Areas"]
 position = Vector2(8672, 1448)
@@ -3329,7 +3329,7 @@ position = Vector2(14741, 2063)
 
 [node name="Puddle" parent="Areas/ThirdCave/Objects" instance=ExtResource("23_43erc")]
 top_level = true
-position = Vector2(11605, 2180)
+position = Vector2(11605, 2200)
 
 [node name="Ending" type="Node2D" parent="Areas"]
 position = Vector2(13640, 104)
