@@ -1,12 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyjvugqw3bid5"]
+[gd_scene load_steps=4 format=3 uid="uid://cyjvugqw3bid5"]
 
-[ext_resource type="Texture2D" uid="uid://bhohuwngei70j" path="res://assets/background/Background.png" id="1_0cc2b"]
 [ext_resource type="Script" path="res://scenes/ui/menus/mainMenu/mainMenu.gd" id="1_8v261"]
-[ext_resource type="PackedScene" uid="uid://ga63x4i2ugw4" path="res://scenes/ui/menus/button.tscn" id="3_tc1ot"]
+[ext_resource type="PackedScene" uid="uid://bnl4aymwagsqa" path="res://scenes/ui/menus/menuTemplate.tscn" id="2_0es5b"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menus/button.tscn" id="3_tc1ot"]
 
-[sub_resource type="SystemFont" id="SystemFont_q56rt"]
-
-[node name="MainMenu" type="Control"]
+[node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,60 +13,24 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8v261")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="MenuTemplate" parent="." instance=ExtResource("2_0es5b")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_0cc2b")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 52
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 65
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_fonts/font = SubResource("SystemFont_q56rt")
-theme_override_font_sizes/font_size = 60
-text = "Aquaflame: 
-Forest of Resilience"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 34
-alignment = 1
-
-[node name="Start" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("3_tc1ot")]
+[node name="Start" parent="MenuTemplate/VBoxContainer/VBoxContainer" index="0" instance=ExtResource("3_tc1ot")]
 layout_mode = 2
 text = "Start"
 
-[node name="Option" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("3_tc1ot")]
+[node name="Options" parent="MenuTemplate/VBoxContainer/VBoxContainer" index="1" instance=ExtResource("3_tc1ot")]
 layout_mode = 2
-text = "Option"
+text = "Options"
 
-[node name="Quit" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("3_tc1ot")]
+[node name="Quit" parent="MenuTemplate/VBoxContainer/VBoxContainer" index="2" instance=ExtResource("3_tc1ot")]
 layout_mode = 2
 text = "Quit
 "
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Option" to="." method="_on_option_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MenuTemplate/VBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MenuTemplate/VBoxContainer/VBoxContainer/Options" to="." method="_on_option_pressed"]
+[connection signal="pressed" from="MenuTemplate/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+
+[editable path="MenuTemplate"]

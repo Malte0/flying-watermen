@@ -1,13 +1,15 @@
 class_name OptionsMenu extends Control
 
+signal back_pressed
+
 @onready var music_bus_id = AudioServer.get_bus_index("Music")
 @onready var sfx_bus_id = AudioServer.get_bus_index("SFX")
 @onready var menu_bus_id = AudioServer.get_bus_index("Menu")
 
-@onready var music_slider: HSlider = $MarginContainer/HBoxContainer/VBoxContainer/GridContainer/MusicSlider
-@onready var sfx_slider: HSlider = $MarginContainer/HBoxContainer/VBoxContainer/GridContainer/SFXSlider
-@onready var menu_slider: HSlider = $MarginContainer/HBoxContainer/VBoxContainer/GridContainer/MenuSlider
-@onready var fullscreen_check_button: CheckButton = $MarginContainer/HBoxContainer/VBoxContainer/GridContainer/FullscreenCheckButton
+@onready var music_slider: HSlider = %MusicSlider
+@onready var sfx_slider: HSlider = %SFXSlider
+@onready var menu_slider: HSlider = %MenuSlider
+@onready var fullscreen_check_button: CheckButton = %FullscreenCheckButton
 
 # saving data
 var save_file_path: String = "user://save/"
@@ -89,5 +91,4 @@ func update_fullscreen(is_fullscreen: bool):
 func _on_back_button_pressed():
 	update_save_options_data()
 	ResourceSaver.save(option_data, save_file_path + save_file_name)
-	print("saved")
-	get_parent().switch_window("menu")
+	back_pressed.emit()
