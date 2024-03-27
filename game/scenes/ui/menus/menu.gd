@@ -2,7 +2,7 @@ class_name Menu extends Control
 
 @onready var main: MainMenu = $Main
 @onready var option: OptionsMenu = $Options
-@onready var menu_audio_player = $MenuAudioPlayer
+@onready var menu_audio_player: AudioStreamPlayer = $MenuAudioPlayer
 @onready var menu_music = preload("res://assets/SFX/worldMusic/Ambient 5.wav")
 
 func _ready():

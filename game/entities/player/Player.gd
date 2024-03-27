@@ -11,7 +11,7 @@ var shoot_position: Marker2D:
 @onready var state_chart: StateChart = %StateChart
 @onready var animation_tree: AnimationTree = $Animation/AnimationTree
 @onready var particle: Node2D = $Particles
-@onready var polyphonic_audio_player = $SFX/PolyphonicAudioPlayer
+@onready var polyphonic_audio_player: AudioStreamPlayer = $SFX/PolyphonicAudioPlayer
 
 # save location
 var save_file_path: String = "user://save/"

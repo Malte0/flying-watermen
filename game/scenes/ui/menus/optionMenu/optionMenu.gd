@@ -4,10 +4,10 @@ class_name OptionsMenu extends Control
 @onready var sfx_bus_id = AudioServer.get_bus_index("SFX")
 @onready var menu_bus_id = AudioServer.get_bus_index("Menu")
 
-@onready var music_slider = $MarginContainer/HBoxContainer/VBoxContainer/GridContainer/MusicSlider
-@onready var sfx_slider = $MarginContainer/HBoxContainer/VBoxContainer/GridContainer/SFXSlider
-@onready var menu_slider = $MarginContainer/HBoxContainer/VBoxContainer/GridContainer/MenuSlider
-@onready var fullscreen_check_button = $MarginContainer/HBoxContainer/VBoxContainer/GridContainer/FullscreenCheckButton
+@onready var music_slider: HSlider = $MarginContainer/HBoxContainer/VBoxContainer/GridContainer/MusicSlider
+@onready var sfx_slider: HSlider = $MarginContainer/HBoxContainer/VBoxContainer/GridContainer/SFXSlider
+@onready var menu_slider: HSlider = $MarginContainer/HBoxContainer/VBoxContainer/GridContainer/MenuSlider
+@onready var fullscreen_check_button: CheckButton = $MarginContainer/HBoxContainer/VBoxContainer/GridContainer/FullscreenCheckButton
 
 # saving data
 var save_file_path: String = "user://save/"
