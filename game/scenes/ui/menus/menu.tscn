@@ -23,7 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_v1kfw")
 
-[node name="Main" parent="." instance=ExtResource("3_ncxo0")]
+[node name="MainMenu" parent="." instance=ExtResource("3_ncxo0")]
 layout_mode = 1
 
 [node name="Options" parent="." instance=ExtResource("4_vtlls")]
