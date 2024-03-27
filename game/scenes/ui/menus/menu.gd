@@ -16,6 +16,6 @@ func switch_window(window: String):
 	if window == "option":
 		main.visible = false
 		option.visible = true
-	if window == "menu": 
+	if window == "menu":
 		main.visible = true
 		option.visible = false

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/ui/menus/menu.gd" id="1_xd4qb"]
 [ext_resource type="Texture2D" uid="uid://bhohuwngei70j" path="res://assets/background/Background.png" id="2_v1kfw"]
-[ext_resource type="PackedScene" uid="uid://cyjvugqw3bid5" path="res://scenes/ui/menus/mainMenu/mainMenu.tscn" id="3_ncxo0"]
+[ext_resource type="PackedScene" uid="uid://cyjvugqw3bid5" path="res://scenes/ui/menus/mainMenu/mainMenu.tscn" id="4_25hxw"]
 [ext_resource type="PackedScene" uid="uid://cdkicasp65o4b" path="res://scenes/ui/menus/optionMenu/options.tscn" id="4_vtlls"]
 
 [node name="Menu" type="Control"]
@@ -23,11 +23,11 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_v1kfw")
 
-[node name="MainMenu" parent="." instance=ExtResource("3_ncxo0")]
-layout_mode = 1
-
 [node name="Options" parent="." instance=ExtResource("4_vtlls")]
 visible = false
+
+[node name="MainMenu" parent="." instance=ExtResource("4_25hxw")]
+layout_mode = 1
 
 [node name="MenuAudioPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"Music"

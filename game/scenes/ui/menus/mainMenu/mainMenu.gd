@@ -5,6 +5,6 @@ func _on_start_pressed() -> void:
 
 func _on_option_pressed() -> void:
 	get_parent().switch_window("option")
-	
+
 func _on_quit_pressed() -> void:
 	get_tree().quit()
