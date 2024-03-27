@@ -13,6 +13,6 @@ func play_sound_effect_from_library(_tag: String) -> void:
 		if !playing: self.play()
 		volume_db = 10
 		var polyphonic_stream_playback: AudioStreamPlayback = self.get_stream_playback()
-		polyphonic_stream_playback.play_stream(audio_stream)	
+		polyphonic_stream_playback.play_stream(audio_stream)
 	else:
 		printerr("no tag, cannot play sound effect")
