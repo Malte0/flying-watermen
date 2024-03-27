@@ -6,7 +6,7 @@
 
 [sub_resource type="SystemFont" id="SystemFont_q56rt"]
 
-[node name="Main_Menu" type="Control"]
+[node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -60,10 +60,15 @@ alignment = 1
 layout_mode = 2
 text = "Start"
 
+[node name="Option" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("3_tc1ot")]
+layout_mode = 2
+text = "Option"
+
 [node name="Quit" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("3_tc1ot")]
 layout_mode = 2
 text = "Quit
 "
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Option" to="." method="_on_option_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

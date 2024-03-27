@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://c640sr08cvsmo"]
+[gd_scene load_steps=18 format=3 uid="uid://c640sr08cvsmo"]
 
 [ext_resource type="Script" path="res://entities/objects/stone-tablet/StoneTabletObject.gd" id="1_rrcxt"]
 [ext_resource type="Texture2D" uid="uid://ciey4ubnpykd2" path="res://entities/objects/stone-tablet/random_selection.png" id="2_shfwb"]
 [ext_resource type="Texture2D" uid="uid://c51h5t2yq11bo" path="res://entities/objects/stone-tablet/stonetablet_pickup.png" id="3_gpjlj"]
 [ext_resource type="Texture2D" uid="uid://dnmhggoppejaj" path="res://entities/objects/stone-tablet/podium.png" id="4_6sq6x"]
 [ext_resource type="Texture2D" uid="uid://bfv2i6fh1wtaa" path="res://assets/buttons/Dark/E_Key_Dark.png" id="4_mgokh"]
+[ext_resource type="AudioStream" uid="uid://cx2yx35kkfnho" path="res://assets/SFX/well/glow.wav" id="6_dbcui"]
 
 [sub_resource type="Animation" id="Animation_lefeg"]
 length = 0.001
@@ -150,6 +151,12 @@ one_way_collision = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_fe6uw")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_dbcui")
+autoplay = true
+max_distance = 1000.0
+attenuation = 2.63902
+bus = &"SFX"
 [node name="GPUParticles2D" type="GPUParticles2D" parent="CollisionShape2D"]
 material = SubResource("CanvasItemMaterial_gvhev")
 position = Vector2(3.55271e-15, 10)

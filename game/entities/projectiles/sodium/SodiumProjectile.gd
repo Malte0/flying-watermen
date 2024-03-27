@@ -1,5 +1,7 @@
 class_name SodiumProjectile extends Node2D
 
+@onready var is_exploding = false 
+
 const EXPLOSION_SCENE: PackedScene = preload("res://entities/projectiles/explosion/Explosion.tscn")
 
 func spawn_explosion(_placeholder):
@@ -11,5 +13,8 @@ func _on_projectile_tree_exiting() -> void:
 	explosion_instance.position = current_pos
 	# This call deferred is needed to prevent a weird godot error being thrown
 	get_parent().call_deferred("add_child", explosion_instance)
-	await get_tree().process_frame
+	$AudioStreamPlayer2D.play()
+	await get_tree().process_frame	
+
+func _on_audio_stream_player_2d_finished():
 	queue_free()

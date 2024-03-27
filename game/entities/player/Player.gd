@@ -199,7 +199,6 @@ func _on_movement_child_state_exited():
 
 func _on_dash_state_entered() -> void:
 	particle.dash_trail()
-	$SFX/dash.play()
 	can_move = false
 	friction = 0
 	@warning_ignore("narrowing_conversion")
