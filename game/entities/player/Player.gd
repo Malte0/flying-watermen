@@ -231,3 +231,11 @@ func shoot():
 func _on_inventory_on_item_in_inventory_updated(new_item, old_item):
 	if !new_item == null:
 		polyphonic_audio_player.play_sound_effect_from_library("pickup_item")
+
+
+func _on_melee_component_melee_attack_started():
+	polyphonic_audio_player.play_sound_effect_from_library("melee")
+
+
+func _on_ranged_component_projectile_shoot():
+	polyphonic_audio_player.play_sound_effect_from_library("shoot")
