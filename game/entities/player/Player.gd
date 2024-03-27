@@ -11,7 +11,6 @@ var shoot_position: Marker2D:
 @onready var state_chart: StateChart = %StateChart
 @onready var animation_tree: AnimationTree = $Animation/AnimationTree
 @onready var particle: Node2D = $Particles
-@onready var polyphonic_audio_player: AudioStreamPlayer = $SFX/PolyphonicAudioPlayer
 
 # save location
 var save_file_path: String = "user://save/"
@@ -183,7 +182,6 @@ func _on_sliding_state_entered():
 
 func _on_jumping_state_entered():
 	#velocity.y = jump_velocity + velocity.y/2
-	polyphonic_audio_player.play_sound_effect_from_library("jump")
 	velocity.y = jump_velocity
 	jumps_left -= 1
 
@@ -201,7 +199,6 @@ func _on_movement_child_state_exited():
 
 func _on_dash_state_entered() -> void:
 	particle.dash_trail()
-	polyphonic_audio_player.play_sound_effect_from_library("dash")
 	can_move = false
 	friction = 0
 	@warning_ignore("narrowing_conversion")
@@ -227,15 +224,3 @@ func shoot():
 	var shoot_direction = shoot_position.global_position.direction_to(get_global_mouse_position())
 	return ranged_component.shoot(shoot_direction, projectile_scene, velocity)
 #endregion
-
-func _on_inventory_on_item_in_inventory_updated(new_item, old_item):
-	if !new_item == null:
-		polyphonic_audio_player.play_sound_effect_from_library("pickup_item")
-
-
-func _on_melee_component_melee_attack_started():
-	polyphonic_audio_player.play_sound_effect_from_library("melee")
-
-
-func _on_ranged_component_projectile_shoot():
-	polyphonic_audio_player.play_sound_effect_from_library("shoot")
