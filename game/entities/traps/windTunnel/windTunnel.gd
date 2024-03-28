@@ -3,6 +3,7 @@ extends Area2D
 @onready var player = get_tree().get_first_node_in_group("Player")
 
 @export var force: float = 0
+@export var lifetime: float = 0
 @export var collision_shape: CollisionShape2D
 
 var force_vector: Vector2 :
@@ -29,5 +30,9 @@ func _on_body_exited(body):
 
 func _ready():
 	var partic: GPUParticles2D = $GPUParticles2D
+	partic.lifetime = lifetime
 	partic.process_material.emission_box_extents = Vector3(0, collision_shape.shape.size.x / 4, 0)
-	partic.amount = collision_shape.position.x / 4
+	var rec: Rect2
+	rec.size = collision_shape.shape.size
+	partic.set_visibility_rect(rec)
+	partic.amount = collision_shape.position.x / 3
