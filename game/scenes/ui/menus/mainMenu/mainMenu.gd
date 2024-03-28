@@ -1,6 +1,6 @@
 class_name MainMenu extends Control
 
-signal options_pressed
+signal options_pressed()
 
 func _on_start_pressed() -> void:
 	Globals.load_with_loading_screen(Globals.main_scene)
