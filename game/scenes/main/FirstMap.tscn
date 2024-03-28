@@ -2474,7 +2474,7 @@ stream_9/stream = ExtResource("43_8b0jp")
 stream_9/weight = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vf8l1"]
-size = Vector2(847.75, 426.5)
+size = Vector2(349.439, 446.06)
 
 [node name="FirstMap" type="Node2D"]
 
@@ -3612,5 +3612,5 @@ lifetime = 4.0
 collision_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WindTunnel"]
-position = Vector2(423, 2.26498e-06)
+position = Vector2(176.28, -1.02905)
 shape = SubResource("RectangleShape2D_vf8l1")
