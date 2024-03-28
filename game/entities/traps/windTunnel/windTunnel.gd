@@ -1,7 +1,7 @@
 @tool
 extends Area2D
 
-@export var force: float = 0
+@export var force: float = 500
 @export var collision_shape: CollisionShape2D:
 	set(value):
 		collision_shape = value

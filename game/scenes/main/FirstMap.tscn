@@ -2474,7 +2474,7 @@ stream_9/stream = ExtResource("43_8b0jp")
 stream_9/weight = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vf8l1"]
-size = Vector2(349.439, 446.06)
+size = Vector2(334.68, 460.013)
 
 [node name="FirstMap" type="Node2D"]
 
@@ -3603,14 +3603,13 @@ position = Vector2(815, 1147)
 position = Vector2(1798, 1119)
 
 [node name="WindTunnel" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("52_k3sqr")]
-position = Vector2(1825, 607.875)
+position = Vector2(-398, 1434.68)
 rotation = -1.5708
 collision_layer = 0
 collision_mask = 7
 force = 1000.0
-lifetime = 4.0
 collision_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WindTunnel"]
-position = Vector2(176.28, -1.02905)
+position = Vector2(167.34, 0)
 shape = SubResource("RectangleShape2D_vf8l1")
