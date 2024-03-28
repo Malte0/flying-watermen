@@ -3,7 +3,7 @@ extends Area2D
 @onready var sprite: Sprite2D = $Texture
 
 var has_enemies_inside: Array[Object] = []
-var new_well: PackedScene = preload("res://entities/objects/well/normalWell/Well.tscn")
+var new_well: PackedScene = load("res://entities/objects/well/normalWell/Well.tscn")
 
 func _process(delta):
 	if has_enemies_inside == []:

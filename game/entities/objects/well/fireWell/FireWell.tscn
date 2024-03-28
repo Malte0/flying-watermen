@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://hyr7i2wnah4e"]
+[gd_scene load_steps=13 format=3 uid="uid://hyr7i2wnah4e"]
 
 [ext_resource type="Script" path="res://entities/objects/well/fireWell/FireWell.gd" id="1_qw6cr"]
 [ext_resource type="Texture2D" uid="uid://cxe6hu7quuq4d" path="res://entities/objects/well/assets/wellEmpty.png" id="2_r3hi0"]
 [ext_resource type="Texture2D" uid="uid://4qlm6ho7173m" path="res://assets/light_noise/offset_glow.png" id="3_etva4"]
+[ext_resource type="Shader" path="res://shader/wobbleEffect.gdshader" id="4_okffb"]
 [ext_resource type="Texture2D" uid="uid://dgn2ljfyurcci" path="res://entities/objects/well/assets/fire.png" id="5_5wk88"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2wsyv"]
@@ -25,7 +26,7 @@ curve = SubResource("Curve_3c8ug")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j1tol"]
 particle_flag_disable_z = true
 emission_shape = 1
-emission_sphere_radius = 8.15
+emission_sphere_radius = 32.15
 angle_max = 360.0
 direction = Vector3(0, -1, 0)
 initial_velocity_min = 0.5
@@ -37,6 +38,18 @@ scale_min = 0.4
 scale_max = 0.8
 scale_curve = SubResource("CurveTexture_xmhfi")
 color_ramp = SubResource("GradientTexture1D_e7xoi")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tmpgh"]
+shader = ExtResource("4_okffb")
+shader_parameter/speed = 9.26
+shader_parameter/minStrength = 0.097
+shader_parameter/maxStrength = 0.783
+shader_parameter/strengthScale = 79.17
+shader_parameter/interval = 13.435
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.807
+shader_parameter/heightOffset = 0.6
+shader_parameter/offset = 0.0
 
 [node name="FireWell" type="Area2D"]
 collision_mask = 4
@@ -77,14 +90,15 @@ polygon = PackedVector2Array(-6.98257, -4.91103, -6.98257, 7.82126, 4.73834, 7.8
 [node name="FlammePart" type="GPUParticles2D" parent="."]
 modulate = Color(0.772549, 0, 0, 1)
 material = SubResource("CanvasItemMaterial_2wsyv")
-position = Vector2(-1, -130)
+position = Vector2(0, -92)
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_j1tol")
 texture = ExtResource("3_etva4")
 
 [node name="Flamme" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_tmpgh")
 position = Vector2(3, -101)
-scale = Vector2(0.151957, 0.158588)
+scale = Vector2(0.153, 0.159)
 texture = ExtResource("5_5wk88")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
