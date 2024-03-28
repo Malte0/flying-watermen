@@ -1,6 +1,6 @@
 extends Node
 
-var main_scene = "res://scenes/main/FirstMap.tscn"
+var main_scene = "res://scenes/main/Map.tscn"
 var test_scene = "res://scenes/test/test.tscn"
 var game_over = "res://scenes/ui/menus/gameOver/GameOver.tscn"
 var main_menu = "res://scenes/ui/menus/menu/menu.tscn"
