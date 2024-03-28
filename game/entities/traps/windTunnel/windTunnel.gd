@@ -1,10 +1,7 @@
 @tool
 extends Area2D
 
-@onready var player = get_tree().get_first_node_in_group("Player")
-
 @export var force: float = 0
-@export var lifetime: float = 0
 @export var collision_shape: CollisionShape2D:
 	set(value):
 		collision_shape = value
@@ -16,10 +13,12 @@ var bodys_in_wind_tunnel: Array = []
 
 func fit_particle():
 	var partic: GPUParticles2D = $GPUParticles2D
-	partic.lifetime = lifetime
+	partic.process_material.set_param_max(0, force)
+	partic.process_material.set_param_min(0, force)
+	partic.lifetime = collision_shape.shape.size.x / partic.process_material.get_param_max(0)
 	partic.process_material.emission_box_extents = Vector3(0, collision_shape.shape.size.y, 0)
 	partic.set_visibility_rect(Rect2(Vector2(0,0), collision_shape.shape.size))
-	partic.amount = collision_shape.position.x / 3
+	partic.amount = collision_shape.position.x / 4
 	global_position = collision_shape.global_position - Vector2(collision_shape.shape.get_rect().size.x/2, 0).rotated(rotation)
 	collision_shape.position = Vector2(collision_shape.shape.get_rect().size.x/2,0)
 

@@ -6,7 +6,7 @@
 particle_flag_disable_z = true
 emission_shape_scale = Vector3(1, 0.5, 1)
 emission_shape = 3
-emission_box_extents = Vector3(1, 1, 1)
+emission_box_extents = Vector3(0, 446.06, 0)
 spread = 0.0
 initial_velocity_min = 1000.0
 initial_velocity_max = 1000.0
@@ -25,7 +25,6 @@ script = ExtResource("1_5ge56")
 modulate = Color(0.847059, 0.913725, 0.92549, 1)
 process_material = SubResource("ParticleProcessMaterial_oj8sd")
 lifetime = 5.0
-speed_scale = 2.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
