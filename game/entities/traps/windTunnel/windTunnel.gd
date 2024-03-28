@@ -6,21 +6,24 @@ extends Area2D
 @export var lifetime: float = 0
 @export var collision_shape: CollisionShape2D
 
-var force_vector: Vector2 :
+var force_vector: Vector2:
 	get: return Vector2(force, 0).rotated(rotation)
 var bodys_in_wind_tunnel: Array = []
 
 func _physics_process(delta):
 	for body in bodys_in_wind_tunnel:
 		if body is CharacterBody2D:
-			var wind_direction_vel: float = body.velocity.dot(Vector2.from_angle(rotation))
-			var wind_direction_force: float = max(wind_direction_vel, min(wind_direction_vel + delta * force, force))
-			var orth_wind_direc_vel: float = body.velocity.dot(Vector2.from_angle(rotation + PI/2))
-			var new_wind_direction_vel: Vector2 = Vector2(wind_direction_force, 0).rotated(rotation)
-			var new_orth_wind_direction_vel: Vector2 = Vector2(orth_wind_direc_vel, 0).rotated(rotation + PI/2)
-			body.velocity = new_wind_direction_vel + new_orth_wind_direction_vel
+			_apply_wind_to_char_body(body, delta)
 		elif body is RigidBody2D:
 			body.apply_impulse(force_vector * delta)
+
+func _apply_wind_to_char_body(body, delta):
+	var wind_direction_vel: float = body.velocity.dot(Vector2.from_angle(rotation))
+	var wind_direction_force: float = max(wind_direction_vel, min(wind_direction_vel + delta * force, force))
+	var orth_wind_direc_vel: float = body.velocity.dot(Vector2.from_angle(rotation + PI/2))
+	var new_wind_direction_vel: Vector2 = Vector2(wind_direction_force, 0).rotated(rotation)
+	var new_orth_wind_direction_vel: Vector2 = Vector2(orth_wind_direc_vel, 0).rotated(rotation + PI/2)
+	body.velocity = new_wind_direction_vel + new_orth_wind_direction_vel
 
 func _on_body_entered(body):
 	bodys_in_wind_tunnel.append(body)
