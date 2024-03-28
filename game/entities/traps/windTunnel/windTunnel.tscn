@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://entities/traps/windTunnel/windTunnel.gd" id="1_5ge56"]
 
-[node name="Area2D" type="Area2D"]
+[node name="WindTunnel" type="Area2D"]
 collision_mask = 2
 script = ExtResource("1_5ge56")
 

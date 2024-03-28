@@ -151,12 +151,6 @@ one_way_collision = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_fe6uw")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_dbcui")
-autoplay = true
-max_distance = 1000.0
-attenuation = 2.63902
-bus = &"SFX"
 [node name="GPUParticles2D" type="GPUParticles2D" parent="CollisionShape2D"]
 material = SubResource("CanvasItemMaterial_gvhev")
 position = Vector2(3.55271e-15, 10)
@@ -175,6 +169,13 @@ unique_name_in_owner = true
 position = Vector2(-1, -63)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_mgokh")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_dbcui")
+autoplay = true
+max_distance = 1000.0
+attenuation = 2.63902
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
