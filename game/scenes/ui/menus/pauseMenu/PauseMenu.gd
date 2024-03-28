@@ -22,9 +22,8 @@ func _on_pause_main_resume_pressed() -> void:
 	is_paused = false
 
 func _on_pause_main_options_pressed() -> void:
-	$PauseMain.visible = false
+	main.visible = false
 	options.visible = true
-	options.script
 
 func _on_pause_main_menu_pressed() -> void:
 	is_paused = false
@@ -34,5 +33,5 @@ func _on_pause_main_quit_pressed() -> void:
 	get_tree().quit()
 
 func _on_options_back_pressed() -> void:
-	$PauseMain.visible = true
-	$Options.visible = false
+	main.visible = true
+	options.visible = false
