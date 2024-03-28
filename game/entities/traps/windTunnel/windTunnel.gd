@@ -13,11 +13,12 @@ var bodys_in_wind_tunnel: Array = []
 func _physics_process(delta):
 	for body in bodys_in_wind_tunnel:
 		if body is CharacterBody2D:
-			var wind_direc_vel: float = body.velocity.dot(Vector2.from_angle(rotation))
-			var wind_direc_force: float = max(wind_direc_vel, min(wind_direc_vel + delta * force, force))
+			var wind_direction_vel: float = body.velocity.dot(Vector2.from_angle(rotation))
+			var wind_direction_force: float = max(wind_direction_vel, min(wind_direction_vel + delta * force, force))
 			var orth_wind_direc_vel: float = body.velocity.dot(Vector2.from_angle(rotation + PI/2))
-			body.velocity = Vector2(wind_direc_force, 0).rotated(rotation) + Vector2(orth_wind_direc_vel, 0).rotated(rotation + PI/2)
-
+			var new_wind_direction_vel: Vector2 = Vector2(wind_direction_force, 0).rotated(rotation)
+			var new_orth_wind_direction_vel: Vector2 = Vector2(orth_wind_direc_vel, 0).rotated(rotation + PI/2)
+			body.velocity = new_wind_direction_vel + new_orth_wind_direction_vel
 		elif body is RigidBody2D:
 			body.apply_impulse(force_vector * delta)
 
@@ -32,7 +33,5 @@ func _ready():
 	var partic: GPUParticles2D = $GPUParticles2D
 	partic.lifetime = lifetime
 	partic.process_material.emission_box_extents = Vector3(0, collision_shape.shape.size.x / 4, 0)
-	var rec: Rect2
-	rec.size = collision_shape.shape.size
-	partic.set_visibility_rect(rec)
+	partic.set_visibility_rect(Rect2(Vector2(0,0), collision_shape.shape.size))
 	partic.amount = collision_shape.position.x / 3
