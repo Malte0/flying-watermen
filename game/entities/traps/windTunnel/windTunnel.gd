@@ -4,25 +4,27 @@ extends Area2D
 @onready var player = get_tree().get_first_node_in_group("Player")
 
 @export var force: float = 0
-@export var lifetime: float = 0
-@export var collision_shape: CollisionShape2D#:
+@export var collision_shape: CollisionShape2D#: #noch für aktuelle Tests drin, muss später noch entfernt werden
 	#set(value):
 		#print(0)
 		#collision_shape = value
 		#if not collision_shape.is_connected("item_rect_changed", _export_func):
 			#collision_shape.item_rect_changed.connect(_export_func)
 
-func _export_func():
-	print(1)
-	var partic: GPUParticles2D = $GPUParticles2D
-	partic.lifetime = lifetime
-	partic.process_material.emission_box_extents = Vector3(0, collision_shape.shape.size.y, 0)
-	partic.set_visibility_rect(Rect2(Vector2(0,0), collision_shape.shape.size))
-	partic.amount = collision_shape.position.x / 3
-
 var force_vector: Vector2:
 	get: return Vector2(force, 0).rotated(rotation)
 var bodys_in_wind_tunnel: Array = []
+
+func _export_func(): #noch für aktuelle Tests drin, muss später noch entfernt werden
+	print(1)
+	var partic: GPUParticles2D = $GPUParticles2D
+	partic.process_material.set_param_max(0, force)
+	partic.process_material.set_param_min(0, force)
+	print(partic.process_material.get_param_max(0))
+	partic.lifetime = collision_shape.shape.size.x / partic.process_material.get_param_max(0)
+	partic.process_material.emission_box_extents = Vector3(0, collision_shape.shape.size.y, 0)
+	partic.set_visibility_rect(Rect2(Vector2(0,0), collision_shape.shape.size))
+	partic.amount = collision_shape.position.x / 4
 
 func _physics_process(delta):
 	if Engine.is_editor_hint(): return
