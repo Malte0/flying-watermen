@@ -2474,7 +2474,7 @@ stream_9/stream = ExtResource("43_8b0jp")
 stream_9/weight = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vf8l1"]
-size = Vector2(847.75, 532)
+size = Vector2(847.75, 426.5)
 
 [node name="FirstMap" type="Node2D"]
 
@@ -3542,6 +3542,7 @@ metadata/_edit_lock_ = true
 
 [node name="Top" type="StaticBody2D" parent="Worldborder"]
 position = Vector2(1, -289)
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Worldborder/Top"]
 shape = SubResource("WorldBoundaryShape2D_a03mb")
@@ -3606,10 +3607,10 @@ position = Vector2(755, 1190)
 rotation = -1.5708
 collision_layer = 0
 collision_mask = 7
-force = 1500.0
+force = 1000.0
 lifetime = 4.0
 collision_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WindTunnel"]
-position = Vector2(424.125, 0.00177002)
+position = Vector2(423, 2.26498e-06)
 shape = SubResource("RectangleShape2D_vf8l1")

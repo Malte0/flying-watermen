@@ -71,6 +71,7 @@ func set_expressions():
 	state_chart.set_expression_property("jumps_left", jumps_left)
 	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
 	state_chart.set_expression_property("velocity_x", velocity.x)
+	state_chart.set_expression_property("velocity_y", velocity.y)
 
 func flip_player():
 	scale.x *= -1
