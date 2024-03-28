@@ -19,10 +19,11 @@ func _physics_process(delta):
 
 func _apply_wind_to_char_body(body, delta):
 	var wind_direction_vel: float = body.velocity.dot(Vector2.from_angle(rotation))
-	var wind_direction_force: float = max(wind_direction_vel, min(wind_direction_vel + delta * force, force))
+	var wind_force_on_body: float = wind_direction_vel+delta*force
+	var wind_direction_force: float = max(wind_direction_vel,min(wind_force_on_body,force))
 	var orth_wind_direc_vel: float = body.velocity.dot(Vector2.from_angle(rotation + PI/2))
 	var new_wind_direction_vel: Vector2 = Vector2(wind_direction_force, 0).rotated(rotation)
-	var new_orth_wind_direction_vel: Vector2 = Vector2(orth_wind_direc_vel, 0).rotated(rotation + PI/2)
+	var new_orth_wind_direction_vel: Vector2 = Vector2(orth_wind_direc_vel,0).rotated(rotation+PI/2)
 	body.velocity = new_wind_direction_vel + new_orth_wind_direction_vel
 
 func _on_body_entered(body):
