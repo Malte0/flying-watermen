@@ -1,6 +1,6 @@
 class_name DestroyableWall extends RigidBody2D
 
-signal wall_destroyed
+signal wall_destroyed()
 @export var sprite: Texture
 @export var collision_shape: CollisionShape2D
 

@@ -24,7 +24,3 @@ func blinging_player(body):
 func give_vision_to_player(body):
 	if body is Player:
 		vison_obstacle.visible = false
-
-
-
-

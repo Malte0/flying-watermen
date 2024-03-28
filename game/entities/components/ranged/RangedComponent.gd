@@ -9,7 +9,7 @@ var cooldown: float = base_cooldown
 @onready var timer: Timer = $ShootCooldown
 @onready var shoot_position: Marker2D = $ShootPosition
 
-signal projectile_shoot
+signal projectile_shoot()
 
 var is_enabled: bool = true:
 	set(value):

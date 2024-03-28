@@ -1,6 +1,6 @@
 class_name SodiumProjectile extends Node2D
 
-@onready var is_exploding = false 
+@onready var is_exploding: bool = false
 
 const EXPLOSION_SCENE: PackedScene = preload("res://entities/projectiles/explosion/Explosion.tscn")
 
@@ -14,7 +14,7 @@ func _on_projectile_tree_exiting() -> void:
 	# This call deferred is needed to prevent a weird godot error being thrown
 	get_parent().call_deferred("add_child", explosion_instance)
 	$AudioStreamPlayer2D.play()
-	await get_tree().process_frame	
+	await get_tree().process_frame
 
 func _on_audio_stream_player_2d_finished():
 	queue_free()
