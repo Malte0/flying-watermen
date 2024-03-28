@@ -10,7 +10,7 @@ class_name MeleeComponent extends Area2D
 @onready var parent: CharacterBody2D = get_parent()
 @onready var ranged_component: RangedComponent = parent.get_node_or_null("RangedComponent")
 
-signal melee_attack_started 
+signal melee_attack_started
 
 const ATTACK_DURATION: float = 0.1
 ## To makes sure no body is hit twice

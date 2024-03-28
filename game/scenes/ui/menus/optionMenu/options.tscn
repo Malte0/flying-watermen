@@ -68,7 +68,7 @@ text = "Reset Settings"
 
 [node name="Back_Button" parent="MenuTemplate/VBoxContainer/VBoxContainer" index="2" instance=ExtResource("2_fyjd1")]
 layout_mode = 2
-text = "Save and Return"
+text = "Return"
 
 [connection signal="value_changed" from="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
