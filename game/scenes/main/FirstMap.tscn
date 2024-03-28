@@ -3602,13 +3602,14 @@ position = Vector2(815, 1147)
 [node name="MeleeEnemy" parent="." instance=ExtResource("49_nv1sn")]
 position = Vector2(1798, 1119)
 
-[node name="WindTunnel" parent="." instance=ExtResource("52_k3sqr")]
-position = Vector2(949, 1196)
+[node name="WindTunnel" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("52_k3sqr")]
+position = Vector2(755, 1190)
 rotation = -1.5708
 collision_layer = 0
 collision_mask = 7
 force = 1500.0
+collision_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WindTunnel"]
-position = Vector2(393.25, -228)
+position = Vector2(458, 0.00164795)
 shape = SubResource("RectangleShape2D_vf8l1")

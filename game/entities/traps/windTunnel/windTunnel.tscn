@@ -1,10 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://bs3b7l8cqtnd5"]
+[gd_scene load_steps=3 format=3 uid="uid://bs3b7l8cqtnd5"]
 
 [ext_resource type="Script" path="res://entities/traps/windTunnel/windTunnel.gd" id="1_5ge56"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oj8sd"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, -98, 0)
 
 [node name="Area2D" type="Area2D"]
 collision_mask = 2
 script = ExtResource("1_5ge56")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(0.847059, 0.913725, 0.92549, 1)
+process_material = SubResource("ParticleProcessMaterial_oj8sd")
+lifetime = 5.0
+speed_scale = 2.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
