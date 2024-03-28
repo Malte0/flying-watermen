@@ -1,5 +1,6 @@
 class_name DestroyableWall extends RigidBody2D
 
+signal wall_destroyed
 @export var sprite: Texture
 @export var collision_shape: CollisionShape2D
 
@@ -14,3 +15,4 @@ func _on_area_2d_area_entered(area):
 	if area is Explosion:
 		set_deferred("freeze", false)
 		collision_mask = 0
+		wall_destroyed.emit()
