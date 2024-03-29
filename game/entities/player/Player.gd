@@ -83,7 +83,7 @@ func flip_player():
 func check_if_won():
 	if num_wells == player_data.num_wells_filled and not is_boss_alive:
 		reset_save_file()
-		print("win")
+		print("win")# replace with win screen
 
 func reset_save_file():
 	DirAccess.remove_absolute(save_file_path + save_file_name)
@@ -104,14 +104,12 @@ func save_Player():
 	update_player_data()
 	ResourceSaver.save(player_data, save_file_path + save_file_name)
 	Globals.update_loadgame()
-	print("save")
 
 func save_on_exit():
 	player_data.set_storedabilities(abilities)
 	player_data.is_boss_alive = is_boss_alive
 	ResourceSaver.save(player_data, save_file_path + save_file_name)
 	Globals.update_loadgame()
-	print("save")
 
 func update_player_data():
 	player_data.update_pos(self.position)
@@ -125,7 +123,6 @@ func load_player():
 		load_wells()
 		if is_boss_alive:
 			Globals.kill_boss.emit()
-	print("loaded")
 
 func load_wells():
 	var wells_to_fill: Dictionary = player_data.stored_wells
@@ -133,7 +130,7 @@ func load_wells():
 		Globals.load.emit(wells[0], wells[1])
 
 func update_Player_on_load():
-	if player_data.stored_pos != null:
+	if player_data.stored_pos != Vector2(0, 0):
 		self.position = player_data.stored_pos
 	abilities = player_data.stored_abilities
 	health_component.health = health_component.max_health
