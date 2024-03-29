@@ -2475,7 +2475,7 @@ stream_9/stream = ExtResource("43_8b0jp")
 stream_9/weight = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vf8l1"]
-size = Vector2(334.68, 460.013)
+size = Vector2(576, 418.008)
 
 [node name="FirstMap" type="Node2D"]
 
@@ -3604,15 +3604,15 @@ position = Vector2(815, 1147)
 position = Vector2(1798, 1119)
 
 [node name="WindTunnel" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("52_k3sqr")]
-position = Vector2(799.001, 1101.34)
-rotation = -1.5708
+position = Vector2(123.999, 1109)
+rotation = -1.57079
 collision_layer = 0
 collision_mask = 7
-force = 1000.0
+force = 2000.0
 collision_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WindTunnel"]
-position = Vector2(167.34, 0)
+position = Vector2(288, 0)
 shape = SubResource("RectangleShape2D_vf8l1")
 
 [node name="CreeperEnemy" parent="." instance=ExtResource("52_0bmdl")]
