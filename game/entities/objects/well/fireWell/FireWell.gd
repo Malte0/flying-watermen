@@ -6,6 +6,7 @@ var has_enemies_inside: Array[Object] = []
 var new_well: PackedScene = load("res://entities/objects/well/normalWell/Well.tscn")
 
 func _process(delta):
+	print(has_enemies_inside)
 	if has_enemies_inside == []:
 		var well_instance: Interactable = new_well.instantiate()
 		well_instance.global_position = position
@@ -18,4 +19,9 @@ func _process(delta):
 	index = 0
 
 func _on_body_entered(body):
-	has_enemies_inside.append(body)
+	if body is Player: $FillLabel.visible = true
+	elif body is CharacterBody2D: has_enemies_inside.append(body)
+
+func _on_body_exited(body):
+	if body is Player:
+		$FillLabel.visible = false
