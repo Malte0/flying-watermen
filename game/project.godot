@@ -21,6 +21,7 @@ Element="*res://globals/Element.gd"
 BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
 Globals="*res://globals/Globals.gd"
 GlobalMusic="*res://scenes/ui/menus/globalMusic/globalMusic.tscn"
+PolyphonicAudioPlayer="*res://scenes/soundSystem/polyphonic_audio_player.tscn"
 
 [display]
 

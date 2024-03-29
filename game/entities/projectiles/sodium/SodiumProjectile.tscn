@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1pa7ehe5sfkb"]
+[gd_scene load_steps=5 format=3 uid="uid://d1pa7ehe5sfkb"]
 
 [ext_resource type="Texture2D" uid="uid://dvyvxar3r85sh" path="res://entities/projectiles/sodium/assets/projectile.png" id="1_uam28"]
 [ext_resource type="PackedScene" uid="uid://ckxjw27a061ub" path="res://entities/projectiles/Projectile.tscn" id="2_4sre5"]
@@ -29,4 +29,3 @@ texture = ExtResource("1_uam28")
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="tree_exiting" from="Projectile" to="." method="_on_projectile_tree_exiting"]
 [connection signal="tree_exiting" from="Projectile" to="Projectile" method="_on_tree_exiting"]
-[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

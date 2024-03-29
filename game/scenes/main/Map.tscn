@@ -3959,7 +3959,7 @@ fire_scale = Vector2(0.5, 0.5)
 position = Vector2(14430, 1102)
 
 [node name="CreeperEnemy" parent="." instance=ExtResource("56_4t8to")]
-position = Vector2(22480, -1150)
+position = Vector2(21950, -1584)
 
 [connection signal="wall_destroyed" from="DestroyableWalls/DestroyableWall3" to="." method="_on_destroyable_wall_3_wall_destroyed"]
 [connection signal="body_entered" from="BlindArea/blind_begining" to="." method="_on_blind_begining_body_entered"]
