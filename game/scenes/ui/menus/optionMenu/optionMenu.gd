@@ -17,6 +17,7 @@ var save_file_name: String = "OptionSave.tres"
 var option_data: OptionData = OptionData.new()
 
 func _ready():
+	visible = false
 	verify_save_dirctory(save_file_path)
 	load_saved_options()
 	music_slider.value = db_to_linear(AudioServer.get_bus_volume_db(music_bus_id))
@@ -94,6 +95,6 @@ func _on_back_button_pressed():
 	back_pressed.emit()
 
 func _input(event: InputEvent) -> void:
-	if visible and event.is_action_pressed("esc"):
+	if is_visible_in_tree() and event.is_action_pressed("esc"):
 		back_pressed.emit()
 		get_viewport().set_input_as_handled()

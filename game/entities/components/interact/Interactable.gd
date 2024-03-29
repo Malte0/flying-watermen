@@ -11,3 +11,6 @@ func disable_interact_hint():
 
 func interact(interactor: Node):
 	interacted.emit(interactor)
+
+func _ready() -> void:
+	interact_hint.visible = false

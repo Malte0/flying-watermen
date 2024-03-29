@@ -1,14 +1,13 @@
 extends Control
 
 @onready var inventory_text: RichTextLabel = $InventoryItem
+@onready var exit_item_text: RichTextLabel = $ActiveItem/ExitButton
 @onready var active_item: Control = $ActiveItem
-@onready var active_item_name: RichTextLabel = $ActiveItem/Name
-@onready var active_item_amount: RichTextLabel = $ActiveItem/Amount
+@onready var active_item_name: Label = $ActiveItem/Name
+@onready var active_item_amount: Label = $ActiveItem/Amount
 @onready var active_item_meter: ProgressBar = $ActiveItem/ItemBar
-@onready var use_item_text: RichTextLabel = $"Use _F_"
 @onready var inventory: Inventory = get_tree().get_first_node_in_group("player").inventory
 
-@onready var exit_item_text: RichTextLabel = $ActiveItem/ExitButton
 
 func _ready():
 	inventory.on_item_in_inventory_updated.connect(update_item_in_inventory)
@@ -20,11 +19,9 @@ func _ready():
 
 func update_item_in_inventory(new_item: Item, _old_item: Item):
 	if new_item:
-		inventory_text.text = new_item.name
-		use_item_text.text = "Use" + "[img=30]res://assets/buttons/Dark/F_Key_Dark.png[/img]"
+		inventory_text.text = str(new_item.name) +  "\n Use[img=30]res://assets/buttons/Dark/F_Key_Dark.png[/img]"
 	else:
 		inventory_text.text = "no item in inventory"
-		use_item_text.text = ""
 
 func update_active_item(item: Item):
 	active_item_name.visible = item != null
