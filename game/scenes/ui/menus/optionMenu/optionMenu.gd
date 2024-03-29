@@ -92,3 +92,8 @@ func _on_back_button_pressed():
 	update_save_options_data()
 	ResourceSaver.save(option_data, save_file_path + save_file_name)
 	back_pressed.emit()
+
+func _input(event: InputEvent) -> void:
+	if visible and event.is_action_pressed("esc"):
+		back_pressed.emit()
+		get_viewport().set_input_as_handled()
