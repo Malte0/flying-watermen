@@ -107,7 +107,8 @@ func save_Player():
 	print("save")
 
 func save_on_exit():
-	update_player_data()
+	player_data.set_storedabilities(abilities)
+	player_data.is_boss_alive = is_boss_alive
 	ResourceSaver.save(player_data, save_file_path + save_file_name)
 	Globals.update_loadgame()
 	print("save")
@@ -132,7 +133,8 @@ func load_wells():
 		Globals.load.emit(wells[0], wells[1])
 
 func update_Player_on_load():
-	self.position = player_data.stored_pos
+	if player_data.stored_pos != null:
+		self.position = player_data.stored_pos
 	abilities = player_data.stored_abilities
 	health_component.health = health_component.max_health
 	heat_component.heat = 0
