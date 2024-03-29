@@ -1,16 +1,25 @@
-[gd_scene load_steps=23 format=3 uid="uid://c6ermasms0od0"]
+[gd_scene load_steps=32 format=3 uid="uid://c6ermasms0od0"]
 
-[ext_resource type="Texture2D" uid="uid://dfu4qtgkvfarv" path="res://assets/melee_enemy_assets/melee_enemy01.png" id="1_5surw"]
 [ext_resource type="Script" path="res://entities/enemies/creeperEnemy/CreeperEnemy.gd" id="1_txjot"]
-[ext_resource type="Texture2D" uid="uid://bgeyik6y657at" path="res://assets/melee_enemy_assets/melee_enemy02.png" id="2_qbm0c"]
-[ext_resource type="Texture2D" uid="uid://cq14ebdyh01l2" path="res://assets/melee_enemy_assets/melee_enemy03.png" id="3_5mk84"]
+[ext_resource type="Texture2D" uid="uid://bqx52jsldtamv" path="res://assets/creeper_enemy_assets/skeleton-02_chasing_01start_01.png" id="2_peh4h"]
+[ext_resource type="Texture2D" uid="uid://bw7m6obpncgeh" path="res://assets/creeper_enemy_assets/skeleton-02_chasing_01start_02.png" id="3_c4p00"]
 [ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="4_hx5t1"]
+[ext_resource type="Texture2D" uid="uid://ckygn5udtej4f" path="res://assets/creeper_enemy_assets/skeleton-02_chasing_01start_03.png" id="4_tlj8c"]
+[ext_resource type="Texture2D" uid="uid://dgbwr8ou43dlr" path="res://assets/creeper_enemy_assets/skeleton-02_chasing_01start_04.png" id="5_6h1xo"]
 [ext_resource type="Texture2D" uid="uid://32uxotk6128m" path="res://entities/enemies/assets/healthbar_under.png" id="5_b4rih"]
+[ext_resource type="Texture2D" uid="uid://c1wsvojvg2pii" path="res://assets/creeper_enemy_assets/skeleton-02_chasing_01start_05.png" id="6_41txn"]
 [ext_resource type="Texture2D" uid="uid://drqht0p82ryru" path="res://entities/enemies/assets/healthbar_progress.png" id="6_dw6vi"]
 [ext_resource type="PackedScene" uid="uid://u07y0x28am7y" path="res://entities/components/heat/HeatArea.tscn" id="7_00013"]
+[ext_resource type="Texture2D" uid="uid://c5mhcgndkaxpp" path="res://assets/creeper_enemy_assets/skeleton-02_chasing_01start_06.png" id="7_feaq6"]
+[ext_resource type="Texture2D" uid="uid://caryug7wpia3q" path="res://assets/creeper_enemy_assets/skeleton-02_chasing_01start_07.png" id="8_ss51c"]
+[ext_resource type="Texture2D" uid="uid://dld1ea1wiy4do" path="res://assets/creeper_enemy_assets/skeleton-02_chasing_01start_08.png" id="9_83ub5"]
 [ext_resource type="PackedScene" uid="uid://bkweew02mcaim" path="res://entities/components/enemyComponents/enemyAggro/AggroComponent.tscn" id="9_qftt5"]
 [ext_resource type="PackedScene" uid="uid://61g8e7mlxwj" path="res://entities/components/enemyComponents/movement/MovementComponent.tscn" id="10_8qnfh"]
+[ext_resource type="Texture2D" uid="uid://bcmges32daq81" path="res://assets/creeper_enemy_assets/skeleton-02_chasing_01start_09.png" id="10_jurbn"]
+[ext_resource type="Texture2D" uid="uid://45ukd24hsrpb" path="res://assets/creeper_enemy_assets/skeleton-02_chasing_01start_10.png" id="11_yeg1w"]
 [ext_resource type="PackedScene" uid="uid://wamnd7014nsa" path="res://entities/components/enemyComponents/itemDropper/DropItemComponent.tscn" id="12_5t00d"]
+[ext_resource type="Texture2D" uid="uid://n3c5k0fpx84a" path="res://assets/creeper_enemy_assets/skeleton-02_chasing_01start_11.png" id="12_80xim"]
+[ext_resource type="Texture2D" uid="uid://dxjytj3hx1rut" path="res://assets/creeper_enemy_assets/skeleton-02_chasing_01start_12.png" id="13_3ftvx"]
 [ext_resource type="PackedScene" uid="uid://dvv2sij5v2epd" path="res://entities/player/inventory/items/sodiumChemical/sodium.tscn" id="13_uwn5w"]
 [ext_resource type="Texture2D" uid="uid://dmyx2mk6fjoud" path="res://assets/light_noise/waterParticle.png" id="14_djsrf"]
 
@@ -21,17 +30,44 @@ radius = 32.0156
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_5surw")
+"texture": ExtResource("2_peh4h")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_qbm0c")
+"texture": ExtResource("3_c4p00")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_5mk84")
+"texture": ExtResource("4_tlj8c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_6h1xo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_41txn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_feaq6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ss51c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_83ub5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_jurbn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_yeg1w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_80xim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_3ftvx")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 10.0
+"speed": 30.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1xs3o"]
@@ -95,11 +131,12 @@ target_position = Vector2(0, 72)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="EnemyGraphics"]
 unique_name_in_owner = true
-position = Vector2(7.62939e-06, -13)
+position = Vector2(0, -5.485)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_tvg72")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.209498
 flip_h = true
 
 [node name="ViewArea" type="Area2D" parent="."]

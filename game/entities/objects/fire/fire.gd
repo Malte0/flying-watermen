@@ -1,6 +1,10 @@
 @tool
 class_name  Fire extends RigidBody2D
 
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var hit_box: CollisionShape2D = $CollisionShape2D
+@onready var area: CollisionShape2D = $Area2D/CollisionShape2D
+
 @export var fire_scale: Vector2 = Vector2(0.1, 0.1):
 	get:
 		return fire_scale
@@ -14,7 +18,7 @@ class_name  Fire extends RigidBody2D
 		return sprite_texture
 	set(value):
 		sprite_texture = value
-		$Sprite2D.texture = sprite_texture
+		sprite.texture = sprite_texture
 @export var collision_shape: CollisionShape2D:
 	get:
 		return collision_shape
@@ -24,17 +28,15 @@ class_name  Fire extends RigidBody2D
 		area.shape = collision_shape.shape
 @export var damage_per_tick: int = 4
 
-@onready var sprite: Sprite2D = $Sprite2D
-@onready var hit_box: CollisionShape2D = $CollisionShape2D
-@onready var area: CollisionShape2D = $Area2D/CollisionShape2D
+
 
 var bodys_inside: Array[Object] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Sprite2D.scale = fire_scale
-	$CollisionShape2D.scale = fire_scale
-	$Area2D/CollisionShape2D.scale = fire_scale
+	sprite.scale = fire_scale
+	hit_box.scale = fire_scale
+	area.scale = fire_scale
 	set_deferred("freeze", true)
 	#set_lock_rotation_enabled(true)
 
@@ -55,7 +57,7 @@ func _on_body_entered(body):
 
 func _on_body_exited(body):
 	bodys_inside.erase(body)#
-	
+
 func fly_towards(body):
 	$Area2D.collision_mask = 0
 	var tween = create_tween()

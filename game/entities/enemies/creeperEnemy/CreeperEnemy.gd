@@ -50,6 +50,7 @@ func explode():
 
 func on_aggro_entered():
 	# This introduces the little jump
+	%AnimatedSprite2D.speed_scale = 2
 	movement_component.jump(0.2)
 	movement_component.movement_speed = 0
 	await get_tree().create_timer(0.4).timeout
@@ -57,6 +58,7 @@ func on_aggro_entered():
 
 func on_calm_entered():
 	movement_component.movement_speed = movement_speed_calm
+	%AnimatedSprite2D.speed_scale = 1
 
 func flash_damage_effect():
 	$DirectionalNodes/EnemyGraphics/FlameImage.set("shader_parameter/flash_modifier", 1)

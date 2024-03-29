@@ -1,13 +1,32 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxqsoc8anmpvj"]
+[gd_scene load_steps=10 format=3 uid="uid://cxqsoc8anmpvj"]
 
 [ext_resource type="Script" path="res://entities/objects/fire/fire.gd" id="1_p2r7l"]
-[ext_resource type="Texture2D" uid="uid://bwaqkov04vcft" path="res://entities/objects/fire/fire-asset.png" id="2_q28x2"]
+[ext_resource type="Texture2D" uid="uid://wc3tovfbvv7g" path="res://assets/fire_barrier/fire_1.png" id="2_0u14y"]
+[ext_resource type="Shader" path="res://shader/wobbleEffect.gdshader" id="2_8nx8l"]
 [ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="3_p8tfa"]
 [ext_resource type="Texture2D" uid="uid://32uxotk6128m" path="res://entities/enemies/assets/healthbar_under.png" id="4_m5hfb"]
 [ext_resource type="Texture2D" uid="uid://drqht0p82ryru" path="res://entities/enemies/assets/healthbar_progress.png" id="5_8rkk6"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ougay"]
-size = Vector2(933.75, 2295.19)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tmkil"]
+resource_local_to_scene = true
+shader = ExtResource("2_8nx8l")
+shader_parameter/speed = 4.0
+shader_parameter/minStrength = 0.1
+shader_parameter/maxStrength = 0.15
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = null
+shader_parameter/heightOffset = null
+shader_parameter/offset = 0.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aftnp"]
+radius = 120.0
+height = 540.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gds7h"]
+radius = 220.0
+height = 680.0
 
 [node name="RigidBody2D" type="RigidBody2D"]
 collision_layer = 8
@@ -16,19 +35,24 @@ freeze = true
 script = ExtResource("1_p2r7l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_tmkil")
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_q28x2")
+texture = ExtResource("2_0u14y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 13)
+rotation = 1.57079
 scale = Vector2(0.1, 0.1)
-shape = SubResource("RectangleShape2D_ougay")
+shape = SubResource("CapsuleShape2D_aftnp")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2.5411e-21, 4)
+rotation = 1.5708
 scale = Vector2(0.1, 0.1)
-shape = SubResource("RectangleShape2D_ougay")
+shape = SubResource("CapsuleShape2D_gds7h")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_health_bar") instance=ExtResource("3_p8tfa")]
 element = 2
