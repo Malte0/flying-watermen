@@ -21,7 +21,6 @@ turbulence_influence_max = 0.008
 [node name="WindTunnel" type="Area2D"]
 collision_mask = 2
 script = ExtResource("1_5ge56")
-update = null
 force = 0.0
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]

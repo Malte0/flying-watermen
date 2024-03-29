@@ -68,9 +68,9 @@ func _input(event: InputEvent):
 		load_player()
 
 func set_expressions():
-	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
+	state_chart.set_expression_property("crouching", false) #Input.is_action_pressed("s"))
+	state_chart.set_expression_property("over_slide_threshold", false)#abs(velocity.x) > slide_threshold)
 	state_chart.set_expression_property("jumps_left", jumps_left)
-	state_chart.set_expression_property("over_slide_threshold", abs(velocity.x) > slide_threshold)
 	state_chart.set_expression_property("velocity_x", velocity.x)
 	state_chart.set_expression_property("velocity_y", velocity.y)
 
@@ -143,11 +143,7 @@ func movement(delta: float):
 		velocity.x = lerp(velocity.x, 0.0, friction)
 	# Gravity
 	if not (is_on_floor() and velocity.y == 0 and gravity > 0):
-		#if (velocity.y - prev_y_velocity) < 0:
-		#	velocity.y += gravity * delta * 4
-		#else:
 		velocity.y += gravity * delta
-	#prev_y_velocity = velocity.y
 
 func update_animation_parameters():
 	animation_tree.set("parameters/Default/blend_position", abs(velocity.x) > 0.8)
@@ -191,12 +187,6 @@ func _on_jumping_state_entered():
 	#velocity.y = jump_velocity + velocity.y/2
 	velocity.y = jump_velocity
 	jumps_left -= 1
-
-func _on_wall_slide_state_entered():
-	pass
-	#reset_jumps()
-	#velocity.y = velocity.y/10
-	#fall_speed_factor = base_fall_speed_factor/10
 
 func _on_airborne_state_entered():
 	friction = base_friction/10
