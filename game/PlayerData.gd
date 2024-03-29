@@ -4,7 +4,6 @@ class_name  PlayerData
 @export var stored_abilities: Dictionary = {
 	"dash": false
 	}
-@export var can_use_pos: bool = false
 @export var stored_pos: Vector2
 @export var stored_wells: Dictionary = {}
 @export var num_wells_filled: int = 0
