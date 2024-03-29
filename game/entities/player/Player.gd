@@ -115,6 +115,7 @@ func save_on_exit():
 
 func update_player_data():
 	player_data.update_pos(self.position)
+	player_data.can_use_pos = true
 	player_data.set_storedabilities(abilities)
 	player_data.is_boss_alive = is_boss_alive
 
@@ -123,6 +124,7 @@ func load_player():
 		player_data = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
 		update_Player_on_load()
 		load_wells()
+		print(player_data.stored_pos)
 		if is_boss_alive:
 			Globals.kill_boss.emit()
 	print("loaded")
@@ -133,7 +135,7 @@ func load_wells():
 		Globals.load.emit(wells[0], wells[1])
 
 func update_Player_on_load():
-	if player_data.stored_pos != null:
+	if player_data.can_use_pos:
 		self.position = player_data.stored_pos
 	abilities = player_data.stored_abilities
 	health_component.health = health_component.max_health
