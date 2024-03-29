@@ -115,7 +115,7 @@ func save_on_exit():
 func update_player_data():
 	player_data.update_pos(self.position)
 	player_data.set_storedabilities(abilities)
-	player_data.boss_alive = is_boss_alive
+	player_data.is_boss_alive = is_boss_alive
 
 func load_player():
 	if FileAccess.file_exists(save_file_path + save_file_name):
@@ -136,7 +136,7 @@ func update_Player_on_load():
 	abilities = player_data.stored_abilities
 	health_component.health = health_component.max_health
 	heat_component.heat = 0
-	is_boss_alive = player_data.boss_alive
+	is_boss_alive = player_data.is_boss_alive
 
 func disenable_components(ranged: bool, melee: bool, movement: bool):
 	ranged_component.is_enabled = ranged
