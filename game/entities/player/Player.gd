@@ -107,8 +107,7 @@ func save_Player():
 	print("save")
 
 func save_on_exit():
-	player_data.set_storedabilities(abilities)
-	player_data.boss_alive = boss_alive
+	update_player_data()
 	ResourceSaver.save(player_data, save_file_path + save_file_name)
 	Globals.update_loadgame()
 	print("save")
