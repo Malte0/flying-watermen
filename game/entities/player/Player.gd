@@ -223,7 +223,6 @@ func melee():
 
 func _on_melee_component_finished() -> void:
 	state_chart.send_event("melee_end")
-
 #endregion
 
 #region Shooting
