@@ -16,3 +16,5 @@ func _on_area_2d_area_entered(area):
 		set_deferred("freeze", false)
 		collision_mask = 0
 		wall_destroyed.emit()
+		await get_tree().create_timer(1.2).timeout
+		queue_free()

@@ -1,5 +1,7 @@
 class_name MeleeComponent extends Area2D
 
+signal finished()
+
 @export var damage: int = 50
 @export var element: Element.Type
 @export var attack_shape: CollisionShape2D
@@ -61,3 +63,4 @@ func _on_attack_state_exited():
 	if ranged_component: ranged_component.enable()
 	tmp_animation_bar.visible = false
 	attack_shape.disabled = true
+	finished.emit()

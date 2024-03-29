@@ -58,14 +58,14 @@ size = Vector2(114.5, 102.5)
 [sub_resource type="Gradient" id="Gradient_n1m4p"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_0j4ex"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_epf44"]
 gradient = SubResource("Gradient_n1m4p")
 
 [sub_resource type="Curve" id="Curve_k8gfw"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.143979, 0.503661), 0.0, 0.0, 0, 0, Vector2(1, 0.227229), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_u3jms"]
+[sub_resource type="CurveTexture" id="CurveTexture_dbnia"]
 curve = SubResource("Curve_k8gfw")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dmaj2"]
@@ -81,9 +81,9 @@ angular_velocity_max = 180.0
 gravity = Vector3(0, -80, 0)
 scale_min = 0.05
 scale_max = 0.1
-scale_curve = SubResource("CurveTexture_u3jms")
+scale_curve = SubResource("CurveTexture_dbnia")
 color = Color(0.384314, 0.792157, 1, 1)
-color_ramp = SubResource("GradientTexture1D_0j4ex")
+color_ramp = SubResource("GradientTexture1D_epf44")
 hue_variation_min = -0.67
 hue_variation_max = -0.55
 
@@ -153,6 +153,7 @@ scale = Vector2(0.5, 0.5)
 value = 100.0
 texture_under = ExtResource("4_ap5gi")
 texture_progress = ExtResource("5_x4f6e")
+metadata/_edit_use_anchors_ = true
 
 [node name="EnemyHeatArea" parent="." instance=ExtResource("6_dqevw")]
 collision_mask = 3
