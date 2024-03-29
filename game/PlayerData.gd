@@ -15,6 +15,6 @@ func set_storedabilities(value: Dictionary):
 func update_pos(value: Vector2):
 	stored_pos = value
 
-func add_well(xpos: int, ypos: int):
-	stored_wells[[xpos, ypos]] = [xpos, ypos]
+func add_well(pos: Vector2):
+	stored_wells[pos] = pos
 	num_wells_filled += 1

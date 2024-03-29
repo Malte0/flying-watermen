@@ -93,8 +93,8 @@ func on_boss_death():
 	is_boss_alive = false
 	check_if_won()
 
-func on_well_save(xpos: int, ypos: int):
-	player_data.add_well(xpos, ypos)
+func on_well_save(pos: Vector2):
+	player_data.add_well(pos)
 	save_Player()
 
 func verify_save_directory(path: String):
@@ -127,7 +127,7 @@ func load_player():
 func load_wells():
 	var wells_to_fill: Dictionary = player_data.stored_wells
 	for wells in wells_to_fill:
-		Globals.load.emit(wells[0], wells[1])
+		Globals.load.emit(wells)
 
 func update_Player_on_load():
 	if player_data.stored_pos != Vector2(0, 0):

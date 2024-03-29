@@ -20,9 +20,9 @@ func fill_well(_body: Node, save = true):
 		$GPUParticles2D.visible  = true
 		well_filled.emit()
 		is_full = true
-		Globals.save.emit(position.x, position.y)
+		Globals.save.emit(position)
 		Globals.check_win.emit()
 
-func load_well(xpos: float, ypos: float):
-	if is_equal_approx(position.x, xpos) and is_equal_approx(position.y, ypos):
+func load_well(pos: Vector2):
+	if is_equal_approx(pos.x, position.x) and is_equal_approx(pos.y, position.y):
 		fill_well(null, false)

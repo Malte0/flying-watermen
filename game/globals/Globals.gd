@@ -7,8 +7,9 @@ var main_menu = "res://scenes/ui/menus/mainMenu/mainMenu.tscn"
 var save_location = "user://save/" + "PlayerSave.tres"
 var load_game = FileAccess.file_exists(save_location)
 
-signal save(xpos: int, ypos: int)
-signal load(xpos: int, ypos: int)
+signal save(pos: Vector2)
+signal load(pos: Vector2)
+signal load_firewell(pos: Vector2)
 signal check_win()
 signal Boss_dead()
 signal kill_boss()
