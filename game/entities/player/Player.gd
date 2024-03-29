@@ -193,9 +193,10 @@ func _on_jumping_state_entered():
 	jumps_left -= 1
 
 func _on_wall_slide_state_entered():
-	reset_jumps()
-	velocity.y = velocity.y/10
-	fall_speed_factor = base_fall_speed_factor/10
+	pass
+	#reset_jumps()
+	#velocity.y = velocity.y/10
+	#fall_speed_factor = base_fall_speed_factor/10
 
 func _on_airborne_state_entered():
 	friction = base_friction/10
