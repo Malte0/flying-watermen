@@ -71,7 +71,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1xs3o"]
-radius = 355.001
+radius = 289.028
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cnei1"]
 radius = 168.027
@@ -136,7 +136,7 @@ scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_tvg72")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.209498
+frame_progress = 0.749781
 flip_h = true
 
 [node name="ViewArea" type="Area2D" parent="."]
@@ -176,6 +176,7 @@ health_component = NodePath("../HealthComponent")
 
 [node name="MovementComponent" parent="." node_paths=PackedStringArray("nodes_to_flip") instance=ExtResource("10_8qnfh")]
 movement_speed = 200
+jump_force = -800
 nodes_to_flip = [NodePath("../EnemyGraphics"), NodePath("../WallDetection")]
 
 [node name="ItemDropperComponent" parent="." instance=ExtResource("12_5t00d")]
