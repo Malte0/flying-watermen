@@ -1,6 +1,6 @@
 [gd_resource type="VisualShader" load_steps=20 format=3 uid="uid://bed3tdjo00y51"]
 
-[ext_resource type="Texture2D" uid="uid://ckas7a44ovihg" path="res://shader/fire/fire_1-modified.jpg" id="1_7nl4w"]
+[ext_resource type="Texture2D" uid="uid://xe7iyt36vjed" path="res://assets/prototype-assets/FireWave.png" id="1_f4r2y"]
 [ext_resource type="Texture2D" uid="uid://ca6mxx0o8vhjw" path="res://shader/fire/distortion01.png" id="2_j2nbs"]
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_v6msn"]
@@ -38,7 +38,7 @@ default_input_values = [0, Quaternion(0, 0, 0, 0)]
 op_type = 2
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_li8im"]
-texture = ExtResource("1_7nl4w")
+texture = ExtResource("1_f4r2y")
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_af2e1"]
 default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]

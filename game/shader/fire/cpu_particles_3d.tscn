@@ -24,4 +24,5 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 
 [node name="CSGTorus3D" type="CSGTorus3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 material_override = SubResource("ShaderMaterial_4tugy")
+outer_radius = 0.462
 sides = 64
