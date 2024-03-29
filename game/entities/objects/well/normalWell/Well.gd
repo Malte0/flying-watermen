@@ -13,7 +13,7 @@ func _ready() -> void:
 	Globals.load.connect(load_well)
 
 ## Fills the well, but only once
-func fill_well(_body: Node):
+func fill_well(_body: Node, save = true):
 	if not is_full:
 		$CollisionShape2D.disabled = true
 		sprite.texture = FULL_TEXTURE
@@ -23,12 +23,6 @@ func fill_well(_body: Node):
 		Globals.save.emit(position.x, position.y)
 		Globals.check_win.emit()
 
-func load_well(xpos: int, ypos: int):
-	if position.x == xpos and position.y == ypos:
-		if not is_full:
-			$CollisionShape2D.disabled = true
-			sprite.texture = FULL_TEXTURE
-			$GPUParticles2D.visible  = true
-			well_filled.emit()
-			is_full = true
-			Globals.check_win.emit()
+func load_well(xpos: float, ypos: float):
+	if is_equal_approx(position.x, xpos) and is_equal_approx(position.y, ypos):
+		fill_well(null, false)
