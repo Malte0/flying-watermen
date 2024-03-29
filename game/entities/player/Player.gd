@@ -16,6 +16,8 @@ var shoot_position: Marker2D:
 var save_file_path: String = "user://save/"
 var save_file_name: String = "PlayerSave.tres"
 var player_data: PlayerData = PlayerData.new()
+var num_wells = 4
+var boss_alive = true
 
 # Reset values
 var base_scale_speed: float = 2
@@ -49,6 +51,11 @@ func _ready():
 	set_expressions()
 	#preparations for saveing
 	verify_save_directory(save_file_path)
+	Globals.save.connect(on_well_save)
+	Globals.check_win.connect(check_if_won)
+	if Globals.load_game:
+		load_player()
+	Globals.save_on_exit.connect(save_on_exit)
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("interact"):
@@ -62,10 +69,6 @@ func _input(event: InputEvent):
 		state_chart.send_event("melee")
 	if event.is_action_pressed("right_click"):
 		shoot()
-	if event.is_action_pressed("savePlayer"):
-		save_Player()
-	if event.is_action_pressed("loadPlayer"):
-		load_player()
 
 func set_expressions():
 	state_chart.set_expression_property("crouching", Input.is_action_pressed("s"))
@@ -77,31 +80,64 @@ func set_expressions():
 func flip_player():
 	scale.x *= -1
 
+func check_if_won():
+	if (num_wells == player_data.num_wells_filled) and not boss_alive:
+		reset_save_file()
+		print("win")
+
+func reset_save_file():
+	DirAccess.remove_absolute(save_file_path + save_file_name)
+	Globals.update_loadgame()
+
+func on_boss_death():
+	boss_alive = false
+	check_if_won()
+
+func on_well_save(xpos: int, ypos: int):
+	player_data.add_well(xpos, ypos)
+	save_Player()
+
 func verify_save_directory(path: String):
 	DirAccess.make_dir_absolute(path)
 
 func save_Player():
 	update_player_data()
 	ResourceSaver.save(player_data, save_file_path + save_file_name)
+	Globals.update_loadgame()
+	print("save")
+
+func save_on_exit():
+	player_data.set_storedabilities(abilities)
+	player_data.boss_alive = boss_alive
+	ResourceSaver.save(player_data, save_file_path + save_file_name)
+	Globals.update_loadgame()
 	print("save")
 
 func update_player_data():
 	player_data.update_pos(self.position)
-	player_data.set_storedheat(heat_component.get_heat())
-	player_data.set_storedhealth(health_component.get_health())
 	player_data.set_storedabilities(abilities)
+	player_data.boss_alive = boss_alive
 
 func load_player():
-	player_data = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
-	update_Player_on_load()
+	if FileAccess.file_exists(save_file_path + save_file_name):
+		player_data = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
+		update_Player_on_load()
+		load_wells()
+		if boss_alive:
+			Globals.kill_boss.emit()
 	print("loaded")
+
+func load_wells():
+	var wells_to_fill: Dictionary = player_data.stored_wells
+	for wells in wells_to_fill:
+		Globals.load.emit(wells[0], wells[1])
 
 func update_Player_on_load():
 	self.position = player_data.stored_pos
-	heat_component.set_heat(player_data.stored_heat)
-	health_component.set_health(player_data.stored_health)
-	health_component.update_healthbar()
 	abilities = player_data.stored_abilities
+	health_component.health = health_component.max_health
+	heat_component.heat = 0
+	boss_alive = player_data.boss_alive
 
 func disenable_components(ranged: bool, melee: bool, movement: bool):
 	ranged_component.is_enabled = ranged

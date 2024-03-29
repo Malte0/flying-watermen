@@ -20,7 +20,10 @@ func _on_resume_button_pressed():
 
 func _on_return_to_menu_button_pressed():
 	is_paused = false
+	Globals.save_on_exit.emit()
 	get_tree().change_scene_to_file.call_deferred(Globals.main_menu)
 
 func _on_quit_game_button_pressed():
+	is_paused = false
+	Globals.save_on_exit.emit()
 	get_tree().quit()

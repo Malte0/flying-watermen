@@ -81,6 +81,8 @@ func _on_heal_tick():
 
 func die():
 	death.emit()
+	if get_parent() is BossEnemy:
+		Globals.Boss_dead.emit()
 	get_parent().queue_free()
 
 func damage_flash_effect():

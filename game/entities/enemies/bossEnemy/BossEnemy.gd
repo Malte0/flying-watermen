@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name BossEnemy extends CharacterBody2D
 
 @export var aggro_component: AggroComponent
 @export var melee_attack_low_component: MeleeComponent
@@ -42,6 +42,7 @@ func _ready():
 	color_rect_high.visible = false
 	fire_detection.collision_mask = 8
 	attack_cooldown.wait_time = 1.5
+	Globals.kill_boss.connect(kill_boss)
 
 func _physics_process(_delta: float):
 	var player_distance = abs(player.global_position.x - global_position.x)
@@ -193,3 +194,6 @@ func _on_dash_timeout_timeout():
 	health_component.is_invincible = false
 	movement_component.movement_speed = movement_speed_aggro
 	is_direciton_locked = false
+
+func kill_boss():
+	health_component.die()

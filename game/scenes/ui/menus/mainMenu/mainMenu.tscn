@@ -74,8 +74,16 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Start Game"
 
+[node name="Reset_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Reset Game"
+
 [node name="Exit_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(120, 32)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Quit Game"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Reset_Button" to="." method="_on_reset_button_pressed"]
