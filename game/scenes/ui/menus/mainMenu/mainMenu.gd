@@ -13,6 +13,5 @@ func on_start_pressed() -> void:
 func on_exit_pressed() -> void:
 	get_tree().quit()
 
-
 func _on_reset_button_pressed():
 	Globals.reset_save_file()

@@ -16,8 +16,8 @@ var shoot_position: Marker2D:
 var save_file_path: String = "user://save/"
 var save_file_name: String = "PlayerSave.tres"
 var player_data: PlayerData = PlayerData.new()
-var num_wells = 4
-var boss_alive = true
+var num_wells: int = 4
+var is_boss_alive: bool = true
 
 # Reset values
 var base_scale_speed: float = 2
@@ -81,7 +81,7 @@ func flip_player():
 	scale.x *= -1
 
 func check_if_won():
-	if (num_wells == player_data.num_wells_filled) and not boss_alive:
+	if num_wells == player_data.num_wells_filled and not is_boss_alive:
 		reset_save_file()
 		print("win")
 
@@ -90,7 +90,7 @@ func reset_save_file():
 	Globals.update_loadgame()
 
 func on_boss_death():
-	boss_alive = false
+	is_boss_alive = false
 	check_if_won()
 
 func on_well_save(xpos: int, ypos: int):
@@ -115,14 +115,14 @@ func save_on_exit():
 func update_player_data():
 	player_data.update_pos(self.position)
 	player_data.set_storedabilities(abilities)
-	player_data.boss_alive = boss_alive
+	player_data.boss_alive = is_boss_alive
 
 func load_player():
 	if FileAccess.file_exists(save_file_path + save_file_name):
 		player_data = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
 		update_Player_on_load()
 		load_wells()
-		if boss_alive:
+		if is_boss_alive:
 			Globals.kill_boss.emit()
 	print("loaded")
 
@@ -136,7 +136,7 @@ func update_Player_on_load():
 	abilities = player_data.stored_abilities
 	health_component.health = health_component.max_health
 	heat_component.heat = 0
-	boss_alive = player_data.boss_alive
+	is_boss_alive = player_data.boss_alive
 
 func disenable_components(ranged: bool, melee: bool, movement: bool):
 	ranged_component.is_enabled = ranged
