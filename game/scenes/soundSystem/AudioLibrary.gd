@@ -4,7 +4,7 @@ class_name AudioLibrary
 @export var sound_effects: Array[SoundEffect]
 
 func get_audio_stream(_tag: String):
-	var index: int = -1 
+	var index: int = -1
 	if _tag:
 		for sound in sound_effects:
 			index += 1

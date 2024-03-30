@@ -28,7 +28,7 @@ height = 540.0
 radius = 220.0
 height = 680.0
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="Fire" type="RigidBody2D"]
 collision_layer = 8
 collision_mask = 0
 freeze = true
