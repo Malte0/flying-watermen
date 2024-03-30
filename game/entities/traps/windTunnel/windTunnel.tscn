@@ -20,7 +20,7 @@ turbulence_influence_min = 0.0
 turbulence_influence_max = 0.008
 
 [node name="WindTunnel" type="Area2D"]
-collision_mask = 2
+collision_mask = 7
 script = ExtResource("1_5ge56")
 force = 0.0
 
