@@ -1,7 +1,7 @@
 @tool
 extends Area2D
 
-@export var update: bool = false:
+@export var is_update: bool = false:
 	set(value):
 		fit_particle()
 @export var force: float = 500
