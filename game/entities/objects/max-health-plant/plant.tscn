@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3fci01ety45h"]
+
+[ext_resource type="Script" path="res://entities/objects/max-health-plant/plant.gd" id="1_2q2m2"]
+[ext_resource type="Texture2D" uid="uid://s4rpkn4au3kf" path="res://entities/objects/max-health-plant/Blue Umbrella.png" id="2_phiv6"]
+[ext_resource type="Texture2D" uid="uid://bfv2i6fh1wtaa" path="res://assets/buttons/Dark/E_Key_Dark.png" id="3_ndxwx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ciqrd"]
+radius = 282.044
+
+[node name="Plant" type="Area2D"]
+script = ExtResource("1_2q2m2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_phiv6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6, -2)
+shape = SubResource("CircleShape2D_ciqrd")
+
+[node name="E_key_dark" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -282)
+texture = ExtResource("3_ndxwx")
+
+[connection signal="interacted" from="." to="." method="_on_interacted"]
