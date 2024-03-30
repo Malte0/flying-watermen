@@ -198,6 +198,7 @@ autostart = true
 
 [node name="ItemDropperComponent" parent="." instance=ExtResource("11_ieocg")]
 carried_item = Array[PackedScene]([ExtResource("14_tjg2r"), ExtResource("12_70ypm"), ExtResource("16_uth2q")])
+spawn_probability = 0.7
 
 [node name="FireParticles" type="GPUParticles2D" parent="."]
 show_behind_parent = true
