@@ -42,6 +42,7 @@ scale_curve = SubResource("CurveTexture_4cgvj")
 color_ramp = SubResource("GradientTexture1D_mxgcb")
 
 [node name="Puddle" type="Area2D"]
+z_index = 1
 collision_mask = 3
 script = ExtResource("1_ogjm0")
 
