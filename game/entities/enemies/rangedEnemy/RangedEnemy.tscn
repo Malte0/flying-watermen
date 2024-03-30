@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dmeutg1f6t7sl"]
+[gd_scene load_steps=29 format=3 uid="uid://dmeutg1f6t7sl"]
 
 [ext_resource type="Script" path="res://entities/enemies/rangedEnemy/RangedEnemy.gd" id="1_itytb"]
 [ext_resource type="PackedScene" uid="uid://bxtfkclrv3vwa" path="res://entities/components/health/HealthComponent.tscn" id="1_otr82"]
@@ -13,9 +13,13 @@
 [ext_resource type="PackedScene" uid="uid://d71bkm5ic0tt" path="res://entities/components/ranged/RangedComponent.tscn" id="11_uinxd"]
 [ext_resource type="PackedScene" uid="uid://bbm5yfysxt45l" path="res://scenes/soundSystem/polyphonic_audio_player.tscn" id="12_1y8ge"]
 [ext_resource type="Script" path="res://entities/enemies/rangedEnemy/RangedEnemySFX.gd" id="12_ksyi7"]
+[ext_resource type="PackedScene" uid="uid://wamnd7014nsa" path="res://entities/components/enemyComponents/itemDropper/DropItemComponent.tscn" id="12_t6x7w"]
 [ext_resource type="Script" path="res://scenes/soundSystem/AudioLibrary.gd" id="13_hu36u"]
+[ext_resource type="PackedScene" uid="uid://bree81gljy661" path="res://entities/player/inventory/items/foamChemical/FoamChemical.tscn" id="13_lvug8"]
+[ext_resource type="PackedScene" uid="uid://dp6qth5jvcdhd" path="res://entities/player/inventory/items/iceChemical/IceChemical.tscn" id="14_5uflq"]
 [ext_resource type="Script" path="res://scenes/soundSystem/soundEffects.gd" id="14_swm4k"]
 [ext_resource type="AudioStream" uid="uid://b8o50pvv7u37j" path="res://assets/SFX/player/spit.wav" id="15_6g77e"]
+[ext_resource type="PackedScene" uid="uid://dvv2sij5v2epd" path="res://entities/player/inventory/items/sodiumChemical/sodium.tscn" id="15_b3ixe"]
 [ext_resource type="AudioStream" uid="uid://bnjog1n32i3wc" path="res://assets/SFX/placeHolder02.wav" id="16_v28ac"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rm63b"]
@@ -128,6 +132,10 @@ nodes_to_flip = [NodePath("../EnemyGraphics")]
 [node name="MovementOscillation" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
+
+[node name="ItemDropperComponent" parent="." instance=ExtResource("12_t6x7w")]
+carried_item = Array[PackedScene]([ExtResource("13_lvug8"), ExtResource("14_5uflq"), ExtResource("15_b3ixe")])
+spawn_probability = 0.7
 
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource("12_ksyi7")

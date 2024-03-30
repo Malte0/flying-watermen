@@ -180,7 +180,7 @@ jump_force = -800
 nodes_to_flip = [NodePath("../EnemyGraphics"), NodePath("../WallDetection")]
 
 [node name="ItemDropperComponent" parent="." instance=ExtResource("12_5t00d")]
-carried_item = ExtResource("13_uwn5w")
+carried_item = Array[PackedScene]([ExtResource("13_uwn5w")])
 
 [node name="FireParticles" type="GPUParticles2D" parent="."]
 show_behind_parent = true

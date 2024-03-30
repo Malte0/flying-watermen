@@ -753,6 +753,7 @@ heat_tick = NodePath("../Timers/HeatTick")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_heal_tick") instance=ExtResource("16_vgsyb")]
 element = 0
+max_health = 1000
 _heal_tick = NodePath("../Timers/HealTick")
 use_damage_effect = true
 

@@ -6,6 +6,14 @@ extends CharacterBody2D
 @export var wall_detection: RayCast2D
 @export var movement_speed_calm: int = 100
 @export var movement_speed_aggro: int = 250
+@export var carried_item: Array[PackedScene] :
+	set(value):
+		carried_item = value
+		$ItemDropperComponent.carried_item = carried_item
+@export_range(0, 1) var spawn_probability: float:
+	set(value):
+		spawn_probability = value
+		$ItemDropperComponent.spawn_probability = spawn_probability
 
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 
