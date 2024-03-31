@@ -52,6 +52,7 @@ func explode():
 	movement_component.movement_speed = IGNATION_MOVE_SPEED
 	await get_tree().create_timer(IGNATION_DELAY).timeout
 	var explosion_instance: Explosion = explosion_scene.instantiate()
+	explosion_instance.damage = 30
 	explosion_instance.global_position = global_position
 	get_parent().add_child(explosion_instance)
 	queue_free()

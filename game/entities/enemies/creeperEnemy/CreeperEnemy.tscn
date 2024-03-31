@@ -149,7 +149,7 @@ collision_mask = 3
 shape = SubResource("CircleShape2D_1xs3o")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_health_bar") instance=ExtResource("4_hx5t1")]
-max_health = 160
+max_health = 70
 _health_bar = NodePath("HealthBar")
 
 [node name="HealthBar" type="TextureProgressBar" parent="HealthComponent"]

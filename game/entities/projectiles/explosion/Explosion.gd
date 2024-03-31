@@ -2,7 +2,7 @@ class_name Explosion extends Node2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-var damage: int = 50
+var damage: int = 40
 var element: Element.Type = Element.Type.Neutral
 
 const DECAY_TIME: float = 0.4

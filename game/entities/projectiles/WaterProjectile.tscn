@@ -7,7 +7,7 @@
 
 [node name="Projectile" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("1_aypoh")]
 collision_mask = 5
-damage = 50
+damage = 35
 sprite = NodePath("Waterattack05")
 
 [node name="Waterattack05" type="Sprite2D" parent="Projectile"]
