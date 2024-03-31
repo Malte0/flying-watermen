@@ -73,10 +73,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1xs3o"]
-radius = 338.006
+radius = 237.008
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cnei1"]
-radius = 168.027
+radius = 123.016
 
 [sub_resource type="Gradient" id="Gradient_0gel6"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
