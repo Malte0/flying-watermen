@@ -62,7 +62,7 @@ func _on_area_2d_body_entered(body):
 
 func stick(body, health_component):
 	if health_component:
-			health_component.take_damage_overtime(damage, element, 30)
+		health_component.take_damage_overtime(damage, element)
 	linear_velocity = Vector2()
 	gravity_scale = 0
 	collision_layer = 1

@@ -57,10 +57,12 @@ shape = SubResource("CapsuleShape2D_gds7h")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_health_bar") instance=ExtResource("3_p8tfa")]
 element = 2
+max_health = 70
 _health_bar = NodePath("HealthBar")
 single_damage_element = 3
 
 [node name="HealthBar" type="TextureProgressBar" parent="HealthComponent"]
+visible = false
 offset_left = -50.5
 offset_top = -166.0
 offset_right = 149.5
@@ -72,3 +74,4 @@ texture_progress = ExtResource("5_8rkk6")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]

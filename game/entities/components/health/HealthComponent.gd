@@ -57,13 +57,11 @@ func can_damage(damage_type: Element.Type) -> bool:
 	else: return damage_type == Element.Type.Neutral or not damage_type == element
 
 # there is no need to use to check for iframes, cuz the func deals no primary dmg
-func take_damage_overtime(amount: int, damage_type: Element.Type, _time: int):
-	if not can_damage(damage_type): return
+func take_damage_overtime(amount: int, damage_type: Element.Type):
 	can_take_damage_over_time += amount
 	while can_take_damage_over_time >= 0:
 		can_take_damage_over_time -= 1
-		health -= 1
-		health_changed.emit(health, -1)
+		take_damage(1,damage_type, false)
 		await get_tree().create_timer(0.3).timeout
 
 func heal(amount: int):
