@@ -19,15 +19,15 @@ func _ready():
 
 func update_item_in_inventory(new_item: Item, _old_item: Item):
 	if new_item:
-		inventory_text.text = str(new_item.name) +  "\n Use[img=30]res://assets/buttons/Dark/F_Key_Dark.png[/img]"
-	else:
-		inventory_text.text = "no item in inventory"
+		inventory_text.text =  "[center]" + str(new_item.name) + "
+		Use [img=30]res://assets/buttons/Dark/F_Key_Dark.png[/img][/center]"
+	else: inventory_text.text = "[center]No Item in Inventory[/center]"
 
 func update_active_item(item: Item):
 	active_item_name.visible = item != null
 	exit_item_text.visible = item != null
 	if item:
-		active_item_name.text = item.name
+		active_item_name.text = str(item.name)
 		update_item_bar(item.max_amount, item.max_amount)
 
 func update_item_bar(amount: int, max_amount: int):

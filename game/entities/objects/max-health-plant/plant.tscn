@@ -1,9 +1,22 @@
-[gd_scene load_steps=12 format=3 uid="uid://d3fci01ety45h"]
+[gd_scene load_steps=14 format=3 uid="uid://d3fci01ety45h"]
 
 [ext_resource type="Script" path="res://entities/objects/max-health-plant/plant.gd" id="1_2q2m2"]
 [ext_resource type="Texture2D" uid="uid://s4rpkn4au3kf" path="res://entities/objects/max-health-plant/Blue Umbrella.png" id="2_phiv6"]
+[ext_resource type="Shader" path="res://shader/wobbleEffect.gdshader" id="2_yjr0p"]
 [ext_resource type="Texture2D" uid="uid://bfv2i6fh1wtaa" path="res://assets/buttons/Dark/E_Key_Dark.png" id="3_ndxwx"]
 [ext_resource type="Texture2D" uid="uid://4qlm6ho7173m" path="res://assets/light_noise/offset_glow.png" id="4_ha8mg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mc6aj"]
+shader = ExtResource("2_yjr0p")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.077
+shader_parameter/maxStrength = 0.08
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.025
+shader_parameter/distortion = null
+shader_parameter/heightOffset = null
+shader_parameter/offset = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ciqrd"]
 radius = 282.044
@@ -49,10 +62,12 @@ script = ExtResource("1_2q2m2")
 health_gained = 20
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_mc6aj")
 texture = ExtResource("2_phiv6")
+region_enabled = true
+region_rect = Rect2(25, 35, 626, 611)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(6, -2)
 shape = SubResource("CircleShape2D_ciqrd")
 
