@@ -23,7 +23,7 @@ func shoot(direction: Vector2, projectile: PackedScene, velocity_offset: Vector2
 		var projectile_instance: Projectile = projectile_node.get_node("Projectile")
 		projectile_instance.position = shoot_position.global_position
 		projectile_instance.direction = direction
-		projectile_instance.velocity_offset = velocity_offset
+		projectile_instance.velocity_offset = velocity_offset/2
 		add_child(projectile_node)
 		shot.emit()
 		if use_cooldown:

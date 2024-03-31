@@ -2,7 +2,7 @@ class_name Player extends CharacterBody2D
 
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var heat_component: HeatComponent = $HeatComponent
-@onready var ranged_component: RangedComponent = $RangedComponent
+@onready var ranged_component: RangedComponent = %RangedComponent
 var shoot_position: Marker2D:
 	get: return ranged_component.shoot_position
 @onready var melee_attack: MeleeComponent = $MeleeComponent
@@ -41,7 +41,9 @@ var slide_threshold: float = base_speed/2
 var abilities: Dictionary = {
 	"dash": false
 }
-var prev_y_velocity: float = 0
+# Shoottype
+var is_shooting_Water: bool = true
+var buildingFoam_shootcooldown: float = 0.3
 
 func _ready():
 	animation_tree.active = true
@@ -62,10 +64,18 @@ func _input(event: InputEvent):
 		state_chart.send_event("melee")
 	if event.is_action_pressed("right_click"):
 		shoot()
-	if event.is_action_pressed("savePlayer"):
-		save_Player()
-	if event.is_action_pressed("loadPlayer"):
-		load_player()
+	if event.is_action_pressed("swap_shoot_type"):
+		set_shooting_type()
+
+func set_shooting_type():
+	if is_shooting_Water:
+		is_shooting_Water = false
+		projectile_scene = load("res://entities/projectiles/BuildingFoamProjectile.tscn")
+		ranged_component.cooldown = buildingFoam_shootcooldown
+	else:
+		is_shooting_Water = true
+		projectile_scene = load("res://entities/projectiles/WaterProjectile.tscn")
+		ranged_component.cooldown = buildingFoam_shootcooldown
 
 func set_expressions():
 	state_chart.set_expression_property("crouching", false) #Input.is_action_pressed("s"))
@@ -114,10 +124,19 @@ func _on_death():
 
 #region PhysicsProcess
 func _physics_process(delta: float):
+	if Input.is_action_pressed("right_click") and !is_shooting_Water:
+		shoot()
+	adjust_shooting_location()
 	update_states()
 	movement(delta)
 	move_and_slide()
 	update_animation_parameters()
+
+func adjust_shooting_location():
+	var point: Vector2 = $Animation.position
+	var angle: float = point.angle_to_point(get_local_mouse_position())
+	ranged_component.position = point + Vector2(ranged_component.position.distance_to(point),0).rotated(angle)
+
 
 func update_states():
 	set_expressions()
