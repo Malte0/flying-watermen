@@ -1,7 +1,10 @@
 extends Node2D
 
-func _ready() -> void:
-	$SequencePlayer.visible = $StoneTabletOverlay.visible
+var sequence: PackedScene = load("res://scenes/ui/menus/tablets/sequence.tscn")
+var scene: CanvasLayer
 
 func _on_stone_tablet_overlay_visibility_changed() -> void:
-	$SequencePlayer.visible = $StoneTabletOverlay.visible
+	if $StoneTabletOverlay.visible == true:
+		scene = sequence.instantiate()
+		add_child.call_deferred(scene)
+	elif scene != null: scene.queue_free()
