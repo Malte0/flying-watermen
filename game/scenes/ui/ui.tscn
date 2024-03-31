@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cihcop35erg48"]
+[gd_scene load_steps=11 format=3 uid="uid://cihcop35erg48"]
 
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_hgyi1"]
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_rfa25"]
 [ext_resource type="Texture2D" uid="uid://bd0dnm2tkxxth" path="res://assets/prototype-assets/healthbar_PROGRESS.png" id="3_5gpoy"]
 [ext_resource type="Texture2D" uid="uid://b7jx8lf3ku7ft" path="res://assets/prototype-assets/healthbar_BORDER.png" id="4_e202w"]
+[ext_resource type="Theme" uid="uid://rgpmfojqc2c" path="res://themes/ui.tres" id="4_s773t"]
 [ext_resource type="Script" path="res://scenes/ui/HealthHeatBar.gd" id="5_4qthl"]
 [ext_resource type="Script" path="res://scenes/ui/InventoryUI.gd" id="6_gvkls"]
 [ext_resource type="PackedScene" uid="uid://besblswfge6aw" path="res://scenes/ui/menus/pauseMenu/pauseMenu.tscn" id="7_hnkim"]
@@ -52,6 +53,7 @@ offset_top = 546.0
 offset_right = 1049.0
 offset_bottom = 629.0
 mouse_filter = 2
+theme = ExtResource("4_s773t")
 bbcode_enabled = true
 text = "Inventory
  Use [img=30]res://assets/buttons/Dark/F_Key_Dark.png[/img]"
@@ -67,6 +69,7 @@ offset_left = 1053.0
 offset_top = 503.0
 offset_right = 1069.0
 offset_bottom = 603.0
+theme = ExtResource("4_s773t")
 value = 25.0
 fill_mode = 3
 show_percentage = false
@@ -77,14 +80,16 @@ offset_left = 1077.0
 offset_top = 575.0
 offset_right = 1142.0
 offset_bottom = 601.0
+theme = ExtResource("4_s773t")
 text = "1/4"
 
 [node name="Name" type="Label" parent="CenterContainer/MarginContainer/Panel2/ActiveItem"]
 layout_mode = 2
 offset_left = 1026.0
 offset_top = 604.0
-offset_right = 1151.0
+offset_right = 1111.0
 offset_bottom = 633.0
+theme = ExtResource("4_s773t")
 text = "Inventory"
 
 [node name="ExitButton" type="RichTextLabel" parent="CenterContainer/MarginContainer/Panel2/ActiveItem"]
@@ -94,6 +99,7 @@ offset_top = 465.0
 offset_right = 1109.0
 offset_bottom = 498.0
 mouse_filter = 2
+theme = ExtResource("4_s773t")
 bbcode_enabled = true
 text = "[img=30x30]res://assets/buttons/Dark/X_Key_Dark.png[/img]to exit"
 scroll_active = false
@@ -150,6 +156,7 @@ offset_left = 8.0
 offset_top = 51.0
 offset_right = 200.0
 offset_bottom = 134.0
+theme = ExtResource("4_s773t")
 bbcode_enabled = true
 text = "Swap shot type on[img=40]res://assets/buttons/Dark/Q_Key_Dark.png"
 
