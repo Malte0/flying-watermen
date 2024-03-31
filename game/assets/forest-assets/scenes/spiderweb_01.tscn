@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://oavf5bkejub3"]
+
+[ext_resource type="Texture2D" uid="uid://obwra0usmk3a" path="res://assets/forest-assets/spiderweb01.png" id="1_l5geq"]
+
+[node name="Spiderweb01" type="Sprite2D"]
+z_index = -10
+position = Vector2(20013, 2745)
+texture = ExtResource("1_l5geq")
+region_enabled = true
+region_rect = Rect2(283.054, 145.945, 536.386, 442.303)
