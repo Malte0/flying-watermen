@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d37g54ehcn7ru"]
+
+[ext_resource type="PackedScene" uid="uid://c640sr08cvsmo" path="res://entities/objects/stone-tablet/StoneTabletObject.tscn" id="1_wbaqd"]
+[ext_resource type="PackedScene" uid="uid://cxpuyaf3piwxm" path="res://scenes/ui/menus/tablets/StoneTabletOverlay.tscn" id="2_7mh8a"]
+
+[node name="FoamTable" type="Node2D"]
+
+[node name="StoneTablet" parent="." instance=ExtResource("1_wbaqd")]
+
+[node name="StoneTabletOverlay" parent="." instance=ExtResource("2_7mh8a")]
+
+[node name="TextureRect2" type="TextureRect" parent="StoneTabletOverlay"]
+offset_left = 280.0
+offset_top = 9.0
+offset_right = 890.0
+offset_bottom = 653.0
+metadata/_edit_use_anchors_ = true
