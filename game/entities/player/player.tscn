@@ -731,6 +731,7 @@ script = ExtResource("54_dh141")
 sound_effects = Array[ExtResource("55_fjhbo")]([SubResource("Resource_o38gm"), SubResource("Resource_5rl7u"), SubResource("Resource_dvurc"), SubResource("Resource_2actv"), SubResource("Resource_10jm0"), SubResource("Resource_j06hn"), SubResource("Resource_mo3hs"), SubResource("Resource_o0ddx")])
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 10
 collision_layer = 2
 collision_mask = 5
 floor_constant_speed = true

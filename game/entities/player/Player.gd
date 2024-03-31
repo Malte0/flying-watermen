@@ -43,7 +43,7 @@ var abilities: Dictionary = {
 }
 # Shoottype
 var is_shooting_Water: bool = true
-var buildingFoam_shootcooldown: float = 0.3
+var buildingFoam_shootcooldown: float = 0.1
 
 func _ready():
 	animation_tree.active = true
@@ -75,7 +75,7 @@ func set_shooting_type():
 	else:
 		is_shooting_Water = true
 		projectile_scene = load("res://entities/projectiles/WaterProjectile.tscn")
-		ranged_component.cooldown = buildingFoam_shootcooldown
+		ranged_component.cooldown = 0.5
 
 func set_expressions():
 	state_chart.set_expression_property("crouching", false) #Input.is_action_pressed("s"))

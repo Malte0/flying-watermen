@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cuqvbh3d0ok8a"
-path="res://.godot/imported/Water, Waterfall, Steady, Perspective SND0047.wav-804f88207c77ab4848f8689688d9f3bc.sample"
+path="res://.godot/imported/Water, Waterfall, Steady, Perspective SND0047.wav-7964d78c4eb85bf7c6d671c166d9d03c.sample"
 
 [deps]
 
-source_file="res://assets/SFX/Waterfall/Water, Waterfall, Steady, Perspective SND0047.wav"
-dest_files=["res://.godot/imported/Water, Waterfall, Steady, Perspective SND0047.wav-804f88207c77ab4848f8689688d9f3bc.sample"]
+source_file="res://assets/SFX/waterfall/Water, Waterfall, Steady, Perspective SND0047.wav"
+dest_files=["res://.godot/imported/Water, Waterfall, Steady, Perspective SND0047.wav-7964d78c4eb85bf7c6d671c166d9d03c.sample"]
 
 [params]
 
