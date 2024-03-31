@@ -3686,7 +3686,7 @@ stream_9/weight = 0.0
 script = ExtResource("1_8arfn")
 
 [node name="Old" type="Node2D" parent="."]
-position = Vector2(-5486, -10038)
+position = Vector2(-4368, -10114)
 
 [node name="Begining" type="Node2D" parent="Old"]
 position = Vector2(0, 737)
@@ -4033,10 +4033,10 @@ texture = ExtResource("17_64asw")
 flip_h = true
 
 [node name="FloatingGround" type="Node2D" parent="Old"]
-position = Vector2(6402, 891)
+position = Vector2(5488, 3023.98)
 
 [node name="Assets" type="Node2D" parent="Old/FloatingGround"]
-position = Vector2(10448, 86)
+position = Vector2(11947, -2835)
 
 [node name="redTree02" parent="Old/FloatingGround/Assets" instance=ExtResource("10_urdcj")]
 modulate = Color(0.443137, 0.443137, 0.443137, 1)
@@ -4121,7 +4121,7 @@ position = Vector2(10018, 1308)
 flip_v = true
 
 [node name="LongStraight" type="Node2D" parent="Old"]
-position = Vector2(7999, 214)
+position = Vector2(7567, 442.984)
 
 [node name="Assets" type="Node2D" parent="Old/LongStraight"]
 position = Vector2(-13361, 4109.98)
@@ -5215,10 +5215,6 @@ position = Vector2(34598, -222.986)
 rotation = -1.0472
 scale = Vector2(1.66787, 1.667)
 flip_h = true
-
-[node name="redTree13" parent="AreaAssets/Labyrinth" instance=ExtResource("11_uo1ys")]
-modulate = Color(0.647059, 0.647059, 0.647059, 1)
-position = Vector2(2779.16, -11133.5)
 
 [node name="redTree14" parent="AreaAssets/Labyrinth" instance=ExtResource("10_urdcj")]
 modulate = Color(0.662745, 0.662745, 0.662745, 1)
@@ -8111,7 +8107,6 @@ scale = Vector2(0.2, 0.2)
 flip_h = true
 
 [node name="Enemys" type="Node2D" parent="."]
-visible = false
 
 [node name="EnemyManager" parent="Enemys" instance=ExtResource("38_5y5mx")]
 position = Vector2(0, -16)
@@ -8401,7 +8396,6 @@ carried_item = Array[PackedScene]([ExtResource("59_7yaom")])
 spawn_probability = 1.0
 
 [node name="Wells" type="Node2D" parent="."]
-visible = false
 
 [node name="FireWell" parent="Wells" instance=ExtResource("28_tyh8k")]
 position = Vector2(12658, -1494)
@@ -8436,7 +8430,6 @@ rotation = -1.57079
 shape = SubResource("CapsuleShape2D_7ifed")
 
 [node name="Puddles" type="Node2D" parent="."]
-visible = false
 
 [node name="Puddle" parent="Puddles" instance=ExtResource("30_cnsya")]
 position = Vector2(9671, -297)
@@ -8505,7 +8498,6 @@ position = Vector2(50330, -739)
 position = Vector2(45579, -723)
 
 [node name="StonePlates" type="Node2D" parent="."]
-visible = false
 
 [node name="DashTablet" parent="StonePlates" instance=ExtResource("52_15fu3")]
 position = Vector2(28822, 1113)
