@@ -135,7 +135,7 @@ autostart = true
 
 [node name="ItemDropperComponent" parent="." instance=ExtResource("12_t6x7w")]
 carried_item = Array[PackedScene]([ExtResource("13_lvug8"), ExtResource("14_5uflq"), ExtResource("15_b3ixe")])
-spawn_probability = 0.7
+spawn_probability = 1.0
 
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource("12_ksyi7")

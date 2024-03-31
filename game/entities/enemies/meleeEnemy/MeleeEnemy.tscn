@@ -196,10 +196,6 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 wait_time = 1.5
 autostart = true
 
-[node name="ItemDropperComponent" parent="." instance=ExtResource("11_ieocg")]
-carried_item = Array[PackedScene]([ExtResource("14_tjg2r"), ExtResource("12_70ypm"), ExtResource("16_uth2q")])
-spawn_probability = 0.7
-
 [node name="FireParticles" type="GPUParticles2D" parent="."]
 show_behind_parent = true
 position = Vector2(0, -24)
@@ -207,6 +203,10 @@ amount = 100
 process_material = SubResource("ParticleProcessMaterial_dmaj2")
 texture = ExtResource("6_tmsvp")
 lifetime = 0.6
+
+[node name="ItemDropperComponent" parent="." instance=ExtResource("11_ieocg")]
+carried_item = Array[PackedScene]([ExtResource("12_70ypm"), ExtResource("14_tjg2r"), ExtResource("16_uth2q")])
+spawn_probability = 1.0
 
 [node name="SFX" type="Node2D" parent="."]
 script = ExtResource("16_t5524")
