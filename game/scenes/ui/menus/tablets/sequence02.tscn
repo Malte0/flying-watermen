@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dttn565m6n0c0"]
+
+[ext_resource type="Script" path="res://scenes/ui/menus/tablets/sequence.gd" id="1_juwsc"]
+[ext_resource type="PackedScene" uid="uid://dktefvbol1xfn" path="res://scenes/ui/menus/tablets/sequence.tscn" id="1_t6cx6"]
+
+[node name="SequencePlayer" type="CanvasLayer"]
+script = ExtResource("1_juwsc")
+
+[node name="Sequence" parent="." instance=ExtResource("1_t6cx6")]
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
