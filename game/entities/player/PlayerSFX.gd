@@ -13,7 +13,7 @@ func _on_dash_state_entered():
 	polyphonic_audio_player.play_sound_effect_from_library("dash")
 
 # pick up sound
-func _on_inventory_on_item_in_inventory_updated(new_item, old_item):
+func _on_inventory_on_item_in_inventory_updated(new_item, _old_item):
 	if !new_item == null:
 		polyphonic_audio_player.play_sound_effect_from_library("pickupItem")
 
@@ -37,6 +37,6 @@ func _on_inventory_on_item_activated(item):
 		polyphonic_audio_player.play_sound_effect_from_library("ice")
 	else: item_in_inventory = item.name
 
-func _on_inventory_on_item_used(amount_left, max_amount):
+func _on_inventory_on_item_used(amount_left, _max_amount):
 	if amount_left == 0:
 		item_in_inventory = ""

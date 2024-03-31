@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bniwcx6k6wrx7"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bniwcx6k6wrx7"]
 
 [ext_resource type="Texture2D" uid="uid://dpb0u5rshgkn4" path="res://assets/ui/uipack_rpg_sheet.png" id="1_hrton"]
 
@@ -24,6 +24,13 @@ texture = ExtResource("1_hrton")
 region_rect = Rect2(0, 143, 190, 46)
 modulate_color = Color(0.666667, 0.666667, 0.666667, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfamd"]
+bg_color = Color(0.419608, 0.443137, 0.470588, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uodyv"]
 bg_color = Color(0.419608, 0.443137, 0.470588, 1)
 corner_radius_top_left = 2
@@ -31,7 +38,7 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j6xki"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_874xf"]
 content_margin_top = 2.0
 bg_color = Color(0, 0, 0, 1)
 border_width_left = 1
@@ -58,8 +65,8 @@ Button/font_sizes/font_size = 24
 Button/styles/hover = SubResource("StyleBoxTexture_e5agl")
 Button/styles/normal = SubResource("StyleBoxTexture_xr6kh")
 Button/styles/pressed = SubResource("StyleBoxTexture_5etx7")
-HSlider/styles/grabber_area = SubResource("StyleBoxFlat_uodyv")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_vfamd")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_uodyv")
-HSlider/styles/slider = SubResource("StyleBoxFlat_j6xki")
+HSlider/styles/slider = SubResource("StyleBoxFlat_874xf")
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 2

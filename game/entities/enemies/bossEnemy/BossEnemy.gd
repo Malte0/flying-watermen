@@ -75,6 +75,7 @@ func on_aggro_entered():
 
 func on_calm_entered():
 	if not dash_timeout.is_stopped():
+		# das ist kein signal darauf kann man nicht warten
 		await dash_timeout.is_stopped()
 	movement_component.movement_speed = movement_speed_calm
 
@@ -172,7 +173,7 @@ func attack_decision():
 func _on_change_current_attack_timeout():
 	next_attack = Attacks.None
 
-func _on_health_component_health_changed(new_health, delta_health):
+func _on_health_component_health_changed(new_health, _delta_health):
 	if not is_in_second_phase && new_health < health_component.max_health / 2:
 		is_in_second_phase = true
 		attack_cooldown.start()
