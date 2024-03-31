@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1f1qpehpsa1r"]
+
+[ext_resource type="PackedScene" uid="uid://c640sr08cvsmo" path="res://entities/objects/stone-tablet/StoneTabletObject.tscn" id="1_2ylgi"]
+[ext_resource type="Script" path="res://scenes/ui/menus/tablets/scripts/BuildingFoam.gd" id="1_o30op"]
+[ext_resource type="PackedScene" uid="uid://cxpuyaf3piwxm" path="res://scenes/ui/menus/tablets/StoneTabletOverlay.tscn" id="2_t028d"]
+
+[node name="BuildingFoam" type="Node2D"]
+script = ExtResource("1_o30op")
+
+[node name="StoneTablet" parent="." instance=ExtResource("1_2ylgi")]
+position = Vector2(31, -50)
+
+[node name="StoneTabletOverlay" parent="." instance=ExtResource("2_t028d")]
+
+[node name="TextureRect2" type="TextureRect" parent="StoneTabletOverlay"]
+offset_left = 280.0
+offset_top = 9.0
+offset_right = 890.0
+offset_bottom = 653.0
+
+[connection signal="read" from="StoneTablet" to="." method="_on_stone_tablet_read"]

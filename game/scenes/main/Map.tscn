@@ -1,4 +1,4 @@
-[gd_scene load_steps=158 format=3 uid="uid://cu55a1ijhr436"]
+[gd_scene load_steps=159 format=3 uid="uid://cu55a1ijhr436"]
 
 [ext_resource type="Script" path="res://scenes/main/Map.gd" id="1_8arfn"]
 [ext_resource type="PackedScene" uid="uid://dqy651tnq3ycc" path="res://assets/forest-assets/scenes/greenTree03.tscn" id="2_ha1vx"]
@@ -63,6 +63,7 @@
 [ext_resource type="PackedScene" uid="uid://dmeutg1f6t7sl" path="res://entities/enemies/rangedEnemy/RangedEnemy.tscn" id="59_rehkv"]
 [ext_resource type="PackedScene" uid="uid://c6ermasms0od0" path="res://entities/enemies/creeperEnemy/CreeperEnemy.tscn" id="60_dovde"]
 [ext_resource type="PackedScene" uid="uid://b7py4c84rndkt" path="res://entities/enemies/spawning/EnemySpawnArea.tscn" id="62_3tnc6"]
+[ext_resource type="PackedScene" uid="uid://c1f1qpehpsa1r" path="res://scenes/ui/menus/tablets/BuildingFoam.tscn" id="64_cducb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_23ck1"]
 resource_local_to_scene = true
@@ -5069,6 +5070,9 @@ render_target_update_mode = 4
 
 [node name="IceChemical" parent="." instance=ExtResource("55_sowcr")]
 position = Vector2(19686, -2377)
+
+[node name="BuildingFoam" parent="." instance=ExtResource("64_cducb")]
+position = Vector2(3002, -433)
 
 [connection signal="wall_destroyed" from="DestroyableWalls/DestroyableWall3" to="." method="_on_destroyable_wall_3_wall_destroyed"]
 [connection signal="body_entered" from="BlindArea/blind_begining" to="." method="_on_blind_begining_body_entered"]

@@ -39,7 +39,8 @@ var projectile_scene: PackedScene = load("res://entities/projectiles/WaterProjec
 var direction: float = 0.0
 var slide_threshold: float = base_speed/2
 var abilities: Dictionary = {
-	"dash": false
+	"dash": false,
+	"building_foam": false
 }
 # Shoottype
 var is_shooting_Water: bool = true
@@ -68,6 +69,8 @@ func _input(event: InputEvent):
 		set_shooting_type()
 
 func set_shooting_type():
+	if abilities["building_foam"] == false:
+		return
 	if is_shooting_Water:
 		is_shooting_Water = false
 		projectile_scene = load("res://entities/projectiles/BuildingFoamProjectile.tscn")
