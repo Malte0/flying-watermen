@@ -1,4 +1,4 @@
-[gd_scene load_steps=152 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=135 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="PackedScene" uid="uid://d71bkm5ic0tt" path="res://entities/components/ranged/RangedComponent.tscn" id="2_32y2k"]
@@ -61,14 +61,6 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="43_c4ing"]
 [ext_resource type="PackedScene" uid="uid://c5yieglatmln5" path="res://entities/player/chemicalEffects/chemicalEffectsManager.tscn" id="51_52a8d"]
 [ext_resource type="Script" path="res://entities/player/PlayerSFX.gd" id="53_830yn"]
-[ext_resource type="PackedScene" uid="uid://bbm5yfysxt45l" path="res://scenes/soundSystem/polyphonic_audio_player.tscn" id="53_mee86"]
-[ext_resource type="Script" path="res://scenes/soundSystem/AudioLibrary.gd" id="54_dh141"]
-[ext_resource type="Script" path="res://scenes/soundSystem/soundEffects.gd" id="55_fjhbo"]
-[ext_resource type="AudioStream" uid="uid://bwcr1or466rwa" path="res://assets/SFX/player/jump.wav" id="56_27xol"]
-[ext_resource type="AudioStream" uid="uid://bbxhs7f4v3t41" path="res://assets/SFX/player/dash.wav" id="57_wgclf"]
-[ext_resource type="AudioStream" uid="uid://dyjar8353lehf" path="res://assets/SFX/player/pickup_item.wav" id="58_2hr3x"]
-[ext_resource type="AudioStream" uid="uid://b8o50pvv7u37j" path="res://assets/SFX/player/spit.wav" id="59_57j0a"]
-[ext_resource type="AudioStream" uid="uid://cxuluryxrrbft" path="res://assets/SFX/placeHolder01.wav" id="61_hrmt7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fuycp"]
 radius = 24.75
@@ -751,50 +743,6 @@ state = NodePath("../../Movement/Interruptible/Airborne")
 script = ExtResource("43_c4ing")
 guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_smd5c"), SubResource("Resource_rhrqw"), SubResource("Resource_nkgmn")])
 
-[sub_resource type="Resource" id="Resource_o38gm"]
-script = ExtResource("55_fjhbo")
-tag = "jump"
-stream = ExtResource("56_27xol")
-
-[sub_resource type="Resource" id="Resource_5rl7u"]
-script = ExtResource("55_fjhbo")
-tag = "dash"
-stream = ExtResource("57_wgclf")
-
-[sub_resource type="Resource" id="Resource_dvurc"]
-script = ExtResource("55_fjhbo")
-tag = "melee"
-stream = ExtResource("59_57j0a")
-
-[sub_resource type="Resource" id="Resource_2actv"]
-script = ExtResource("55_fjhbo")
-tag = "shoot"
-stream = ExtResource("59_57j0a")
-
-[sub_resource type="Resource" id="Resource_10jm0"]
-script = ExtResource("55_fjhbo")
-tag = "pickupItem"
-stream = ExtResource("58_2hr3x")
-
-[sub_resource type="Resource" id="Resource_j06hn"]
-script = ExtResource("55_fjhbo")
-tag = "foam"
-stream = ExtResource("61_hrmt7")
-
-[sub_resource type="Resource" id="Resource_mo3hs"]
-script = ExtResource("55_fjhbo")
-tag = "ice"
-stream = ExtResource("61_hrmt7")
-
-[sub_resource type="Resource" id="Resource_o0ddx"]
-script = ExtResource("55_fjhbo")
-tag = "sodium"
-stream = ExtResource("61_hrmt7")
-
-[sub_resource type="Resource" id="Resource_jkm28"]
-script = ExtResource("54_dh141")
-sound_effects = Array[ExtResource("55_fjhbo")]([SubResource("Resource_o38gm"), SubResource("Resource_5rl7u"), SubResource("Resource_dvurc"), SubResource("Resource_2actv"), SubResource("Resource_10jm0"), SubResource("Resource_j06hn"), SubResource("Resource_mo3hs"), SubResource("Resource_o0ddx")])
-
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 10
 collision_layer = 2
@@ -1160,10 +1108,6 @@ layer = 5
 
 [node name="SFX" type="Node2D" parent="."]
 script = ExtResource("53_830yn")
-
-[node name="PolyphonicAudioPlayer" parent="SFX" instance=ExtResource("53_mee86")]
-bus = &"SFX"
-audio_library = SubResource("Resource_jkm28")
 
 [connection signal="projectile_shoot" from="RangedComponent" to="SFX" method="_on_ranged_component_projectile_shoot"]
 [connection signal="death" from="HealthComponent" to="." method="_on_death"]
