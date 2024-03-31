@@ -745,7 +745,7 @@ debug_color = Color(0.917647, 0.172549, 0.568627, 0.419608)
 
 [node name="RangedComponent" parent="." instance=ExtResource("2_32y2k")]
 unique_name_in_owner = true
-position = Vector2(40, -25)
+position = Vector2(0, -24.595)
 use_cooldown = true
 
 [node name="Sprite2D" type="Sprite2D" parent="RangedComponent"]
