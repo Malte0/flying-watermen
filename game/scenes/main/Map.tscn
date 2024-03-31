@@ -1,4 +1,4 @@
-[gd_scene load_steps=194 format=3 uid="uid://cu55a1ijhr436"]
+[gd_scene load_steps=192 format=3 uid="uid://cu55a1ijhr436"]
 
 [ext_resource type="Script" path="res://scenes/main/Map.gd" id="1_8arfn"]
 [ext_resource type="PackedScene" uid="uid://dqy651tnq3ycc" path="res://assets/forest-assets/scenes/greenTree03.tscn" id="2_ha1vx"]
@@ -2694,58 +2694,6 @@ stream_8/weight = 1.0
 stream_9/stream = ExtResource("49_m1cfj")
 stream_9/weight = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yktr6"]
-resource_local_to_scene = true
-shader = ExtResource("16_ps01h")
-shader_parameter/speed = 1.3
-shader_parameter/minStrength = 0.793
-shader_parameter/maxStrength = 0.464
-shader_parameter/strengthScale = 100.0
-shader_parameter/interval = 3.5
-shader_parameter/detail = 1.0
-shader_parameter/distortion = null
-shader_parameter/heightOffset = 0.686
-shader_parameter/offset = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uefpk"]
-resource_local_to_scene = true
-shader = ExtResource("3_thwww")
-shader_parameter/speed = 1.0
-shader_parameter/minStrength = 0.398
-shader_parameter/maxStrength = 0.713
-shader_parameter/strengthScale = 100.0
-shader_parameter/interval = 3.5
-shader_parameter/detail = 1.0
-shader_parameter/distortion = null
-shader_parameter/heightOffset = 0.805
-shader_parameter/offset = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qr0m3"]
-resource_local_to_scene = true
-shader = ExtResource("3_thwww")
-shader_parameter/speed = 1.0
-shader_parameter/minStrength = 0.046
-shader_parameter/maxStrength = 0.517
-shader_parameter/strengthScale = 100.0
-shader_parameter/interval = 3.5
-shader_parameter/detail = 1.0
-shader_parameter/distortion = null
-shader_parameter/heightOffset = 0.644
-shader_parameter/offset = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tasbg"]
-resource_local_to_scene = true
-shader = ExtResource("3_thwww")
-shader_parameter/speed = 2.0
-shader_parameter/minStrength = 0.188
-shader_parameter/maxStrength = 0.47
-shader_parameter/strengthScale = 100.0
-shader_parameter/interval = 3.5
-shader_parameter/detail = 1.0
-shader_parameter/distortion = 1.0
-shader_parameter/heightOffset = 0.667
-shader_parameter/offset = 0.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uw2al"]
 resource_local_to_scene = true
 shader = ExtResource("3_thwww")
@@ -3110,6 +3058,32 @@ shader_parameter/distortion = null
 shader_parameter/heightOffset = 0.686
 shader_parameter/offset = 0.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7pc36"]
+resource_local_to_scene = true
+shader = ExtResource("3_thwww")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.398
+shader_parameter/maxStrength = 0.713
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = null
+shader_parameter/heightOffset = 0.805
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cyx0a"]
+resource_local_to_scene = true
+shader = ExtResource("3_thwww")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.046
+shader_parameter/maxStrength = 0.517
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = null
+shader_parameter/heightOffset = 0.644
+shader_parameter/offset = 0.0
+
 [node name="Map" type="Node2D" groups=["map"]]
 script = ExtResource("1_8arfn")
 
@@ -3331,97 +3305,56 @@ flip_h = true
 position = Vector2(4767, 1089)
 
 [node name="Assets" type="Node2D" parent="Old/FirstCave"]
-position = Vector2(656, 698)
+position = Vector2(454, 562)
 
 [node name="Stone06" parent="Old/FirstCave/Assets" instance=ExtResource("6_oleto")]
 modulate = Color(0.964706, 0.901961, 0.870588, 1)
-position = Vector2(804, 453)
+position = Vector2(1725.84, 644.5)
 
 [node name="Stone04" parent="Old/FirstCave/Assets" instance=ExtResource("7_87qjw")]
 modulate = Color(0.921569, 0.87451, 0.811765, 1)
-position = Vector2(399, 498)
+position = Vector2(1320.84, 689.5)
 flip_h = true
 
 [node name="Stone07" parent="Old/FirstCave/Assets" instance=ExtResource("6_oleto")]
-position = Vector2(681, 519)
+position = Vector2(1602.84, 710.5)
 flip_h = true
 
 [node name="Stone05" parent="Old/FirstCave/Assets" instance=ExtResource("7_87qjw")]
 modulate = Color(0.976471, 0.937255, 0.898039, 1)
-position = Vector2(71, 418)
+position = Vector2(772, 610)
 
 [node name="GreenTree03" parent="Old/FirstCave/Assets" instance=ExtResource("5_ryicy")]
 modulate = Color(0.607843, 0.607843, 0.607843, 1)
 material = SubResource("ShaderMaterial_0y1r8")
-position = Vector2(761, 444)
+position = Vector2(1682.84, 635.5)
 scale = Vector2(0.8, 0.8)
 flip_h = true
 
 [node name="GreenTree02" parent="Old/FirstCave/Assets" instance=ExtResource("4_7wop1")]
 modulate = Color(0.811765, 0.772549, 0.772549, 1)
 material = SubResource("ShaderMaterial_ifru3")
-position = Vector2(255, 352)
+position = Vector2(1102, 554)
 
 [node name="GreenTree01" parent="Old/FirstCave/Assets" instance=ExtResource("5_ryicy")]
 modulate = Color(0.764706, 0.682353, 0.764706, 1)
 material = SubResource("ShaderMaterial_1agcp")
-position = Vector2(1043, 339)
+position = Vector2(1964.84, 530.5)
 
 [node name="GreenTree05" parent="Old/FirstCave/Assets" instance=ExtResource("4_7wop1")]
 modulate = Color(0.913725, 0.839216, 0.839216, 1)
 material = SubResource("ShaderMaterial_e7pi4")
-position = Vector2(385, 543)
+position = Vector2(1306.84, 734.5)
 scale = Vector2(0.791156, 0.881703)
 
 [node name="Stone09" parent="Old/FirstCave/Assets" instance=ExtResource("8_u8bjd")]
 modulate = Color(0.815686, 0.690196, 0.517647, 1)
-position = Vector2(338, 453)
+position = Vector2(1259.84, 644.5)
 flip_h = true
 
 [node name="Stone08" parent="Old/FirstCave/Assets" instance=ExtResource("8_u8bjd")]
 modulate = Color(0.894118, 0.819608, 0.717647, 1)
-position = Vector2(276, 484)
-
-[node name="celling" type="Node2D" parent="Old/FirstCave/Assets"]
-position = Vector2(338, 347)
-
-[node name="Stone13" type="Sprite2D" parent="Old/FirstCave/Assets/celling"]
-modulate = Color(0.27451, 0.219608, 0.137255, 1)
-position = Vector2(92, 50)
-rotation = 3.13571
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("17_64asw")
-flip_h = true
-
-[node name="Stone10" type="Sprite2D" parent="Old/FirstCave/Assets/celling"]
-modulate = Color(0.321569, 0.262745, 0.180392, 1)
-position = Vector2(152, 33)
-rotation = 3.13571
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("17_64asw")
-
-[node name="Stone14" type="Sprite2D" parent="Old/FirstCave/Assets/celling"]
-modulate = Color(0.517647, 0.411765, 0.262745, 1)
-position = Vector2(40, 33)
-rotation = 3.13571
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("17_64asw")
-
-[node name="Stone11" type="Sprite2D" parent="Old/FirstCave/Assets/celling"]
-modulate = Color(0.517647, 0.411765, 0.262745, 1)
-position = Vector2(396, 33)
-rotation = 3.13571
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("17_64asw")
-flip_h = true
-
-[node name="Stone12" type="Sprite2D" parent="Old/FirstCave/Assets/celling"]
-modulate = Color(0.517647, 0.411765, 0.262745, 1)
-position = Vector2(218, 33)
-rotation = 3.13571
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("17_64asw")
-flip_h = true
+position = Vector2(1197.84, 675.5)
 
 [node name="celling2" type="Node2D" parent="Old/FirstCave/Assets"]
 position = Vector2(2979, 1585)
@@ -3993,7 +3926,21 @@ rotation = -0.261799
 [node name="Waterfall" type="Node2D" parent="AreaAssets"]
 
 [node name="GreenTree01" parent="AreaAssets/Waterfall" instance=ExtResource("5_ryicy")]
+modulate = Color(0.811765, 0.811765, 0.811765, 1)
 material = SubResource("ShaderMaterial_hbho7")
+
+[node name="GreenTree11" parent="AreaAssets/Waterfall" instance=ExtResource("5_ryicy")]
+modulate = Color(0.764706, 0.776471, 0.74902, 1)
+material = SubResource("ShaderMaterial_hbho7")
+position = Vector2(1325.61, -272.18)
+rotation = -2.09439
+
+[node name="GreenTree10" parent="AreaAssets/Waterfall" instance=ExtResource("5_ryicy")]
+modulate = Color(0.811765, 0.811765, 0.811765, 1)
+material = SubResource("ShaderMaterial_hbho7")
+position = Vector2(-3980.42, -1090.36)
+rotation = -3.92699
+flip_h = true
 
 [node name="GreenTree02" parent="AreaAssets/Waterfall" instance=ExtResource("4_7wop1")]
 material = SubResource("ShaderMaterial_16ro3")
@@ -4006,22 +3953,43 @@ position = Vector2(-421.615, -41.5374)
 rotation = 0.261799
 scale = Vector2(0.788889, 0.770035)
 
+[node name="GreenTree12" parent="AreaAssets/Waterfall" instance=ExtResource("2_ha1vx")]
+material = SubResource("ShaderMaterial_wc3ma")
+position = Vector2(619.015, -575.393)
+rotation = -3.92699
+scale = Vector2(0.788889, 0.770035)
+
 [node name="GreenTree04" parent="AreaAssets/Waterfall" instance=ExtResource("4_7wop1")]
 material = SubResource("ShaderMaterial_lp6s1")
 position = Vector2(-287.012, 248.172)
 rotation = 0.261799
 
 [node name="GreenTree05" parent="AreaAssets/Waterfall" instance=ExtResource("2_ha1vx")]
+modulate = Color(0.74902, 0.74902, 0.74902, 1)
 material = SubResource("ShaderMaterial_n56lc")
 position = Vector2(-1033.39, -242.731)
 rotation = 0.523598
+flip_h = true
+
+[node name="GreenTree08" parent="AreaAssets/Waterfall" instance=ExtResource("2_ha1vx")]
+modulate = Color(0.74902, 0.74902, 0.74902, 1)
+material = SubResource("ShaderMaterial_n56lc")
+position = Vector2(-3677.9, -1380.96)
+rotation = 2.87979
+scale = Vector2(0.760783, 0.488861)
 flip_h = true
 
 [node name="GreenTree06" parent="AreaAssets/Waterfall" instance=ExtResource("4_7wop1")]
 material = SubResource("ShaderMaterial_apbvj")
 position = Vector2(-766.108, -96.5742)
 
+[node name="GreenTree09" parent="AreaAssets/Waterfall" instance=ExtResource("4_7wop1")]
+material = SubResource("ShaderMaterial_apbvj")
+position = Vector2(-3947.9, -1250.39)
+rotation = 1.57079
+
 [node name="redTree02" parent="AreaAssets/Waterfall" instance=ExtResource("10_urdcj")]
+modulate = Color(0.745098, 0.745098, 0.745098, 1)
 position = Vector2(-1696.22, -465.887)
 rotation = 0.261799
 flip_h = true
@@ -4033,6 +4001,7 @@ rotation = 0.305723
 scale = Vector2(0.588889, 0.634146)
 
 [node name="redTree01" parent="AreaAssets/Waterfall" instance=ExtResource("11_uo1ys")]
+modulate = Color(0.796078, 0.796078, 0.796078, 1)
 position = Vector2(-3023.47, -601.009)
 rotation = 0.523598
 
@@ -4053,8 +4022,21 @@ position = Vector2(-1216.85, -180.081)
 rotation = 0.261799
 
 [node name="Stone23" parent="AreaAssets/Waterfall" instance=ExtResource("7_87qjw")]
-position = Vector2(-194.217, 110.498)
+position = Vector2(-257.621, 72.8035)
 rotation = 0.261799
+
+[node name="Stone38" parent="AreaAssets/Waterfall" instance=ExtResource("7_87qjw")]
+position = Vector2(121.844, -566.777)
+rotation = 2.87979
+
+[node name="Stone31" parent="AreaAssets/Waterfall" instance=ExtResource("7_87qjw")]
+position = Vector2(-2762.87, -1167.88)
+rotation = -2.87979
+flip_h = true
+
+[node name="Stone30" parent="AreaAssets/Waterfall" instance=ExtResource("7_87qjw")]
+position = Vector2(-2859.75, -1277.69)
+rotation = -2.87979
 
 [node name="Stone24" parent="AreaAssets/Waterfall" instance=ExtResource("8_u8bjd")]
 position = Vector2(1367.8, 377.89)
@@ -4064,13 +4046,53 @@ rotation = -0.2618
 position = Vector2(-717.027, 13.8931)
 rotation = 0.261799
 
+[node name="Stone37" parent="AreaAssets/Waterfall" instance=ExtResource("6_oleto")]
+position = Vector2(-431.581, -703.678)
+rotation = 2.61799
+
+[node name="Stone36" parent="AreaAssets/Waterfall" instance=ExtResource("6_oleto")]
+position = Vector2(-2366.4, -1059.57)
+rotation = -2.87979
+
+[node name="Stone39" parent="AreaAssets/Waterfall" instance=ExtResource("6_oleto")]
+position = Vector2(-1574.06, -863.83)
+rotation = -2.87979
+flip_h = true
+
 [node name="Stone26" parent="AreaAssets/Waterfall" instance=ExtResource("8_u8bjd")]
 position = Vector2(-1125.63, -80.063)
 rotation = 0.261799
 
+[node name="Stone29" parent="AreaAssets/Waterfall" instance=ExtResource("8_u8bjd")]
+position = Vector2(-3195.38, -1311.72)
+rotation = 3.40339
+flip_h = true
+
 [node name="Stone27" parent="AreaAssets/Waterfall" instance=ExtResource("8_u8bjd")]
 position = Vector2(-3875.64, -859.37)
 rotation = 0.261799
+
+[node name="Stone28" parent="AreaAssets/Waterfall" instance=ExtResource("8_u8bjd")]
+position = Vector2(-3331.51, -1352.34)
+rotation = -2.87979
+
+[node name="Stone32" parent="AreaAssets/Waterfall" instance=ExtResource("7_87qjw")]
+position = Vector2(-1268.9, -760.528)
+rotation = -2.87979
+flip_h = true
+
+[node name="Stone33" parent="AreaAssets/Waterfall" instance=ExtResource("7_87qjw")]
+position = Vector2(-1365.78, -870.344)
+rotation = -2.87979
+
+[node name="Stone34" parent="AreaAssets/Waterfall" instance=ExtResource("8_u8bjd")]
+position = Vector2(-1961.77, -973.93)
+rotation = 3.40339
+flip_h = true
+
+[node name="Stone35" parent="AreaAssets/Waterfall" instance=ExtResource("8_u8bjd")]
+position = Vector2(-1837.53, -944.987)
+rotation = -2.87979
 
 [node name="waterfall" type="Sprite2D" parent="AreaAssets/Waterfall"]
 top_level = true
@@ -4195,6 +4217,10 @@ rotation = -0.523598
 modulate = Color(0.596078, 0.780392, 0.0705882, 1)
 position = Vector2(40397.1, -3597.3)
 
+[node name="Stone18" parent="AreaAssets/Plateau" instance=ExtResource("13_iwcp0")]
+modulate = Color(0.596078, 0.780392, 0.0705882, 1)
+position = Vector2(41483, -3953.98)
+
 [node name="redTree07" parent="AreaAssets/Plateau" instance=ExtResource("9_qodc0")]
 modulate = Color(0.74902, 0.74902, 0.74902, 1)
 position = Vector2(39977, -4183.98)
@@ -4209,7 +4235,8 @@ flip_h = true
 position = Vector2(40615.1, -4047.3)
 
 [node name="Stone05" parent="AreaAssets/Plateau" instance=ExtResource("12_uaooe")]
-position = Vector2(39780.1, -3619.3)
+position = Vector2(39780, -3619.3)
+scale = Vector2(0.200143, 0.2)
 
 [node name="Stone06" parent="AreaAssets/Plateau" instance=ExtResource("7_87qjw")]
 modulate = Color(0.533333, 0.533333, 0.533333, 1)
@@ -4270,6 +4297,10 @@ position = Vector2(44022, -3124.99)
 [node name="Stone14" parent="AreaAssets/Plateau" instance=ExtResource("13_iwcp0")]
 modulate = Color(0.596078, 0.780392, 0.0705882, 1)
 position = Vector2(40291.1, -3549.3)
+
+[node name="Stone17" parent="AreaAssets/Plateau" instance=ExtResource("13_iwcp0")]
+modulate = Color(0.596078, 0.780392, 0.0705882, 1)
+position = Vector2(39909, -4122.98)
 
 [node name="Stone16" parent="AreaAssets/Plateau" instance=ExtResource("6_oleto")]
 modulate = Color(1, 0.341176, 0.341176, 1)
@@ -4409,6 +4440,11 @@ material = SubResource("ShaderMaterial_7tn6f")
 position = Vector2(22767.5, 1150.25)
 scale = Vector2(1.00515, 1.52479)
 
+[node name="Stone3" parent="AreaAssets/Labyrinth" instance=ExtResource("15_gmj0n")]
+material = SubResource("ShaderMaterial_7tn6f")
+position = Vector2(21404, 617.015)
+scale = Vector2(1.00515, 1.52479)
+
 [node name="Stone02" parent="AreaAssets/Labyrinth" instance=ExtResource("13_iwcp0")]
 position = Vector2(22698, 1238)
 scale = Vector2(0.148138, 0.261029)
@@ -4452,6 +4488,10 @@ rotation = -1.0472
 
 [node name="Stone20" parent="AreaAssets/Labyrinth" instance=ExtResource("8_u8bjd")]
 position = Vector2(25079, -616)
+
+[node name="Stone44" parent="AreaAssets/Labyrinth" instance=ExtResource("8_u8bjd")]
+position = Vector2(25538, -95.9853)
+rotation = -0.523598
 
 [node name="Stone21" parent="AreaAssets/Labyrinth" instance=ExtResource("7_87qjw")]
 position = Vector2(25209, -1332)
@@ -4561,6 +4601,13 @@ flip_h = true
 [node name="Stone24" parent="AreaAssets/Labyrinth" instance=ExtResource("7_87qjw")]
 position = Vector2(27473, -1461)
 
+[node name="Stone57" parent="AreaAssets/Labyrinth" instance=ExtResource("7_87qjw")]
+position = Vector2(27177, -1751.99)
+
+[node name="Stone56" parent="AreaAssets/Labyrinth" instance=ExtResource("7_87qjw")]
+position = Vector2(26785, -1793.99)
+rotation = 1.0472
+
 [node name="Stone25" parent="AreaAssets/Labyrinth" instance=ExtResource("8_u8bjd")]
 position = Vector2(23564, -1346)
 
@@ -4593,6 +4640,14 @@ position = Vector2(26848, -680)
 position = Vector2(26768, -627)
 rotation = -0.479966
 
+[node name="Stone45" parent="AreaAssets/Labyrinth" instance=ExtResource("7_87qjw")]
+position = Vector2(26398, -411.985)
+rotation = -0.479966
+
+[node name="Stone46" parent="AreaAssets/Labyrinth" instance=ExtResource("7_87qjw")]
+position = Vector2(26008, -55.9857)
+rotation = 0.785397
+
 [node name="Stone30" parent="AreaAssets/Labyrinth" instance=ExtResource("6_oleto")]
 position = Vector2(27205, -349)
 
@@ -4606,16 +4661,74 @@ scale = Vector2(0.162136, 0.16599)
 
 [node name="Stone2" parent="AreaAssets/Labyrinth" instance=ExtResource("15_gmj0n")]
 material = SubResource("ShaderMaterial_sj3lw")
-position = Vector2(22767.5, 1150.25)
+position = Vector2(21205, 1065.01)
+rotation = 0.523598
 scale = Vector2(1.00515, 1.52479)
 
 [node name="Stone33" parent="AreaAssets/Labyrinth" instance=ExtResource("13_iwcp0")]
 position = Vector2(22698, 1238)
 scale = Vector2(0.148138, 0.261029)
 
+[node name="Stone47" parent="AreaAssets/Labyrinth" instance=ExtResource("12_uaooe")]
+position = Vector2(22652, 1183)
+scale = Vector2(0.162136, 0.16599)
+
+[node name="Stone48" parent="AreaAssets/Labyrinth" instance=ExtResource("13_iwcp0")]
+position = Vector2(22698, 1238)
+scale = Vector2(0.148138, 0.261029)
+
+[node name="Stone49" parent="AreaAssets/Labyrinth" instance=ExtResource("12_uaooe")]
+position = Vector2(22652, 1183)
+scale = Vector2(0.162136, 0.16599)
+
+[node name="Stone54" parent="AreaAssets/Labyrinth" instance=ExtResource("12_uaooe")]
+position = Vector2(21033, -274.985)
+rotation = 2.61799
+scale = Vector2(0.162136, 0.16599)
+
+[node name="Stone50" parent="AreaAssets/Labyrinth" instance=ExtResource("13_iwcp0")]
+position = Vector2(22698, 1238)
+scale = Vector2(0.148138, 0.261029)
+
 [node name="Stone34" parent="AreaAssets/Labyrinth" instance=ExtResource("12_uaooe")]
 position = Vector2(22878.6, 1224.62)
 rotation = -0.598648
+scale = Vector2(0.223472, 0.208775)
+
+[node name="Stone55" parent="AreaAssets/Labyrinth" instance=ExtResource("12_uaooe")]
+position = Vector2(20924, -146.985)
+rotation = 2.61799
+scale = Vector2(0.162136, 0.16599)
+flip_h = true
+
+[node name="Stone61" parent="AreaAssets/Labyrinth" instance=ExtResource("13_iwcp0")]
+position = Vector2(20776, -79.9849)
+rotation = 2.61799
+scale = Vector2(0.148138, 0.261029)
+
+[node name="Stone62" parent="AreaAssets/Labyrinth" instance=ExtResource("12_uaooe")]
+position = Vector2(20765, 49.0151)
+rotation = 1.309
+scale = Vector2(0.162136, 0.16599)
+
+[node name="Stone63" parent="AreaAssets/Labyrinth" instance=ExtResource("13_iwcp0")]
+position = Vector2(20718, 149.014)
+rotation = 1.0472
+scale = Vector2(0.148138, 0.261029)
+
+[node name="Stone53" parent="AreaAssets/Labyrinth" instance=ExtResource("12_uaooe")]
+position = Vector2(20958, 362.016)
+rotation = 0.523598
+scale = Vector2(0.223472, 0.208775)
+
+[node name="Stone52" parent="AreaAssets/Labyrinth" instance=ExtResource("12_uaooe")]
+position = Vector2(21423, 1115.01)
+scale = Vector2(0.223472, 0.208775)
+flip_h = true
+
+[node name="Stone51" parent="AreaAssets/Labyrinth" instance=ExtResource("12_uaooe")]
+position = Vector2(21627, 1119.02)
+rotation = 0.261799
 scale = Vector2(0.223472, 0.208775)
 
 [node name="Spiderweb28" parent="AreaAssets/Labyrinth" instance=ExtResource("57_ftl5n")]
@@ -4628,8 +4741,9 @@ flip_h = true
 position = Vector2(22610, -1)
 
 [node name="Stone36" parent="AreaAssets/Labyrinth" instance=ExtResource("8_u8bjd")]
-position = Vector2(21986, -739)
+position = Vector2(22030.9, -656.594)
 rotation = 1.91463
+scale = Vector2(0.336461, 0.367897)
 
 [node name="Stone37" parent="AreaAssets/Labyrinth" instance=ExtResource("6_oleto")]
 position = Vector2(23822, 1105)
@@ -5270,11 +5384,11 @@ rotation = 0.785397
 fire_scale = Vector2(0.2, 0.2)
 
 [node name="Fire27" parent="FireTraps" instance=ExtResource("54_bp6fb")]
-position = Vector2(34183, 1078)
+position = Vector2(34211, 1076)
 fire_scale = Vector2(0.3, 0.3)
 
 [node name="Fire28" parent="FireTraps" instance=ExtResource("54_bp6fb")]
-position = Vector2(34322, 1084)
+position = Vector2(34350, 1082)
 fire_scale = Vector2(0.3, 0.3)
 
 [node name="Fire29" parent="FireTraps" instance=ExtResource("54_bp6fb")]
@@ -5344,7 +5458,7 @@ metadata/_edit_lock_ = true
 [node name="HealthPlants" type="Node2D" parent="."]
 
 [node name="Plant" parent="HealthPlants" instance=ExtResource("57_vwl11")]
-position = Vector2(7144, 1065)
+position = Vector2(7261, 1052)
 
 [node name="Plant2" parent="HealthPlants" instance=ExtResource("57_vwl11")]
 position = Vector2(21846, -33)
@@ -5502,21 +5616,15 @@ offset_bottom = -927.0
 theme_override_font_sizes/font_size = 50
 text = "W, A, S, D to move "
 
-[node name="Label15" type="Label" parent="label"]
-offset_left = 9107.0
-offset_top = 591.0
-offset_right = 9353.0
-offset_bottom = 715.0
-theme_override_font_sizes/font_size = 50
-text = "double"
-
 [node name="fireTest" type="Node2D" parent="."]
 position = Vector2(39331, 1120)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="fireTest"]
 z_index = -100
-offset_right = 531.0
-offset_bottom = 512.0
+offset_left = 129.0
+offset_top = 2337.0
+offset_right = 660.0
+offset_bottom = 2849.0
 scale = Vector2(15, 15)
 
 [node name="SubViewport" type="SubViewport" parent="fireTest/SubViewportContainer"]
@@ -5528,58 +5636,6 @@ render_target_update_mode = 4
 
 [node name="IceChemical" parent="." instance=ExtResource("55_sowcr")]
 position = Vector2(19686, -2377)
-
-[node name="Stone06" parent="." instance=ExtResource("6_oleto")]
-position = Vector2(24563, 2743)
-scale = Vector2(1, 1)
-
-[node name="Stone05" parent="." instance=ExtResource("8_u8bjd")]
-position = Vector2(25895, 2539)
-scale = Vector2(1, 1)
-
-[node name="Stone04" parent="." instance=ExtResource("7_87qjw")]
-position = Vector2(27108, 2503)
-scale = Vector2(1, 1)
-
-[node name="Stone03" parent="." instance=ExtResource("12_uaooe")]
-position = Vector2(28589, 2619)
-scale = Vector2(1, 1)
-
-[node name="Stone02" parent="." instance=ExtResource("13_iwcp0")]
-position = Vector2(29721, 2593)
-scale = Vector2(1, 1)
-
-[node name="Stone" parent="." instance=ExtResource("15_gmj0n")]
-material = SubResource("ShaderMaterial_yktr6")
-position = Vector2(31211, 2808)
-scale = Vector2(3.325, 3.325)
-
-[node name="redTree03" parent="." instance=ExtResource("9_qodc0")]
-position = Vector2(24073, 4120)
-scale = Vector2(2.685, 2.685)
-
-[node name="redTree02" parent="." instance=ExtResource("10_urdcj")]
-position = Vector2(25877, 4020)
-scale = Vector2(2.685, 2.685)
-
-[node name="redTree01" parent="." instance=ExtResource("11_uo1ys")]
-position = Vector2(27539, 4056)
-scale = Vector2(2.685, 2.685)
-
-[node name="GreenTree03" parent="." instance=ExtResource("2_ha1vx")]
-material = SubResource("ShaderMaterial_uefpk")
-position = Vector2(31077, 3805)
-scale = Vector2(2.685, 2.685)
-
-[node name="GreenTree02" parent="." instance=ExtResource("4_7wop1")]
-material = SubResource("ShaderMaterial_qr0m3")
-position = Vector2(32971, 3904)
-scale = Vector2(2.685, 2.685)
-
-[node name="GreenTree01" parent="." instance=ExtResource("5_ryicy")]
-material = SubResource("ShaderMaterial_tasbg")
-position = Vector2(29272, 3939)
-scale = Vector2(2.685, 2.685)
 
 [node name="Stone16" parent="." instance=ExtResource("7_87qjw")]
 modulate = Color(0.517647, 0.411765, 0.262745, 1)
@@ -5609,9 +5665,24 @@ modulate = Color(0.517647, 0.411765, 0.262745, 1)
 position = Vector2(24393.4, 72.3901)
 rotation = -0.785397
 
+[node name="Stone263" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(24120, -947)
+rotation = -0.785397
+
 [node name="Stone19" parent="." instance=ExtResource("7_87qjw")]
 modulate = Color(0.517647, 0.411765, 0.262745, 1)
 position = Vector2(24405.4, 200.389)
+rotation = -2.87979
+
+[node name="Stone264" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(23106, 186)
+rotation = -2.35619
+
+[node name="Stone208" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(23453, -333)
 rotation = -2.87979
 
 [node name="Stone22" parent="." instance=ExtResource("7_87qjw")]
@@ -6055,6 +6126,13 @@ show_behind_parent = true
 position = Vector2(41983, -3146)
 rotation = -3.92699
 scale = Vector2(0.506172, 0.486607)
+texture = ExtResource("14_xtlt2")
+
+[node name="Bush11" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(44723, -3110)
+rotation = -6.28318
+scale = Vector2(0.300633, 0.274252)
 texture = ExtResource("14_xtlt2")
 
 [node name="Bush09" type="Sprite2D" parent="."]
@@ -6540,6 +6618,22 @@ modulate = Color(0.745098, 0.631373, 0.47451, 1)
 position = Vector2(35643, -2971)
 rotation = 0.261799
 
+[node name="Stone166" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.729412, 0.6, 0.419608, 1)
+position = Vector2(35521.7, -4365.33)
+rotation = -5.23598
+scale = Vector2(0.252568, 0.290329)
+
+[node name="Stone167" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.745098, 0.631373, 0.47451, 1)
+position = Vector2(35548.7, -4174.33)
+rotation = 1.309
+
+[node name="Stone168" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.745098, 0.631373, 0.47451, 1)
+position = Vector2(35539, -4003)
+rotation = 1.83259
+
 [node name="Stone120" parent="." instance=ExtResource("7_87qjw")]
 modulate = Color(0.745098, 0.631373, 0.47451, 1)
 position = Vector2(35740, 133)
@@ -6574,6 +6668,61 @@ rotation = 1.309
 modulate = Color(0.835294, 0.713726, 0.545098, 1)
 position = Vector2(31921, -251)
 rotation = 1.309
+
+[node name="Stone265" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.662745, 0.537255, 0.364706, 1)
+position = Vector2(25677, -1563)
+rotation = -3.14159
+
+[node name="Stone274" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.662745, 0.537255, 0.364706, 1)
+position = Vector2(26952, -1583)
+rotation = -3.14159
+
+[node name="Stone273" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.662745, 0.537255, 0.364706, 1)
+position = Vector2(26395, -1560)
+rotation = -3.14159
+flip_h = true
+
+[node name="Stone266" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.662745, 0.537255, 0.364706, 1)
+position = Vector2(24642, -1551)
+rotation = -3.40339
+
+[node name="Stone267" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(26021, -1567)
+rotation = -3.66519
+
+[node name="Stone272" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(26195, -1567)
+rotation = -2.87979
+flip_h = true
+
+[node name="Stone268" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(24860, -1555)
+rotation = -2.87979
+flip_h = true
+
+[node name="Stone269" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(24545, -1616)
+rotation = -3.14159
+scale = Vector2(0.252568, 0.290329)
+flip_h = true
+
+[node name="Stone270" parent="." instance=ExtResource("6_oleto")]
+modulate = Color(0.835294, 0.713726, 0.545098, 1)
+position = Vector2(24744, -1577)
+rotation = 2.87979
+
+[node name="Stone271" parent="." instance=ExtResource("6_oleto")]
+modulate = Color(0.835294, 0.713726, 0.545098, 1)
+position = Vector2(25834, -1545)
+rotation = 3.40339
 
 [node name="Stone88" parent="." instance=ExtResource("6_oleto")]
 modulate = Color(0.835294, 0.713726, 0.545098, 1)
@@ -6770,6 +6919,531 @@ material = SubResource("ShaderMaterial_quscj")
 position = Vector2(34318, 154.998)
 rotation = -0.785397
 
+[node name="Fire35" parent="." instance=ExtResource("54_bp6fb")]
+position = Vector2(34211, 1076)
+fire_scale = Vector2(0.3, 0.3)
+
+[node name="Fire36" parent="." instance=ExtResource("54_bp6fb")]
+position = Vector2(34350, 1082)
+fire_scale = Vector2(0.3, 0.3)
+
+[node name="redTree53" parent="." instance=ExtResource("11_uo1ys")]
+modulate = Color(0.647059, 0.647059, 0.647059, 1)
+position = Vector2(33306, 1208)
+rotation = -6.02138
+
+[node name="redTree54" parent="." instance=ExtResource("11_uo1ys")]
+modulate = Color(0.647059, 0.647059, 0.647059, 1)
+position = Vector2(33306, 1208)
+rotation = -6.02138
+
+[node name="Stone169" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.47451, 0.396078, 0.282353, 1)
+position = Vector2(35941, 582)
+rotation = 2.9341
+
+[node name="Stone170" parent="." instance=ExtResource("6_oleto")]
+modulate = Color(0.894118, 0.8, 0.670588, 1)
+position = Vector2(36041, 1094)
+flip_h = true
+
+[node name="Stone171" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.87451, 0.768627, 0.807843, 1)
+position = Vector2(36207.2, 1073.31)
+scale = Vector2(0.152308, 0.14312)
+
+[node name="Stone172" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.572549, 0.470588, 0.329412, 1)
+position = Vector2(35796, 1054)
+rotation = 0.473688
+scale = Vector2(0.338176, 0.3639)
+
+[node name="Stone173" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.780392, 0.67451, 0.768627, 1)
+position = Vector2(36398.2, 1080.31)
+scale = Vector2(0.129057, 0.100718)
+
+[node name="Stone174" parent="." instance=ExtResource("6_oleto")]
+modulate = Color(0.862745, 0.74902, 0.592157, 1)
+position = Vector2(35914, 1070)
+
+[node name="Stone175" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.647059, 0.521569, 0.34902, 1)
+position = Vector2(36077, 593)
+rotation = 3.03307
+flip_h = true
+
+[node name="Bush12" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(33953, 812)
+rotation = -3.14159
+scale = Vector2(0.262548, 0.2875)
+texture = ExtResource("14_xtlt2")
+
+[node name="Stone176" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.729412, 0.6, 0.419608, 1)
+position = Vector2(33347, 358.002)
+rotation = -7.06857
+scale = Vector2(0.252568, 0.290329)
+flip_h = true
+
+[node name="Stone177" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.729412, 0.6, 0.419608, 1)
+position = Vector2(35904, 342)
+rotation = -6.54498
+scale = Vector2(0.252568, 0.290329)
+
+[node name="Stone178" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.729412, 0.6, 0.419608, 1)
+position = Vector2(32972, 539.001)
+rotation = -6.54498
+scale = Vector2(0.252568, 0.290329)
+
+[node name="Stone179" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.745098, 0.631373, 0.47451, 1)
+position = Vector2(33118, 480.001)
+rotation = -0.785397
+
+[node name="Stone180" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.745098, 0.631373, 0.47451, 1)
+position = Vector2(35740, 133)
+rotation = -3.14159
+
+[node name="Stone181" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.745098, 0.631373, 0.47451, 1)
+position = Vector2(35309, 127)
+rotation = -3.40339
+
+[node name="Stone182" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(33850, 427.001)
+rotation = 0.523598
+
+[node name="Stone183" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(33295, 1086)
+rotation = 0.523598
+
+[node name="Stone184" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(34037, 839)
+rotation = 3.14159
+
+[node name="Stone185" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(34274, 633)
+rotation = 0.523598
+flip_h = true
+
+[node name="Stone186" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(34922, 939)
+
+[node name="Stone187" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(35400, 931.001)
+rotation = -0.785397
+flip_h = true
+
+[node name="Stone188" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(34644, 1081)
+rotation = -0.523598
+flip_h = true
+
+[node name="Stone189" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(34941, 430)
+rotation = -3.40339
+flip_h = true
+
+[node name="Stone190" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(34123, 591)
+rotation = 0.523598
+
+[node name="Stone191" parent="." instance=ExtResource("13_iwcp0")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(33886, 227.998)
+rotation = 2.35619
+
+[node name="Stone192" parent="." instance=ExtResource("13_iwcp0")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(33869, 821)
+rotation = 2.35619
+
+[node name="Stone193" parent="." instance=ExtResource("13_iwcp0")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(34327, 387)
+rotation = 3.14159
+
+[node name="Stone194" parent="." instance=ExtResource("13_iwcp0")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(35105, 360.001)
+rotation = 2.35619
+scale = Vector2(0.20067, 0.294121)
+
+[node name="Stone195" parent="." instance=ExtResource("13_iwcp0")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(33301, 911.999)
+rotation = 2.61799
+
+[node name="Stone196" parent="." instance=ExtResource("15_gmj0n")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+material = SubResource("ShaderMaterial_u51tp")
+position = Vector2(34161, 248)
+rotation = -0.785397
+
+[node name="Stone197" parent="." instance=ExtResource("15_gmj0n")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+material = SubResource("ShaderMaterial_a7885")
+position = Vector2(34777, 397)
+rotation = -3.40339
+
+[node name="Stone198" parent="." instance=ExtResource("15_gmj0n")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+material = SubResource("ShaderMaterial_73yak")
+position = Vector2(35806, 536.999)
+rotation = -2.09439
+scale = Vector2(0.846418, 1.28163)
+
+[node name="Stone199" parent="." instance=ExtResource("15_gmj0n")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+material = SubResource("ShaderMaterial_pxa2y")
+position = Vector2(34528, 587.001)
+rotation = -1.17044
+
+[node name="Stone200" parent="." instance=ExtResource("15_gmj0n")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+material = SubResource("ShaderMaterial_xghj6")
+position = Vector2(33576, 884)
+rotation = -3.14159
+
+[node name="Stone202" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.47451, 0.396078, 0.282353, 1)
+position = Vector2(41833, -1889)
+rotation = 1.57079
+scale = Vector2(0.255641, 0.284678)
+
+[node name="Stone203" parent="." instance=ExtResource("6_oleto")]
+modulate = Color(0.894118, 0.8, 0.670588, 1)
+position = Vector2(42961, -1183)
+rotation = -3.40339
+flip_h = true
+
+[node name="Stone204" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.572549, 0.470588, 0.329412, 1)
+position = Vector2(42561, -1509)
+rotation = -1.57079
+scale = Vector2(0.338176, 0.3639)
+
+[node name="Stone205" parent="." instance=ExtResource("6_oleto")]
+modulate = Color(0.862745, 0.74902, 0.592157, 1)
+position = Vector2(41861, -1400)
+rotation = 2.61799
+
+[node name="Stone206" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.639216, 0.141176, 0.0823529, 1)
+position = Vector2(44674, -2384)
+rotation = 4.71238
+flip_h = true
+
+[node name="Stone239" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.639216, 0.141176, 0.0823529, 1)
+position = Vector2(43452, -2045)
+rotation = 4.18878
+flip_h = true
+
+[node name="Bush13" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(43972, -2714)
+rotation = -3.14159
+scale = Vector2(0.262548, 0.2875)
+texture = ExtResource("14_xtlt2")
+
+[node name="Bush15" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(42726, -2329)
+rotation = -3.14159
+scale = Vector2(0.262548, 0.2875)
+texture = ExtResource("14_xtlt2")
+
+[node name="Stone207" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.729412, 0.6, 0.419608, 1)
+position = Vector2(42719, -1176)
+rotation = -9.42476
+scale = Vector2(0.252568, 0.290329)
+flip_h = true
+
+[node name="Stone209" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(45781, -2305)
+rotation = 3.14159
+
+[node name="Stone210" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(41777, -2486)
+rotation = 0.523598
+
+[node name="Stone211" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(44318, -2700)
+rotation = 3.14159
+
+[node name="Stone212" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(45009, -2275)
+rotation = 2.87979
+flip_h = true
+
+[node name="Stone213" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(45804, -1943)
+rotation = 2.87979
+
+[node name="Stone214" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(46230, -2371)
+rotation = -1.309
+flip_h = true
+
+[node name="Stone215" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(46308, -2263)
+rotation = -2.61799
+flip_h = true
+
+[node name="Stone216" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(45011.9, -2675.1)
+rotation = -3.40339
+scale = Vector2(0.2354, 0.249646)
+flip_h = true
+
+[node name="Stone217" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(44813, -2264.2)
+rotation = 2.87979
+
+[node name="Stone218" parent="." instance=ExtResource("13_iwcp0")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(41838, -1674)
+rotation = 0.785397
+scale = Vector2(0.2, 0.299825)
+
+[node name="Stone219" parent="." instance=ExtResource("13_iwcp0")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(43618, -2732)
+rotation = 2.87979
+
+[node name="Stone220" parent="." instance=ExtResource("13_iwcp0")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(43572, -2018)
+rotation = 3.14159
+
+[node name="Stone221" parent="." instance=ExtResource("13_iwcp0")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(45238, -2666)
+rotation = 3.14159
+scale = Vector2(0.20067, 0.294121)
+
+[node name="Stone222" parent="." instance=ExtResource("13_iwcp0")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(41875, -2927)
+rotation = 2.61799
+
+[node name="Stone224" parent="." instance=ExtResource("15_gmj0n")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+material = SubResource("ShaderMaterial_a7885")
+position = Vector2(44819, -2738)
+rotation = -3.40339
+
+[node name="Stone225" parent="." instance=ExtResource("15_gmj0n")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+material = SubResource("ShaderMaterial_73yak")
+position = Vector2(46470, -2259)
+rotation = -2.87979
+scale = Vector2(0.846418, 1.28163)
+
+[node name="Stone226" parent="." instance=ExtResource("15_gmj0n")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+material = SubResource("ShaderMaterial_pxa2y")
+position = Vector2(43443, -2159)
+rotation = -1.83259
+
+[node name="Stone227" parent="." instance=ExtResource("15_gmj0n")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+material = SubResource("ShaderMaterial_xghj6")
+position = Vector2(43492, -2716)
+rotation = -3.14159
+
+[node name="Stone228" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.47451, 0.396078, 0.282353, 1)
+position = Vector2(42536, -1779)
+rotation = 5.49778
+
+[node name="Stone230" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.572549, 0.470588, 0.329412, 1)
+position = Vector2(41556, -1290)
+rotation = -2.61799
+scale = Vector2(0.338176, 0.3639)
+
+[node name="Stone231" parent="." instance=ExtResource("6_oleto")]
+modulate = Color(0.862745, 0.74902, 0.592157, 1)
+position = Vector2(41402, -1524)
+rotation = -1.57079
+
+[node name="Stone232" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.647059, 0.521569, 0.34902, 1)
+position = Vector2(41857, -2062)
+rotation = 3.03307
+flip_h = true
+
+[node name="Bush14" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(46040, -2703)
+rotation = -3.14159
+scale = Vector2(0.262548, 0.2875)
+texture = ExtResource("14_xtlt2")
+
+[node name="Stone233" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.729412, 0.6, 0.419608, 1)
+position = Vector2(41498, -873)
+rotation = -6.80677
+scale = Vector2(0.252568, 0.290329)
+flip_h = true
+
+[node name="Stone234" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.705882, 0.156863, 0.101961, 1)
+position = Vector2(35165, 1000)
+rotation = -12.5664
+scale = Vector2(0.252568, 0.290329)
+
+[node name="Stone257" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.705882, 0.156863, 0.101961, 1)
+position = Vector2(34566, 361.001)
+rotation = -9.68656
+scale = Vector2(0.252568, 0.290329)
+
+[node name="Stone254" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.705882, 0.156863, 0.101961, 1)
+position = Vector2(43462, -2693)
+rotation = -9.42476
+scale = Vector2(0.252568, 0.290329)
+
+[node name="Stone256" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.705882, 0.156863, 0.101961, 1)
+position = Vector2(44919, -2258)
+rotation = -9.42476
+scale = Vector2(0.252568, 0.290329)
+
+[node name="Stone255" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.705882, 0.156863, 0.101961, 1)
+position = Vector2(45631, -2382)
+rotation = -8.37757
+scale = Vector2(0.252568, 0.290329)
+
+[node name="Stone235" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(43131, -2402)
+rotation = 2.35619
+
+[node name="Stone236" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(41843, -2384)
+rotation = 0.523598
+
+[node name="Stone237" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(43787.7, -2632.94)
+rotation = 3.14159
+scale = Vector2(0.244038, 0.279305)
+
+[node name="Stone238" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(45149, -2290)
+rotation = 2.87979
+flip_h = true
+
+[node name="Stone240" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(45775, -1960)
+rotation = -2.61799
+flip_h = true
+
+[node name="Stone241" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(46591, -2234)
+rotation = -2.61799
+flip_h = true
+
+[node name="Stone242" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(45470, -2686)
+rotation = -3.40339
+
+[node name="Stone243" parent="." instance=ExtResource("12_uaooe")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(45881, -2332)
+rotation = 2.87979
+
+[node name="Stone244" parent="." instance=ExtResource("13_iwcp0")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(42969, -2377)
+rotation = 2.87979
+
+[node name="Stone245" parent="." instance=ExtResource("13_iwcp0")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(44171, -2713)
+rotation = 3.14159
+
+[node name="Stone246" parent="." instance=ExtResource("13_iwcp0")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(44482, -2733)
+rotation = 3.14159
+
+[node name="Stone247" parent="." instance=ExtResource("13_iwcp0")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(45581, -2658)
+rotation = 4.18878
+scale = Vector2(0.20067, 0.294121)
+
+[node name="Stone248" parent="." instance=ExtResource("13_iwcp0")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+position = Vector2(41779, -2868)
+rotation = 2.61799
+
+[node name="Stone250" parent="." instance=ExtResource("15_gmj0n")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+material = SubResource("ShaderMaterial_a7885")
+position = Vector2(44548, -2723)
+rotation = -2.87979
+
+[node name="Stone251" parent="." instance=ExtResource("15_gmj0n")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+material = SubResource("ShaderMaterial_73yak")
+position = Vector2(43784, -2063)
+rotation = -4.18878
+scale = Vector2(0.846418, 1.28163)
+
+[node name="Stone252" parent="." instance=ExtResource("15_gmj0n")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+material = SubResource("ShaderMaterial_pxa2y")
+position = Vector2(43843, -2164)
+rotation = 1.70028
+
+[node name="Stone253" parent="." instance=ExtResource("15_gmj0n")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+material = SubResource("ShaderMaterial_xghj6")
+position = Vector2(43251, -2674)
+rotation = -3.92699
+
+[node name="Stone201" parent="." instance=ExtResource("15_gmj0n")]
+modulate = Color(0.517647, 0.411765, 0.262745, 1)
+material = SubResource("ShaderMaterial_quscj")
+position = Vector2(34318, 154.998)
+rotation = -0.785397
+
 [node name="redTree42" parent="." instance=ExtResource("11_uo1ys")]
 modulate = Color(0.807843, 0.807843, 0.807843, 1)
 position = Vector2(37144, -2882)
@@ -6822,6 +7496,197 @@ flip_h = true
 modulate = Color(0.752941, 0.752941, 0.752941, 1)
 position = Vector2(37720, -2184)
 rotation = -0.523598
+flip_h = true
+
+[node name="redTree55" parent="." instance=ExtResource("11_uo1ys")]
+modulate = Color(0.541176, 0.541176, 0.541176, 1)
+position = Vector2(42196, -1463)
+rotation = 0.261799
+scale = Vector2(1.60236, 1.83333)
+
+[node name="Stone223" parent="." instance=ExtResource("6_oleto")]
+modulate = Color(0.964706, 0.901961, 0.870588, 1)
+position = Vector2(39978, -1752)
+
+[node name="Stone229" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.921569, 0.87451, 0.811765, 1)
+position = Vector2(39818, -1786)
+rotation = 1.0472
+flip_h = true
+
+[node name="Stone249" parent="." instance=ExtResource("6_oleto")]
+position = Vector2(40528, -2500)
+rotation = 2.61799
+flip_h = true
+
+[node name="Stone258" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.976471, 0.937255, 0.898039, 1)
+position = Vector2(39687, -2292)
+rotation = 2.35619
+
+[node name="GreenTree07" parent="." instance=ExtResource("5_ryicy")]
+modulate = Color(0.607843, 0.607843, 0.607843, 1)
+material = SubResource("ShaderMaterial_0y1r8")
+position = Vector2(41225, -2277)
+rotation = -1.57079
+scale = Vector2(0.8, 0.8)
+flip_h = true
+
+[node name="GreenTree08" parent="." instance=ExtResource("4_7wop1")]
+modulate = Color(0.811765, 0.772549, 0.772549, 1)
+material = SubResource("ShaderMaterial_ifru3")
+position = Vector2(40234, -2580)
+rotation = 3.14159
+
+[node name="GreenTree09" parent="." instance=ExtResource("5_ryicy")]
+modulate = Color(0.764706, 0.682353, 0.764706, 1)
+material = SubResource("ShaderMaterial_1agcp")
+position = Vector2(41144, -2604)
+rotation = -2.87979
+
+[node name="GreenTree11" parent="." instance=ExtResource("5_ryicy")]
+modulate = Color(0.764706, 0.682353, 0.764706, 1)
+material = SubResource("ShaderMaterial_1agcp")
+position = Vector2(39854, -1925)
+rotation = -5.49778
+
+[node name="GreenTree10" parent="." instance=ExtResource("4_7wop1")]
+modulate = Color(0.913725, 0.839216, 0.839216, 1)
+material = SubResource("ShaderMaterial_e7pi4")
+position = Vector2(39847, -2504)
+rotation = 1.83259
+scale = Vector2(0.791156, 0.881703)
+
+[node name="Stone259" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.815686, 0.690196, 0.517647, 1)
+position = Vector2(40689, -2678)
+rotation = 2.87979
+flip_h = true
+
+[node name="Stone261" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.815686, 0.690196, 0.517647, 1)
+position = Vector2(41305, -2181)
+rotation = 4.71238
+flip_h = true
+
+[node name="Stone262" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.815686, 0.690196, 0.517647, 1)
+position = Vector2(40118, -1717)
+rotation = 6.28318
+flip_h = true
+
+[node name="Stone260" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.894118, 0.819608, 0.717647, 1)
+position = Vector2(39664, -1907)
+rotation = 1.0472
+
+[node name="GreenTree13" parent="." instance=ExtResource("2_ha1vx")]
+modulate = Color(0.556863, 0.556863, 0.556863, 1)
+material = SubResource("ShaderMaterial_7pc36")
+position = Vector2(40766, -1879)
+rotation = 0.785388
+scale = Vector2(0.534107, 0.484705)
+
+[node name="GreenTree12" parent="." instance=ExtResource("4_7wop1")]
+modulate = Color(0.552941, 0.552941, 0.552941, 1)
+material = SubResource("ShaderMaterial_cyx0a")
+position = Vector2(40602, -1821)
+
+[node name="Spiderweb01" parent="." instance=ExtResource("57_ftl5n")]
+position = Vector2(33442, 1008)
+
+[node name="Spiderweb02" parent="." instance=ExtResource("57_ftl5n")]
+position = Vector2(39746, -2225)
+rotation = 0.523598
+scale = Vector2(0.581275, 0.615737)
+
+[node name="Spiderweb03" parent="." instance=ExtResource("57_ftl5n")]
+position = Vector2(39874, -2452)
+rotation = -1.0472
+scale = Vector2(0.581275, 0.615737)
+
+[node name="Stone275" parent="." instance=ExtResource("8_u8bjd")]
+position = Vector2(27585, -2076)
+rotation = -0.785397
+
+[node name="Stone276" parent="." instance=ExtResource("8_u8bjd")]
+position = Vector2(26772, -2156)
+rotation = 0.523598
+
+[node name="GreenTree14" parent="." instance=ExtResource("4_7wop1")]
+modulate = Color(0.67451, 0.592157, 0.576471, 1)
+material = SubResource("ShaderMaterial_c4ns0")
+position = Vector2(12684, -1140)
+rotation = 0.261799
+
+[node name="GreenTree18" parent="." instance=ExtResource("4_7wop1")]
+modulate = Color(0.67451, 0.592157, 0.576471, 1)
+material = SubResource("ShaderMaterial_c4ns0")
+position = Vector2(12279, -1896)
+rotation = 2.61799
+
+[node name="GreenTree19" parent="." instance=ExtResource("4_7wop1")]
+modulate = Color(0.67451, 0.592157, 0.576471, 1)
+material = SubResource("ShaderMaterial_c4ns0")
+position = Vector2(11461, -1211)
+rotation = 0.523598
+
+[node name="GreenTree15" parent="." instance=ExtResource("2_ha1vx")]
+modulate = Color(0.666667, 0.580392, 0.596078, 1)
+material = SubResource("ShaderMaterial_velgv")
+position = Vector2(12224, -1328)
+
+[node name="GreenTree16" parent="." instance=ExtResource("5_ryicy")]
+modulate = Color(0.658824, 0.611765, 0.54902, 1)
+material = SubResource("ShaderMaterial_2k2i4")
+position = Vector2(13156, -1343)
+flip_h = true
+
+[node name="GreenTree17" parent="." instance=ExtResource("5_ryicy")]
+modulate = Color(0.658824, 0.611765, 0.54902, 1)
+material = SubResource("ShaderMaterial_2k2i4")
+position = Vector2(12749.8, -1792.75)
+rotation = -3.14159
+scale = Vector2(0.718018, 0.675476)
+flip_h = true
+
+[node name="Stone277" parent="." instance=ExtResource("6_oleto")]
+modulate = Color(0.894118, 0.8, 0.670588, 1)
+position = Vector2(12765, -1224)
+flip_h = true
+
+[node name="Stone278" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.580392, 0.490196, 0.360784, 1)
+position = Vector2(13160, -1812)
+rotation = -2.61799
+scale = Vector2(0.203112, 0.163611)
+
+[node name="Stone279" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.87451, 0.768627, 0.807843, 1)
+position = Vector2(12547, -1525)
+rotation = -0.795705
+scale = Vector2(0.152308, 0.14312)
+
+[node name="Stone280" parent="." instance=ExtResource("8_u8bjd")]
+modulate = Color(0.780392, 0.67451, 0.768627, 1)
+position = Vector2(12763, -1523)
+rotation = 0.599173
+scale = Vector2(0.129057, 0.100718)
+
+[node name="Stone281" parent="." instance=ExtResource("6_oleto")]
+modulate = Color(0.862745, 0.74902, 0.592157, 1)
+position = Vector2(12309, -1186)
+
+[node name="Stone282" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.576471, 0.486275, 0.356863, 1)
+position = Vector2(13131, -1192)
+rotation = -0.652957
+scale = Vector2(0.261714, 0.254094)
+
+[node name="Stone283" parent="." instance=ExtResource("7_87qjw")]
+modulate = Color(0.647059, 0.521569, 0.34902, 1)
+position = Vector2(12178, -1778)
+rotation = 3.03307
 flip_h = true
 
 [connection signal="wall_destroyed" from="DestroyableWalls/DestroyableWall3" to="." method="_on_destroyable_wall_3_wall_destroyed"]
