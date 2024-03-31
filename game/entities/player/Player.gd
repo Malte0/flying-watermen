@@ -11,6 +11,7 @@ var shoot_position: Marker2D:
 @onready var state_chart: StateChart = %StateChart
 @onready var animation_tree: AnimationTree = $Animation/AnimationTree
 @onready var particle: Node2D = $Particles
+@onready var point_light: PointLight2D = $PointLight2D2
 
 # save location
 var save_file_path: String = "user://save/"
@@ -48,6 +49,7 @@ var buildingFoam_shootcooldown: float = 0.3
 func _ready():
 	animation_tree.active = true
 	#Initialize values so Guards don't complain
+	point_light.energy = 0
 	set_expressions()
 	#preparations for saveing
 	verify_save_directory(save_file_path)
@@ -66,6 +68,8 @@ func _input(event: InputEvent):
 		shoot()
 	if event.is_action_pressed("swap_shoot_type"):
 		set_shooting_type()
+	if event.is_action_pressed("toggle_light"):
+		toggle_light()
 
 func set_shooting_type():
 	if is_shooting_Water:
@@ -244,3 +248,10 @@ func shoot():
 	var shoot_direction = shoot_position.global_position.direction_to(get_global_mouse_position())
 	return ranged_component.shoot(shoot_direction, projectile_scene, velocity)
 #endregion
+
+func toggle_light():
+	var tween = create_tween()
+	if point_light.energy > 0:
+		tween.tween_property(point_light, "energy", 0, 0.5)
+	else: 
+		tween.tween_property(point_light, "energy", 1, 0.5)
