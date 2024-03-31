@@ -1,4 +1,4 @@
-[gd_scene load_steps=145 format=3 uid="uid://cu55a1ijhr436"]
+[gd_scene load_steps=146 format=3 uid="uid://cu55a1ijhr436"]
 
 [ext_resource type="Script" path="res://scenes/main/Map.gd" id="1_8arfn"]
 [ext_resource type="PackedScene" uid="uid://dqy651tnq3ycc" path="res://assets/forest-assets/scenes/greenTree03.tscn" id="2_ha1vx"]
@@ -853,7 +853,7 @@ texture = ExtResource("34_y043k")
 0:2/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_cqlwc")
 0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:2/0/physics_layer_0/angular_velocity = 0.0
-0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.625, -8, 8, -8, 8, 8, -4.875, 8)
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.625, -8, 8, -8, 8, 8, -3.875, 8)
 0:2/0/terrains_peering_bit/right_side = 0
 0:2/0/terrains_peering_bit/bottom_side = 0
 0:2/0/terrains_peering_bit/top_side = 0
@@ -927,7 +927,7 @@ texture = ExtResource("34_y043k")
 4:2/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_i00aq")
 4:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:2/0/physics_layer_0/angular_velocity = 0.0
-4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 4.875, -8, 4.625, 8, -8, 8)
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 4.375, -8, 4.125, 8, -8, 8)
 4:2/0/terrains_peering_bit/bottom_side = 0
 4:2/0/terrains_peering_bit/left_side = 0
 4:2/0/terrains_peering_bit/top_side = 0
@@ -998,7 +998,7 @@ texture = ExtResource("34_y043k")
 0:3/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_w14s0")
 0:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:3/0/physics_layer_0/angular_velocity = 0.0
-0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.45416, -8, 8, -8, 8, 8, -6.27557, 8, -6.625, -2.5)
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.875, -8, 8, -8, 8, 8, -4.375, 8)
 0:3/0/terrains_peering_bit/right_side = 0
 0:3/0/terrains_peering_bit/bottom_side = 0
 0:3/0/terrains_peering_bit/top_side = 0
@@ -1069,7 +1069,7 @@ texture = ExtResource("34_y043k")
 4:3/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_17j3m")
 4:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:3/0/physics_layer_0/angular_velocity = 0.0
-4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 3, -8, 3.5, 8, -8, 8)
+4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 3.875, -8, 3.375, 8, -8, 8)
 4:3/0/terrains_peering_bit/bottom_side = 0
 4:3/0/terrains_peering_bit/left_side = 0
 4:3/0/terrains_peering_bit/top_side = 0
@@ -1125,7 +1125,7 @@ texture = ExtResource("34_y043k")
 0:4/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_q8j02")
 0:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:4/0/physics_layer_0/angular_velocity = 0.0
-0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.25, -8, 8, -8, 8, 8, -5.5, 0.5)
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.875, -8, 8, -8, 8, 8, -3.625, 0.75)
 0:4/0/terrains_peering_bit/right_side = 0
 0:4/0/terrains_peering_bit/top_side = 0
 0:4/0/metadata/_better_terrain = {
@@ -1191,7 +1191,7 @@ texture = ExtResource("34_y043k")
 4:4/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_u2wrg")
 4:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:4/0/physics_layer_0/angular_velocity = 0.0
-4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 3.75, -8, 3, 6.875, -8, 8)
+4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 3.75, -8, 3.5, 8, -8, 8)
 4:4/0/terrains_peering_bit/left_side = 0
 4:4/0/terrains_peering_bit/top_side = 0
 4:4/0/metadata/_better_terrain = {
@@ -2578,6 +2578,9 @@ shader_parameter/offset = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7y728"]
 size = Vector2(1199.5, 619)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7wj4"]
+size = Vector2(659, 644.5)
 
 [node name="Map" type="Node2D" groups=["map"]]
 script = ExtResource("1_8arfn")
@@ -4349,14 +4352,6 @@ offset_bottom = 1092.0
 theme_override_font_sizes/font_size = 50
 text = "Dash"
 
-[node name="Label20" type="Label" parent="label"]
-offset_left = 29946.0
-offset_top = -4031.0
-offset_right = 30490.0
-offset_bottom = -3746.0
-theme_override_font_sizes/font_size = 50
-text = "enemys"
-
 [node name="Label19" type="Label" parent="label"]
 offset_left = 31704.0
 offset_top = -4526.0
@@ -4419,17 +4414,11 @@ render_target_update_mode = 4
 
 [node name="CPUParticles3D" parent="fireTest/SubViewportContainer/SubViewport" instance=ExtResource("50_hmd4g")]
 
-[node name="Sodium" parent="." instance=ExtResource("51_jjvhx")]
-position = Vector2(32231, 524)
-
 [node name="Sodium2" parent="." instance=ExtResource("51_jjvhx")]
 position = Vector2(21158, 10)
 
 [node name="Sodium3" parent="." instance=ExtResource("51_jjvhx")]
 position = Vector2(24792, 1104)
-
-[node name="Sodium4" parent="." instance=ExtResource("51_jjvhx")]
-position = Vector2(32940, -2230)
 
 [node name="IceChemical" parent="." instance=ExtResource("55_sowcr")]
 position = Vector2(19686, -2377)
@@ -4702,6 +4691,42 @@ position = Vector2(28071, 1202)
 
 [node name="CreeperEnemy10" parent="." instance=ExtResource("60_dovde")]
 position = Vector2(28707, 1198)
+
+[node name="EnemySpawnArea2" parent="." instance=ExtResource("62_3tnc6")]
+position = Vector2(30612, -1067)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawnArea2"]
+shape = SubResource("RectangleShape2D_d7wj4")
+
+[node name="CreeperEnemy11" parent="." instance=ExtResource("60_dovde")]
+position = Vector2(29741, -3923)
+
+[node name="MeleeEnemy18" parent="." instance=ExtResource("58_6c21q")]
+position = Vector2(30520, -3977)
+carried_item = Array[PackedScene]([ExtResource("51_jjvhx")])
+spawn_probability = 1.0
+
+[node name="RangedEnemy7" parent="." instance=ExtResource("59_rehkv")]
+position = Vector2(30984, -4214)
+
+[node name="RangedEnemy8" parent="." instance=ExtResource("59_rehkv")]
+position = Vector2(30089, -4235)
+
+[node name="CreeperEnemy12" parent="." instance=ExtResource("60_dovde")]
+position = Vector2(32049, 468)
+carried_item = Array[PackedScene]([ExtResource("51_jjvhx")])
+spawn_probability = 1.0
+
+[node name="MeleeEnemy19" parent="." instance=ExtResource("58_6c21q")]
+position = Vector2(32826, 513)
+carried_item = Array[PackedScene]([ExtResource("51_jjvhx")])
+spawn_probability = 1.0
+
+[node name="RangedEnemy9" parent="." instance=ExtResource("59_rehkv")]
+position = Vector2(29859, 7)
+
+[node name="Puddle" parent="." instance=ExtResource("30_cnsya")]
+position = Vector2(29522, -2662)
 
 [connection signal="wall_destroyed" from="DestroyableWalls/DestroyableWall3" to="." method="_on_destroyable_wall_3_wall_destroyed"]
 [connection signal="body_entered" from="BlindArea/blind_begining" to="." method="_on_blind_begining_body_entered"]
