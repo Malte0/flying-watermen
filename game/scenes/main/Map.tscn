@@ -25,7 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://ctwhu6gvuwl61" path="res://assets/light_noise/noise-pattern-water-surface-caustics-background-free-video.jpg" id="23_u4kap"]
 [ext_resource type="Texture2D" uid="uid://b0n33wo3w23dm" path="res://assets/light_noise/light.png" id="24_ylghc"]
 [ext_resource type="Texture2D" uid="uid://4qlm6ho7173m" path="res://assets/light_noise/offset_glow.png" id="25_ygvqh"]
-[ext_resource type="AudioStream" uid="uid://cuqvbh3d0ok8a" path="res://assets/SFX/waterfall/Water, Waterfall, Steady, Perspective SND0047.wav" id="26_mx3pc"]
+[ext_resource type="AudioStream" uid="uid://cuqvbh3d0ok8a" path="res://assets/SFX/Waterfall/Water, Waterfall, Steady, Perspective SND0047.wav" id="26_mx3pc"]
 [ext_resource type="PackedScene" uid="uid://bgaxka266oy83" path="res://entities/enemies/bossEnemy/BossEnemy.tscn" id="28_6xg4q"]
 [ext_resource type="PackedScene" uid="uid://hyr7i2wnah4e" path="res://entities/objects/well/fireWell/FireWell.tscn" id="28_tyh8k"]
 [ext_resource type="PackedScene" uid="uid://i1cmowsc0ynu" path="res://entities/traps/destroyableWall/destroyable_wall.tscn" id="29_wn4ko"]
@@ -3615,47 +3615,38 @@ rotation = 0.523598
 [node name="Stone19" parent="AreaAssets/Waterfall" instance=ExtResource("12_uaooe")]
 position = Vector2(-3771.81, -902.984)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone20" parent="AreaAssets/Waterfall" instance=ExtResource("13_iwcp0")]
 position = Vector2(-3675.79, -828.598)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone21" parent="AreaAssets/Waterfall" instance=ExtResource("8_u8bjd")]
 position = Vector2(-3219.45, -630.746)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone22" parent="AreaAssets/Waterfall" instance=ExtResource("8_u8bjd")]
 position = Vector2(-1216.85, -180.081)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone23" parent="AreaAssets/Waterfall" instance=ExtResource("7_87qjw")]
 position = Vector2(-194.217, 110.498)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone24" parent="AreaAssets/Waterfall" instance=ExtResource("8_u8bjd")]
 position = Vector2(1367.8, 377.89)
 rotation = -0.2618
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone25" parent="AreaAssets/Waterfall" instance=ExtResource("6_oleto")]
 position = Vector2(-717.027, 13.8931)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone26" parent="AreaAssets/Waterfall" instance=ExtResource("8_u8bjd")]
 position = Vector2(-1125.63, -80.063)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone27" parent="AreaAssets/Waterfall" instance=ExtResource("8_u8bjd")]
 position = Vector2(-3875.64, -859.37)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="waterfall" type="Sprite2D" parent="AreaAssets/Waterfall"]
 top_level = true
@@ -3911,7 +3902,7 @@ scale = Vector2(1, 1.214)
 flip_v = true
 
 [node name="Spiderweb16" parent="AreaAssets/Labyrinth" instance=ExtResource("57_ftl5n")]
-position = Vector2(21936, 807)
+position = Vector2(21936, 772.015)
 rotation = 1.69122
 scale = Vector2(1, 1.214)
 flip_h = true
@@ -4128,7 +4119,6 @@ position = Vector2(22610, -1)
 [node name="Stone36" parent="AreaAssets/Labyrinth" instance=ExtResource("8_u8bjd")]
 position = Vector2(21986, -739)
 rotation = 1.91463
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone37" parent="AreaAssets/Labyrinth" instance=ExtResource("6_oleto")]
 position = Vector2(23822, 1105)
