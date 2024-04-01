@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c640sr08cvsmo"]
+[gd_scene load_steps=20 format=3 uid="uid://c640sr08cvsmo"]
 
 [ext_resource type="Script" path="res://entities/objects/stone-tablet/StoneTabletObject.gd" id="1_rrcxt"]
 [ext_resource type="Texture2D" uid="uid://ciey4ubnpykd2" path="res://entities/objects/stone-tablet/random_selection.png" id="2_shfwb"]
@@ -127,6 +127,15 @@ hue_variation_max = 0.91
 anim_offset_min = 0.1453
 anim_offset_max = 0.41
 
+[sub_resource type="Gradient" id="Gradient_scf2q"]
+offsets = PackedFloat32Array(0, 0.584416)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0xnj4"]
+gradient = SubResource("Gradient_scf2q")
+fill = 1
+fill_from = Vector2(0.472477, 0.545872)
+
 [node name="StoneTablet" type="Area2D"]
 script = ExtResource("1_rrcxt")
 
@@ -163,6 +172,12 @@ lifetime = 1.5
 position = Vector2(0, 2)
 scale = Vector2(0.06, 0.067)
 texture = ExtResource("3_gpjlj")
+
+[node name="PointLight2D" type="PointLight2D" parent="CollisionShape2D/Sprite2D"]
+position = Vector2(0, -29.8507)
+scale = Vector2(100, 90.0187)
+energy = 0.5
+texture = SubResource("GradientTexture2D_0xnj4")
 
 [node name="EKeyDark" type="Sprite2D" parent="CollisionShape2D"]
 unique_name_in_owner = true
