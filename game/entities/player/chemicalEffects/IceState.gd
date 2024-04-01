@@ -5,7 +5,6 @@ extends Node2D
 @onready var animation_tree: AnimationTree = $"../../../Animation/AnimationTree"
 @onready var heat_component: HeatComponent:
 	get: return player.heat_component
-
 const ICE_FRICTION: float = 0.02
 
 func _ready() -> void:

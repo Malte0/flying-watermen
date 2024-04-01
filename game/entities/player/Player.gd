@@ -247,6 +247,3 @@ func shoot():
 	var shoot_direction = shoot_position.global_position.direction_to(get_global_mouse_position())
 	return ranged_component.shoot(shoot_direction, projectile_scene, velocity)
 #endregion
-
-func _on_chemical_effects_manager_chemical_used():
-	$Animation/AnimationPlayer.play("ice")
