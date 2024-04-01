@@ -4,6 +4,11 @@ var main_scene = "res://scenes/main/Map.tscn"
 var test_scene = "res://scenes/test/test.tscn"
 var game_over = "res://scenes/ui/menus/gameOver/GameOver.tscn"
 var main_menu = "res://scenes/ui/menus/menu/menu.tscn"
+var win_screen = "res://scenes/ui/menus/winscreen/winscreen.tscn"
+var is_boos_alive: bool = true
+var wells_filled: int = 0
+var num_wells: int = 0
+var wells_location: Dictionary = {}
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("str+1"):
@@ -18,3 +23,20 @@ func load_with_loading_screen(scene_name: String):
 	loading_screen.scene_to_load = scene_name
 	get_tree().root.get_children().back().queue_free()
 	get_tree().root.add_child(loading_screen)
+
+func count_num_wells(value: Vector2):
+	if not wells_location.has(value):
+		wells_location[value] = value
+		num_wells = num_wells + 1
+
+func well_filled():
+	wells_filled = wells_filled + 1
+	check_win_con()
+
+func boss_killed():
+	is_boos_alive = false
+	check_win_con()
+
+func check_win_con():
+	if not is_boos_alive and wells_filled == num_wells:
+		get_tree().change_scene_to_file.call_deferred(win_screen)

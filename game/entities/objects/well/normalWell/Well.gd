@@ -19,3 +19,4 @@ func fill_well(_body: Node):
 		$GPUParticles2D.visible  = true
 		well_filled.emit()
 		is_full = true
+		Globals.well_filled()
