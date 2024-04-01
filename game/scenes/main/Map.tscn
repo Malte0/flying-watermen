@@ -7349,44 +7349,36 @@ rotation = 0.261799
 [node name="Stone348" parent="AreaAssets/IDK" instance=ExtResource("6_oleto")]
 position = Vector2(-9428.16, -4559.55)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone349" parent="AreaAssets/IDK" instance=ExtResource("6_oleto")]
 position = Vector2(-8398.49, -4167.7)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone350" parent="AreaAssets/IDK" instance=ExtResource("6_oleto")]
 position = Vector2(-6384.74, -3082.52)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone351" parent="AreaAssets/IDK" instance=ExtResource("6_oleto")]
 position = Vector2(-8916.74, -4420.44)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 flip_h = true
 
 [node name="Stone352" parent="AreaAssets/IDK" instance=ExtResource("6_oleto")]
 position = Vector2(-8086.62, -4249.78)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 flip_h = true
 
 [node name="Stone353" parent="AreaAssets/IDK" instance=ExtResource("8_u8bjd")]
 position = Vector2(-8838.26, -4326.94)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone354" parent="AreaAssets/IDK" instance=ExtResource("7_87qjw")]
 position = Vector2(-8025.5, -4134.01)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone355" parent="AreaAssets/IDK" instance=ExtResource("7_87qjw")]
 position = Vector2(-8181.46, -4177.87)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 flip_h = true
 
 [node name="Stone356" parent="AreaAssets/IDK" instance=ExtResource("7_87qjw")]
@@ -7397,13 +7389,11 @@ flip_h = true
 [node name="Stone357" parent="AreaAssets/IDK" instance=ExtResource("7_87qjw")]
 position = Vector2(-6821.72, -3205.82)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 flip_h = true
 
 [node name="Stone358" parent="AreaAssets/IDK" instance=ExtResource("8_u8bjd")]
 position = Vector2(-8763.37, -4308.95)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 flip_h = true
 
 [node name="GreenTree29" parent="AreaAssets/IDK" instance=ExtResource("2_ha1vx")]
@@ -7416,12 +7406,10 @@ flip_h = true
 [node name="Stone359" parent="AreaAssets/IDK" instance=ExtResource("6_oleto")]
 position = Vector2(-5933.93, -2945.17)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone360" parent="AreaAssets/IDK" instance=ExtResource("8_u8bjd")]
 position = Vector2(-5775.38, -2910.96)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone361" parent="AreaAssets/IDK" instance=ExtResource("7_87qjw")]
 modulate = Color(0.658824, 0.643137, 0.643137, 1)
@@ -7541,17 +7529,14 @@ flip_h = true
 [node name="Stone02" parent="AreaAssets/IDK" instance=ExtResource("13_iwcp0")]
 position = Vector2(38346.3, 8474.49)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone03" parent="AreaAssets/IDK" instance=ExtResource("13_iwcp0")]
 position = Vector2(38388.1, 8538.5)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone363" parent="AreaAssets/IDK" instance=ExtResource("12_uaooe")]
 position = Vector2(38187, 8412.14)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone364" parent="AreaAssets/IDK" instance=ExtResource("7_87qjw")]
 position = Vector2(38934.3, 8555.46)
@@ -7570,17 +7555,14 @@ rotation = 1.09361
 [node name="Stone366" parent="AreaAssets/IDK" instance=ExtResource("6_oleto")]
 position = Vector2(35385.6, 7136.64)
 rotation = 2.87979
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone367" parent="AreaAssets/IDK" instance=ExtResource("13_iwcp0")]
 position = Vector2(34651.1, 7540.29)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone368" parent="AreaAssets/IDK" instance=ExtResource("12_uaooe")]
 position = Vector2(34788, 7535.56)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="GreenTree39" parent="AreaAssets/IDK" instance=ExtResource("2_ha1vx")]
 modulate = Color(1, 0.329412, 0.329412, 1)
@@ -7592,7 +7574,6 @@ scale = Vector2(0.865657, 0.864111)
 [node name="Stone369" parent="AreaAssets/IDK" instance=ExtResource("13_iwcp0")]
 position = Vector2(35467.7, 7695.93)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="redTree92" parent="AreaAssets/IDK" instance=ExtResource("9_qodc0")]
 modulate = Color(0.588235, 0.588235, 0.588235, 1)
@@ -7602,12 +7583,10 @@ rotation = 0.261799
 [node name="Stone370" parent="AreaAssets/IDK" instance=ExtResource("7_87qjw")]
 position = Vector2(33973.3, 7342.11)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone371" parent="AreaAssets/IDK" instance=ExtResource("6_oleto")]
 position = Vector2(33196.7, 7107.09)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="redTree93" parent="AreaAssets/IDK" instance=ExtResource("10_urdcj")]
 modulate = Color(0.470588, 0.470588, 0.470588, 1)
@@ -7631,109 +7610,92 @@ rotation = 0.261799
 modulate = Color(0.654902, 0.654902, 0.654902, 1)
 position = Vector2(-2944.56, -2104.83)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone374" parent="AreaAssets/IDK" instance=ExtResource("13_iwcp0")]
 modulate = Color(0.654902, 0.654902, 0.654902, 1)
 position = Vector2(-3757.67, -2335.12)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone375" parent="AreaAssets/IDK" instance=ExtResource("12_uaooe")]
 modulate = Color(0.654902, 0.654902, 0.654902, 1)
 position = Vector2(-1988.25, -1779.22)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone376" parent="AreaAssets/IDK" instance=ExtResource("7_87qjw")]
 modulate = Color(0.654902, 0.654902, 0.654902, 1)
 position = Vector2(-3728.12, -2317.89)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone377" parent="AreaAssets/IDK" instance=ExtResource("8_u8bjd")]
 modulate = Color(0.654902, 0.654902, 0.654902, 1)
 position = Vector2(-2908.05, -2040.18)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone378" parent="AreaAssets/IDK" instance=ExtResource("8_u8bjd")]
 modulate = Color(0.654902, 0.654902, 0.654902, 1)
 position = Vector2(-4531.65, -2583.92)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone379" parent="AreaAssets/IDK" instance=ExtResource("6_oleto")]
 modulate = Color(0.654902, 0.654902, 0.654902, 1)
 position = Vector2(-4699.17, -2603.96)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone380" parent="AreaAssets/IDK" instance=ExtResource("7_87qjw")]
 modulate = Color(0.654902, 0.654902, 0.654902, 1)
 position = Vector2(-7293.92, -3340.63)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 flip_h = true
 
 [node name="Stone381" parent="AreaAssets/IDK" instance=ExtResource("7_87qjw")]
 modulate = Color(0.654902, 0.654902, 0.654902, 1)
 position = Vector2(-4632.64, -2535.41)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 flip_h = true
 
 [node name="Stone382" parent="AreaAssets/IDK" instance=ExtResource("8_u8bjd")]
 modulate = Color(0.654902, 0.654902, 0.654902, 1)
 position = Vector2(-4123.61, -2441.46)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 flip_h = true
 
 [node name="Stone383" parent="AreaAssets/IDK" instance=ExtResource("8_u8bjd")]
 modulate = Color(0.654902, 0.654902, 0.654902, 1)
 position = Vector2(-4493.6, -2509.54)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 flip_h = true
 
 [node name="Stone384" parent="AreaAssets/IDK" instance=ExtResource("6_oleto")]
 modulate = Color(0.654902, 0.654902, 0.654902, 1)
 position = Vector2(-3256.2, -2166.59)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 flip_h = true
 
 [node name="Stone385" parent="AreaAssets/IDK" instance=ExtResource("6_oleto")]
 modulate = Color(0.654902, 0.654902, 0.654902, 1)
 position = Vector2(-4340.22, -2513.99)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 flip_h = true
 
 [node name="Stone386" parent="AreaAssets/IDK" instance=ExtResource("7_87qjw")]
 modulate = Color(0.807843, 0.14902, 0.137255, 1)
 position = Vector2(-2537.47, -1935.7)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone387" parent="AreaAssets/IDK" instance=ExtResource("7_87qjw")]
 modulate = Color(0.807843, 0.14902, 0.137255, 1)
 position = Vector2(-3150.27, -2191.01)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone388" parent="AreaAssets/IDK" instance=ExtResource("7_87qjw")]
 modulate = Color(0.807843, 0.14902, 0.137255, 1)
 position = Vector2(-3859.5, -2395.54)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone389" parent="AreaAssets/IDK" instance=ExtResource("8_u8bjd")]
 modulate = Color(0.807843, 0.14902, 0.137255, 1)
 position = Vector2(-2801.21, -2075.73)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone390" parent="AreaAssets/IDK" instance=ExtResource("8_u8bjd")]
 modulate = Color(0.807843, 0.14902, 0.137255, 1)
@@ -7744,19 +7706,16 @@ rotation = -1.30899
 modulate = Color(0.807843, 0.14902, 0.137255, 1)
 position = Vector2(390.959, -2115.91)
 rotation = -2.8798
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone392" parent="AreaAssets/IDK" instance=ExtResource("8_u8bjd")]
 modulate = Color(0.807843, 0.14902, 0.137255, 1)
 position = Vector2(-3372.35, -2212.21)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone393" parent="AreaAssets/IDK" instance=ExtResource("8_u8bjd")]
 modulate = Color(0.807843, 0.14902, 0.137255, 1)
 position = Vector2(-3544.04, -2301.69)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone394" parent="AreaAssets/IDK" instance=ExtResource("8_u8bjd")]
 modulate = Color(0.807843, 0.14902, 0.137255, 1)
@@ -7767,13 +7726,11 @@ rotation = -2.61799
 modulate = Color(0.807843, 0.14902, 0.137255, 1)
 position = Vector2(-3972.55, -2394.77)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone396" parent="AreaAssets/IDK" instance=ExtResource("6_oleto")]
 modulate = Color(0.807843, 0.14902, 0.137255, 1)
 position = Vector2(-1521.4, -1643.78)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone397" parent="AreaAssets/IDK" instance=ExtResource("6_oleto")]
 modulate = Color(0.807843, 0.14902, 0.137255, 1)
@@ -7784,13 +7741,11 @@ rotation = -1.57079
 modulate = Color(0.807843, 0.14902, 0.137255, 1)
 position = Vector2(390.672, -1983.47)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Stone399" parent="AreaAssets/IDK" instance=ExtResource("6_oleto")]
 modulate = Color(0.807843, 0.14902, 0.137255, 1)
 position = Vector2(-3700.89, -2249.51)
 rotation = 0.261799
-scale = Vector2(0.2, 0.2)
 
 [node name="Enemys" type="Node2D" parent="."]
 

@@ -13,7 +13,7 @@ func _ready():
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("f3"):
 		debugger.visible = !debugger.visible
-	if event.is_action_pressed("swap_shoot_type"):
+	if event.is_action_pressed("swap_shoot_type") and player.abilities.building_foam:
 		if water.visible:
 			water.visible = false
 			foam.visible = true
