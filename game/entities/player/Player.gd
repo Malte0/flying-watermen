@@ -19,7 +19,7 @@ var save_file_name: String = "PlayerSave.tres"
 var player_data: PlayerData = PlayerData.new()
 
 # Reset values
-var base_scale_speed: float = 6
+var base_scale_speed: float = 2
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var base_speed: float = 300.0 * base_scale_speed
 var base_jump_velocity: float = -400.0 * base_scale_speed
