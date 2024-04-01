@@ -203,3 +203,5 @@ func _on_dash_timeout_timeout():
 	is_direciton_locked = false
 	is_dash_cd = true
 
+func _on_death():
+	Globals.boss_killed()
