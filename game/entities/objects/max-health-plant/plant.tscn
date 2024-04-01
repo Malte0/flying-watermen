@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d3fci01ety45h"]
+[gd_scene load_steps=16 format=3 uid="uid://d3fci01ety45h"]
 
 [ext_resource type="Script" path="res://entities/objects/max-health-plant/plant.gd" id="1_2q2m2"]
 [ext_resource type="Texture2D" uid="uid://s4rpkn4au3kf" path="res://entities/objects/max-health-plant/Blue Umbrella.png" id="2_phiv6"]
@@ -17,6 +17,15 @@ shader_parameter/detail = 1.025
 shader_parameter/distortion = null
 shader_parameter/heightOffset = null
 shader_parameter/offset = 0.0
+
+[sub_resource type="Gradient" id="Gradient_pw0k1"]
+offsets = PackedFloat32Array(0, 0.584416)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d77il"]
+gradient = SubResource("Gradient_pw0k1")
+fill = 1
+fill_from = Vector2(0.472477, 0.545872)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ciqrd"]
 radius = 282.044
@@ -66,6 +75,12 @@ material = SubResource("ShaderMaterial_mc6aj")
 texture = ExtResource("2_phiv6")
 region_enabled = true
 region_rect = Rect2(25, 35, 626, 611)
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite2D"]
+scale = Vector2(32.1094, 26.3281)
+color = Color(0.219608, 0.447059, 1, 1)
+energy = 1.5
+texture = SubResource("GradientTexture2D_d77il")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(6, -2)

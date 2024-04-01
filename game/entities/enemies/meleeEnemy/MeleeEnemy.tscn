@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c2mdlfdoukqoq"]
+[gd_scene load_steps=33 format=3 uid="uid://c2mdlfdoukqoq"]
 
 [ext_resource type="Script" path="res://entities/enemies/meleeEnemy/MeleeEnemy.gd" id="2_r07kk"]
 [ext_resource type="Texture2D" uid="uid://dfu4qtgkvfarv" path="res://assets/melee_enemy_assets/melee_enemy01.png" id="3_dl6au"]
@@ -39,6 +39,15 @@ animations = [{
 "name": &"idle",
 "speed": 10.0
 }]
+
+[sub_resource type="Gradient" id="Gradient_gkfsx"]
+offsets = PackedFloat32Array(0, 0.584416)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1vf74"]
+gradient = SubResource("Gradient_gkfsx")
+fill = 1
+fill_from = Vector2(0.472477, 0.545872)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ol33t"]
 radius = 355.001
@@ -115,6 +124,11 @@ animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.505926
 flip_h = true
+
+[node name="PointLight2D" type="PointLight2D" parent="EnemyGraphics"]
+scale = Vector2(5.21875, 5.125)
+energy = 0.5
+texture = SubResource("GradientTexture2D_1vf74")
 
 [node name="ViewArea" type="Area2D" parent="."]
 collision_layer = 0
