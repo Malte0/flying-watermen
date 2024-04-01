@@ -8,7 +8,6 @@
 [node name="StoneTablet" parent="." instance=ExtResource("1_x7con")]
 
 [node name="StoneTabletOverlay" parent="." instance=ExtResource("2_cca32")]
-process_mode = 3
 
 [node name="Label" type="Label" parent="StoneTabletOverlay"]
 offset_left = 418.0
