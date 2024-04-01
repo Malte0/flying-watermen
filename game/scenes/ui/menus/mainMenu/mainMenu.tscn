@@ -26,16 +26,21 @@ text = "
 layout_mode = 2
 text = "Start"
 
-[node name="Options" parent="MenuTemplate/VBoxContainer/VBoxContainer" index="1" instance=ExtResource("3_tc1ot")]
+[node name="Delete Save" parent="MenuTemplate/VBoxContainer/VBoxContainer" index="1" instance=ExtResource("3_tc1ot")]
+layout_mode = 2
+text = "Delete Save"
+
+[node name="Options" parent="MenuTemplate/VBoxContainer/VBoxContainer" index="2" instance=ExtResource("3_tc1ot")]
 layout_mode = 2
 text = "Options"
 
-[node name="Quit" parent="MenuTemplate/VBoxContainer/VBoxContainer" index="2" instance=ExtResource("3_tc1ot")]
+[node name="Quit" parent="MenuTemplate/VBoxContainer/VBoxContainer" index="3" instance=ExtResource("3_tc1ot")]
 layout_mode = 2
 text = "Quit
 "
 
 [connection signal="pressed" from="MenuTemplate/VBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MenuTemplate/VBoxContainer/VBoxContainer/Delete Save" to="." method="_on_delete_save_pressed"]
 [connection signal="pressed" from="MenuTemplate/VBoxContainer/VBoxContainer/Options" to="." method="_on_option_pressed"]
 [connection signal="pressed" from="MenuTemplate/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 

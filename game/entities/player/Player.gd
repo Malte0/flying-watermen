@@ -54,7 +54,12 @@ func _ready():
 	point_light.energy = 0
 	set_expressions()
 	#preparations for saveing
-	verify_save_directory(save_file_path)
+	Globals.verify_save_directory(save_file_path)
+	Globals.wellfilled.connect(save)
+	Globals.planteaten.connect(save_plant)
+	Globals.stonetablet_read.connect(save_stone_tablet)
+	if FileAccess.file_exists(save_file_path + save_file_name):
+		load_game()
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("interact"):
@@ -98,28 +103,57 @@ func flip_player():
 func verify_save_directory(path: String):
 	DirAccess.make_dir_absolute(path)
 
-func save_Player():
+# brunen healt auf max
+func save(value: Vector2):
+	health_component.heal(health_component.max_health)
 	update_player_data()
+	player_data.update_filled_wells(value)
 	ResourceSaver.save(player_data, save_file_path + save_file_name)
-	print("save")
+	print("saved")
+
+func save_stone_tablet(value: Vector2):
+	update_player_data()
+	player_data.update_tablets_read(value)
+	ResourceSaver.save(player_data, save_file_path + save_file_name)
+	print("saved")
 
 func update_player_data():
 	player_data.update_pos(self.position)
-	player_data.set_storedheat(heat_component.get_heat())
-	player_data.set_storedhealth(health_component.get_health())
 	player_data.set_storedabilities(abilities)
 
-func load_player():
+func save_plant(value: Vector2):
+	player_data.update_eaten_plants(value)
+
+func load_game():
 	player_data = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
 	update_Player_on_load()
+	update_wells_on_load()
+	update_stonetablet_on_load()
 	print("loaded")
+
+func update_wells_on_load():
+	var well_locations: Dictionary = player_data.filled_wells
+	for pos in well_locations:
+		Globals.fillwell.emit(pos)
+
+func update_stonetablet_on_load():
+	var stonetablet: Dictionary = player_data.tablets_read
+	for pos in stonetablet:
+		Globals.stonetablet_remove.emit(pos)
+
+func update_plants_on_load():
+	var plant_locations: Dictionary = player_data.eaten_plants
+	for pos in plant_locations:
+		Globals.plantdelete.emit(pos)
+	var plant_hp = plant_locations.size() * 30
+	health_component.max_health += plant_hp
+	health_component.heal(plant_hp)
 
 func update_Player_on_load():
 	self.position = player_data.stored_pos
-	heat_component.set_heat(player_data.stored_heat)
-	health_component.set_health(player_data.stored_health)
 	health_component.update_healthbar()
 	abilities = player_data.stored_abilities
+	update_plants_on_load()
 
 func disenable_components(ranged: bool, melee: bool, movement: bool):
 	ranged_component.is_enabled = ranged
