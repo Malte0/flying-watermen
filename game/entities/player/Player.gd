@@ -126,6 +126,7 @@ func load_game():
 	player_data = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
 	update_Player_on_load()
 	update_wells_on_load()
+	update_stonetablet_on_load()
 	print("loaded")
 
 func update_wells_on_load():
@@ -150,6 +151,7 @@ func update_Player_on_load():
 	self.position = player_data.stored_pos
 	health_component.update_healthbar()
 	abilities = player_data.stored_abilities
+	update_plants_on_load()
 
 func disenable_components(ranged: bool, melee: bool, movement: bool):
 	ranged_component.is_enabled = ranged

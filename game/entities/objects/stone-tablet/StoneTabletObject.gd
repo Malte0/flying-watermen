@@ -16,6 +16,6 @@ func read_stone_tablet(reader: Node):
 	Globals.stonetablet_read.emit(position)
 
 func load_stone_tablet(pos: Vector2):
+	print("hi")
 	if is_equal_approx(pos.x, position.x) and is_equal_approx(pos.y, position.y):
 		$CollisionShape2D/GPUParticles2D.visible = false
-		queue_free()
