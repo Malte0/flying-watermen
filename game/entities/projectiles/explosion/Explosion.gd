@@ -8,6 +8,7 @@ var element: Element.Type = Element.Type.Neutral
 const DECAY_TIME: float = 0.4
 
 func _ready():
+	PolyphonicAudioPlayer.play_sound_effect_from_library("explosion")
 	top_level = true
 	animation_player.play("SodiumExplosion")
 	await get_tree().create_timer(DECAY_TIME).timeout
