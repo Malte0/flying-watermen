@@ -23,7 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://ctwhu6gvuwl61" path="res://assets/light_noise/noise-pattern-water-surface-caustics-background-free-video.jpg" id="23_u4kap"]
 [ext_resource type="Texture2D" uid="uid://b0n33wo3w23dm" path="res://assets/light_noise/light.png" id="24_ylghc"]
 [ext_resource type="Texture2D" uid="uid://4qlm6ho7173m" path="res://assets/light_noise/offset_glow.png" id="25_ygvqh"]
-[ext_resource type="AudioStream" uid="uid://cuqvbh3d0ok8a" path="res://assets/SFX/Waterfall/Water, Waterfall, Steady, Perspective SND0047.wav" id="26_mx3pc"]
+[ext_resource type="AudioStream" uid="uid://cuqvbh3d0ok8a" path="res://assets/SFX/waterfall/Water, Waterfall, Steady, Perspective SND0047.wav" id="26_mx3pc"]
 [ext_resource type="PackedScene" uid="uid://bgaxka266oy83" path="res://entities/enemies/bossEnemy/BossEnemy.tscn" id="28_6xg4q"]
 [ext_resource type="PackedScene" uid="uid://hyr7i2wnah4e" path="res://entities/objects/well/fireWell/FireWell.tscn" id="28_tyh8k"]
 [ext_resource type="PackedScene" uid="uid://i1cmowsc0ynu" path="res://entities/traps/destroyableWall/destroyable_wall.tscn" id="29_wn4ko"]
@@ -8978,14 +8978,14 @@ max_distance = 100000.0
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Environment"]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Environment/ParallaxBackground"]
-position = Vector2(212, -3944.99)
-motion_mirroring = Vector2(13694.2, 0)
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(12800, 0)
 
 [node name="Background01" type="Sprite2D" parent="Environment/ParallaxBackground/ParallaxLayer"]
 modulate = Color(0.556863, 0.4, 0.4, 1)
 show_behind_parent = true
-position = Vector2(6626.81, 1924.46)
-scale = Vector2(5.34937, 5.09019)
+position = Vector2(6400, 0)
+scale = Vector2(5, 5)
 texture = ExtResource("39_rmh2i")
 metadata/_edit_lock_ = true
 
