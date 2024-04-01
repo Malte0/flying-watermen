@@ -60,7 +60,7 @@
 [ext_resource type="PackedScene" uid="uid://dmeutg1f6t7sl" path="res://entities/enemies/rangedEnemy/RangedEnemy.tscn" id="59_rehkv"]
 [ext_resource type="PackedScene" uid="uid://c6ermasms0od0" path="res://entities/enemies/creeperEnemy/CreeperEnemy.tscn" id="60_dovde"]
 [ext_resource type="PackedScene" uid="uid://b7py4c84rndkt" path="res://entities/enemies/spawning/EnemySpawnArea.tscn" id="62_3tnc6"]
-[ext_resource type="PackedScene" path="res://scenes/ui/menus/tablets/BuildingFoam.tscn" id="64_cducb"]
+[ext_resource type="PackedScene" uid="uid://c1f1qpehpsa1r" path="res://scenes/ui/menus/tablets/BuildingFoam.tscn" id="64_cducb"]
 [ext_resource type="PackedScene" uid="uid://vnownse3oxg0" path="res://entities/objects/Lantern/Lantern.tscn" id="65_m8s1r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/menus/tablets/IceTable.tscn" id="65_rvjdg"]
 [ext_resource type="PackedScene" path="res://scenes/ui/menus/tablets/SodiumTable.tscn" id="66_c3aw4"]

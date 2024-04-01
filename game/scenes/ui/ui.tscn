@@ -162,6 +162,7 @@ bbcode_enabled = true
 text = "Swap shot type on[img=40]res://assets/buttons/Dark/Q_Key_Dark.png"
 
 [node name="ColorRect" type="ColorRect" parent="Swap"]
+layout_mode = 0
 offset_left = 32.0
 offset_top = 84.0
 offset_right = 196.0
