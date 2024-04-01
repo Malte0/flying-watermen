@@ -40,7 +40,8 @@ var direction: float = 0.0
 var slide_threshold: float = base_speed/2
 var abilities: Dictionary = {
 	"dash": false,
-	"building_foam": false
+	"building_foam": false,
+	"double_jump": false
 }
 # Shoottype
 var is_shooting_Water: bool = true
@@ -208,7 +209,10 @@ func _on_sliding_state_entered():
 func _on_jumping_state_entered():
 	#velocity.y = jump_velocity + velocity.y/2
 	velocity.y = jump_velocity
-	jumps_left -= 1
+	if abilities["double_jump"] == false:
+		jumps_left -=2
+	else:
+		jumps_left -=1
 
 func _on_airborne_state_entered():
 	friction = base_friction/10
