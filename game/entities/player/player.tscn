@@ -486,6 +486,9 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_denoe")
 blend_point_2/pos = -0.8
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dmnx8"]
+animation = &"ice"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c2nnl"]
 animation = &"jump"
 
@@ -494,9 +497,6 @@ animation = &"melee"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wlofg"]
 animation = &"death"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dmnx8"]
-animation = &"ice"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b1nr5"]
 advance_mode = 2
@@ -517,6 +517,8 @@ states/Dash/position = Vector2(458.333, 231.556)
 states/Default/node = SubResource("AnimationNodeBlendSpace1D_rocsi")
 states/Default/position = Vector2(298, 152)
 states/End/position = Vector2(815.333, 151.63)
+states/Ice/node = SubResource("AnimationNodeAnimation_dmnx8")
+states/Ice/position = Vector2(298, 230)
 states/Jump/node = SubResource("AnimationNodeAnimation_c2nnl")
 states/Jump/position = Vector2(458.667, 152.889)
 states/Melee/node = SubResource("AnimationNodeAnimation_we478")
@@ -524,10 +526,8 @@ states/Melee/position = Vector2(298.222, 66.5556)
 states/Start/position = Vector2(96, 152)
 states/death/node = SubResource("AnimationNodeAnimation_wlofg")
 states/death/position = Vector2(457.222, 67.6296)
-"states/ice 2/node" = SubResource("AnimationNodeAnimation_dmnx8")
-"states/ice 2/position" = Vector2(298, 230)
-transitions = ["Start", "Default", SubResource("AnimationNodeStateMachineTransition_b1nr5"), "Default", "ice 2", SubResource("AnimationNodeStateMachineTransition_v43ie"), "ice 2", "Default", SubResource("AnimationNodeStateMachineTransition_e6j7h")]
-graph_offset = Vector2(-232, 28)
+transitions = ["Start", "Default", SubResource("AnimationNodeStateMachineTransition_b1nr5"), "Default", "Ice", SubResource("AnimationNodeStateMachineTransition_v43ie"), "Ice", "Default", SubResource("AnimationNodeStateMachineTransition_e6j7h")]
+graph_offset = Vector2(-254, -58)
 
 [sub_resource type="Gradient" id="Gradient_5hdqj"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
@@ -811,7 +811,7 @@ position = Vector2(0, -25)
 unique_name_in_owner = true
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_pbewx")
-animation = &"jump"
+animation = &"airborne"
 autoplay = "idle"
 flip_h = true
 
@@ -1120,6 +1120,7 @@ layer = 5
 script = ExtResource("53_830yn")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 rotation = -1.57079
 scale = Vector2(23.3509, 40.4555)
 energy = 0.7
@@ -1132,6 +1133,7 @@ metadata/_edit_lock_ = true
 [connection signal="death" from="HealthComponent" to="." method="_on_death"]
 [connection signal="finished" from="MeleeComponent" to="." method="_on_melee_component_finished"]
 [connection signal="melee_attack_started" from="MeleeComponent" to="SFX" method="_on_melee_component_melee_attack_started"]
+[connection signal="ice_entered" from="ChemicalEffectsManager" to="." method="_on_chemical_effects_manager_ice_entered"]
 [connection signal="on_item_activated" from="Inventory" to="SFX" method="_on_inventory_on_item_activated"]
 [connection signal="on_item_in_inventory_updated" from="Inventory" to="SFX" method="_on_inventory_on_item_in_inventory_updated"]
 [connection signal="on_item_used" from="Inventory" to="SFX" method="_on_inventory_on_item_used"]
