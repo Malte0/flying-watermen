@@ -164,8 +164,8 @@ func _on_fire_wave_cooldown_timeout():
 
 func _on_attack_cooldown_timeout():
 	is_attack_cd = false
-	
-	
+
+
 func _on_dash_cooldown_timeout():
 	is_dash_cd = false
 
