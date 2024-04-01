@@ -137,6 +137,7 @@ func do_fire_ball():
 		shoot_fire_ball()
 
 func do_Dash():
+	if is_dash_cd: return
 	if movement_component.movement_speed == movement_speed_calm:
 		return
 	var player_direction: int = sign(player.global_position.x - global_position.x)
@@ -148,7 +149,9 @@ func do_Dash():
 	health_component.is_invincible = true
 	collision_mask = 1
 	collision_layer = 0
+	is_dash_cd = true
 	dash_timeout.start()
+	dash_cooldown.start()
 
 func shoot_fire_ball():
 	var projectile: Node2D = projectile_scene.instantiate()
@@ -165,10 +168,9 @@ func _on_fire_wave_cooldown_timeout():
 func _on_attack_cooldown_timeout():
 	is_attack_cd = false
 
-
 func _on_dash_cooldown_timeout():
 	is_dash_cd = false
-
+	
 func attack_decision():
 	#das ich das so nennen muss ist sehr Fragwürdig ._.
 	var has_return: bool = player.global_position.y > global_position.y + 100

@@ -5,7 +5,7 @@ class_name  Fire extends RigidBody2D
 @onready var hit_box: CollisionShape2D = $CollisionShape2D
 @onready var area: CollisionShape2D = $Area2D/CollisionShape2D
 
-@export var fire_scale: Vector2 = Vector2(0.1, 0.1):
+@export var fire_scale: Vector2 = Vector2(0.3, 0.3):
 	get:
 		return fire_scale
 	set(value):
