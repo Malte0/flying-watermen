@@ -248,6 +248,5 @@ func shoot():
 	return ranged_component.shoot(shoot_direction, projectile_scene, velocity)
 #endregion
 
-func _on_chemical_effects_manager_test():
-	print("lföjhgfdoiljfg")
+func _on_chemical_effects_manager_chemical_used():
 	$Animation/AnimationPlayer.play("ice")
