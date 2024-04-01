@@ -13,3 +13,6 @@ func give_vision_to_player(body):
 	if body is Player:
 		pass
 		#vision_obstacle.visible = false
+
+func _on_audio_stream_player_finished():
+	$Environment/AudioStreamPlayer.play()
