@@ -47,7 +47,6 @@ func boss_killed():
 
 func check_win_con():
 	if not is_boos_alive and wells_filled == num_wells:
-		delet_save()
 		get_tree().change_scene_to_file.call_deferred(win_screen)
 
 func verify_save_directory(path: String):
