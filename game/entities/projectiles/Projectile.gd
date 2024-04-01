@@ -33,7 +33,7 @@ func _ready():
 	await get_tree().create_timer(life_time_seconds).timeout
 	queue_free()
 
-func _integrate_forces(state):
+func _integrate_forces(_state):
 	rotation = linear_velocity.angle()
 	if not visible: visible = true
 	if new_position != Vector2():

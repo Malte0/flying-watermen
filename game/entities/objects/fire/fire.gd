@@ -41,7 +41,7 @@ func _ready():
 	#set_lock_rotation_enabled(true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if not Engine.is_editor_hint():
 		for body in bodys_inside:
 			var health_component: HealthComponent = body.get_node_or_null("HealthComponent")

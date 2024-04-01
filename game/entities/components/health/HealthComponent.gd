@@ -57,7 +57,7 @@ func can_damage(damage_type: Element.Type) -> bool:
 	else: return damage_type == Element.Type.Neutral or not damage_type == element
 
 # there is no need to use to check for iframes, cuz the func deals no primary dmg
-func take_damage_overtime(amount: int, damage_type: Element.Type, time: int):
+func take_damage_overtime(amount: int, damage_type: Element.Type, _time: int):
 	if not can_damage(damage_type): return
 	can_take_damage_over_time += amount
 	while can_take_damage_over_time >= 0:

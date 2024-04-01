@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export var attack_cooldown: Timer
 @export var change_current_attack: Timer
 @export var dash_timeout: Timer
+@export var dash_cooldown: Timer
 @export var movement_speed_calm: int = 0
 @export var movement_speed_aggro: int = 100
 @export var fire_wave_scene: PackedScene
@@ -30,6 +31,7 @@ const ATTACK_HINT_TIME: float = 0.3
 var next_attack: Attacks = Attacks.None
 var is_fire_wave_cd: bool = false
 var is_attack_cd: bool = false
+var is_dash_cd: bool = false
 var is_in_second_phase: bool = false
 var fire_in_range: Array[Object] = []
 var is_direciton_locked: bool = false
@@ -75,11 +77,12 @@ func on_aggro_entered():
 
 func on_calm_entered():
 	if not dash_timeout.is_stopped():
+		# das ist kein signal darauf kann man nicht warten
 		await dash_timeout.is_stopped()
 	movement_component.movement_speed = movement_speed_calm
 
 func choose_attack(_player_distance):
-	match randi() % 5:
+	match randi() % 10:
 		0:
 			return Attacks.FireWave
 		1:
@@ -162,6 +165,10 @@ func _on_fire_wave_cooldown_timeout():
 func _on_attack_cooldown_timeout():
 	is_attack_cd = false
 
+
+func _on_dash_cooldown_timeout():
+	is_dash_cd = false
+
 func attack_decision():
 	#das ich das so nennen muss ist sehr Fragwürdig ._.
 	var has_return: bool = player.global_position.y > global_position.y + 100
@@ -172,7 +179,7 @@ func attack_decision():
 func _on_change_current_attack_timeout():
 	next_attack = Attacks.None
 
-func _on_health_component_health_changed(new_health, delta_health):
+func _on_health_component_health_changed(new_health, _delta_health):
 	if not is_in_second_phase && new_health < health_component.max_health / 2:
 		is_in_second_phase = true
 		attack_cooldown.start()
@@ -193,3 +200,4 @@ func _on_dash_timeout_timeout():
 	health_component.is_invincible = false
 	movement_component.movement_speed = movement_speed_aggro
 	is_direciton_locked = false
+	is_dash_cd = true

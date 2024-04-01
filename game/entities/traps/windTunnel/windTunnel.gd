@@ -39,7 +39,7 @@ func _physics_process(delta):
 		elif body is RigidBody2D:
 			body.apply_impulse(force_vector * delta)
 
-func _apply_wind_to_char_body(body, delta):
+func _apply_wind_to_char_body(body, _delta):
 	var wind_direction_vel: float = body.velocity.dot(Vector2.from_angle(rotation))
 	var wind_force_on_body: float = lerp(wind_direction_vel, force, 0.05)
 	var wind_direction_force: float = min(wind_force_on_body, force)

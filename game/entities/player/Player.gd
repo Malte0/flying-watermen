@@ -40,11 +40,12 @@ var projectile_scene: PackedScene = load("res://entities/projectiles/WaterProjec
 var direction: float = 0.0
 var slide_threshold: float = base_speed/2
 var abilities: Dictionary = {
-	"dash": false
+	"dash": false,
+	"building_foam": false
 }
 # Shoottype
 var is_shooting_Water: bool = true
-var buildingFoam_shootcooldown: float = 0.3
+var buildingFoam_shootcooldown: float = 0.1
 
 func _ready():
 	animation_tree.active = true
@@ -72,6 +73,8 @@ func _input(event: InputEvent):
 		toggle_light()
 
 func set_shooting_type():
+	if abilities["building_foam"] == false:
+		return
 	if is_shooting_Water:
 		is_shooting_Water = false
 		projectile_scene = load("res://entities/projectiles/BuildingFoamProjectile.tscn")
@@ -79,7 +82,7 @@ func set_shooting_type():
 	else:
 		is_shooting_Water = true
 		projectile_scene = load("res://entities/projectiles/WaterProjectile.tscn")
-		ranged_component.cooldown = buildingFoam_shootcooldown
+		ranged_component.cooldown = 0.5
 
 func set_expressions():
 	state_chart.set_expression_property("crouching", false) #Input.is_action_pressed("s"))
@@ -255,3 +258,5 @@ func toggle_light():
 		tween.tween_property(point_light, "energy", 0, 0.5)
 	else: 
 		tween.tween_property(point_light, "energy", 1, 0.5)
+func _on_chemical_effects_manager_chemical_used():
+	$Animation/AnimationPlayer.play("ice")

@@ -1,6 +1,80 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbm5yfysxt45l"]
+[gd_scene load_steps=23 format=3 uid="uid://bbm5yfysxt45l"]
 
 [ext_resource type="Script" path="res://scenes/soundSystem/polyphonic_audio_player.gd" id="1_hanfh"]
+[ext_resource type="Script" path="res://scenes/soundSystem/AudioLibrary.gd" id="2_5ayua"]
+[ext_resource type="Script" path="res://scenes/soundSystem/soundEffects.gd" id="3_xtsh6"]
+[ext_resource type="AudioStream" uid="uid://cxuluryxrrbft" path="res://assets/SFX/placeHolder01.wav" id="4_3fc3d"]
+[ext_resource type="AudioStream" uid="uid://b8o50pvv7u37j" path="res://assets/SFX/player/spit.wav" id="5_6tr5i"]
+[ext_resource type="AudioStream" uid="uid://bbxhs7f4v3t41" path="res://assets/SFX/player/dash.wav" id="6_3ftgu"]
+[ext_resource type="AudioStream" uid="uid://bwcr1or466rwa" path="res://assets/SFX/player/jump.wav" id="7_prwst"]
+[ext_resource type="AudioStream" uid="uid://dyjar8353lehf" path="res://assets/SFX/player/pickup_item.wav" id="8_c2poy"]
+
+[sub_resource type="Resource" id="Resource_eaexf"]
+script = ExtResource("3_xtsh6")
+tag = "melee_player"
+stream = ExtResource("4_3fc3d")
+
+[sub_resource type="Resource" id="Resource_sma3q"]
+script = ExtResource("3_xtsh6")
+tag = "shoot_player"
+stream = ExtResource("5_6tr5i")
+
+[sub_resource type="Resource" id="Resource_keasy"]
+script = ExtResource("3_xtsh6")
+tag = "dash"
+stream = ExtResource("6_3ftgu")
+
+[sub_resource type="Resource" id="Resource_k5rbn"]
+script = ExtResource("3_xtsh6")
+tag = "jump"
+stream = ExtResource("7_prwst")
+
+[sub_resource type="Resource" id="Resource_swcnd"]
+script = ExtResource("3_xtsh6")
+tag = "pickup_item"
+stream = ExtResource("8_c2poy")
+
+[sub_resource type="Resource" id="Resource_h6inb"]
+script = ExtResource("3_xtsh6")
+tag = "foam"
+stream = ExtResource("8_c2poy")
+
+[sub_resource type="Resource" id="Resource_jb3qc"]
+script = ExtResource("3_xtsh6")
+tag = "ice"
+stream = ExtResource("4_3fc3d")
+
+[sub_resource type="Resource" id="Resource_jf566"]
+script = ExtResource("3_xtsh6")
+tag = "sodium"
+stream = ExtResource("4_3fc3d")
+
+[sub_resource type="Resource" id="Resource_6fhe7"]
+script = ExtResource("3_xtsh6")
+tag = ""
+
+[sub_resource type="Resource" id="Resource_3hioi"]
+script = ExtResource("3_xtsh6")
+tag = ""
+
+[sub_resource type="Resource" id="Resource_xqx0l"]
+script = ExtResource("3_xtsh6")
+tag = ""
+
+[sub_resource type="Resource" id="Resource_5ni0b"]
+script = ExtResource("3_xtsh6")
+tag = "melee_enemy_attack"
+stream = ExtResource("4_3fc3d")
+
+[sub_resource type="Resource" id="Resource_j8ixj"]
+script = ExtResource("3_xtsh6")
+tag = "ranged_enemy_attack"
+stream = ExtResource("4_3fc3d")
+
+[sub_resource type="Resource" id="Resource_85lbr"]
+script = ExtResource("2_5ayua")
+sound_effects = Array[ExtResource("3_xtsh6")]([SubResource("Resource_eaexf"), SubResource("Resource_sma3q"), SubResource("Resource_keasy"), SubResource("Resource_k5rbn"), SubResource("Resource_swcnd"), SubResource("Resource_h6inb"), SubResource("Resource_jb3qc"), SubResource("Resource_jf566"), SubResource("Resource_6fhe7"), SubResource("Resource_3hioi"), SubResource("Resource_xqx0l"), SubResource("Resource_5ni0b"), SubResource("Resource_j8ixj")])
 
 [node name="PolyphonicAudioPlayer" type="AudioStreamPlayer"]
 script = ExtResource("1_hanfh")
+audio_library = SubResource("Resource_85lbr")

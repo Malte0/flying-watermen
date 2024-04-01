@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdkicasp65o4b"]
+[gd_scene load_steps=6 format=3 uid="uid://cdkicasp65o4b"]
 
 [ext_resource type="Script" path="res://scenes/ui/menus/optionMenu/optionMenu.gd" id="1_o5c20"]
-[ext_resource type="PackedScene" uid="uid://bnl4aymwagsqa" path="res://scenes/ui/menus/menuTemplate.tscn" id="2_5rd8f"]
-[ext_resource type="PackedScene" uid="uid://ga63x4i2ugw4" path="res://scenes/ui/menus/button.tscn" id="2_fyjd1"]
-[ext_resource type="PackedScene" uid="uid://cw2su11exv8go" path="res://scenes/ui/menus/slider.tscn" id="3_l5udh"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menus/menuTemplate.tscn" id="2_5rd8f"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menus/button.tscn" id="2_fyjd1"]
+[ext_resource type="PackedScene" uid="uid://d0dr7finpfu4d" path="res://scenes/ui/menus/slider.tscn" id="3_l5udh"]
+[ext_resource type="PackedScene" uid="uid://dpx1mkfrxogqu" path="res://scenes/ui/menus/menuLabel.tscn" id="3_yts85"]
 
 [node name="Options" type="Control"]
 layout_mode = 3
@@ -27,33 +28,30 @@ size_flags_horizontal = 4
 theme_override_constants/h_separation = 16
 columns = 2
 
-[node name="MusicLabel" type="Label" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer"]
+[node name="MusicLabel" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer" instance=ExtResource("3_yts85")]
 layout_mode = 2
-text = "Music"
 
 [node name="MusicSlider" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer" instance=ExtResource("3_l5udh")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="SFXLabel" type="Label" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer"]
+[node name="SFX" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer" instance=ExtResource("3_yts85")]
 layout_mode = 2
-text = "SFX
-"
+text = "SFX"
 
 [node name="SFXSlider" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer" instance=ExtResource("3_l5udh")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MenuLabel" type="Label" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer"]
+[node name="Menu" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer" instance=ExtResource("3_yts85")]
 layout_mode = 2
-text = "Menu
-"
+text = "Menu"
 
 [node name="MenuSlider" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer" instance=ExtResource("3_l5udh")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="FullscreenLabel" type="Label" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer"]
+[node name="Fullscreen" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer" instance=ExtResource("3_yts85")]
 layout_mode = 2
 text = "Fullscreen"
 
