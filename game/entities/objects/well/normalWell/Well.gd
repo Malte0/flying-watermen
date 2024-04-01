@@ -20,3 +20,5 @@ func fill_well(_body: Node):
 		well_filled.emit()
 		is_full = true
 		Globals.well_filled()
+		var tween = create_tween()
+		tween.tween_property($PointLight2D, "energy", 1, 0.5)

@@ -74,6 +74,7 @@ autoplay = "idle"
 frame_progress = 0.312619
 
 [node name="PointLight2D" type="PointLight2D" parent="EnemyGraphics"]
+position = Vector2(0, -17)
 scale = Vector2(5.21875, 5.125)
 energy = 0.4
 texture = SubResource("GradientTexture2D_qyfpx")

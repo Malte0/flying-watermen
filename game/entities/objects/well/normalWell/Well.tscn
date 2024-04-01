@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://o5qajbk6mfjn"]
+[gd_scene load_steps=15 format=3 uid="uid://o5qajbk6mfjn"]
 
 [ext_resource type="Script" path="res://entities/objects/well/normalWell/Well.gd" id="1_ryms2"]
 [ext_resource type="Texture2D" uid="uid://cxe6hu7quuq4d" path="res://entities/objects/well/assets/wellEmpty.png" id="2_gdx0v"]
@@ -8,6 +8,15 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_amob8"]
 radius = 95.0
+
+[sub_resource type="Gradient" id="Gradient_j2evw"]
+offsets = PackedFloat32Array(0, 0.584416)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_djkt6"]
+gradient = SubResource("Gradient_j2evw")
+fill = 1
+fill_from = Vector2(0.472477, 0.545872)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2wsyv"]
 blend_mode = 1
@@ -49,6 +58,13 @@ script = ExtResource("1_ryms2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -22)
 shape = SubResource("CircleShape2D_amob8")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -5)
+scale = Vector2(28.5625, 21.9688)
+color = Color(0.643137, 0.690196, 1, 1)
+energy = 0.5
+texture = SubResource("GradientTexture2D_djkt6")
 
 [node name="Texture" type="Sprite2D" parent="."]
 position = Vector2(0, -37)

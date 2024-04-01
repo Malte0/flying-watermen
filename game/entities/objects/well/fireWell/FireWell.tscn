@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://hyr7i2wnah4e"]
+[gd_scene load_steps=16 format=3 uid="uid://hyr7i2wnah4e"]
 
 [ext_resource type="Script" path="res://entities/objects/well/fireWell/FireWell.gd" id="1_qw6cr"]
 [ext_resource type="Texture2D" uid="uid://cxe6hu7quuq4d" path="res://entities/objects/well/assets/wellEmpty.png" id="2_r3hi0"]
@@ -6,6 +6,15 @@
 [ext_resource type="Shader" path="res://shader/wobbleEffect.gdshader" id="4_okffb"]
 [ext_resource type="Texture2D" uid="uid://dgn2ljfyurcci" path="res://entities/objects/well/assets/fire.png" id="5_5wk88"]
 [ext_resource type="AudioStream" uid="uid://cx2yx35kkfnho" path="res://assets/SFX/well/glow.wav" id="6_1fsnh"]
+
+[sub_resource type="Gradient" id="Gradient_pprk8"]
+offsets = PackedFloat32Array(0, 0.584416)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_80rt4"]
+gradient = SubResource("Gradient_pprk8")
+fill = 1
+fill_from = Vector2(0.472477, 0.545872)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2wsyv"]
 blend_mode = 1
@@ -88,6 +97,12 @@ metadata/_edit_lock_ = true
 position = Vector2(10.8713, -6)
 scale = Vector2(10.5794, 5.49783)
 polygon = PackedVector2Array(-6.98257, -4.91103, -6.98257, 7.82126, 4.73834, 7.82126, 4.73834, -5.09292, 3.60405, -6.91181, 1.52454, -8.00315, -1.02759, -8.36693, -3.8633, -8.00315, -5.94281, -6.91181)
+
+[node name="PointLight2D" type="PointLight2D" parent="Texture"]
+position = Vector2(0, 40)
+scale = Vector2(143.333, 117.917)
+energy = 0.75
+texture = SubResource("GradientTexture2D_80rt4")
 
 [node name="FlammePart" type="GPUParticles2D" parent="."]
 modulate = Color(0.772549, 0, 0, 1)
