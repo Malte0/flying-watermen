@@ -40,7 +40,6 @@ func _ready():
 	movement_component.change_move_direction(movement_component.Movement_Direction.Left)
 	aggro_component.aggro_entered.connect(on_aggro_entered)
 	aggro_component.calm_entered.connect(on_calm_entered)
-	health_component.death.connect(_on_death)
 	color_rect_low.visible = false
 	color_rect_high.visible = false
 	fire_detection.collision_mask = 8
@@ -203,5 +202,5 @@ func _on_dash_timeout_timeout():
 	is_direciton_locked = false
 	is_dash_cd = true
 
-func _on_death():
+func _on_health_component_death():
 	Globals.boss_killed()
