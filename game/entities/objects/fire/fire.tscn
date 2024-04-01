@@ -37,13 +37,13 @@ script = ExtResource("1_p2r7l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_tmkil")
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_0u14y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 13)
 rotation = 1.57079
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.3, 0.3)
 shape = SubResource("CapsuleShape2D_aftnp")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -52,7 +52,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(2.5411e-21, 4)
 rotation = 1.5708
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.3, 0.3)
 shape = SubResource("CapsuleShape2D_gds7h")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_health_bar") instance=ExtResource("3_p8tfa")]
