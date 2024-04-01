@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var vision_obstacle: Sprite2D = $Player/Camera2D/BlockVision
+@onready var vision_obstacle: PointLight2D = $Player/PointLight2D2
 
 func _on_destroyable_wall_3_wall_destroyed():
 	$WindTunnels/WindTunnel3/CollisionShape2D.set_deferred("disabled", false)
@@ -20,8 +20,10 @@ func _on_vision_ending_body_entered(body):
 
 func blinging_player(body):
 	if body is Player:
-		vision_obstacle.visible = true
+		pass
+		#vision_obstacle.visible = true
 
 func give_vision_to_player(body):
 	if body is Player:
-		vision_obstacle.visible = false
+		pass
+		#vision_obstacle.visible = false

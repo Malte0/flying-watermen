@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpiypck5f1v6f"]
+[gd_scene load_steps=13 format=3 uid="uid://dfpxrmj7hpbrk"]
 
 [ext_resource type="Script" path="res://entities/objects/puddle.gd" id="1_ogjm0"]
 [ext_resource type="Texture2D" uid="uid://utp3bloip30k" path="res://assets/prototype-assets/pfuetze.png" id="2_8qdcc"]
@@ -41,6 +41,16 @@ scale_max = 0.6
 scale_curve = SubResource("CurveTexture_4cgvj")
 color_ramp = SubResource("GradientTexture1D_mxgcb")
 
+[sub_resource type="Gradient" id="Gradient_ouhto"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2nfwm"]
+gradient = SubResource("Gradient_ouhto")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
 [node name="Puddle" type="Area2D"]
 z_index = 1
 collision_mask = 3
@@ -51,6 +61,7 @@ position = Vector2(0, 7.75)
 shape = SubResource("RectangleShape2D_f8yqx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.764706, 0.764706, 0.764706, 1)
 position = Vector2(-1, 11)
 scale = Vector2(0.171875, 0.0726732)
 texture = ExtResource("2_8qdcc")
@@ -65,6 +76,11 @@ scale = Vector2(0.5, 0.5)
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_jylbr")
 texture = ExtResource("3_3pshe")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(9.25, 3.78125)
+energy = 0.3
+texture = SubResource("GradientTexture2D_2nfwm")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

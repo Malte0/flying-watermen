@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxqsoc8anmpvj"]
+[gd_scene load_steps=12 format=3 uid="uid://cxqsoc8anmpvj"]
 
 [ext_resource type="Script" path="res://entities/objects/fire/fire.gd" id="1_p2r7l"]
 [ext_resource type="Texture2D" uid="uid://wc3tovfbvv7g" path="res://assets/fire_barrier/fire_1.png" id="2_0u14y"]
@@ -20,6 +20,15 @@ shader_parameter/distortion = null
 shader_parameter/heightOffset = null
 shader_parameter/offset = 0.0
 
+[sub_resource type="Gradient" id="Gradient_pprk8"]
+offsets = PackedFloat32Array(0, 0.584416)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8d18q"]
+gradient = SubResource("Gradient_pprk8")
+fill = 1
+fill_from = Vector2(0.472477, 0.545872)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aftnp"]
 radius = 120.0
 height = 540.0
@@ -39,6 +48,12 @@ script = ExtResource("1_p2r7l")
 material = SubResource("ShaderMaterial_tmkil")
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_0u14y")
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite2D"]
+position = Vector2(0, 40)
+scale = Vector2(51.25, 43.4375)
+energy = 0.5
+texture = SubResource("GradientTexture2D_8d18q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 13)
