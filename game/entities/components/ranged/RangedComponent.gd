@@ -4,8 +4,8 @@ signal shot()
 
 @export var use_cooldown: bool = false
 @export var base_cooldown: float = 0.5
-var cooldown: float = base_cooldown
 
+@onready var cooldown: float = base_cooldown
 @onready var timer: Timer = $ShootCooldown
 @onready var shoot_position: Marker2D = $ShootPosition
 
