@@ -211,6 +211,7 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FireDetection"]
 shape = SubResource("CircleShape2D_bvbuf")
 
+[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
 [connection signal="timeout" from="FireWaveCooldown" to="." method="_on_fire_wave_cooldown_timeout"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
