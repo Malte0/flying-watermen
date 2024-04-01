@@ -56,6 +56,7 @@ func _ready():
 	#preparations for saveing
 	Globals.verify_save_directory(save_file_path)
 	Globals.wellfilled.connect(save)
+	Globals.planteaten.connect(save_plant)
 	if FileAccess.file_exists(save_file_path + save_file_name):
 		load_game()
 
@@ -111,6 +112,9 @@ func update_player_data():
 	player_data.update_pos(self.position)
 	player_data.set_storedabilities(abilities)
 
+func save_plant(value: Vector2):
+	player_data.update_eaten_plants(value)
+
 func load_game():
 	player_data = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
 	update_Player_on_load()
@@ -121,6 +125,14 @@ func update_wells_on_load():
 	var well_locations: Dictionary = player_data.filled_wells
 	for pos in well_locations:
 		Globals.fillwell.emit(pos)
+
+func update_plants_on_load():
+	var plant_locations: Dictionary = player_data.eaten_plants
+	for pos in plant_locations:
+		Globals.plantdelete.emit(pos)
+	var plant_hp = plant_locations.size() * 30
+	health_component.max_health += plant_hp
+	health_component.heal(plant_hp)
 
 func update_Player_on_load():
 	self.position = player_data.stored_pos

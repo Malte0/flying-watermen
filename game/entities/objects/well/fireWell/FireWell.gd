@@ -36,5 +36,4 @@ func _on_body_exited(body):
 
 func fill_well_signal(pos: Vector2):
 	if is_equal_approx(pos.x, position.x) and is_equal_approx(pos.y, position.y):
-		print("hi")
 		already_filled = true

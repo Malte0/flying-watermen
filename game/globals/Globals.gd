@@ -13,6 +13,8 @@ var num_wells: int = 0
 var wells_location: Dictionary = {}
 signal wellfilled(pos: Vector2)
 signal fillwell(pos: Vector2)
+signal planteaten(pos: Vector2)
+signal plantdelete(pos: Vector2)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("str+1"):
@@ -43,6 +45,7 @@ func boss_killed():
 
 func check_win_con():
 	if not is_boos_alive and wells_filled == num_wells:
+		delet_save()
 		get_tree().change_scene_to_file.call_deferred(win_screen)
 
 func verify_save_directory(path: String):
