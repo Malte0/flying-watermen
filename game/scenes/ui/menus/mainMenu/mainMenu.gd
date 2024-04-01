@@ -10,3 +10,6 @@ func _on_option_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+func _on_delete_save_pressed():
+	Globals.delet_save()

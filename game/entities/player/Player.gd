@@ -54,7 +54,10 @@ func _ready():
 	point_light.energy = 0
 	set_expressions()
 	#preparations for saveing
-	verify_save_directory(save_file_path)
+	Globals.verify_save_directory(save_file_path)
+	Globals.wellfilled.connect(save)
+	if FileAccess.file_exists(save_file_path + save_file_name):
+		load_game()
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("interact"):
@@ -98,26 +101,29 @@ func flip_player():
 func verify_save_directory(path: String):
 	DirAccess.make_dir_absolute(path)
 
-func save_Player():
+func save(value: Vector2):
 	update_player_data()
+	player_data.update_filled_wells(value)
 	ResourceSaver.save(player_data, save_file_path + save_file_name)
-	print("save")
+	print("saved")
 
 func update_player_data():
 	player_data.update_pos(self.position)
-	player_data.set_storedheat(heat_component.get_heat())
-	player_data.set_storedhealth(health_component.get_health())
 	player_data.set_storedabilities(abilities)
 
-func load_player():
+func load_game():
 	player_data = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
 	update_Player_on_load()
+	update_wells_on_load()
 	print("loaded")
+
+func update_wells_on_load():
+	var well_locations: Dictionary = player_data.filled_wells
+	for pos in well_locations:
+		Globals.fillwell.emit(pos)
 
 func update_Player_on_load():
 	self.position = player_data.stored_pos
-	heat_component.set_heat(player_data.stored_heat)
-	health_component.set_health(player_data.stored_health)
 	health_component.update_healthbar()
 	abilities = player_data.stored_abilities
 
