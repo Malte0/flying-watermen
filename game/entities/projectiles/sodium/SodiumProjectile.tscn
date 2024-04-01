@@ -24,7 +24,7 @@ debug_color = Color(0.258824, 0.635294, 0, 0.419608)
 [node name="ProjectileSprite" type="Sprite2D" parent="Projectile"]
 self_modulate = Color(0.580392, 0.580392, 0.580392, 1)
 rotation = 3.14159
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.35, 0.35)
 texture = ExtResource("3_3drq2")
 
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
