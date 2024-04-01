@@ -57,6 +57,7 @@ func _ready():
 	Globals.verify_save_directory(save_file_path)
 	Globals.wellfilled.connect(save)
 	Globals.planteaten.connect(save_plant)
+	Globals.stonetablet_read.connect(save_stone_tablet)
 	if FileAccess.file_exists(save_file_path + save_file_name):
 		load_game()
 
@@ -108,6 +109,12 @@ func save(value: Vector2):
 	ResourceSaver.save(player_data, save_file_path + save_file_name)
 	print("saved")
 
+func save_stone_tablet(value: Vector2):
+	update_player_data()
+	player_data.update_tablets_read(value)
+	ResourceSaver.save(player_data, save_file_path + save_file_name)
+	print("saved")
+
 func update_player_data():
 	player_data.update_pos(self.position)
 	player_data.set_storedabilities(abilities)
@@ -125,6 +132,11 @@ func update_wells_on_load():
 	var well_locations: Dictionary = player_data.filled_wells
 	for pos in well_locations:
 		Globals.fillwell.emit(pos)
+
+func update_stonetablet_on_load():
+	var stonetablet: Dictionary = player_data.tablets_read
+	for pos in stonetablet:
+		Globals.stonetablet_remove.emit(pos)
 
 func update_plants_on_load():
 	var plant_locations: Dictionary = player_data.eaten_plants

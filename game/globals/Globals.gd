@@ -15,6 +15,8 @@ signal wellfilled(pos: Vector2)
 signal fillwell(pos: Vector2)
 signal planteaten(pos: Vector2)
 signal plantdelete(pos: Vector2)
+signal stonetablet_read(pos: Vector2)
+signal stonetablet_remove(pos: Vector2)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("str+1"):
