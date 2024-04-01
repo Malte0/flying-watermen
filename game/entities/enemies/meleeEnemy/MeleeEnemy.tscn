@@ -128,6 +128,7 @@ flip_h = true
 [node name="PointLight2D" type="PointLight2D" parent="EnemyGraphics"]
 scale = Vector2(5.21875, 5.125)
 energy = 0.5
+range_layer_min = -101
 texture = SubResource("GradientTexture2D_1vf74")
 
 [node name="ViewArea" type="Area2D" parent="."]

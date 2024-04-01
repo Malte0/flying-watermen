@@ -177,6 +177,7 @@ texture = ExtResource("3_gpjlj")
 position = Vector2(0, -29.8507)
 scale = Vector2(100, 90.0187)
 energy = 0.5
+range_layer_min = -101
 texture = SubResource("GradientTexture2D_0xnj4")
 
 [node name="EKeyDark" type="Sprite2D" parent="CollisionShape2D"]

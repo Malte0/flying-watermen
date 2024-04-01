@@ -64,6 +64,7 @@ position = Vector2(0, -5)
 scale = Vector2(28.5625, 21.9688)
 color = Color(0.643137, 0.690196, 1, 1)
 energy = 0.5
+range_layer_min = -101
 texture = SubResource("GradientTexture2D_djkt6")
 
 [node name="Texture" type="Sprite2D" parent="."]

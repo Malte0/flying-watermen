@@ -53,6 +53,7 @@ texture = ExtResource("2_0u14y")
 position = Vector2(0, 40)
 scale = Vector2(51.25, 43.4375)
 energy = 0.5
+range_layer_min = -101
 texture = SubResource("GradientTexture2D_8d18q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
