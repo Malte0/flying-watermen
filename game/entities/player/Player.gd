@@ -103,7 +103,9 @@ func flip_player():
 func verify_save_directory(path: String):
 	DirAccess.make_dir_absolute(path)
 
+# brunen healt auf max
 func save(value: Vector2):
+	health_component.heal(health_component.max_health)
 	update_player_data()
 	player_data.update_filled_wells(value)
 	ResourceSaver.save(player_data, save_file_path + save_file_name)
