@@ -56,7 +56,7 @@ func _on_body_entered(body):
 	bodys_inside.append(body)
 
 func _on_body_exited(body):
-	bodys_inside.erase(body)#
+	bodys_inside.erase(body)
 
 func fly_towards(body):
 	$Area2D.collision_mask = 0
@@ -64,8 +64,6 @@ func fly_towards(body):
 	tween.tween_property(self, "position", body.global_position, 0.3)
 	tween.tween_property(self, "scale", Vector2.ZERO, 0.3)
 	tween.finished.connect(self.queue_free)
-
-
 
 func _on_health_component_health_changed(new_health, delta_health):
 	var tween = create_tween()
