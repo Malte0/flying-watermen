@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://jfq7dfysa03y"]
 
 [ext_resource type="Script" path="res://scenes/ui/menus/winscreen/winscreen.gd" id="1_h54h1"]
-[ext_resource type="Texture2D" uid="uid://bhohuwngei70j" path="res://assets/background/Background.png" id="2_pskj5"]
+[ext_resource type="Texture2D" uid="uid://1akl0pqn16nd" path="res://assets/menue_pictures/WinScreen.png" id="2_gc51o"]
 
 [node name="Winscreen" type="Node2D"]
 script = ExtResource("1_h54h1")
@@ -10,14 +10,14 @@ script = ExtResource("1_h54h1")
 offset_left = -6.0
 offset_right = 1152.0
 offset_bottom = 646.0
-texture = ExtResource("2_pskj5")
+texture = ExtResource("2_gc51o")
 expand_mode = 1
 
 [node name="Button" type="Button" parent="."]
-offset_left = 462.0
-offset_top = 279.0
-offset_right = 671.0
-offset_bottom = 352.0
+offset_left = 489.0
+offset_top = 336.0
+offset_right = 698.0
+offset_bottom = 409.0
 text = "Return to menu
 "
 

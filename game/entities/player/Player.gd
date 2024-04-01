@@ -260,7 +260,7 @@ func toggle_light():
 	var tween = create_tween()
 	if point_light.energy > 0:
 		tween.tween_property(point_light, "energy", 0, 0.5)
-	else: 
+	else:
 		tween.tween_property(point_light, "energy", 0.7, 0.5)
 func _on_chemical_effects_manager_chemical_used():
 	$Animation/AnimationPlayer.play("ice")

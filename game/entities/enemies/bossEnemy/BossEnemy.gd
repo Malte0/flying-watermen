@@ -170,7 +170,7 @@ func _on_attack_cooldown_timeout():
 
 func _on_dash_cooldown_timeout():
 	is_dash_cd = false
-	
+
 func attack_decision():
 	#das ich das so nennen muss ist sehr Fragwürdig ._.
 	var has_return: bool = player.global_position.y > global_position.y + 100
