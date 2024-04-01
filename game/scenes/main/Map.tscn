@@ -52,7 +52,7 @@
 [ext_resource type="PackedScene" uid="uid://cxqsoc8anmpvj" path="res://entities/objects/fire/fire.tscn" id="54_bp6fb"]
 [ext_resource type="PackedScene" uid="uid://dp6qth5jvcdhd" path="res://entities/player/inventory/items/iceChemical/IceChemical.tscn" id="55_sowcr"]
 [ext_resource type="PackedScene" uid="uid://4lea60a43ia6" path="res://scenes/ui/menus/tablets/Lore1.tscn" id="56_2kron"]
-[ext_resource type="PackedScene" uid="uid://oavf5bkejub3" path="res://assets/forest-assets/scenes/spiderweb_01.tscn" id="57_ftl5n"]
+[ext_resource type="PackedScene" path="res://assets/forest-assets/scenes/spiderweb_01.tscn" id="57_ftl5n"]
 [ext_resource type="PackedScene" uid="uid://d3fci01ety45h" path="res://entities/objects/max-health-plant/plant.tscn" id="57_vwl11"]
 [ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/meleeEnemy/MeleeEnemy.tscn" id="58_6c21q"]
 [ext_resource type="Texture2D" uid="uid://c6h0smnhpwt86" path="res://assets/sign/wood1.png" id="58_ngghx"]
@@ -3947,15 +3947,6 @@ metadata/_better_terrain = {
 }]],
 "version": "0.2"
 }
-
-[sub_resource type="Gradient" id="Gradient_uqgdu"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_aa4jg"]
-gradient = SubResource("Gradient_uqgdu")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.5, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sro4y"]
 
@@ -9334,15 +9325,6 @@ position = Vector2(31024, -1130)
 position = Vector2(0, -20)
 zoom = Vector2(0.55, 0.55)
 process_callback = 0
-metadata/_edit_lock_ = true
-
-[node name="PointLight2D2" type="PointLight2D" parent="Player"]
-rotation = -1.57079
-scale = Vector2(23.3509, 40.4555)
-energy = 0.7
-range_layer_min = -101
-shadow_filter_smooth = 1.8
-texture = SubResource("GradientTexture2D_aa4jg")
 metadata/_edit_lock_ = true
 
 [node name="Worldborder" type="Node2D" parent="."]

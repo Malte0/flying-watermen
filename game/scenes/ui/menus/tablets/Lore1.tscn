@@ -31,5 +31,3 @@ filling the springs of life.
 It is our duty to keep 
 the forest safe and
  the springs alive."
-
-[connection signal="visibility_changed" from="StoneTabletOverlay" to="StoneTabletOverlay" method="pause"]

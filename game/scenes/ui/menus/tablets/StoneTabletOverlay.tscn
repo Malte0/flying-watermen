@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dcw2xybxiknk0" path="res://entities/objects/stone-tablet/stone_tablet_open.png" id="2_3m06m"]
 
 [node name="StoneTabletRead" type="CanvasLayer"]
+process_mode = 3
 layer = 101
 script = ExtResource("1_3ru2b")
 
@@ -26,4 +27,5 @@ offset_bottom = 651.0
 texture = ExtResource("2_3m06m")
 expand_mode = 1
 
+[connection signal="visibility_changed" from="." to="." method="pause"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

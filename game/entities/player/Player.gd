@@ -11,7 +11,7 @@ var shoot_position: Marker2D:
 @onready var state_chart: StateChart = %StateChart
 @onready var animation_tree: AnimationTree = $Animation/AnimationTree
 @onready var particle: Node2D = $Particles
-@onready var point_light: PointLight2D = $PointLight2D2
+@onready var point_light: PointLight2D = $PointLight2D
 
 # save location
 var save_file_path: String = "user://save/"
