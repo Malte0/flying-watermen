@@ -20,12 +20,12 @@ shader_parameter/distortion = null
 shader_parameter/heightOffset = null
 shader_parameter/offset = 0.0
 
-[sub_resource type="Gradient" id="Gradient_gak6g"]
+[sub_resource type="Gradient" id="Gradient_he26q"]
 offsets = PackedFloat32Array(0, 0.584416)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_8d18q"]
-gradient = SubResource("Gradient_gak6g")
+gradient = SubResource("Gradient_he26q")
 fill = 1
 fill_from = Vector2(0.472477, 0.545872)
 
@@ -53,6 +53,7 @@ texture = ExtResource("2_0u14y")
 position = Vector2(0, 40)
 scale = Vector2(51.25, 43.4375)
 energy = 0.5
+range_layer_min = -101
 texture = SubResource("GradientTexture2D_8d18q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -154,6 +154,7 @@ flip_h = true
 position = Vector2(22, -21)
 scale = Vector2(2.6875, 2.46875)
 energy = 0.3
+range_layer_min = -101
 texture = SubResource("GradientTexture2D_taxbo")
 
 [node name="ViewArea" type="Area2D" parent="."]

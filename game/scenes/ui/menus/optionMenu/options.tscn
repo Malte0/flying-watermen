@@ -19,7 +19,10 @@ script = ExtResource("1_o5c20")
 layout_mode = 1
 
 [node name="Label" parent="MenuTemplate/VBoxContainer" index="0"]
-text = "Options"
+text = "Options
+
+
+"
 
 [node name="GridContainer" type="GridContainer" parent="MenuTemplate/VBoxContainer/VBoxContainer" index="0"]
 custom_minimum_size = Vector2(267.92, 0)
@@ -43,14 +46,6 @@ text = "SFX"
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Menu" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer" instance=ExtResource("3_yts85")]
-layout_mode = 2
-text = "Menu"
-
-[node name="MenuSlider" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer" instance=ExtResource("3_l5udh")]
-unique_name_in_owner = true
-layout_mode = 2
-
 [node name="Fullscreen" parent="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer" instance=ExtResource("3_yts85")]
 layout_mode = 2
 text = "Fullscreen"
@@ -70,7 +65,6 @@ text = "Return"
 
 [connection signal="value_changed" from="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
-[connection signal="value_changed" from="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer/MenuSlider" to="." method="_on_menu_slider_value_changed"]
 [connection signal="toggled" from="MenuTemplate/VBoxContainer/VBoxContainer/GridContainer/FullscreenCheckButton" to="." method="_on_fullscreen_check_button_toggled"]
 [connection signal="pressed" from="MenuTemplate/VBoxContainer/VBoxContainer/Reset_Settings_Button" to="." method="_on_reset_settings_button_pressed"]
 [connection signal="pressed" from="MenuTemplate/VBoxContainer/VBoxContainer/Back_Button" to="." method="_on_back_button_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bgaxka266oy83"]
+[gd_scene load_steps=23 format=3 uid="uid://bgaxka266oy83"]
 
 [ext_resource type="Script" path="res://entities/enemies/bossEnemy/BossEnemy.gd" id="1_qajqb"]
 [ext_resource type="PackedScene" uid="uid://de1lxor656te5" path="res://entities/enemies/bossEnemy/FireWave.tscn" id="2_bgprt"]
@@ -52,6 +52,15 @@ size = Vector2(322.023, 128.817)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bvbuf"]
 radius = 684.134
+
+[sub_resource type="Gradient" id="Gradient_gak6g"]
+offsets = PackedFloat32Array(0, 0.584416)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8nua2"]
+gradient = SubResource("Gradient_gak6g")
+fill = 1
+fill_from = Vector2(0.472477, 0.545872)
 
 [node name="BossEnemy" type="CharacterBody2D" node_paths=PackedStringArray("aggro_component", "melee_attack_low_component", "melee_attack_high_component", "movement_component", "wall_detection", "fire_wave_cooldown", "attack_cooldown", "change_current_attack", "dash_timeout", "dash_cooldown")]
 collision_layer = 4
@@ -210,6 +219,13 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FireDetection"]
 shape = SubResource("CircleShape2D_bvbuf")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(1, 1)
+scale = Vector2(51.25, 43.4375)
+energy = 0.7
+range_layer_min = -101
+texture = SubResource("GradientTexture2D_8nua2")
 
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bbm5yfysxt45l"]
+[gd_scene load_steps=26 format=3 uid="uid://bbm5yfysxt45l"]
 
 [ext_resource type="Script" path="res://scenes/soundSystem/polyphonic_audio_player.gd" id="1_hanfh"]
 [ext_resource type="Script" path="res://scenes/soundSystem/AudioLibrary.gd" id="2_5ayua"]
@@ -8,6 +8,9 @@
 [ext_resource type="AudioStream" uid="uid://bbxhs7f4v3t41" path="res://assets/SFX/player/dash.wav" id="6_3ftgu"]
 [ext_resource type="AudioStream" uid="uid://bwcr1or466rwa" path="res://assets/SFX/player/jump.wav" id="7_prwst"]
 [ext_resource type="AudioStream" uid="uid://dyjar8353lehf" path="res://assets/SFX/player/pickup_item.wav" id="8_c2poy"]
+[ext_resource type="AudioStream" uid="uid://40y6qgm2iuvt" path="res://assets/SFX/player/ice.wav" id="9_dxpgi"]
+[ext_resource type="AudioStream" uid="uid://36cqyd3egf6p" path="res://assets/SFX/enemy/explosion.wav" id="10_2gghn"]
+[ext_resource type="AudioStream" uid="uid://bal6cqlxkmwxh" path="res://assets/SFX/enemy/fireball-whoosh-1-179125.wav" id="11_8vi6s"]
 
 [sub_resource type="Resource" id="Resource_eaexf"]
 script = ExtResource("3_xtsh6")
@@ -42,7 +45,7 @@ stream = ExtResource("8_c2poy")
 [sub_resource type="Resource" id="Resource_jb3qc"]
 script = ExtResource("3_xtsh6")
 tag = "ice"
-stream = ExtResource("4_3fc3d")
+stream = ExtResource("9_dxpgi")
 
 [sub_resource type="Resource" id="Resource_jf566"]
 script = ExtResource("3_xtsh6")
@@ -59,7 +62,8 @@ tag = ""
 
 [sub_resource type="Resource" id="Resource_xqx0l"]
 script = ExtResource("3_xtsh6")
-tag = ""
+tag = "explosion"
+stream = ExtResource("10_2gghn")
 
 [sub_resource type="Resource" id="Resource_5ni0b"]
 script = ExtResource("3_xtsh6")
@@ -69,7 +73,7 @@ stream = ExtResource("4_3fc3d")
 [sub_resource type="Resource" id="Resource_j8ixj"]
 script = ExtResource("3_xtsh6")
 tag = "ranged_enemy_attack"
-stream = ExtResource("4_3fc3d")
+stream = ExtResource("11_8vi6s")
 
 [sub_resource type="Resource" id="Resource_85lbr"]
 script = ExtResource("2_5ayua")

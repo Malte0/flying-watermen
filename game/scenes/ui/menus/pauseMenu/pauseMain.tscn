@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/ui/menus/pauseMenu/pauseMain.gd" id="1_bfgq5"]
 [ext_resource type="PackedScene" uid="uid://bnl4aymwagsqa" path="res://scenes/ui/menus/menuTemplate.tscn" id="1_kwjyf"]
-[ext_resource type="PackedScene" path="res://scenes/ui/menus/button.tscn" id="2_8jybv"]
+[ext_resource type="PackedScene" uid="uid://ga63x4i2ugw4" path="res://scenes/ui/menus/button.tscn" id="2_8jybv"]
 
 [node name="PauseMain" type="Control"]
 layout_mode = 3

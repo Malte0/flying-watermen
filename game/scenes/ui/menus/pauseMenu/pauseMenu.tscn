@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://besblswfge6aw"]
 
-[ext_resource type="PackedScene" path="res://scenes/ui/menus/pauseMenu/pauseMain.tscn" id="1_5tsro"]
+[ext_resource type="PackedScene" uid="uid://bhiir77ni7ulx" path="res://scenes/ui/menus/pauseMenu/pauseMain.tscn" id="1_5tsro"]
 [ext_resource type="Script" path="res://scenes/ui/menus/pauseMenu/PauseMenu.gd" id="1_osadj"]
 [ext_resource type="PackedScene" uid="uid://cdkicasp65o4b" path="res://scenes/ui/menus/optionMenu/options.tscn" id="3_qru53"]
 
