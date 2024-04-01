@@ -9,6 +9,7 @@ func _ready():
 
 func _on_interacted(interactor):
 	var health_component = interactor.get_node_or_null("HealthComponent")
+	PolyphonicAudioPlayer.play_sound_effect_from_library("max_health")
 	health_component.max_health += health_gained
 	health_component.heal(health_gained)
 	Globals.planteaten.emit(position)

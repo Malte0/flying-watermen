@@ -8600,65 +8600,53 @@ rotation = 0.261799
 [node name="Lantern" parent="AreaAssets/Lantern" instance=ExtResource("65_m8s1r")]
 position = Vector2(2424.52, 127.868)
 rotation = 0.261799
-scale = Vector2(0.05, 0.05)
 
 [node name="Lantern2" parent="AreaAssets/Lantern" instance=ExtResource("65_m8s1r")]
 position = Vector2(372.015, -2056.8)
 rotation = 0.261799
-scale = Vector2(0.05, 0.05)
 flip_h = true
 
 [node name="Lantern3" parent="AreaAssets/Lantern" instance=ExtResource("65_m8s1r")]
 position = Vector2(17076.6, 1434.62)
 rotation = 0.261799
-scale = Vector2(0.05, 0.05)
 
 [node name="Lantern4" parent="AreaAssets/Lantern" instance=ExtResource("65_m8s1r")]
 position = Vector2(18195.4, 5032.8)
 rotation = 0.261799
-scale = Vector2(0.05, 0.05)
 
 [node name="Lantern5" parent="AreaAssets/Lantern" instance=ExtResource("65_m8s1r")]
 position = Vector2(19619.2, 3393.45)
 rotation = 0.261799
-scale = Vector2(0.05, 0.05)
 flip_h = true
 
 [node name="Lantern6" parent="AreaAssets/Lantern" instance=ExtResource("65_m8s1r")]
 position = Vector2(19010.5, 298.448)
 rotation = 0.261799
-scale = Vector2(0.05, 0.05)
 
 [node name="Lantern7" parent="AreaAssets/Lantern" instance=ExtResource("65_m8s1r")]
 position = Vector2(21083.6, 4647.19)
 rotation = 0.261799
-scale = Vector2(0.05, 0.05)
 
 [node name="Lantern8" parent="AreaAssets/Lantern" instance=ExtResource("65_m8s1r")]
 position = Vector2(24871.5, 5949.95)
 rotation = 0.261799
-scale = Vector2(0.05, 0.05)
 
 [node name="Lantern9" parent="AreaAssets/Lantern" instance=ExtResource("65_m8s1r")]
 position = Vector2(22294.9, 6111.58)
 rotation = 0.261799
-scale = Vector2(0.05, 0.05)
 
 [node name="Lantern10" parent="AreaAssets/Lantern" instance=ExtResource("65_m8s1r")]
 position = Vector2(26503.5, 4511.31)
 rotation = 0.261799
-scale = Vector2(0.05, 0.05)
 flip_h = true
 
 [node name="Lantern11" parent="AreaAssets/Lantern" instance=ExtResource("65_m8s1r")]
 position = Vector2(30403.8, 6140.29)
 rotation = 0.261799
-scale = Vector2(0.05, 0.05)
 
 [node name="Lantern12" parent="AreaAssets/Lantern" instance=ExtResource("65_m8s1r")]
 position = Vector2(22398.8, 2690.91)
 rotation = 0.261799
-scale = Vector2(0.05, 0.05)
 
 [node name="Enemys" type="Node2D" parent="."]
 
@@ -9464,6 +9452,7 @@ metadata/_edit_lock_ = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Environment"]
 stream = SubResource("AudioStreamRandomizer_tdk81")
+autoplay = true
 bus = &"Music"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Environment"]
@@ -9517,6 +9506,15 @@ position = Vector2(45754, -5827)
 
 [node name="FoamChemical" parent="." instance=ExtResource("59_7yaom")]
 position = Vector2(45561, -5819)
+
+[node name="Plant" parent="." instance=ExtResource("57_vwl11")]
+position = Vector2(46128, -5885)
+
+[node name="Puddle" parent="." instance=ExtResource("30_cnsya")]
+position = Vector2(45885, -5780)
+
+[node name="FireWell" parent="." instance=ExtResource("28_tyh8k")]
+position = Vector2(45971, -5767)
 
 [connection signal="wall_destroyed" from="DestroyableWalls/DestroyableWall3" to="." method="_on_destroyable_wall_3_wall_destroyed"]
 [connection signal="finished" from="Environment/AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
