@@ -27,7 +27,7 @@ func _on_pause_main_options_pressed() -> void:
 
 func _on_pause_main_menu_pressed() -> void:
 	is_paused = false
-	Globals.load_with_loading_screen(Globals.main_menu)
+	get_tree().change_scene_to_file.call_deferred(Globals.main_menu)
 
 func _on_pause_main_quit_pressed() -> void:
 	get_tree().quit()

@@ -109,13 +109,11 @@ func save(value: Vector2):
 	update_player_data()
 	player_data.update_filled_wells(value)
 	ResourceSaver.save(player_data, save_file_path + save_file_name)
-	print("saved")
 
 func save_stone_tablet(value: Vector2):
 	update_player_data()
 	player_data.update_tablets_read(value)
 	ResourceSaver.save(player_data, save_file_path + save_file_name)
-	print("saved")
 
 func update_player_data():
 	player_data.update_pos(self.position)
@@ -129,7 +127,6 @@ func load_game():
 	update_Player_on_load()
 	update_wells_on_load()
 	update_stonetablet_on_load()
-	print("loaded")
 
 func update_wells_on_load():
 	var well_locations: Dictionary = player_data.filled_wells
