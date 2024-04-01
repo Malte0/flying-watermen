@@ -145,13 +145,13 @@ text = "AAAAAA"
 visible = false
 size_flags_horizontal = 4
 
-[node name="Panel3" type="Control" parent="."]
+[node name="Swap" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Swap_ShootingType" type="RichTextLabel" parent="Panel3"]
+[node name="Swap_ShootingType" type="RichTextLabel" parent="Swap"]
 layout_mode = 2
 offset_left = 25.0
 offset_top = 41.0
@@ -161,14 +161,14 @@ theme = ExtResource("4_s773t")
 bbcode_enabled = true
 text = "Swap shot type on[img=40]res://assets/buttons/Dark/Q_Key_Dark.png"
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="Swap"]
 offset_left = 32.0
 offset_top = 84.0
 offset_right = 196.0
 offset_bottom = 161.0
 color = Color(0, 0.00392157, 0.00392157, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+[node name="MarginContainer" type="MarginContainer" parent="Swap/ColorRect"]
 layout_mode = 0
 offset_right = 164.0
 offset_bottom = 77.0
@@ -177,17 +177,17 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="ColorRect" type="ColorRect" parent="ColorRect/MarginContainer"]
+[node name="ColorRect" type="ColorRect" parent="Swap/ColorRect/MarginContainer"]
 layout_mode = 2
 
-[node name="Foam" type="Sprite2D" parent="ColorRect/MarginContainer/ColorRect"]
+[node name="Foam" type="Sprite2D" parent="Swap/ColorRect/MarginContainer/ColorRect"]
 unique_name_in_owner = true
 visible = false
 position = Vector2(83, 34)
 scale = Vector2(0.05, 0.034)
 texture = ExtResource("8_4wnj2")
 
-[node name="Water" type="Sprite2D" parent="ColorRect/MarginContainer/ColorRect"]
+[node name="Water" type="Sprite2D" parent="Swap/ColorRect/MarginContainer/ColorRect"]
 unique_name_in_owner = true
 position = Vector2(75, 32)
 scale = Vector2(0.14, 0.08)

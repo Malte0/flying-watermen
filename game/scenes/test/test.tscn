@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ccfj1eejs6m1o"]
+[gd_scene load_steps=21 format=3 uid="uid://ccfj1eejs6m1o"]
 
 [ext_resource type="Texture2D" uid="uid://dx3nby7obhlgn" path="res://assets/tileMap/tileset.png" id="1_hwc3f"]
 [ext_resource type="Texture2D" uid="uid://ihorffrdym4j" path="res://icon.svg" id="3_n53fm"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://hyr7i2wnah4e" path="res://entities/objects/well/fireWell/FireWell.tscn" id="13_22fuh"]
 [ext_resource type="PackedScene" uid="uid://bgaxka266oy83" path="res://entities/enemies/bossEnemy/BossEnemy.tscn" id="14_r85a3"]
 [ext_resource type="PackedScene" uid="uid://4a5uyw208q4h" path="res://scenes/ui/menus/tablets/DoubleJumpTable.tscn" id="15_54e8k"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menus/tablets/BuildingFoam.tscn" id="16_qohv1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_314cy"]
 texture = ExtResource("1_hwc3f")
@@ -146,3 +147,6 @@ position = Vector2(765, -1612)
 rotation = 0.261799
 energy = 0.09
 shadow_enabled = true
+
+[node name="BuildingFoam" parent="." instance=ExtResource("16_qohv1")]
+position = Vector2(-246, 307)

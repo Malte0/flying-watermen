@@ -44,6 +44,7 @@ var abilities: Dictionary = {
 	"building_foam": false,
 	"double_jump": false
 }
+
 # Shoottype
 var is_shooting_Water: bool = true
 var buildingFoam_shootcooldown: float = 0.1

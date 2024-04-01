@@ -24,3 +24,4 @@ func _input(event: InputEvent) -> void:
 func _physics_process(_delta):
 	player.state_chart.set_expression_property("velocity_x", player.velocity.x)
 	player.state_chart.set_expression_property("is_on_wall", player.is_on_wall())
+	$Swap.visible = player.abilities.building_foam
