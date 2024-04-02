@@ -13,15 +13,13 @@ func _ready():
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("f3"):
 		debugger.visible = !debugger.visible
-	if player.abilities.building_foam:
-		$Panel3.visible = true
-		if event.is_action_pressed("swap_shoot_type"):
-			if water.visible:
-				water.visible = false
-				foam.visible = true
-			else:
-				water.visible = true
-				foam.visible = false
+	if event.is_action_pressed("swap_shoot_type") and player.abilities.building_foam:
+		if water.visible:
+			water.visible = false
+			foam.visible = true
+		else:
+			water.visible = true
+			foam.visible = false
 
 func _physics_process(_delta):
 	player.state_chart.set_expression_property("velocity_x", player.velocity.x)

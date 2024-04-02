@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://shader/Fade.gdshader" id="2_vfgrt"]
 [ext_resource type="Texture2D" uid="uid://2gmq2a8qnov1" path="res://entities/projectiles/animationProjectile/waterattack02.png" id="3_qjhpp"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sn1hi"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_14ne4"]
 resource_local_to_scene = true
 shader = ExtResource("2_vfgrt")
 shader_parameter/blink_speed = 1.0
@@ -15,7 +15,7 @@ shader_parameter/blink_toogle = false
 [node name="BuildingFoamProjectile" type="Node2D"]
 
 [node name="Projectile" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("1_amoi4")]
-material = SubResource("ShaderMaterial_sn1hi")
+material = SubResource("ShaderMaterial_14ne4")
 element = 2
 speed = 1200
 damage = 0
