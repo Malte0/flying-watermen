@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://4lea60a43ia6"]
+[gd_scene load_steps=4 format=3 uid="uid://4lea60a43ia6"]
 
+[ext_resource type="Script" path="res://scenes/ui/menus/tablets/Lore1.gd" id="1_ibsar"]
 [ext_resource type="PackedScene" uid="uid://c640sr08cvsmo" path="res://entities/objects/stone-tablet/StoneTabletObject.tscn" id="1_x7con"]
 [ext_resource type="PackedScene" uid="uid://cxpuyaf3piwxm" path="res://scenes/ui/menus/tablets/StoneTabletOverlay.tscn" id="2_cca32"]
 
 [node name="Lore1" type="Node2D"]
+script = ExtResource("1_ibsar")
 
 [node name="StoneTablet" parent="." instance=ExtResource("1_x7con")]
 
@@ -30,3 +32,5 @@ filling the springs of life.
 It is our duty to keep 
 the forest safe and
  the springs alive."
+
+[connection signal="visibility_changed" from="StoneTabletOverlay" to="." method="_on_stone_tablet_overlay_visibility_changed"]

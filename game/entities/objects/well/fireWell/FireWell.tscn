@@ -97,6 +97,7 @@ metadata/_edit_lock_ = true
 position = Vector2(10.8713, -6)
 scale = Vector2(10.5794, 5.49783)
 polygon = PackedVector2Array(-6.98257, -4.91103, -6.98257, 7.82126, 4.73834, 7.82126, 4.73834, -5.09292, 3.60405, -6.91181, 1.52454, -8.00315, -1.02759, -8.36693, -3.8633, -8.00315, -5.94281, -6.91181)
+one_way_collision = true
 
 [node name="PointLight2D" type="PointLight2D" parent="Texture"]
 position = Vector2(0, 40)
