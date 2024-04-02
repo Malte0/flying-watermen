@@ -11,12 +11,14 @@ signal back_pressed()
 @onready var sfx_slider: HSlider = %SFXSlider
 @onready var fullscreen_check_button: CheckButton = %FullscreenCheckButton
 
+@export var has_background: bool = true
 # saving data
 var save_file_path: String = "user://save/"
 var save_file_name: String = "OptionSave.tres"
 var option_data: OptionData = OptionData.new()
 
 func _ready():
+	$TextureRect.visible = has_background
 	visible = false
 	verify_save_dirctory(save_file_path)
 	load_saved_options()

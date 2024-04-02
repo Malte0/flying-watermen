@@ -29,6 +29,7 @@ layout_mode = 1
 [node name="Options" parent="." instance=ExtResource("3_qru53")]
 visible = false
 layout_mode = 1
+has_background = false
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="menu_pressed" from="PauseMain" to="." method="_on_pause_main_menu_pressed"]
