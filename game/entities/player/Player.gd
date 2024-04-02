@@ -48,6 +48,7 @@ var abilities: Dictionary = {
 # Shoottype
 var is_shooting_Water: bool = true
 var buildingFoam_shootcooldown: float = 0.1
+var can_change_shooting_type: bool = true
 
 func _ready():
 	animation_tree.active = true
@@ -82,11 +83,13 @@ func _input(event: InputEvent):
 func set_shooting_type():
 	if abilities["building_foam"] == false:
 		return
+	if !can_change_shooting_type:
+		return
 	if is_shooting_Water:
 		is_shooting_Water = false
 		projectile_scene = load("res://entities/projectiles/BuildingFoamProjectile.tscn")
 		ranged_component.cooldown = buildingFoam_shootcooldown
-	else:
+	elif !is_shooting_Water:
 		is_shooting_Water = true
 		projectile_scene = load("res://entities/projectiles/WaterProjectile.tscn")
 		ranged_component.cooldown = 0.5
@@ -294,3 +297,12 @@ func toggle_light():
 		tween.tween_property(point_light, "energy", 0, 0.5)
 	else:
 		tween.tween_property(point_light, "energy", 0.7, 0.5)
+func _on_chemical_effects_manager_chemical_used():
+	$Animation/AnimationPlayer.play("ice")
+
+func _on_inventory_on_item_activated(item):
+	can_change_shooting_type = false
+	if !is_shooting_Water:
+		set_shooting_type()
+	if inventory.active_item_left == 0:
+		can_change_shooting_type = true
