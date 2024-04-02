@@ -96,7 +96,7 @@ stream = ExtResource("13_a4i1i")
 
 [sub_resource type="Resource" id="Resource_85lbr"]
 script = ExtResource("2_5ayua")
-sound_effects = Array[ExtResource("3_xtsh6")]([SubResource("Resource_eaexf"), SubResource("Resource_sma3q"), SubResource("Resource_keasy"), SubResource("Resource_k5rbn"), SubResource("Resource_swcnd"), SubResource("Resource_h6inb"), SubResource("Resource_jb3qc"), SubResource("Resource_jf566"), SubResource("Resource_6fhe7"), SubResource("Resource_3hioi"), SubResource("Resource_xqx0l"), SubResource("Resource_5ni0b"), SubResource("Resource_j8ixj"), SubResource("Resource_q82v5"), SubResource("Resource_ax4rh"), SubResource("Resource_5vw83"), null])
+sound_effects = Array[ExtResource("3_xtsh6")]([SubResource("Resource_eaexf"), SubResource("Resource_sma3q"), SubResource("Resource_keasy"), SubResource("Resource_k5rbn"), SubResource("Resource_swcnd"), SubResource("Resource_h6inb"), SubResource("Resource_jb3qc"), SubResource("Resource_jf566"), SubResource("Resource_6fhe7"), SubResource("Resource_3hioi"), SubResource("Resource_xqx0l"), SubResource("Resource_5ni0b"), SubResource("Resource_j8ixj"), SubResource("Resource_q82v5"), SubResource("Resource_ax4rh"), SubResource("Resource_5vw83")])
 
 [node name="PolyphonicAudioPlayer" type="AudioStreamPlayer"]
 bus = &"SFX"

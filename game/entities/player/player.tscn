@@ -814,7 +814,7 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_pbewx")
 animation = &"run"
 autoplay = "idle"
-frame = 3
+frame = 4
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animation"]
