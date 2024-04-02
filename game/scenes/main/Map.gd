@@ -7,11 +7,10 @@ func _on_destroyable_wall_3_wall_destroyed():
 func _on_audio_stream_player_finished():
 	$Environment/AudioStreamPlayer.play()
 
-
-func _on_area_2d_2_body_entered(body):
+func _on_world_music_of_body_entered(body):
 	if body is Player:
 		$Environment/AudioStreamPlayer.volume_db = -1000
 
-func _on_area_2d_3_body_entered(body):
+func _on_world_music_on_body_entered(body):
 	if body is Player:
 		$Environment/AudioStreamPlayer.volume_db = 0
