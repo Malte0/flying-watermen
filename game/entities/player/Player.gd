@@ -194,10 +194,6 @@ func movement(delta: float):
 	direction = Input.get_axis("a", "d")
 	if abs(direction) > 0 and can_move:
 		velocity.x = lerp(velocity.x, direction * speed, 0.1)
-		if $Animation/Timer.time_left <= 0:
-			$Animation/AudioStreamPlayer.pitch_scale = randf_range(0.7,1.0)
-			$Animation/AudioStreamPlayer.play()
-			$Animation/Timer.start(0.8)
 		if sign(scale.y) != sign(direction) and sign(direction) != 0: flip_player()
 	elif abs(velocity.x) < 0.1:
 		velocity.x = 0

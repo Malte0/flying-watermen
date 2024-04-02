@@ -1,4 +1,4 @@
-[gd_scene load_steps=138 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=137 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="PackedScene" uid="uid://d71bkm5ic0tt" path="res://entities/components/ranged/RangedComponent.tscn" id="2_32y2k"]
@@ -59,7 +59,6 @@
 [ext_resource type="Texture2D" uid="uid://dewcvwmxjcg6l" path="res://entities/player/assets/meleeanimation/hit07.png" id="38_n4fxb"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/animation_tree_state.gd" id="42_m0dwi"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="43_c4ing"]
-[ext_resource type="AudioStream" uid="uid://dxvxi16853ic4" path="res://assets/SFX/player/walk3.wav" id="45_y70n4"]
 [ext_resource type="PackedScene" uid="uid://c5yieglatmln5" path="res://entities/player/chemicalEffects/chemicalEffectsManager.tscn" id="51_52a8d"]
 [ext_resource type="Script" path="res://entities/player/PlayerSFX.gd" id="53_830yn"]
 
@@ -834,15 +833,6 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/entered_ice = false
 parameters/conditions/exited_ice = false
 parameters/Default/blend_position = -0.810732
-
-[node name="Timer" type="Timer" parent="Animation"]
-one_shot = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Animation"]
-stream = ExtResource("45_y70n4")
-volume_db = -30.0
-max_polyphony = 20
-bus = &"SFX"
 
 [node name="Light" type="Node2D" parent="."]
 visible = false
