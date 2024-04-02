@@ -15,14 +15,19 @@ func _input(event: InputEvent) -> void:
 		debugger.visible = !debugger.visible
 	if player.abilities.building_foam:
 		$Panel3.visible = true
-		if event.is_action_pressed("swap_shoot_type"):
-			if water.visible:
-				water.visible = false
-				foam.visible = true
-			else:
-				water.visible = true
-				foam.visible = false
+		if event.is_action_pressed("swap_shoot_type") and player.inventory.active_item_left == 0:
+			_swap_shoot_type()
+
+func _swap_shoot_type():
+	if water.visible:
+		water.visible = false
+		foam.visible = true
+	else:
+		water.visible = true
+		foam.visible = false
 
 func _physics_process(_delta):
+	if player.inventory.active_item and foam.visible:
+		_swap_shoot_type()
 	player.state_chart.set_expression_property("velocity_x", player.velocity.x)
 	player.state_chart.set_expression_property("is_on_wall", player.is_on_wall())

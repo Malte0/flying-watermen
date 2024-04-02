@@ -1132,6 +1132,7 @@ metadata/_edit_lock_ = true
 [connection signal="death" from="HealthComponent" to="." method="_on_death"]
 [connection signal="finished" from="MeleeComponent" to="." method="_on_melee_component_finished"]
 [connection signal="melee_attack_started" from="MeleeComponent" to="SFX" method="_on_melee_component_melee_attack_started"]
+[connection signal="on_item_activated" from="Inventory" to="." method="_on_inventory_on_item_activated"]
 [connection signal="on_item_activated" from="Inventory" to="SFX" method="_on_inventory_on_item_activated"]
 [connection signal="on_item_in_inventory_updated" from="Inventory" to="SFX" method="_on_inventory_on_item_in_inventory_updated"]
 [connection signal="on_item_used" from="Inventory" to="SFX" method="_on_inventory_on_item_used"]
