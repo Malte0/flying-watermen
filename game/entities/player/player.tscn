@@ -1,4 +1,4 @@
-[gd_scene load_steps=137 format=3 uid="uid://djmlmtr41m2ce"]
+[gd_scene load_steps=142 format=3 uid="uid://djmlmtr41m2ce"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_n7144"]
 [ext_resource type="PackedScene" uid="uid://d71bkm5ic0tt" path="res://entities/components/ranged/RangedComponent.tscn" id="2_32y2k"]
@@ -509,6 +509,26 @@ advance_condition = &"entered_ice"
 advance_mode = 2
 advance_condition = &"exited_ice"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h2isx"]
+advance_mode = 2
+advance_condition = &"entered_ice"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vmc66"]
+advance_mode = 2
+advance_condition = &"entered_ice"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n3n3s"]
+advance_mode = 2
+advance_condition = &"entered_ice"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m807c"]
+advance_mode = 2
+advance_condition = &"entered_ice"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_he8y2"]
+advance_mode = 2
+advance_condition = &"entered_ice"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_arr00"]
 states/Airborne/node = SubResource("AnimationNodeAnimation_i2jmy")
 states/Airborne/position = Vector2(580.667, 66.1482)
@@ -526,8 +546,8 @@ states/Melee/position = Vector2(298.222, 66.5556)
 states/Start/position = Vector2(96, 152)
 states/death/node = SubResource("AnimationNodeAnimation_wlofg")
 states/death/position = Vector2(457.222, 67.6296)
-transitions = ["Start", "Default", SubResource("AnimationNodeStateMachineTransition_b1nr5"), "Default", "Ice", SubResource("AnimationNodeStateMachineTransition_v43ie"), "Ice", "Default", SubResource("AnimationNodeStateMachineTransition_e6j7h")]
-graph_offset = Vector2(-254, -58)
+transitions = ["Start", "Default", SubResource("AnimationNodeStateMachineTransition_b1nr5"), "Default", "Ice", SubResource("AnimationNodeStateMachineTransition_v43ie"), "Ice", "Default", SubResource("AnimationNodeStateMachineTransition_e6j7h"), "Jump", "Ice", SubResource("AnimationNodeStateMachineTransition_h2isx"), "Melee", "Ice", SubResource("AnimationNodeStateMachineTransition_vmc66"), "death", "Ice", SubResource("AnimationNodeStateMachineTransition_n3n3s"), "Dash", "Ice", SubResource("AnimationNodeStateMachineTransition_m807c"), "Airborne", "Ice", SubResource("AnimationNodeStateMachineTransition_he8y2")]
+graph_offset = Vector2(-289, 12)
 
 [sub_resource type="Gradient" id="Gradient_5hdqj"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
@@ -1133,7 +1153,6 @@ metadata/_edit_lock_ = true
 [connection signal="death" from="HealthComponent" to="." method="_on_death"]
 [connection signal="finished" from="MeleeComponent" to="." method="_on_melee_component_finished"]
 [connection signal="melee_attack_started" from="MeleeComponent" to="SFX" method="_on_melee_component_melee_attack_started"]
-[connection signal="ice_entered" from="ChemicalEffectsManager" to="." method="_on_chemical_effects_manager_ice_entered"]
 [connection signal="on_item_activated" from="Inventory" to="SFX" method="_on_inventory_on_item_activated"]
 [connection signal="on_item_in_inventory_updated" from="Inventory" to="SFX" method="_on_inventory_on_item_in_inventory_updated"]
 [connection signal="on_item_used" from="Inventory" to="SFX" method="_on_inventory_on_item_used"]

@@ -294,6 +294,3 @@ func toggle_light():
 		tween.tween_property(point_light, "energy", 0, 0.5)
 	else:
 		tween.tween_property(point_light, "energy", 0.7, 0.5)
-
-func _on_chemical_effects_manager_ice_entered() -> void:
-	%AnimatedSprite2D.play("ice")
