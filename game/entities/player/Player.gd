@@ -35,7 +35,7 @@ var friction: float = base_friction
 var fall_speed_factor: float = base_fall_speed_factor
 var can_move: bool = true
 var jumps_left: int = jumps
-var is_melee_cooldown: bool= false 
+var is_melee_cooldown: bool = false
 
 # Other information about the player
 var projectile_scene: PackedScene = load("res://entities/projectiles/WaterProjectile.tscn")
@@ -73,7 +73,7 @@ func _input(event: InputEvent):
 	if event.is_action_pressed("lshift"):
 		dash()
 	if event.is_action_pressed("attack"):
-		if !is_melee_cooldown: 
+		if !is_melee_cooldown:
 			melee()
 			state_chart.send_event("melee")
 			is_melee_cooldown = true

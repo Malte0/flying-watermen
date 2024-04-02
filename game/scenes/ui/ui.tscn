@@ -108,10 +108,11 @@ scroll_following = true
 
 [node name="PlayerHealthBar" type="TextureProgressBar" parent="CenterContainer/MarginContainer" groups=["playerHealthHeatBar"]]
 texture_filter = 1
-custom_minimum_size = Vector2(200.09, 26.22)
+custom_minimum_size = Vector2(200, 25)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+value = 50.0
 nine_patch_stretch = true
 stretch_margin_left = 3
 stretch_margin_top = 3
@@ -120,10 +121,13 @@ stretch_margin_bottom = 3
 texture_under = ExtResource("3_5gpoy")
 texture_over = ExtResource("4_e202w")
 texture_progress = ExtResource("3_5gpoy")
+tint_over = Color(0.701961, 0.701961, 0.701961, 1)
+tint_progress = Color(0, 0, 1, 1)
 script = ExtResource("5_4qthl")
 
 [node name="HP" type="Label" parent="CenterContainer/MarginContainer/PlayerHealthBar"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.025

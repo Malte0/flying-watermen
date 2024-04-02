@@ -1,7 +1,10 @@
 class_name HealthComponent extends Node2D
 
 @export var element: Element.Type = Element.Type.Neutral
-@export var max_health: int = 100
+@export var max_health: int = 100:
+	set(new):
+		max_health = new
+		max_health_changed.emit(new)
 ## Optional for heal_over_time
 @export var _heal_tick: Timer
 ## Optional to display health. Automatically assigned for Player
@@ -24,6 +27,7 @@ var is_invincible: bool = false
 var can_take_damage_over_time: int = 0
 
 signal health_changed(new_health: int, delta_health: int)
+signal max_health_changed(new: int)
 signal death()
 
 func _ready():
