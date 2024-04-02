@@ -209,9 +209,10 @@ script = ExtResource("18_tqsd8")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("22_xply0")
+volume_db = -10.0
 autoplay = true
-max_distance = 1000.0
-attenuation = 6.06286
+max_distance = 1570.0
+attenuation = 2.2974
 bus = &"SFX"
 
 [connection signal="body_entered" from="ViewArea" to="." method="_on_view_area_body_entered"]

@@ -67,7 +67,6 @@ collision_mask = 4
 script = ExtResource("1_qw6cr")
 
 [node name="FillLabel" type="Panel" parent="."]
-visible = false
 offset_left = -79.0
 offset_top = -208.0
 offset_right = 80.0
@@ -121,11 +120,7 @@ scale = Vector2(0.153, 0.159)
 texture = ExtResource("5_5wk88")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(0, -70)
 stream = ExtResource("6_1fsnh")
-autoplay = true
-max_distance = 1000.0
-attenuation = 2.07052
 bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

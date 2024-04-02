@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bgaxka266oy83"]
+[gd_scene load_steps=24 format=3 uid="uid://bgaxka266oy83"]
 
 [ext_resource type="Script" path="res://entities/enemies/bossEnemy/BossEnemy.gd" id="1_qajqb"]
 [ext_resource type="PackedScene" uid="uid://de1lxor656te5" path="res://entities/enemies/bossEnemy/FireWave.tscn" id="2_bgprt"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://61g8e7mlxwj" path="res://entities/components/enemyComponents/movement/MovementComponent.tscn" id="7_lt55y"]
 [ext_resource type="PackedScene" uid="uid://u07y0x28am7y" path="res://entities/components/heat/HeatArea.tscn" id="9_oyriq"]
 [ext_resource type="PackedScene" uid="uid://tdd5ci5su0wo" path="res://entities/components/meleeCombat/MeleeComponent.tscn" id="10_7eh7u"]
+[ext_resource type="AudioStream" uid="uid://c0gwhbtywwgyn" path="res://assets/SFX/enemy/Battle-Dawn.mp3" id="14_43npc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kcv6l"]
 animations = [{
@@ -227,6 +228,13 @@ energy = 0.7
 range_layer_min = -101
 texture = SubResource("GradientTexture2D_8nua2")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_43npc")
+autoplay = true
+max_distance = 4000.0
+attenuation = 1.86606
+bus = &"Music"
+
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
 [connection signal="timeout" from="FireWaveCooldown" to="." method="_on_fire_wave_cooldown_timeout"]
@@ -235,3 +243,4 @@ texture = SubResource("GradientTexture2D_8nua2")
 [connection signal="timeout" from="DashTimeout" to="." method="_on_dash_timeout_timeout"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="body_entered" from="FireDetection" to="." method="_on_fire_detection_body_entered"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

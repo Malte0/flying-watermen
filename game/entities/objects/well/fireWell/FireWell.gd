@@ -9,6 +9,7 @@ var already_filled: bool = false
 func _ready() -> void:
 	Globals.count_num_wells(position)
 	Globals.fillwell.connect(fill_well_signal)
+	$AudioStreamPlayer2D.play()
 
 func _process(_delta):
 	if has_enemies_inside == []:

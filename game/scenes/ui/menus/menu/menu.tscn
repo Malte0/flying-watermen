@@ -32,8 +32,7 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[node name="MenuAudioPlayer" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"Music"
 
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

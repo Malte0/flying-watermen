@@ -206,3 +206,6 @@ func _on_dash_timeout_timeout():
 
 func _on_health_component_death():
 	Globals.boss_killed()
+
+func _on_audio_stream_player_2d_finished():
+	$AudioStreamPlayer2D.play()
