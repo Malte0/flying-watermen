@@ -146,6 +146,7 @@ visible = false
 size_flags_horizontal = 4
 
 [node name="Panel3" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
