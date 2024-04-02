@@ -20,7 +20,7 @@ func get_closest_node():
 	var closest_node: Interactable = null
 	var closest_distance: float = -1
 	for node: Interactable in interactables_in_range:
-		var distance: float = global_position.distance_to($CollisionShape2D.global_position)
+		var distance: float = global_position.distance_to(node.global_position)
 		if not closest_node or distance < closest_distance:
 			closest_node = node
 			closest_distance = distance

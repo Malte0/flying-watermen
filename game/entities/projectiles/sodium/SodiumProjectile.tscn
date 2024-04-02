@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ckxjw27a061ub" path="res://entities/projectiles/Projectile.tscn" id="2_4sre5"]
 [ext_resource type="PackedScene" uid="uid://bta1xlxhyldh8" path="res://entities/projectiles/explosion/Explosion.tscn" id="2_bi16a"]
-[ext_resource type="Texture2D" uid="uid://c5837pfp3pmqg" path="res://entities/player/assets/waterexplosion.png" id="3_3drq2"]
+[ext_resource type="Texture2D" path="res://entities/player/assets/waterexplosion.png" id="3_3drq2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cjdrv"]
 radius = 16.0

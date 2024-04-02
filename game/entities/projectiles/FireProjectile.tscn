@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://1kqni5b4lpm"]
 
-[ext_resource type="Texture2D" uid="uid://1385yykpnr6a" path="res://entities/enemies/assets/featherProjectile.png" id="2_fgvtd"]
+[ext_resource type="Texture2D" path="res://entities/enemies/assets/featherProjectile.png" id="2_fgvtd"]
 [ext_resource type="PackedScene" uid="uid://ckxjw27a061ub" path="res://entities/projectiles/Projectile.tscn" id="2_uorqn"]
 
 [node name="FireProjectile" type="Node2D"]

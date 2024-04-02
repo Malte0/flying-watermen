@@ -14,7 +14,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("f3"):
 		debugger.visible = !debugger.visible
 	if player.abilities.building_foam:
-		$Panel3.visible = true
+		$Swap.visible = true
 		if event.is_action_pressed("swap_shoot_type") and player.inventory.active_item_left == 0:
 			_swap_shoot_type()
 
@@ -31,3 +31,4 @@ func _physics_process(_delta):
 		_swap_shoot_type()
 	player.state_chart.set_expression_property("velocity_x", player.velocity.x)
 	player.state_chart.set_expression_property("is_on_wall", player.is_on_wall())
+	$Swap.visible = player.abilities.building_foam
