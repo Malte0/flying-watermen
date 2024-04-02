@@ -212,7 +212,7 @@ stream = ExtResource("22_xply0")
 volume_db = -15.0
 autoplay = true
 max_distance = 1000.0
-attenuation = 6.06286
+attenuation = 4.59479
 bus = &"SFX"
 
 [connection signal="body_entered" from="ViewArea" to="." method="_on_view_area_body_entered"]
