@@ -139,6 +139,7 @@ collision_mask = 3
 shape = SubResource("CircleShape2D_ol33t")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_health_bar") instance=ExtResource("4_7dbns")]
+max_health = 105
 _health_bar = NodePath("HealthBar")
 use_damage_effect = true
 

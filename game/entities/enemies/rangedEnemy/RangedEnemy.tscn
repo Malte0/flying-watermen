@@ -89,6 +89,7 @@ shape = SubResource("CircleShape2D_5bvq1")
 debug_color = Color(0.0196078, 0.639216, 0.360784, 0.419608)
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_health_bar") instance=ExtResource("1_otr82")]
+max_health = 80
 _health_bar = NodePath("HealthBar")
 
 [node name="HealthBar" type="TextureProgressBar" parent="HealthComponent"]

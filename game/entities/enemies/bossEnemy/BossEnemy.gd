@@ -43,7 +43,7 @@ func _ready():
 	color_rect_low.visible = false
 	color_rect_high.visible = false
 	fire_detection.collision_mask = 8
-	attack_cooldown.wait_time = 1.5
+	attack_cooldown.wait_time = 1.2
 
 func _physics_process(_delta: float):
 	var player_distance = abs(player.global_position.x - global_position.x)

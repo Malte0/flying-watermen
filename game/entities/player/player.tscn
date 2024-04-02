@@ -67,7 +67,7 @@ radius = 24.75
 height = 81.3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_obf3n"]
-size = Vector2(85.5, 47.484)
+size = Vector2(85.5, 72)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pbewx"]
 animations = [{
@@ -802,7 +802,7 @@ heat_tick = NodePath("../Timers/HeatTick")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_heal_tick") instance=ExtResource("16_vgsyb")]
 element = 0
-max_health = 1000
+max_health = 150
 _heal_tick = NodePath("../Timers/HealTick")
 use_damage_effect = true
 
@@ -813,7 +813,7 @@ attack_shape = NodePath("AttackShape")
 attack_color = Color(0.188235, 0.560784, 0.709804, 1)
 
 [node name="AttackShape" type="CollisionShape2D" parent="MeleeComponent"]
-position = Vector2(63.2502, -24.2575)
+position = Vector2(39.0001, -23.9998)
 shape = SubResource("RectangleShape2D_obf3n")
 debug_color = Color(1, 1, 1, 0.419608)
 
@@ -1141,7 +1141,6 @@ layer = 5
 script = ExtResource("53_830yn")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
 rotation = -1.57079
 scale = Vector2(23.3509, 40.4555)
 energy = 0.7
@@ -1149,6 +1148,9 @@ range_layer_min = -101
 shadow_filter_smooth = 1.8
 texture = SubResource("GradientTexture2D_mi7o7")
 metadata/_edit_lock_ = true
+
+[node name="MeleeCD" type="Timer" parent="."]
+wait_time = 0.6
 
 [connection signal="projectile_shoot" from="RangedComponent" to="SFX" method="_on_ranged_component_projectile_shoot"]
 [connection signal="death" from="HealthComponent" to="." method="_on_death"]
@@ -1177,3 +1179,4 @@ metadata/_edit_lock_ = true
 [connection signal="state_entered" from="StateChart/Mechanics/Movement/Dash" to="SFX" method="_on_dash_state_entered"]
 [connection signal="state_exited" from="StateChart/Mechanics/Movement/Dash" to="." method="_on_dash_state_exited"]
 [connection signal="state_entered" from="StateChart/Mechanics/Movement/Disabled" to="." method="_on_disabled_state_entered"]
+[connection signal="timeout" from="MeleeCD" to="." method="_on_melee_cd_timeout"]

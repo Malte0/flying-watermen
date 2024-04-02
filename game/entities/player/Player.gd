@@ -12,6 +12,7 @@ var shoot_position: Marker2D:
 @onready var animation_tree: AnimationTree = $Animation/AnimationTree
 @onready var particle: Node2D = $Particles
 @onready var point_light: PointLight2D = $PointLight2D
+@onready var melee_cd: Timer = $MeleeCD
 
 # save location
 var save_file_path: String = "user://save/"
@@ -34,6 +35,7 @@ var friction: float = base_friction
 var fall_speed_factor: float = base_fall_speed_factor
 var can_move: bool = true
 var jumps_left: int = jumps
+var is_melee_cooldown: bool= false 
 
 # Other information about the player
 var projectile_scene: PackedScene = load("res://entities/projectiles/WaterProjectile.tscn")
@@ -71,8 +73,11 @@ func _input(event: InputEvent):
 	if event.is_action_pressed("lshift"):
 		dash()
 	if event.is_action_pressed("attack"):
-		melee()
-		state_chart.send_event("melee")
+		if !is_melee_cooldown: 
+			melee()
+			state_chart.send_event("melee")
+			is_melee_cooldown = true
+			melee_cd.start()
 	if event.is_action_pressed("right_click"):
 		shoot()
 	if event.is_action_pressed("swap_shoot_type"):
@@ -306,3 +311,7 @@ func _on_inventory_on_item_activated(item):
 		set_shooting_type()
 	if inventory.active_item_left == 0:
 		can_change_shooting_type = true
+
+
+func _on_melee_cd_timeout():
+	is_melee_cooldown = false
