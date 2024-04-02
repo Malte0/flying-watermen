@@ -67,7 +67,6 @@ collision_mask = 4
 script = ExtResource("1_qw6cr")
 
 [node name="FillLabel" type="Panel" parent="."]
-visible = false
 offset_left = -79.0
 offset_top = -208.0
 offset_right = 80.0
