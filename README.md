@@ -44,20 +44,6 @@ Mushroom [Quelle: https://k-ramstack.itch.io/mushroom-art-pack]
 ![Screenshot 2024-04-04 175702](https://github.com/Malte0/flying-watermen/assets/116385114/940ee810-483e-4e58-a341-2d7f6acaccce)
 
 
-## Soundsystem
-- PolyphonicAudioPlayer
-- Audacity
-
-
-Environment music by AlkaKrab | Game Music:
-https://alkakrab.itch.io/free-10-rpg-game-ambient-tracks-music-pack-no-copyright
-
-Boss music by Euphlka:
-https://youfulca.com/en/2022/08/14/boss_queen-of-the-white-dawn/ 
-
-Trailer music by TERRASOUND:
-https://www.terrasound.de/gemafreie-musik-kostenlos-downloaden/
-
 ## Team
 Simon Döhl
 
