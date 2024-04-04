@@ -76,9 +76,6 @@ func on_aggro_entered():
 	movement_component.movement_speed = movement_speed_aggro
 
 func on_calm_entered():
-	if not dash_timeout.is_stopped():
-		# das ist kein signal darauf kann man nicht warten
-		await dash_timeout.is_stopped()
 	movement_component.movement_speed = movement_speed_calm
 
 func choose_attack(_player_distance):

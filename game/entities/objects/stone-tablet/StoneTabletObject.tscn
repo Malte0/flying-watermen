@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c51h5t2yq11bo" path="res://entities/objects/stone-tablet/stonetablet_pickup.png" id="3_gpjlj"]
 [ext_resource type="Texture2D" uid="uid://dnmhggoppejaj" path="res://entities/objects/stone-tablet/podium.png" id="4_6sq6x"]
 [ext_resource type="Texture2D" uid="uid://bfv2i6fh1wtaa" path="res://assets/buttons/Dark/E_Key_Dark.png" id="4_mgokh"]
-[ext_resource type="AudioStream" uid="uid://cx2yx35kkfnho" path="res://assets/SFX/well/glow.wav" id="6_dbcui"]
+[ext_resource type="AudioStream" uid="uid://b0cs6w8r867lq" path="res://assets/SFX/well/glow.ogg" id="6_xo5t1"]
 
 [sub_resource type="Animation" id="Animation_lefeg"]
 length = 0.001
@@ -187,7 +187,7 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_mgokh")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_dbcui")
+stream = ExtResource("6_xo5t1")
 autoplay = true
 max_distance = 1000.0
 attenuation = 2.63902

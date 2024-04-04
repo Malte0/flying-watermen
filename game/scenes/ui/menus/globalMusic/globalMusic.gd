@@ -1,6 +1,6 @@
 extends AudioStreamPlayer
 
-@onready var global_music = preload("res://assets/SFX/worldMusic/Ambient 5.wav")
+@onready var global_music = preload("res://assets/SFX/worldMusic/Ambient5.ogg")
 
 func play_music(music: AudioStream):
 	if stream == music:

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://4qlm6ho7173m" path="res://assets/light_noise/offset_glow.png" id="3_etva4"]
 [ext_resource type="Shader" path="res://shader/wobbleEffect.gdshader" id="4_okffb"]
 [ext_resource type="Texture2D" uid="uid://dgn2ljfyurcci" path="res://entities/objects/well/assets/fire.png" id="5_5wk88"]
-[ext_resource type="AudioStream" uid="uid://cx2yx35kkfnho" path="res://assets/SFX/well/glow.wav" id="6_1fsnh"]
+[ext_resource type="AudioStream" uid="uid://b0cs6w8r867lq" path="res://assets/SFX/well/glow.ogg" id="6_5j7pv"]
 
 [sub_resource type="Gradient" id="Gradient_pprk8"]
 offsets = PackedFloat32Array(0, 0.584416)
@@ -120,7 +120,7 @@ scale = Vector2(0.153, 0.159)
 texture = ExtResource("5_5wk88")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_1fsnh")
+stream = ExtResource("6_5j7pv")
 bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

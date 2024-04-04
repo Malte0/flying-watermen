@@ -65,7 +65,7 @@ func fly_towards(body):
 	tween.tween_property(self, "scale", Vector2.ZERO, 0.3)
 	tween.finished.connect(self.queue_free)
 
-func _on_health_component_health_changed(new_health, delta_health):
+func _on_health_component_health_changed(new_health, _delta_health):
 	var tween = create_tween()
 	var new_alpha: float= (30 + new_health)
 	tween.tween_property(sprite, "modulate:a", new_alpha / 100, 0.2)

@@ -29,24 +29,24 @@
 [ext_resource type="PackedScene" uid="uid://cihcop35erg48" path="res://scenes/ui/ui.tscn" id="37_cf5a8"]
 [ext_resource type="PackedScene" uid="uid://d1krisq0xpjcp" path="res://entities/enemies/spawning/EnemyManager.tscn" id="38_5y5mx"]
 [ext_resource type="Texture2D" uid="uid://dabjfpe5wvvqr" path="res://assets/background/background01.png" id="39_rmh2i"]
-[ext_resource type="AudioStream" uid="uid://coc8rjgvqarww" path="res://assets/SFX/worldMusic/Ambient 1.wav" id="40_lpcro"]
-[ext_resource type="AudioStream" uid="uid://bja1g8xmn1kc5" path="res://assets/SFX/worldMusic/Ambient 2.wav" id="41_x6w64"]
-[ext_resource type="AudioStream" uid="uid://b2sgdjvuruxsx" path="res://assets/SFX/worldMusic/Ambient 3.wav" id="42_so5d5"]
-[ext_resource type="AudioStream" uid="uid://c5iod6eix5cbx" path="res://assets/SFX/worldMusic/Ambient 4.wav" id="43_kkjn6"]
-[ext_resource type="AudioStream" uid="uid://blo6nbnluf74a" path="res://assets/SFX/worldMusic/Ambient 5.wav" id="44_alnic"]
 [ext_resource type="PackedScene" uid="uid://4a5uyw208q4h" path="res://scenes/ui/menus/tablets/DoubleJumpTable.tscn" id="44_puxml"]
-[ext_resource type="AudioStream" uid="uid://blycmbt041odr" path="res://assets/SFX/worldMusic/Ambient 6.wav" id="45_gcmek"]
-[ext_resource type="AudioStream" uid="uid://coiwghaguirxw" path="res://assets/SFX/worldMusic/Ambient 7 .wav" id="46_78pjp"]
-[ext_resource type="AudioStream" uid="uid://c70bjia7vne0g" path="res://assets/SFX/worldMusic/Ambient 8.wav" id="47_vy30p"]
-[ext_resource type="AudioStream" uid="uid://ck4luwd7ukkg6" path="res://assets/SFX/worldMusic/Ambient 9.wav" id="48_spxeh"]
-[ext_resource type="AudioStream" uid="uid://cwtlwjv4f1yva" path="res://assets/SFX/worldMusic/Ambient 10.wav" id="49_m1cfj"]
+[ext_resource type="AudioStream" uid="uid://dxf0q5dxh105g" path="res://assets/SFX/worldMusic/Ambient1.ogg" id="49_vkege"]
+[ext_resource type="AudioStream" uid="uid://bwj7xgnew5dgr" path="res://assets/SFX/worldMusic/Ambient2.ogg" id="50_lx704"]
 [ext_resource type="PackedScene" uid="uid://dvv2sij5v2epd" path="res://entities/player/inventory/items/sodiumChemical/sodium.tscn" id="51_jjvhx"]
+[ext_resource type="AudioStream" uid="uid://f0qb0aqhtvdc" path="res://assets/SFX/worldMusic/Ambient3.ogg" id="51_vmkdg"]
 [ext_resource type="PackedScene" uid="uid://qno5f50626uf" path="res://scenes/ui/menus/tablets/Dash.tscn" id="52_15fu3"]
+[ext_resource type="AudioStream" uid="uid://dltcn8un625bk" path="res://assets/SFX/worldMusic/Ambient4.ogg" id="52_wgpip"]
+[ext_resource type="AudioStream" uid="uid://cjpfhe4nqwds2" path="res://assets/SFX/worldMusic/Ambient5.ogg" id="53_rtnqu"]
 [ext_resource type="PackedScene" uid="uid://cxqsoc8anmpvj" path="res://entities/objects/fire/fire.tscn" id="54_bp6fb"]
+[ext_resource type="AudioStream" uid="uid://dfqjqiq3im3ad" path="res://assets/SFX/worldMusic/Ambient6.ogg" id="54_qgu22"]
+[ext_resource type="AudioStream" uid="uid://deou2s684ixyb" path="res://assets/SFX/worldMusic/Ambient7.ogg" id="55_3kdyt"]
 [ext_resource type="PackedScene" uid="uid://dp6qth5jvcdhd" path="res://entities/player/inventory/items/iceChemical/IceChemical.tscn" id="55_sowcr"]
 [ext_resource type="PackedScene" uid="uid://4lea60a43ia6" path="res://scenes/ui/menus/tablets/Lore1.tscn" id="56_2kron"]
-[ext_resource type="PackedScene" uid="uid://oavf5bkejub3" path="res://assets/forest-assets/scenes/spiderweb_01.tscn" id="57_ftl5n"]
+[ext_resource type="AudioStream" uid="uid://dk3ktsqa758ay" path="res://assets/SFX/worldMusic/Ambient8.ogg" id="56_o0yf7"]
+[ext_resource type="AudioStream" uid="uid://dtdb0d6h7n0ti" path="res://assets/SFX/worldMusic/Ambient9.ogg" id="57_1sery"]
+[ext_resource type="PackedScene" uid="uid://d0qqb6y1scgni" path="res://assets/forest-assets/scenes/spiderweb_01.tscn" id="57_ftl5n"]
 [ext_resource type="PackedScene" uid="uid://d3fci01ety45h" path="res://entities/objects/max-health-plant/plant.tscn" id="57_vwl11"]
+[ext_resource type="AudioStream" uid="uid://baeykbptp8igy" path="res://assets/SFX/worldMusic/Ambient10.ogg" id="58_3vxtb"]
 [ext_resource type="PackedScene" uid="uid://c2mdlfdoukqoq" path="res://entities/enemies/meleeEnemy/MeleeEnemy.tscn" id="58_6c21q"]
 [ext_resource type="Texture2D" uid="uid://c6h0smnhpwt86" path="res://assets/sign/wood1.png" id="58_ngghx"]
 [ext_resource type="Theme" uid="uid://bniwcx6k6wrx7" path="res://themes/menu.tres" id="59_3bxbq"]
@@ -54,7 +54,7 @@
 [ext_resource type="PackedScene" uid="uid://dmeutg1f6t7sl" path="res://entities/enemies/rangedEnemy/RangedEnemy.tscn" id="59_rehkv"]
 [ext_resource type="PackedScene" uid="uid://c6ermasms0od0" path="res://entities/enemies/creeperEnemy/CreeperEnemy.tscn" id="60_dovde"]
 [ext_resource type="PackedScene" uid="uid://b7py4c84rndkt" path="res://entities/enemies/spawning/EnemySpawnArea.tscn" id="62_3tnc6"]
-[ext_resource type="PackedScene" path="res://scenes/ui/menus/tablets/BuildingFoam.tscn" id="64_cducb"]
+[ext_resource type="PackedScene" uid="uid://c1f1qpehpsa1r" path="res://scenes/ui/menus/tablets/BuildingFoam.tscn" id="64_cducb"]
 [ext_resource type="PackedScene" uid="uid://vnownse3oxg0" path="res://entities/objects/Lantern/Lantern.tscn" id="65_m8s1r"]
 [ext_resource type="PackedScene" uid="uid://dtwwwxiwl6hwv" path="res://scenes/ui/menus/tablets/IceTable.tscn" id="65_rvjdg"]
 [ext_resource type="PackedScene" uid="uid://ctkpvojmkefpf" path="res://scenes/ui/menus/tablets/SodiumTable.tscn" id="66_c3aw4"]
@@ -3890,25 +3890,25 @@ normal = Vector2(0, 1)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tdk81"]
 streams_count = 10
-stream_0/stream = ExtResource("40_lpcro")
+stream_0/stream = ExtResource("49_vkege")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("41_x6w64")
+stream_1/stream = ExtResource("50_lx704")
 stream_1/weight = 1.0
-stream_2/stream = ExtResource("42_so5d5")
+stream_2/stream = ExtResource("51_vmkdg")
 stream_2/weight = 1.0
-stream_3/stream = ExtResource("43_kkjn6")
+stream_3/stream = ExtResource("52_wgpip")
 stream_3/weight = 1.0
-stream_4/stream = ExtResource("44_alnic")
+stream_4/stream = ExtResource("53_rtnqu")
 stream_4/weight = 1.0
-stream_5/stream = ExtResource("45_gcmek")
+stream_5/stream = ExtResource("54_qgu22")
 stream_5/weight = 1.0
-stream_6/stream = ExtResource("46_78pjp")
+stream_6/stream = ExtResource("55_3kdyt")
 stream_6/weight = 1.0
-stream_7/stream = ExtResource("47_vy30p")
+stream_7/stream = ExtResource("56_o0yf7")
 stream_7/weight = 1.0
-stream_8/stream = ExtResource("48_spxeh")
+stream_8/stream = ExtResource("57_1sery")
 stream_8/weight = 1.0
-stream_9/stream = ExtResource("49_m1cfj")
+stream_9/stream = ExtResource("58_3vxtb")
 stream_9/weight = 0.0
 
 [sub_resource type="Gradient" id="Gradient_3hnls"]

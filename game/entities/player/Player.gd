@@ -305,7 +305,7 @@ func toggle_light():
 		PolyphonicAudioPlayer.play_sound_effect_from_library("light")
 		tween.tween_property(point_light, "energy", 0.7, 0.5)
 
-func _on_inventory_on_item_activated(item):
+func _on_inventory_on_item_activated(_item):
 	can_change_shooting_type = false
 	if !is_shooting_Water:
 		set_shooting_type()

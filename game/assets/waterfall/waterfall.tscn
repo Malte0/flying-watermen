@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ctwhu6gvuwl61" path="res://assets/light_noise/noise-pattern-water-surface-caustics-background-free-video.jpg" id="5_x4tix"]
 [ext_resource type="Texture2D" uid="uid://b0n33wo3w23dm" path="res://assets/light_noise/light.png" id="6_8ntd8"]
 [ext_resource type="Texture2D" uid="uid://4qlm6ho7173m" path="res://assets/light_noise/offset_glow.png" id="7_3prnd"]
-[ext_resource type="AudioStream" uid="uid://cuqvbh3d0ok8a" path="res://assets/SFX/waterfall/Water, Waterfall, Steady, Perspective SND0047.wav" id="8_ff88x"]
+[ext_resource type="AudioStream" uid="uid://c6w42jkmrdbdu" path="res://assets/SFX/Waterfall/Water, Waterfall, Steady, Perspective SND0047.ogg" id="8_krdgq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rg02h"]
 shader = ExtResource("1_jpog6")
@@ -110,7 +110,7 @@ process_material = SubResource("ParticleProcessMaterial_ltff6")
 texture = ExtResource("7_3prnd")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_ff88x")
+stream = ExtResource("8_krdgq")
 volume_db = 4.216
 autoplay = true
 max_distance = 2200.0

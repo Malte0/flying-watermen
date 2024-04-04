@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://v02odff5nyxo"]
 
-[ext_resource type="Texture2D" uid="uid://dn43ufaukta8" path="res://assets/menue_pictures/GameOver.png" id="1_38wyq"]
-[ext_resource type="PackedScene" uid="uid://ga63x4i2ugw4" path="res://scenes/ui/menus/button.tscn" id="2_t3uos"]
+[ext_resource type="Texture2D" uid="uid://dn43ufaukta8" path="res://assets/menu_pictures/GameOver.png" id="1_38wyq"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menus/button.tscn" id="2_t3uos"]
 [ext_resource type="Texture2D" uid="uid://bio4rf0meadhh" path="res://entities/player/assets/idleanimation/01Idle.png" id="2_ypsss"]
 [ext_resource type="Texture2D" uid="uid://bgd8x87u7urvs" path="res://entities/player/assets/idleanimation/02Idle.png" id="3_q3xq6"]
 [ext_resource type="Texture2D" uid="uid://b2o02fvn5tkcp" path="res://entities/player/assets/deathanimation/death01.png" id="4_3w7as"]

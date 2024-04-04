@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://cdkicasp65o4b"]
 
 [ext_resource type="Script" path="res://scenes/ui/menus/optionMenu/optionMenu.gd" id="1_o5c20"]
-[ext_resource type="PackedScene" uid="uid://bnl4aymwagsqa" path="res://scenes/ui/menus/menuTemplate.tscn" id="2_5rd8f"]
-[ext_resource type="PackedScene" uid="uid://ga63x4i2ugw4" path="res://scenes/ui/menus/button.tscn" id="2_fyjd1"]
-[ext_resource type="Texture2D" uid="uid://2oefvaixj8il" path="res://assets/menue_pictures/forest.png" id="2_thror"]
-[ext_resource type="PackedScene" uid="uid://cw2su11exv8go" path="res://scenes/ui/menus/slider.tscn" id="3_l5udh"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menus/menuTemplate.tscn" id="2_5rd8f"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menus/button.tscn" id="2_fyjd1"]
+[ext_resource type="Texture2D" uid="uid://2oefvaixj8il" path="res://assets/menu_pictures/forest.png" id="2_thror"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menus/slider.tscn" id="3_l5udh"]
 [ext_resource type="PackedScene" path="res://scenes/ui/menus/menuLabel.tscn" id="3_yts85"]
 
 [node name="Options" type="Control"]
